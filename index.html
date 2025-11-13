@@ -347,22 +347,174 @@
       </ul>
     </section>
 
-    <!-- เลือกหลักสูตร (สรุป) -->
-    <section id="courses">
-      <h2>หลักสูตรที่เปิดสอน (สรุป)</h2>
-      <div class="course-card">
-        <h3>พนักงานผู้ช่วยพยาบาล 840 ชม. (กระทรวงศึกษาธิการ)</h3>
-        <p>เน้นปฏิบัติงานในโรงพยาบาลและคลินิก</p>
-      </div>
-      <div class="course-card">
-        <h3>ผู้ให้การดูแล 510 ชม. (สภาการพยาบาล)</h3>
-        <p>เน้นการดูแลในชุมชนและการดูแลต่อเนื่องที่บ้าน</p>
-      </div>
-      <p>
-        ดูรายละเอียดทุกหลักสูตรที่หน้า
-        <a href="courses.html">หลักสูตร</a>
-      </p>
-    </section>
+   <!-- ============================= -->
+<!-- DASHBOARD แสดงสถิติหน้าแรก -->
+<!-- ============================= -->
+<section id="dashboard" style="margin-bottom:30px;">
+  <h2>📊 Dashboard สถิตินักศึกษา</h2>
+  <div style="display:flex; gap:15px; flex-wrap:wrap;">
+
+    <div class="dash-card">
+      <h3>เข้าชมเว็บไซต์</h3>
+      <p id="stat-views">0</p>
+    </div>
+
+    <div class="dash-card">
+      <h3>ผู้สมัครเรียน</h3>
+      <p id="stat-registered">0</p>
+    </div>
+
+    <div class="dash-card">
+      <h3>กำลังเรียนออนไลน์</h3>
+      <p id="stat-learning">0</p>
+    </div>
+
+    <div class="dash-card">
+      <h3>กำลังฝึกงาน</h3>
+      <p id="stat-intern">0</p>
+    </div>
+
+    <div class="dash-card">
+      <h3>จบการศึกษา</h3>
+      <p id="stat-graduated">0</p>
+    </div>
+
+    <div class="dash-card">
+      <h3>บรรจุงานแล้ว</h3>
+      <p id="stat-employed">0</p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .dash-card {
+    background:#ffffff;
+    padding:16px;
+    border-radius:10px;
+    box-shadow:0 2px 6px rgba(0,0,0,0.08);
+    width:160px;
+    text-align:center;
+  }
+  .dash-card h3 {
+    margin:0;
+    font-size:16px;
+    color:#1f3bb3;
+  }
+  .dash-card p {
+    margin:8px 0 0 0;
+    font-size:22px;
+    font-weight:bold;
+    color:#111;
+  }
+</style>
+
+<script>
+  // โหลดจาก localStorage
+  const students = JSON.parse(localStorage.getItem("students") || "[]");
+
+  function countStatus(key){
+    return students.filter(s => s.status === key).length;
+  }
+
+  // แสดงผล
+  document.getElementById("stat-views").textContent = localStorage.getItem("siteViews") || "0";
+  document.getElementById("stat-registered").textContent = students.length;
+  document.getElementById("stat-learning").textContent = countStatus("learning");
+  document.getElementById("stat-intern").textContent = countStatus("intern");
+  document.getElementById("stat-graduated").textContent = countStatus("graduated");
+  document.getElementById("stat-employed").textContent = countStatus("employed");
+</script>
+
+<!-- =================================== -->
+<!-- แสดงหลักสูตร – 2 แถว × 3 หัวข้อ -->
+<!-- =================================== -->
+<section id="courses">
+  <h2>🎓 เลือกหลักสูตรที่ต้องการ</h2>
+
+  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
+
+    <!-- คอร์ส 1 -->
+    <div class="course-box">
+      <a href="courses/na840.html" class="course-title">หลักสูตรพนักงานผู้ช่วยพยาบาล 840 ชม.</a>
+      <div class="course-sub">กระทรวงศึกษาธิการ</div>
+      <a href="register.html" class="btn">สมัครเรียน</a>
+    </div>
+
+    <!-- คอร์ส 2 -->
+    <div class="course-box">
+      <a href="courses/elderkid840.html" class="course-title">หลักสูตรการดูแลผู้สูงอายุและเด็กเล็ก 840 ชม.</a>
+      <div class="course-sub">กระทรวงศึกษาธิการ</div>
+      <a href="register.html" class="btn">สมัครเรียน</a>
+    </div>
+
+    <!-- คอร์ส 3 -->
+    <div class="course-box">
+      <a href="courses/elder420.html" class="course-title">หลักสูตรการดูแลผู้สูงอายุ 420 ชม.</a>
+      <div class="course-sub">กระทรวงสาธารณสุข</div>
+      <a href="register.html" class="btn">สมัครเรียน</a>
+    </div>
+
+    <!-- คอร์ส 4 -->
+    <div class="course-box">
+      <a href="courses/kid420.html" class="course-title">หลักสูตรการดูแลเด็กเล็ก 420 ชม.</a>
+      <div class="course-sub">กระทรวงศึกษาธิการ</div>
+      <a href="register.html" class="btn">สมัครเรียน</a>
+    </div>
+
+    <!-- คอร์ส 5 -->
+    <div class="course-box">
+      <a href="courses/caregiver510.html" class="course-title">หลักสูตรผู้ให้การดูแล 510 ชม.</a>
+      <div class="course-sub">สภาการพยาบาล</div>
+      <a href="register.html" class="btn">สมัครเรียน</a>
+    </div>
+
+    <!-- คอร์ส 6 -->
+    <div class="course-box">
+      <a href="courses/basic70.html" class="course-title">หลักสูตรการดูแลผู้สูงอายุเบื้องต้น 70 ชม.</a>
+      <div class="course-sub">กระทรวงสาธารณสุข</div>
+      <a href="register.html" class="btn">สมัครเรียน</a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .course-box {
+    background:#fff;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.08);
+    text-align:center;
+  }
+  .course-title {
+    display:block;
+    font-size:20px;
+    font-weight:bold;
+    color:#0055cc;
+    margin-bottom:6px;
+    text-decoration:none;
+  }
+  .course-title:hover {
+    text-decoration:underline;
+  }
+  .course-sub {
+    font-size:14px;
+    color:#666;
+    margin-bottom:12px;
+  }
+  .btn {
+    display:inline-block;
+    padding:8px 16px;
+    background:#28a745;
+    color:#fff;
+    border-radius:6px;
+    text-decoration:none;
+  }
+  .btn:hover {
+    background:#218838;
+  }
+</style>
 
     <!-- 🔽 Dashboard ภาพรวม อยู่ด้านล่างของเว็บ -->
     <section id="home-dashboard">
