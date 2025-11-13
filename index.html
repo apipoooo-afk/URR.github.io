@@ -1,14 +1,306 @@
-/
-├─ index.html          → หน้าแรก
-├─ register.html       → สมัครเรียน
-├─ login.html          → เข้าสู่ระบบ
-├─ dashboard.html      → แดชบอร์ด / ฐานข้อมูลนักศึกษา
-├─ courses.html        → รายละเอียดหลักสูตร
-├─ learning.html       → ระบบเรียนออนไลน์
-├─ assessment.html     → ผลการเรียน / ชั่วโมงเรียน
-├─ internship.html     → การฝึกงาน
-├─ certificates.html   → การขอรับใบประกาศ
-├─ contact.html        → ติดต่อเรา
-├─ about.html          → เกี่ยวกับโรงเรียน
-└─ assets/
-   └─ style.css
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แดชบอร์ดสถิติ | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      background-color: #007bff;
+      color: white;
+      padding: 16px 10px;
+    }
+    main {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px 24px 16px;
+    }
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .card-title {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    .card-value {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #111827;
+    }
+    .card-sub {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      background: #fff;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 8px;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+    th {
+      background: #f3f4f6;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      color: #fff;
+    }
+    .badge-learning { background: #10b981; }
+    .badge-intern { background: #f59e0b; }
+    .badge-graduated { background: #3b82f6; }
+    .badge-appointed { background: #8b5cf6; }
+    .badge-other { background: #6b7280; }
+    .top-actions {
+      margin-bottom: 16px;
+    }
+    .top-actions a {
+      display: inline-block;
+      padding: 8px 14px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: #111827;
+      margin-right: 8px;
+    }
+    .top-actions a:hover {
+      background: #d1d5db;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>แดชบอร์ดสถิติ / ฐานข้อมูลนักศึกษา</h1>
+    <p>โรงเรียนอุบลบุรีรักษ์การบริบาล</p>
+  </header>
+
+  <main>
+    <div class="top-actions">
+      <a href="index.html">← กลับหน้าแรก</a>
+      <a href="register.html">สมัครเรียนใหม่</a>
+      <a href="login.html">เข้าสู่ระบบ</a>
+    </div>
+
+    <h2>สรุปภาพรวม</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-title">ผู้เข้าดูเว็บไซต์ทั้งหมด</div>
+        <div class="card-value" id="viewsTotal">0</div>
+        <div class="card-sub">นับจากจำนวนครั้งที่เปิดหน้าเว็บไซต์</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">ผู้สมัครเรียนทั้งหมด</div>
+        <div class="card-value" id="studentsTotal">0</div>
+        <div class="card-sub">จำนวนระเบียนในฐานข้อมูลนักศึกษา</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">ผู้ที่เคยล็อกอินแล้ว</div>
+        <div class="card-value" id="loggedUsersTotal">0</div>
+        <div class="card-sub">นับจากรหัสนักศึกษาที่เคยเข้าสู่ระบบ</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">จำนวนครั้งที่ล็อกอิน</div>
+        <div class="card-value" id="loginCountTotal">0</div>
+        <div class="card-sub">ทุกครั้งที่เข้าสู่ระบบผ่านหน้า Login</div>
+      </div>
+    </div>
+
+    <h2>สถานะนักศึกษา</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-title">ผู้เรียนออนไลน์ / กำลังเรียน</div>
+        <div class="card-value" id="learningTotal">0</div>
+      </div>
+      <div class="card">
+        <div class="card-title">ผู้ฝึกงาน</div>
+        <div class="card-value" id="internTotal">0</div>
+      </div>
+      <div class="card">
+        <div class="card-title">ผู้เรียนจบ</div>
+        <div class="card-value" id="graduatedTotal">0</div>
+      </div>
+      <div class="card">
+        <div class="card-title">ผู้ที่บรรจุงานแล้ว</div>
+        <div class="card-value" id="appointedTotal">0</div>
+      </div>
+    </div>
+
+    <h3>ฐานข้อมูลนักศึกษา</h3>
+    <table id="studentsTable">
+      <thead>
+        <tr>
+          <th>รหัสนักศึกษา</th>
+          <th>ชื่อ-นามสกุล</th>
+          <th>หลักสูตร</th>
+          <th>สถานะ</th>
+          <th>เบอร์โทร</th>
+          <th>อีเมล</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- เติมด้วย JS -->
+      </tbody>
+    </table>
+  </main>
+
+  <script>
+    const STORAGE_KEY = "students";
+    const VIEW_KEY = "siteViews";
+    const LOGIN_COUNT_KEY = "loginCount";
+    const LOGGED_STUDENTS_KEY = "loggedStudents";
+
+    function loadStudents() {
+      const data = localStorage.getItem(STORAGE_KEY);
+      if (!data) return [];
+      try {
+        return JSON.parse(data);
+      } catch (e) {
+        console.error("JSON parse error:", e);
+        return [];
+      }
+    }
+
+    function loadLoggedStudents() {
+      const data = localStorage.getItem(LOGGED_STUDENTS_KEY);
+      if (!data) return [];
+      try {
+        return JSON.parse(data);
+      } catch (e) {
+        console.error("JSON parse error:", e);
+        return [];
+      }
+    }
+
+    function getBadgeClass(status) {
+      switch (status) {
+        case "learning":  return "badge badge-learning";
+        case "intern":    return "badge badge-intern";
+        case "graduated": return "badge badge-graduated";
+        case "appointed": return "badge badge-appointed";
+        default:          return "badge badge-other";
+      }
+    }
+
+    function getStatusLabel(status) {
+      switch (status) {
+        case "learning":  return "ผู้เรียนออนไลน์ / กำลังเรียน";
+        case "intern":    return "ผู้ฝึกงาน";
+        case "graduated": return "ผู้เรียนจบ";
+        case "appointed": return "บรรจุงานแล้ว";
+        default:          return "อื่น ๆ";
+      }
+    }
+
+    function renderDashboard() {
+      const students = loadStudents();
+      const loggedStudents = loadLoggedStudents();
+
+      const viewsTotal = parseInt(localStorage.getItem(VIEW_KEY) || "0", 10);
+      const loginCountTotal = parseInt(localStorage.getItem(LOGIN_COUNT_KEY) || "0", 10);
+
+      document.getElementById("viewsTotal").textContent = viewsTotal;
+      document.getElementById("studentsTotal").textContent = students.length;
+      document.getElementById("loggedUsersTotal").textContent = loggedStudents.length;
+      document.getElementById("loginCountTotal").textContent = loginCountTotal;
+
+      let learningTotal = 0;
+      let internTotal = 0;
+      let graduatedTotal = 0;
+      let appointedTotal = 0;
+
+      students.forEach(s => {
+        switch (s.status) {
+          case "learning":
+            learningTotal++;
+            break;
+          case "intern":
+            internTotal++;
+            break;
+          case "graduated":
+            graduatedTotal++;
+            break;
+          case "appointed":
+            appointedTotal++;
+            break;
+        }
+      });
+
+      document.getElementById("learningTotal").textContent = learningTotal;
+      document.getElementById("internTotal").textContent = internTotal;
+      document.getElementById("graduatedTotal").textContent = graduatedTotal;
+      document.getElementById("appointedTotal").textContent = appointedTotal;
+
+      const tbody = document.querySelector("#studentsTable tbody");
+      tbody.innerHTML = "";
+
+      students.forEach(s => {
+        const tr = document.createElement("tr");
+
+        const tdId = document.createElement("td");
+        tdId.textContent = s.studentId;
+
+        const tdName = document.createElement("td");
+        tdName.textContent = s.fullName;
+
+        const tdCourse = document.createElement("td");
+        tdCourse.textContent = s.course || "-";
+
+        const tdStatus = document.createElement("td");
+        const spanStatus = document.createElement("span");
+        spanStatus.className = getBadgeClass(s.status);
+        spanStatus.textContent = getStatusLabel(s.status);
+        tdStatus.appendChild(spanStatus);
+
+        const tdPhone = document.createElement("td");
+        tdPhone.textContent = s.phone || "-";
+
+        const tdEmail = document.createElement("td");
+        tdEmail.textContent = s.email || "-";
+
+        tr.appendChild(tdId);
+        tr.appendChild(tdName);
+        tr.appendChild(tdCourse);
+        tr.appendChild(tdStatus);
+        tr.appendChild(tdPhone);
+        tr.appendChild(tdEmail);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", renderDashboard);
+  </script>
+</body>
+</html>
