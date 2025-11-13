@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ชั่วโมงเรียน | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      text-align: center;
+      background-color: #007bff;
+      color: white;
+      padding: 16px 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    main {
+      max-width: 1200px;
+      margin: 20px auto 32px auto;
+      padding: 0 16px;
+    }
+    h1, h2 {
+      margin-top: 0;
+    }
+
+    .header-info {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    .header-info span {
+      display: inline-block;
+      margin-right: 16px;
+      margin-bottom: 4px;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      margin-bottom: 12px;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+      font-size: 14px;
+    }
+    th {
+      background: #f5f5f5;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .btn-back {
+      display: inline-block;
+      padding: 6px 12px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #111827;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .btn-back:hover {
+      background: #d1d5db;
+    }
+    .btn-link {
+      display: inline-block;
+      padding: 6px 12px;
+      background: #3b82f6;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .btn-link:hover {
+      background: #2563eb;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ระบบแสดงการสะสมจำนวนชั่วโมงเรียน (2.1.1)</h1>
+    <p>โรงเรียนอุบลบุรีรักษ์การบริบาล</p>
+    <nav>
+      <a href="index.html">หน้าแรก</a>
+      <a href="courses.html">หลักสูตร</a>
+      <a href="learning.html">ระบบเรียนออนไลน์</a>
+      <a href="assessment.html">ผลการเรียน</a>
+      <a href="hours.html">ชั่วโมงเรียน</a>
+      <a href="dashboard.html">ฐานข้อมูลนักศึกษา (ผู้บริหาร)</a>
+      <a href="about.html">เกี่ยวกับเรา</a>
+      <a href="contact.html">ติดต่อเรา</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="index.html" class="btn-back">← กลับหน้าแรก</a>
+
+    <section class="card">
+      <h2>2.1.1 ระบบแสดงการสะสมจำนวนชั่วโมงเรียน</h2>
+
+      <div class="header-info">
+        <span><strong>ชื่อนักศึกษา:</strong> <span id="hoursStudentName"></span></span>
+        <span><strong>รหัสนักศึกษา:</strong> <span id="hoursStudentId"></span></span>
+        <span><strong>ปีการศึกษา:</strong> <span id="hoursAcademicYear"></span></span>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>ลำดับ</th>
+            <th>ชื่อวิชา</th>
+            <th>จำนวนชั่วโมงที่เรียนทั้งหมด</th>
+            <th>จำนวนชั่วโมงที่เรียนในรอบนี้</th>
+            <th>จำนวนชั่วโมงที่เหลือ</th>
+          </tr>
+        </thead>
+        <tbody id="hoursTableBody">
+          <!-- เติมข้อมูลด้วย JS -->
+        </tbody>
+      </table>
+
+      <p class="note">
+        ข้อมูลนี้เป็นตัวอย่างจำลองเพื่อทดสอบระบบ  
+        ในการใช้งานจริงสามารถเชื่อมกับข้อมูลเช็คชื่อ / ลงเวลาฝึกงาน / ระบบ LMS ได้
+      </p>
+
+      <a href="assessment.html" class="btn-link">กลับไปดูผลการเรียน (2.1)</a>
+    </section>
+  </main>
+
+  <script>
+    // อ่านข้อมูลนักศึกษาจาก sessionStorage ถ้ามี
+    let studentInfo;
+    const currentStudentRaw = sessionStorage.getItem("currentStudent");
+
+    if (currentStudentRaw) {
+      try {
+        const s = JSON.parse(currentStudentRaw);
+        studentInfo = {
+          studentName: s.fullName || "นักศึกษา",
+          studentId:   s.studentId || "-",
+          academicYear:"2568"
+        };
+      } catch (e) {
+        studentInfo = {
+          studentName: "นางสาวตัวอย่าง นักศึกษา",
+          studentId:   "UBN001-2568",
+          academicYear:"2568"
+        };
+      }
+    } else {
+      studentInfo = {
+        studentName: "นางสาวตัวอย่าง นักศึกษา",
+        studentId:   "UBN001-2568",
+        academicYear:"2568"
+      };
+    }
+
+    // ตัวอย่างข้อมูลชั่วโมงเรียน
+    const subjectHours = [
+      { subjectId: 1, subjectName: "พื้นฐานการพยาบาล",       totalHours: 60, hoursThisRound: 20 },
+      { subjectId: 2, subjectName: "กายวิภาคและสรีรวิทยา", totalHours: 45, hoursThisRound: 15 },
+      { subjectId: 3, subjectName: "จริยธรรมวิชาชีพ",       totalHours: 30, hoursThisRound: 10 },
+      { subjectId: 4, subjectName: "การพยาบาลผู้สูงอายุ",  totalHours: 40, hoursThisRound: 18 },
+      { subjectId: 5, subjectName: "การดูแลผู้ป่วยเบื้องต้น", totalHours: 50, hoursThisRound: 22 }
+    ];
+
+    function renderStudentHeader() {
+      document.getElementById("hoursStudentName").textContent   = studentInfo.studentName;
+      document.getElementById("hoursStudentId").textContent     = studentInfo.studentId;
+      document.getElementById("hoursAcademicYear").textContent  = studentInfo.academicYear;
+    }
+
+    function renderHoursTable() {
+      const tbody = document.getElementById("hoursTableBody");
+      tbody.innerHTML = "";
+
+      subjectHours.forEach((subj, index) => {
+        const remainingHours = Math.max(subj.totalHours - subj.hoursThisRound, 0);
+
+        const tr = document.createElement("tr");
+
+        const tdNo        = document.createElement("td");
+        const tdName      = document.createElement("td");
+        const tdTotal     = document.createElement("td");
+        const tdThisRound = document.createElement("td");
+        const tdRemain    = document.createElement("td");
+
+        tdNo.textContent        = index + 1;
+        tdName.textContent      = subj.subjectName;
+        tdTotal.textContent     = subj.totalHours;
+        tdThisRound.textContent = subj.hoursThisRound;
+        tdRemain.textContent    = remainingHours;
+
+        tr.appendChild(tdNo);
+        tr.appendChild(tdName);
+        tr.appendChild(tdTotal);
+        tr.appendChild(tdThisRound);
+        tr.appendChild(tdRemain);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      renderStudentHeader();
+      renderHoursTable();
+    });
+  </script>
+</body>
+</html>
