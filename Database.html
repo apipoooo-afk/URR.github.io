@@ -126,6 +126,35 @@
       display: none;
       margin-top: 24px;
     }
+
+    /* แถวเครื่องมือบนตาราง: ค้นหา + Export */
+    .table-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .table-actions input[type="text"] {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      min-width: 220px;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .table-actions button {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      background: #16a34a;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    .table-actions button:hover {
+      background: #15803d;
+    }
   </style>
 </head>
 <body>
@@ -160,6 +189,16 @@
     <!-- ตารางฐานข้อมูลนักศึกษา: แสดงเฉพาะเมื่อเป็นผู้บริหาร -->
     <section id="student-db-section">
       <h2>ตารางฐานข้อมูลนักศึกษา</h2>
+
+      <div class="table-actions">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="ค้นหาชื่อ / รหัสนักศึกษา / หลักสูตร"
+        >
+        <button type="button" onclick="exportCSV()">Export CSV</button>
+      </div>
+
       <table id="studentsTable">
         <thead>
           <tr>
@@ -182,6 +221,9 @@
     const STORAGE_KEY        = "students";
     const ADMIN_PASSWORD     = "UBR-ADMIN-2025";   // เปลี่ยนได้
     const ADMIN_SESSION_KEY  = "isAdminDashboard"; // flag ใน sessionStorage
+
+    // cache รายชื่อนักศึกษาไว้ใช้กับ search + export
+    let studentsCache = [];
 
     function loadStudents() {
       return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
@@ -209,15 +251,11 @@
       }
     }
 
-    function showStudentTable() {
-      const students = loadStudents();
-      const section  = document.getElementById("student-db-section");
-      const tbody    = document.querySelector("#studentsTable tbody");
-
-      section.style.display = "block";
+    function renderTable(list) {
+      const tbody = document.querySelector("#studentsTable tbody");
       tbody.innerHTML = "";
 
-      students.forEach(s => {
+      list.forEach(s => {
         const tr = document.createElement("tr");
 
         const tdId     = document.createElement("td");
@@ -247,20 +285,55 @@
       });
     }
 
+    function attachSearch() {
+      const input = document.getElementById("searchInput");
+      if (!input || input.dataset.bound === "true") return;
+
+      input.addEventListener("input", function () {
+        const q = this.value.trim().toLowerCase();
+        if (!q) {
+          renderTable(studentsCache);
+          return;
+        }
+        const filtered = studentsCache.filter(s => {
+          const text = (
+            (s.studentId || "") + " " +
+            (s.fullName || "") + " " +
+            (s.course || "")
+          ).toLowerCase();
+          return text.includes(q);
+        });
+        renderTable(filtered);
+      });
+
+      input.dataset.bound = "true";
+    }
+
+    function showStudentTable() {
+      const students = loadStudents();
+      studentsCache = students;
+
+      const section = document.getElementById("student-db-section");
+      section.style.display = "block";
+
+      attachSearch();
+      renderTable(studentsCache);
+    }
+
     function checkAdmin() {
-      const input = document.getElementById("adminPasswordInput").value;
-      const msg   = document.getElementById("adminMsg");
+      const inputVal = document.getElementById("adminPasswordInput").value;
+      const msg      = document.getElementById("adminMsg");
 
       msg.textContent = "";
       msg.className   = "admin-msg";
 
-      if (!input) {
+      if (!inputVal) {
         msg.textContent = "กรุณากรอกรหัสผ่านผู้บริหาร";
         msg.classList.add("err");
         return;
       }
 
-      if (input === ADMIN_PASSWORD) {
+      if (inputVal === ADMIN_PASSWORD) {
         sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
         showStudentTable();
         msg.textContent = "เข้าสู่ระบบผู้บริหารสำเร็จ — แสดงตารางฐานข้อมูลแล้ว";
@@ -269,6 +342,40 @@
         msg.textContent = "รหัสผ่านไม่ถูกต้อง";
         msg.classList.add("err");
       }
+    }
+
+    function exportCSV() {
+      if (!studentsCache || studentsCache.length === 0) {
+        alert("ยังไม่มีข้อมูลนักศึกษาในระบบ ไม่สามารถ Export ได้");
+        return;
+      }
+
+      const header = ["studentId","fullName","course","status","createdAt"];
+      let csv = header.join(",") + "\n";
+
+      csv += studentsCache.map(s => {
+        const row = [
+          s.studentId || "",
+          s.fullName || "",
+          s.course || "",
+          statusLabel(s.status),
+          s.createdAt || ""
+        ];
+        // escape " ด้วย ""
+        return row
+          .map(v => '"' + String(v).replace(/"/g, '""') + '"')
+          .join(",");
+      }).join("\n");
+
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement("a");
+      a.href = url;
+      a.download = "students.csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     }
 
     // ถ้าใน session เคยยืนยันเป็นผู้บริหารแล้ว ให้แสดงตารางทันที
