@@ -129,6 +129,324 @@
       <div id="courses-exam-list"></div>
     </section>
     <!-- END: Post-course exam UI -->
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ระบบประเมินการเรียนและชั่วโมงเรียน</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+    }
+    h2 {
+      margin-top: 40px;
+    }
+    .card {
+      border: 1px solid #ddd;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      margin-bottom: 12px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background: #f5f5f5;
+    }
+    .header-info {
+      margin-bottom: 8px;
+    }
+    .header-info span {
+      display: inline-block;
+      margin-right: 16px;
+    }
+    .status-pass {
+      color: green;
+      font-weight: bold;
+    }
+    .status-fail {
+      color: red;
+      font-weight: bold;
+    }
+    select {
+      padding: 4px 8px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 2.1 ระบบแสดงผลรวมการเรียน -->
+  <div class="card">
+    <h2>2.1 ระบบแสดงผลรวมการเรียน</h2>
+
+    <!-- หัวตาราง -->
+    <div class="header-info">
+      <span><strong>ชื่อโรงเรียน:</strong> <span id="schoolName"></span></span>
+      <span><strong>ชื่อนักศึกษา:</strong> <span id="studentName"></span></span>
+      <span><strong>รหัสนักศึกษา:</strong> <span id="studentId"></span></span>
+      <span><strong>ปีการศึกษา:</strong> <span id="academicYear"></span></span>
+    </div>
+
+    <!-- ตัวกรองวิชา -->
+    <label for="subjectFilter"><strong>เลือกวิชา:</strong></label>
+    <select id="subjectFilter">
+      <option value="all">ทุกวิชา</option>
+      <!-- จะเพิ่ม option ตามรายวิชาอัตโนมัติจาก JS -->
+    </select>
+
+    <!-- ตารางผลการเรียน -->
+    <table>
+      <thead>
+        <tr>
+          <th>ชื่อวิชา</th>
+          <th>คะแนนเต็ม</th>
+          <th>คะแนนที่สอบได้ (0–100)</th>
+          <th>ผลการเรียน (เกรด)</th>
+        </tr>
+      </thead>
+      <tbody id="gradeTableBody">
+        <!-- เติมข้อมูลด้วย JS -->
+      </tbody>
+    </table>
+
+    <!-- สถานะสำเร็จการศึกษา -->
+    <div id="graduationStatus"></div>
+  </div>
+
+  <!-- 2.1.1 ระบบแสดงการสะสมจำนวนชั่วโมงเรียน -->
+  <div class="card">
+    <h2>2.1.1 ระบบแสดงการสะสมจำนวนชั่วโมงเรียน</h2>
+
+    <!-- หัวตาราง -->
+    <div class="header-info">
+      <span><strong>ชื่อนักศึกษา:</strong> <span id="hoursStudentName"></span></span>
+      <span><strong>รหัสนักศึกษา:</strong> <span id="hoursStudentId"></span></span>
+      <span><strong>ปีการศึกษา:</strong> <span id="hoursAcademicYear"></span></span>
+    </div>
+
+    <!-- ตารางชั่วโมงเรียน -->
+    <table>
+      <thead>
+        <tr>
+          <th>ลำดับ</th>
+          <th>ชื่อวิชา</th>
+          <th>จำนวนชั่วโมงที่เรียนทั้งหมด</th>
+          <th>จำนวนชั่วโมงที่เรียนในรอบนี้</th>
+          <th>จำนวนชั่วโมงที่เหลือ</th>
+        </tr>
+      </thead>
+      <tbody id="hoursTableBody">
+        <!-- เติมข้อมูลด้วย JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    // -------------------------------
+    // ข้อมูลนักศึกษา (ตัวอย่าง)
+    // ตรงนี้คุณสามารถเปลี่ยนให้ดึงจากฐานข้อมูล หรือ API ของระบบคุณได้
+    // -------------------------------
+    const studentInfo = {
+      schoolName: "โรงเรียนอุบลบุรีรักษ์การบริบาล",
+      studentName: "นางสาวตัวอย่าง นักศึกษา",
+      studentId: "UBN001-2568",
+      academicYear: "2568"
+    };
+
+    // -------------------------------
+    // ข้อมูลผลคะแนนสอบหลังการเรียน (ตัวอย่าง)
+    // สมมติว่าดึงมาจากระบบการสอบหลังการเรียน
+    // subjectId ใช้เชื่อมกับตารางชั่วโมงเรียนได้
+    // -------------------------------
+    const examResults = [
+      { subjectId: 1, subjectName: "พื้นฐานการพยาบาล", fullScore: 100, score: 85 },
+      { subjectId: 2, subjectName: "กายวิภาคและสรีรวิทยา", fullScore: 100, score: 76 },
+      { subjectId: 3, subjectName: "จริยธรรมวิชาชีพ", fullScore: 100, score: 62 },
+      { subjectId: 4, subjectName: "การพยาบาลผู้สูงอายุ", fullScore: 100, score: 54 },
+      { subjectId: 5, subjectName: "การดูแลผู้ป่วยเบื้องต้น", fullScore: 100, score: 45 } // ตัวอย่าง F
+      // คุณสามารถเพิ่มวิชาให้ครบ 20 วิชาตามหลักสูตรจริงได้
+    ];
+
+    // -------------------------------
+    // ข้อมูลจำนวนชั่วโมงเรียน (ตัวอย่าง)
+    // totalHours = จำนวนชั่วโมงตามหลักสูตร
+    // hoursThisRound = จำนวนชั่วโมงที่เรียนในรอบนี้
+    // completedHours = จำนวนชั่วโมงที่เรียนสะสมแล้ว (รวมก่อนรอบนี้ + รอบนี้ ถ้าคุณต้องการ)
+    // ในตัวอย่างนี้ให้ถือว่า completedHours = hoursThisRound เพื่อความง่าย
+    // -------------------------------
+    const subjectHours = [
+      { subjectId: 1, subjectName: "พื้นฐานการพยาบาล", totalHours: 60, hoursThisRound: 20 },
+      { subjectId: 2, subjectName: "กายวิภาคและสรีรวิทยา", totalHours: 45, hoursThisRound: 15 },
+      { subjectId: 3, subjectName: "จริยธรรมวิชาชีพ", totalHours: 30, hoursThisRound: 10 },
+      { subjectId: 4, subjectName: "การพยาบาลผู้สูงอายุ", totalHours: 40, hoursThisRound: 18 },
+      { subjectId: 5, subjectName: "การดูแลผู้ป่วยเบื้องต้น", totalHours: 50, hoursThisRound: 22 }
+      // เพิ่มให้ครบ 20 วิชาได้ตามหลักสูตร
+    ];
+
+    // -------------------------------
+    // ฟังก์ชันคำนวณเกรดตามเกณฑ์
+    // A = 80+, B = 70-79, C = 60-69, D = 50-59, F = <50
+    // -------------------------------
+    function calculateGrade(score) {
+      if (score >= 80) return "A";
+      if (score >= 70) return "B";
+      if (score >= 60) return "C";
+      if (score >= 50) return "D";
+      return "F";
+    }
+
+    // -------------------------------
+    // แสดงหัวตารางข้อมูลนักศึกษา
+    // -------------------------------
+    function renderStudentHeader() {
+      document.getElementById("schoolName").textContent = studentInfo.schoolName;
+      document.getElementById("studentName").textContent = studentInfo.studentName;
+      document.getElementById("studentId").textContent = studentInfo.studentId;
+      document.getElementById("academicYear").textContent = studentInfo.academicYear;
+
+      // ตารางชั่วโมงเรียนใช้ข้อมูลเดียวกัน
+      document.getElementById("hoursStudentName").textContent = studentInfo.studentName;
+      document.getElementById("hoursStudentId").textContent = studentInfo.studentId;
+      document.getElementById("hoursAcademicYear").textContent = studentInfo.academicYear;
+    }
+
+    // -------------------------------
+    // เติมรายชื่อวิชาใน dropdown เพื่อให้เลือกดูเฉพาะวิชา
+    // -------------------------------
+    function populateSubjectFilter() {
+      const select = document.getElementById("subjectFilter");
+      examResults.forEach(result => {
+        const option = document.createElement("option");
+        option.value = result.subjectId;
+        option.textContent = result.subjectName;
+        select.appendChild(option);
+      });
+
+      select.addEventListener("change", () => {
+        const selected = select.value;
+        if (selected === "all") {
+          renderGradeTable(); // แสดงทุกวิชา
+        } else {
+          const subjectId = parseInt(selected, 10);
+          renderGradeTable(subjectId); // แสดงเฉพาะวิชา
+        }
+      });
+    }
+
+    // -------------------------------
+    // แสดงตารางผลการเรียน
+    // filterSubjectId: ถ้าไม่ส่ง = แสดงทุกวิชา
+    // -------------------------------
+    function renderGradeTable(filterSubjectId = null) {
+      const tbody = document.getElementById("gradeTableBody");
+      tbody.innerHTML = "";
+
+      let hasFail = false;
+
+      let filteredResults = examResults;
+      if (filterSubjectId !== null) {
+        filteredResults = examResults.filter(r => r.subjectId === filterSubjectId);
+      }
+
+      filteredResults.forEach(result => {
+        const grade = calculateGrade(result.score);
+        if (grade === "F") {
+          hasFail = true;
+        }
+
+        const tr = document.createElement("tr");
+
+        const tdName = document.createElement("td");
+        tdName.textContent = result.subjectName;
+
+        const tdFull = document.createElement("td");
+        tdFull.textContent = result.fullScore;
+
+        const tdScore = document.createElement("td");
+        tdScore.textContent = result.score;
+
+        const tdGrade = document.createElement("td");
+        tdGrade.textContent = grade;
+
+        tr.appendChild(tdName);
+        tr.appendChild(tdFull);
+        tr.appendChild(tdScore);
+        tr.appendChild(tdGrade);
+
+        tbody.appendChild(tr);
+      });
+
+      // ถ้า filter เฉพาะวิชา แต่ในทุกวิชาเดิมมี F อยู่
+      // เราต้องเช็คจาก examResults ทั้งชุด ว่าเคยมี F ไหม
+      const anyFailInAllSubjects = examResults.some(r => calculateGrade(r.score) === "F");
+
+      const statusDiv = document.getElementById("graduationStatus");
+      if (!anyFailInAllSubjects) {
+        statusDiv.innerHTML = '<span class="status-pass">สำเร็จการศึกษาแล้ว</span>';
+      } else {
+        statusDiv.innerHTML = '<span class="status-fail">ยังไม่สำเร็จการศึกษา (กรณีมีผลสอบเป็น F)</span>';
+      }
+    }
+
+    // -------------------------------
+    // แสดงตารางชั่วโมงเรียน
+    // -------------------------------
+    function renderHoursTable() {
+      const tbody = document.getElementById("hoursTableBody");
+      tbody.innerHTML = "";
+
+      subjectHours.forEach((subj, index) => {
+        const remainingHours = Math.max(subj.totalHours - subj.hoursThisRound, 0);
+
+        const tr = document.createElement("tr");
+
+        const tdNo = document.createElement("td");
+        tdNo.textContent = index + 1;
+
+        const tdName = document.createElement("td");
+        tdName.textContent = subj.subjectName;
+
+        const tdTotal = document.createElement("td");
+        tdTotal.textContent = subj.totalHours;
+
+        const tdThisRound = document.createElement("td");
+        tdThisRound.textContent = subj.hoursThisRound;
+
+        const tdRemaining = document.createElement("td");
+        tdRemaining.textContent = remainingHours;
+
+        tr.appendChild(tdNo);
+        tr.appendChild(tdName);
+        tr.appendChild(tdTotal);
+        tr.appendChild(tdThisRound);
+        tr.appendChild(tdRemaining);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    // -------------------------------
+    // เรียกใช้เมื่อโหลดหน้าเสร็จ
+    // -------------------------------
+    window.addEventListener("DOMContentLoaded", () => {
+      renderStudentHeader();
+      populateSubjectFilter();
+      renderGradeTable();   // เริ่มต้นแสดงทุกวิชา
+      renderHoursTable();   // แสดงชั่วโมงเรียน
+    });
+  </script>
+</body>
+</html>
 
     <section id="certificates">
       <h2>การออกใบประกาศนียบัตร</h2>
