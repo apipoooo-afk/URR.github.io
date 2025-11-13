@@ -207,3 +207,126 @@
   </footer>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบขอฝึกงาน</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #343a40;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>ระบบออกเอกสารขอฝึกงาน</h1>
+</header>
+<main>
+    <form id="internship-request-form">
+        <div class="form-group">
+            <label for="internship-place">สถานที่ฝึกงาน</label>
+            <input type="text" id="internship-place" placeholder="กรอกชื่อสถานที่">
+        </div>
+        <div class="form-group">
+            <label for="start-date">วันที่เริ่มต้น</label>
+            <input type="date" id="start-date">
+        </div>
+        <div class="form-group">
+            <label for="end-date">วันที่สิ้นสุด</label>
+            <input type="date" id="end-date">
+        </div>
+        <div class="form-group">
+            <label for="hours">จำนวนชั่วโมง</label>
+            <input type="number" id="hours" placeholder="ใส่จำนวนชั่วโมง">
+        </div>
+        <button type="button" onclick="generateLetter()">สร้างเอกสาร</button>
+    </form>
+    <hr>
+    <div id="result" style="margin-top: 20px;">
+        <!-- Show generated letter here -->
+    </div>
+</main>
+<footer>
+    <p>ปรัชญาของโรงเรียน: "สร้างอาชีพ สร้างงาน สร้างรายได้ เพื่อพัฒนาคน และพัฒนาประเทศชาติ"</p>
+</footer>
+<script>
+    function generateLetter() {
+        const internshipPlace = document.getElementById('internship-place').value;
+        const startDate = document.getElementById('start-date').value;
+        const endDate = document.getElementById('end-date').value;
+        const hours = document.getElementById('hours').value;
+
+        const letterContent = `
+            <h2>โรงเรียนอุบลบุรีรักษ์การบริบาล</h2>
+            <p>วันที่: ${new Date().toLocaleDateString("th-TH")}</p>
+            <p><strong>เรียน: </strong></p>
+            <p><strong>เรื่อง: ขอความอนุเคราะห์ฝึกงาน</strong></p>
+            <p>
+                โรงเรียนอุบลบุรีรักษ์การบริบาลขอส่งนักศึกษาที่สำเร็จการศึกษาจากโรงเรียนอุบลบุรีรักษ์การบริบาล 
+                เพื่อเข้าฝึกงานที่ <strong>${internshipPlace}</strong> ตั้งแต่วันที่ <strong>${startDate}</strong> 
+                ถึงวันที่ <strong>${endDate}</strong> รวมจำนวน <strong>${hours}</strong> ชั่วโมง
+            </p>
+            <p>
+                เพื่อให้การฝึกงานของนักศึกษาเกิดประโยชน์ต่อสถานที่ฝึกงานและตัวนักศึกษา 
+                จึงขอความอนุเคราะห์ให้สถานที่ฝึกงานช่วยส่งเสริมและสนับสนุนให้นักศึกษาสามารถฝึกงานจนสำเร็จการศึกษา 
+                และหวังเป็นอย่างยิ่งว่าท่านจะบรรจุนักศึกษาเข้าเป็นพนักงานต่อไป
+            </p>
+            <p>
+                ขอแสดงความนับถือ<br>
+                <strong>นางสาวธัญภ์วรินทร์ อัครฆ์ธนเดชาณ์</strong><br>
+                ผู้บริหารโรงเรียน
+            </p>
+        `;
+        document.getElementById('result').innerHTML = letterContent;
+    }
+</script>
+</body>
+</html>
