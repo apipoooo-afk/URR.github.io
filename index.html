@@ -74,6 +74,36 @@
     ul {
       padding-left: 20px;
     }
+
+    /* Dashboard cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 12px;
+      margin-bottom: 8px;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    .card-title {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    .card-value {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #111827;
+    }
+    .card-sub {
+      font-size: 0.85rem;
+      color: #6b7280;
+      margin-top: 4px;
+    }
   </style>
 </head>
 <body>
@@ -86,7 +116,7 @@
       <a href="courses.html">หลักสูตร</a>
       <a href="learning.html">ระบบเรียนออนไลน์</a>
       <a href="assessment.html">ผลการเรียน</a>
-      <a href="dashboard.html">แดชบอร์ด</a>
+      <a href="dashboard.html">ฐานข้อมูลนักศึกษา (ผู้บริหาร)</a>
       <a href="about.html">เกี่ยวกับเรา</a>
       <a href="contact.html">ติดต่อเรา</a>
     </nav>
@@ -99,7 +129,7 @@
       <p>เรียนสั้น จบไว ได้งานจริง 💉 พร้อมโอกาสทำงานในโรงพยาบาลและคลินิกชุมชน</p>
       <a href="register.html" class="btn">สมัครเรียน</a>
       <a href="login.html" class="btn">เข้าสู่ระบบ</a>
-      <a href="dashboard.html" class="btn">ดูแดชบอร์ด/ฐานข้อมูลนักศึกษา</a>
+      <a href="dashboard.html" class="btn">ฐานข้อมูลนักศึกษา (ผู้บริหาร)</a>
     </section>
 
     <!-- ทำไมต้องเรียนกับเรา -->
@@ -113,7 +143,7 @@
       </ul>
     </section>
 
-    <!-- หลักสูตร (สรุปสั้น ๆ หน้าแรก) -->
+    <!-- หลักสูตร (สรุป) -->
     <section id="courses">
       <h2>หลักสูตรที่เปิดสอน (สรุป)</h2>
       <div class="course-card">
@@ -129,6 +159,61 @@
         <a href="courses.html">หลักสูตร</a>
       </p>
     </section>
+
+    <!-- 🔽 Dashboard ภาพรวม อยู่ด้านล่างของเว็บ -->
+    <section id="home-dashboard">
+      <h2>แดชบอร์ดภาพรวม (มุมมองสาธารณะ)</h2>
+
+      <div class="grid">
+        <div class="card">
+          <div class="card-title">จำนวนครั้งที่เข้าดูเว็บไซต์</div>
+          <div class="card-value" id="viewsTotalHome">0</div>
+          <div class="card-sub">นับจากการเปิดหน้าเว็บไซต์นี้ (ในเครื่องนี้)</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">ผู้สมัครเรียนทั้งหมด</div>
+          <div class="card-value" id="studentsTotalHome">0</div>
+          <div class="card-sub">ข้อมูลจากแบบฟอร์มสมัครเรียน</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">ผู้ที่เคยล็อกอินแล้ว</div>
+          <div class="card-value" id="loggedUsersTotalHome">0</div>
+          <div class="card-sub">นับจากรหัสนักศึกษาที่เคยเข้าสู่ระบบ</div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">จำนวนครั้งที่ล็อกอิน</div>
+          <div class="card-value" id="loginCountTotalHome">0</div>
+          <div class="card-sub">ทุกครั้งที่เข้าสู่ระบบผ่านหน้า login.html</div>
+        </div>
+      </div>
+
+      <h3>สถานะนักศึกษา (จากข้อมูลที่บันทึกในระบบ)</h3>
+      <div class="grid">
+        <div class="card">
+          <div class="card-title">สมัครใหม่</div>
+          <div class="card-value" id="newTotalHome">0</div>
+        </div>
+        <div class="card">
+          <div class="card-title">กำลังเรียนออนไลน์</div>
+          <div class="card-value" id="learningTotalHome">0</div>
+        </div>
+        <div class="card">
+          <div class="card-title">ฝึกงาน</div>
+          <div class="card-value" id="internTotalHome">0</div>
+        </div>
+        <div class="card">
+          <div class="card-title">จบการศึกษา</div>
+          <div class="card-value" id="graduatedTotalHome">0</div>
+        </div>
+        <div class="card">
+          <div class="card-title">บรรจุงานแล้ว</div>
+          <div class="card-value" id="employedTotalHome">0</div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
@@ -136,13 +221,59 @@
     <p>ที่อยู่: 115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000 | โทร: 080-459-3311</p>
   </footer>
 
-  <!-- ตัวนับจำนวนผู้เข้าชมหน้าเว็บ -->
+  <!-- สคริปต์: นับจำนวนเข้าชม และแสดงแดชบอร์ดหน้าแรก -->
   <script>
-    (function () {
-      const key = "siteViews";
-      const current = parseInt(localStorage.getItem(key) || "0", 10);
-      localStorage.setItem(key, String(current + 1));
+    const VIEW_KEY            = "siteViews";
+    const STORAGE_KEY         = "students";
+    const LOGIN_COUNT_KEY     = "loginCount";
+    const LOGGED_STUDENTS_KEY = "loggedStudents";
+
+    // นับจำนวนเข้าชมหน้าเว็บ (เก็บใน localStorage เครื่องนี้)
+    (function countView(){
+      const current = parseInt(localStorage.getItem(VIEW_KEY) || "0", 10);
+      localStorage.setItem(VIEW_KEY, String(current + 1));
     })();
+
+    function loadStudents() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    }
+    function loadLoggedStudents() {
+      return JSON.parse(localStorage.getItem(LOGGED_STUDENTS_KEY) || "[]");
+    }
+
+    function renderHomeDashboard() {
+      const students       = loadStudents();
+      const loggedStudents = loadLoggedStudents();
+
+      const viewsTotal = parseInt(localStorage.getItem(VIEW_KEY) || "0", 10);
+      const loginCount = parseInt(localStorage.getItem(LOGIN_COUNT_KEY) || "0", 10);
+
+      document.getElementById("viewsTotalHome").textContent        = viewsTotal;
+      document.getElementById("studentsTotalHome").textContent     = students.length;
+      document.getElementById("loggedUsersTotalHome").textContent  = loggedStudents.length;
+      document.getElementById("loginCountTotalHome").textContent   = loginCount;
+
+      let newTotal = 0, learningTotal = 0, internTotal = 0,
+          graduatedTotal = 0, employedTotal = 0;
+
+      students.forEach(s => {
+        switch (s.status) {
+          case "new":       newTotal++;       break;
+          case "learning":  learningTotal++;  break;
+          case "intern":    internTotal++;    break;
+          case "graduated": graduatedTotal++; break;
+          case "employed":  employedTotal++;  break;
+        }
+      });
+
+      document.getElementById("newTotalHome").textContent       = newTotal;
+      document.getElementById("learningTotalHome").textContent  = learningTotal;
+      document.getElementById("internTotalHome").textContent    = internTotal;
+      document.getElementById("graduatedTotalHome").textContent = graduatedTotal;
+      document.getElementById("employedTotalHome").textContent  = employedTotal;
+    }
+
+    document.addEventListener("DOMContentLoaded", renderHomeDashboard);
   </script>
 </body>
 </html>
