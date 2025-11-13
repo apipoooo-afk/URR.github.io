@@ -3,304 +3,146 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>แดชบอร์ดสถิติ | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+  <title>โรงเรียนอุบลบุรีรักษ์การบริบาล | Ubon Buri Rak Nursing Assistant School</title>
+
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="exam.css">
+
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
       margin: 0;
       padding: 0;
+      background-color: #f9f9f9;
     }
     header {
       text-align: center;
       background-color: #007bff;
       color: white;
-      padding: 16px 10px;
+      padding: 20px 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+      font-weight: bold;
+      font-size: 14px;
     }
     main {
-      max-width: 1100px;
-      margin: 24px auto;
-      padding: 0 16px 24px 16px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
     }
-    h1, h2, h3 {
-      margin-top: 0;
+    main > section {
+      margin-bottom: 32px;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
+    .intro {
+      text-align: center;
+      margin: 30px 0;
     }
-    .card {
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: #28a745;
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      border-radius: 5px;
+      margin: 5px;
+    }
+    .btn:hover {
+      background-color: #218838;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background-color: #343a40;
+      color: white;
+      margin-top: 32px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .course-card {
       background: #ffffff;
       border-radius: 10px;
       padding: 16px 20px;
+      margin-bottom: 16px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
-    .card-title {
-      font-size: 0.95rem;
-      color: #6b7280;
-      margin-bottom: 4px;
-    }
-    .card-value {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #111827;
-    }
-    .card-sub {
-      font-size: 0.85rem;
-      color: #6b7280;
-      margin-top: 4px;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      background: #fff;
-    }
-    th, td {
-      border: 1px solid #e5e7eb;
-      padding: 8px;
-      font-size: 0.9rem;
-      text-align: left;
-    }
-    th {
-      background: #f3f4f6;
-    }
-    .badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 999px;
-      font-size: 0.75rem;
-      color: #fff;
-    }
-    .badge-learning { background: #10b981; }
-    .badge-intern { background: #f59e0b; }
-    .badge-graduated { background: #3b82f6; }
-    .badge-appointed { background: #8b5cf6; }
-    .badge-other { background: #6b7280; }
-    .top-actions {
-      margin-bottom: 16px;
-    }
-    .top-actions a {
-      display: inline-block;
-      padding: 8px 14px;
-      background: #e5e7eb;
-      border-radius: 999px;
-      text-decoration: none;
-      font-size: 0.9rem;
-      color: #111827;
-      margin-right: 8px;
-    }
-    .top-actions a:hover {
-      background: #d1d5db;
+
+    ul {
+      padding-left: 20px;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>แดชบอร์ดสถิติ / ฐานข้อมูลนักศึกษา</h1>
-    <p>โรงเรียนอุบลบุรีรักษ์การบริบาล</p>
+    <h1>โรงเรียนอุบลบุรีรักษ์การบริบาล</h1>
+    <p>พนักงานผู้ช่วยพยาบาล รับรองโดยกระทรวงศึกษาธิการ กระทรวงสาธารณสุข และสภาการพยาบาล</p>
+    <p>ที่อยู่: 115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000</p>
+    <nav>
+      <a href="index.html">หน้าแรก</a>
+      <a href="courses.html">หลักสูตร</a>
+      <a href="learning.html">ระบบเรียนออนไลน์</a>
+      <a href="assessment.html">ผลการเรียน</a>
+      <a href="dashboard.html">แดชบอร์ด</a>
+      <a href="about.html">เกี่ยวกับเรา</a>
+      <a href="contact.html">ติดต่อเรา</a>
+    </nav>
   </header>
 
   <main>
-    <div class="top-actions">
-      <a href="index.html">← กลับหน้าแรก</a>
-      <a href="register.html">สมัครเรียนใหม่</a>
-      <a href="login.html">เข้าสู่ระบบ</a>
-    </div>
+    <!-- INTRO -->
+    <section class="intro">
+      <h2>ยินดีต้อนรับสู่การเรียนออนไลน์</h2>
+      <p>เรียนสั้น จบไว ได้งานจริง 💉 พร้อมโอกาสทำงานในโรงพยาบาลและคลินิกชุมชน</p>
+      <a href="register.html" class="btn">สมัครเรียน</a>
+      <a href="login.html" class="btn">เข้าสู่ระบบ</a>
+      <a href="dashboard.html" class="btn">ดูแดชบอร์ด/ฐานข้อมูลนักศึกษา</a>
+    </section>
 
-    <h2>สรุปภาพรวม</h2>
-    <div class="grid">
-      <div class="card">
-        <div class="card-title">ผู้เข้าดูเว็บไซต์ทั้งหมด</div>
-        <div class="card-value" id="viewsTotal">0</div>
-        <div class="card-sub">นับจากจำนวนครั้งที่เปิดหน้าเว็บไซต์</div>
-      </div>
+    <!-- ทำไมต้องเรียนกับเรา -->
+    <section>
+      <h3>ทำไมต้องเรียนกับเรา?</h3>
+      <ul>
+        <li>หลักสูตรได้รับการรับรองจากกระทรวงศึกษาธิการ กระทรวงสาธารณสุข และสภาการพยาบาล</li>
+        <li>เรียนออนไลน์แบบยืดหยุ่นตามเวลาของคุณ</li>
+        <li>มีทั้งการเรียนแบบวิดีโอและแบบตัวต่อตัวกับอาจารย์</li>
+        <li>โอกาสฝึกงานและได้งานทำหลังเรียนจบ</li>
+      </ul>
+    </section>
 
-      <div class="card">
-        <div class="card-title">ผู้สมัครเรียนทั้งหมด</div>
-        <div class="card-value" id="studentsTotal">0</div>
-        <div class="card-sub">จำนวนระเบียนในฐานข้อมูลนักศึกษา</div>
+    <!-- หลักสูตร (สรุปสั้น ๆ หน้าแรก) -->
+    <section id="courses">
+      <h2>หลักสูตรที่เปิดสอน (สรุป)</h2>
+      <div class="course-card">
+        <h3>พนักงานผู้ช่วยพยาบาล 840 ชม. (กระทรวงศึกษาธิการ)</h3>
+        <p>เน้นปฏิบัติงานในโรงพยาบาลและคลินิก</p>
       </div>
-
-      <div class="card">
-        <div class="card-title">ผู้ที่เคยล็อกอินแล้ว</div>
-        <div class="card-value" id="loggedUsersTotal">0</div>
-        <div class="card-sub">นับจากรหัสนักศึกษาที่เคยเข้าสู่ระบบ</div>
+      <div class="course-card">
+        <h3>ผู้ให้การดูแล 510 ชม. (สภาการพยาบาล)</h3>
+        <p>เน้นการดูแลในชุมชนและการดูแลต่อเนื่องที่บ้าน</p>
       </div>
-
-      <div class="card">
-        <div class="card-title">จำนวนครั้งที่ล็อกอิน</div>
-        <div class="card-value" id="loginCountTotal">0</div>
-        <div class="card-sub">ทุกครั้งที่เข้าสู่ระบบผ่านหน้า Login</div>
-      </div>
-    </div>
-
-    <h2>สถานะนักศึกษา</h2>
-    <div class="grid">
-      <div class="card">
-        <div class="card-title">ผู้เรียนออนไลน์ / กำลังเรียน</div>
-        <div class="card-value" id="learningTotal">0</div>
-      </div>
-      <div class="card">
-        <div class="card-title">ผู้ฝึกงาน</div>
-        <div class="card-value" id="internTotal">0</div>
-      </div>
-      <div class="card">
-        <div class="card-title">ผู้เรียนจบ</div>
-        <div class="card-value" id="graduatedTotal">0</div>
-      </div>
-      <div class="card">
-        <div class="card-title">ผู้ที่บรรจุงานแล้ว</div>
-        <div class="card-value" id="appointedTotal">0</div>
-      </div>
-    </div>
-
-    <h3>ฐานข้อมูลนักศึกษา</h3>
-    <table id="studentsTable">
-      <thead>
-        <tr>
-          <th>รหัสนักศึกษา</th>
-          <th>ชื่อ-นามสกุล</th>
-          <th>หลักสูตร</th>
-          <th>สถานะ</th>
-          <th>เบอร์โทร</th>
-          <th>อีเมล</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- เติมด้วย JS -->
-      </tbody>
-    </table>
+      <p>
+        ดูรายละเอียดทุกหลักสูตรที่หน้า
+        <a href="courses.html">หลักสูตร</a>
+      </p>
+    </section>
   </main>
 
+  <footer>
+    <p>© 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล</p>
+    <p>ที่อยู่: 115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000 | โทร: 080-459-3311</p>
+  </footer>
+
+  <!-- ตัวนับจำนวนผู้เข้าชมหน้าเว็บ -->
   <script>
-    const STORAGE_KEY = "students";
-    const VIEW_KEY = "siteViews";
-    const LOGIN_COUNT_KEY = "loginCount";
-    const LOGGED_STUDENTS_KEY = "loggedStudents";
-
-    function loadStudents() {
-      const data = localStorage.getItem(STORAGE_KEY);
-      if (!data) return [];
-      try {
-        return JSON.parse(data);
-      } catch (e) {
-        console.error("JSON parse error:", e);
-        return [];
-      }
-    }
-
-    function loadLoggedStudents() {
-      const data = localStorage.getItem(LOGGED_STUDENTS_KEY);
-      if (!data) return [];
-      try {
-        return JSON.parse(data);
-      } catch (e) {
-        console.error("JSON parse error:", e);
-        return [];
-      }
-    }
-
-    function getBadgeClass(status) {
-      switch (status) {
-        case "learning":  return "badge badge-learning";
-        case "intern":    return "badge badge-intern";
-        case "graduated": return "badge badge-graduated";
-        case "appointed": return "badge badge-appointed";
-        default:          return "badge badge-other";
-      }
-    }
-
-    function getStatusLabel(status) {
-      switch (status) {
-        case "learning":  return "ผู้เรียนออนไลน์ / กำลังเรียน";
-        case "intern":    return "ผู้ฝึกงาน";
-        case "graduated": return "ผู้เรียนจบ";
-        case "appointed": return "บรรจุงานแล้ว";
-        default:          return "อื่น ๆ";
-      }
-    }
-
-    function renderDashboard() {
-      const students = loadStudents();
-      const loggedStudents = loadLoggedStudents();
-
-      const viewsTotal = parseInt(localStorage.getItem(VIEW_KEY) || "0", 10);
-      const loginCountTotal = parseInt(localStorage.getItem(LOGIN_COUNT_KEY) || "0", 10);
-
-      document.getElementById("viewsTotal").textContent = viewsTotal;
-      document.getElementById("studentsTotal").textContent = students.length;
-      document.getElementById("loggedUsersTotal").textContent = loggedStudents.length;
-      document.getElementById("loginCountTotal").textContent = loginCountTotal;
-
-      let learningTotal = 0;
-      let internTotal = 0;
-      let graduatedTotal = 0;
-      let appointedTotal = 0;
-
-      students.forEach(s => {
-        switch (s.status) {
-          case "learning":
-            learningTotal++;
-            break;
-          case "intern":
-            internTotal++;
-            break;
-          case "graduated":
-            graduatedTotal++;
-            break;
-          case "appointed":
-            appointedTotal++;
-            break;
-        }
-      });
-
-      document.getElementById("learningTotal").textContent = learningTotal;
-      document.getElementById("internTotal").textContent = internTotal;
-      document.getElementById("graduatedTotal").textContent = graduatedTotal;
-      document.getElementById("appointedTotal").textContent = appointedTotal;
-
-      const tbody = document.querySelector("#studentsTable tbody");
-      tbody.innerHTML = "";
-
-      students.forEach(s => {
-        const tr = document.createElement("tr");
-
-        const tdId = document.createElement("td");
-        tdId.textContent = s.studentId;
-
-        const tdName = document.createElement("td");
-        tdName.textContent = s.fullName;
-
-        const tdCourse = document.createElement("td");
-        tdCourse.textContent = s.course || "-";
-
-        const tdStatus = document.createElement("td");
-        const spanStatus = document.createElement("span");
-        spanStatus.className = getBadgeClass(s.status);
-        spanStatus.textContent = getStatusLabel(s.status);
-        tdStatus.appendChild(spanStatus);
-
-        const tdPhone = document.createElement("td");
-        tdPhone.textContent = s.phone || "-";
-
-        const tdEmail = document.createElement("td");
-        tdEmail.textContent = s.email || "-";
-
-        tr.appendChild(tdId);
-        tr.appendChild(tdName);
-        tr.appendChild(tdCourse);
-        tr.appendChild(tdStatus);
-        tr.appendChild(tdPhone);
-        tr.appendChild(tdEmail);
-
-        tbody.appendChild(tr);
-      });
-    }
-
-    window.addEventListener("DOMContentLoaded", renderDashboard);
+    (function () {
+      const key = "siteViews";
+      const current = parseInt(localStorage.getItem(key) || "0", 10);
+      localStorage.setItem(key, String(current + 1));
+    })();
   </script>
 </body>
 </html>
