@@ -2,9 +2,10 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta viewport="width=device-width, initial-scale=1.0">
   <title>โรงเรียนอุบลบุรีรักษ์การบริบาล | Ubon Buri Rak Nursing Assistant School</title>
 
+  <!-- ถ้ามีไฟล์เดิมอยู่แล้ว ปล่อยสองบรรทัดนี้ไว้ได้ -->
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="exam.css">
 
@@ -19,15 +20,22 @@
       text-align: center;
       background-color: #007bff;
       color: white;
-      padding: 20px 10px;
+      padding: 16px 10px;
+    }
+    nav {
+      margin-top: 8px;
     }
     nav a {
       color: white;
       text-decoration: none;
-      margin: 0 8px;
+      margin: 0 6px;
       font-weight: bold;
-      font-size: 14px;
+      font-size: 13px;
     }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
     main {
       padding: 20px;
       max-width: 1200px;
@@ -36,10 +44,12 @@
     main > section {
       margin-bottom: 32px;
     }
+
     .intro {
       text-align: center;
-      margin: 30px 0;
+      margin: 30px 0 24px 0;
     }
+
     .btn {
       display: inline-block;
       padding: 10px 20px;
@@ -53,6 +63,7 @@
     .btn:hover {
       background-color: #218838;
     }
+
     footer {
       text-align: center;
       padding: 15px;
@@ -75,7 +86,75 @@
       padding-left: 20px;
     }
 
-    /* Dashboard cards */
+    /* ===== ฟอร์มสมัครเรียน ===== */
+    #register-section {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    #register-section h2 {
+      margin-top: 0;
+    }
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px 20px;
+    }
+    .form-group {
+      text-align: left;
+      font-size: 14px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 4px;
+      font-weight: bold;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    .form-group textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+    .form-group input[type="file"] {
+      padding: 4px;
+    }
+    .form-note {
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .form-actions {
+      margin-top: 14px;
+      text-align: right;
+    }
+    .btn-submit {
+      background: #2563eb;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    .btn-submit:hover {
+      background: #1d4ed8;
+    }
+    .msg-success {
+      margin-top: 10px;
+      font-size: 13px;
+      color: #16a34a;
+      font-weight: bold;
+    }
+
+    /* ===== Dashboard cards ===== */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -113,9 +192,11 @@
     <p>ที่อยู่: 115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000</p>
     <nav>
       <a href="index.html">หน้าแรก</a>
+      <a href="#register-section">สมัครเรียน</a>
       <a href="courses.html">หลักสูตร</a>
       <a href="learning.html">ระบบเรียนออนไลน์</a>
       <a href="assessment.html">ผลการเรียน</a>
+      <a href="hours.html">ชั่วโมงเรียน</a>
       <a href="dashboard.html">ฐานข้อมูลนักศึกษา (ผู้บริหาร)</a>
       <a href="about.html">เกี่ยวกับเรา</a>
       <a href="contact.html">ติดต่อเรา</a>
@@ -127,9 +208,132 @@
     <section class="intro">
       <h2>ยินดีต้อนรับสู่การเรียนออนไลน์</h2>
       <p>เรียนสั้น จบไว ได้งานจริง 💉 พร้อมโอกาสทำงานในโรงพยาบาลและคลินิกชุมชน</p>
-      <a href="register.html" class="btn">สมัครเรียน</a>
+      <a href="#register-section" class="btn">สมัครเรียน</a>
       <a href="login.html" class="btn">เข้าสู่ระบบ</a>
       <a href="dashboard.html" class="btn">ฐานข้อมูลนักศึกษา (ผู้บริหาร)</a>
+    </section>
+
+    <!-- 🔹 ฟอร์มสมัครเรียน (เมนูสมัครเรียน) -->
+    <section id="register-section">
+      <h2>แบบฟอร์มสมัครเรียนออนไลน์</h2>
+      <p style="font-size:14px; color:#4b5563;">
+        กรุณากรอกข้อมูลให้ครบถ้วน เมื่อกด “ส่งข้อมูลไป LINE” ระบบจะเปิดหน้าต่าง LINE พร้อมข้อความสรุปให้คุณส่งต่อได้ทันที  
+        <span class="form-note">* การแนบรูปจะไม่ถูกส่งอัตโนมัติในข้อความ LINE กรุณาแนบรูปซ้ำในแชทเองอีกครั้ง</span>
+      </p>
+
+      <form id="quickRegisterForm">
+        <div class="form-grid">
+          <!-- ชื่อ - อายุ - เพศ - จบการศึกษา -->
+          <div class="form-group">
+            <label for="fullName">ชื่อ-นามสกุลผู้สมัคร</label>
+            <input type="text" id="fullName" required>
+          </div>
+
+          <div class="form-group">
+            <label for="age">อายุ</label>
+            <input type="text" id="age" placeholder="เช่น 18 หรือ 18 ปี">
+          </div>
+
+          <div class="form-group">
+            <label for="gender">เพศ</label>
+            <select id="gender">
+              <option value="">เลือกเพศ</option>
+              <option value="หญิง">หญิง</option>
+              <option value="ชาย">ชาย</option>
+              <option value="อื่น ๆ">อื่น ๆ</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="education">จบการศึกษา</label>
+            <input type="text" id="education" placeholder="เช่น ม.3 / ม.6 / ปวช. / ปวส. / ป.ตรี">
+          </div>
+
+          <!-- ที่อยู่: เลขที่ / ตำบล / อำเภอ / จังหวัด / รหัสไปรษณีย์ -->
+          <div class="form-group">
+            <label for="addressNo">เลขที่ / บ้านเลขที่</label>
+            <input type="text" id="addressNo" placeholder="เช่น 115/3 หมู่ 4">
+          </div>
+
+          <div class="form-group">
+            <label for="tambon">ตำบล</label>
+            <select id="tambon">
+              <option value="">เลือกตำบล</option>
+              <option value="ขามใหญ่">ขามใหญ่</option>
+              <option value="ในเมือง">ในเมือง</option>
+              <option value="แจระแม">แจระแม</option>
+              <option value="อื่น ๆ">อื่น ๆ</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="amphoe">อำเภอ</label>
+            <select id="amphoe">
+              <option value="">เลือกอำเภอ</option>
+              <option value="เมืองอุบลราชธานี">เมืองอุบลราชธานี</option>
+              <option value="วารินชำราบ">วารินชำราบ</option>
+              <option value="เดชอุดม">เดชอุดม</option>
+              <option value="อื่น ๆ">อื่น ๆ</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="province">จังหวัด</label>
+            <select id="province">
+              <option value="">เลือกจังหวัด</option>
+              <option value="อุบลราชธานี">อุบลราชธานี</option>
+              <option value="ศรีสะเกษ">ศรีสะเกษ</option>
+              <option value="ยโสธร">ยโสธร</option>
+              <option value="อื่น ๆ">อื่น ๆ</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="postcode">รหัสไปรษณีย์</label>
+            <input type="text" id="postcode" placeholder="เช่น 34000">
+          </div>
+
+          <!-- ช่องติดต่อ -->
+          <div class="form-group">
+            <label for="phone">เบอร์โทร</label>
+            <input type="tel" id="phone" placeholder="เช่น 080-0000000">
+          </div>
+
+          <div class="form-group">
+            <label for="lineId">ไอดีไลน์</label>
+            <input type="text" id="lineId" placeholder="เช่น lineid1234">
+          </div>
+
+          <div class="form-group">
+            <label for="facebook">เฟซบุ๊ก</label>
+            <input type="text" id="facebook" placeholder="ชื่อเฟซ หรือลิงก์ Facebook">
+          </div>
+
+          <!-- แนบรูป -->
+          <div class="form-group">
+            <label for="photo">แนบรูปผู้สมัคร (ในเครื่อง)</label>
+            <input type="file" id="photo" accept="image/*">
+            <div class="form-note">
+              * ระบบจะไม่ส่งไฟล์รูปไป LINE ให้อัตโนมัติ  
+              กรุณาแนบรูปซ้ำในแชทไลน์เองอีกครั้งหลังจากส่งข้อความ
+            </div>
+          </div>
+        </div>
+
+        <!-- ข้อความเพิ่มเติม -->
+        <div class="form-group" style="margin-top:12px;">
+          <label for="extraInfo">ข้อมูลเพิ่มเติม / ข้อความฝากถึงโรงเรียน</label>
+          <textarea id="extraInfo" placeholder="เช่น สะดวกเรียนรอบเช้า / มีประสบการณ์ดูแลผู้สูงอายุ ฯลฯ"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-submit">ส่งข้อมูลไป LINE</button>
+        </div>
+
+        <div id="formMessage" class="msg-success" style="display:none;">
+          สร้างข้อความสำหรับส่งไป LINE แล้ว กรุณาตรวจสอบและกดส่งในแอป LINE อีกครั้ง
+        </div>
+      </form>
     </section>
 
     <!-- ทำไมต้องเรียนกับเรา -->
@@ -143,7 +347,7 @@
       </ul>
     </section>
 
-    <!-- หลักสูตร (สรุป) -->
+    <!-- เลือกหลักสูตร (สรุป) -->
     <section id="courses">
       <h2>หลักสูตรที่เปิดสอน (สรุป)</h2>
       <div class="course-card">
@@ -172,9 +376,9 @@
         </div>
 
         <div class="card">
-          <div class="card-title">ผู้สมัครเรียนทั้งหมด</div>
+          <div class="card-title">ผู้สมัครเรียนทั้งหมด (จากระบบหลัก)</div>
           <div class="card-value" id="studentsTotalHome">0</div>
-          <div class="card-sub">ข้อมูลจากแบบฟอร์มสมัครเรียน</div>
+          <div class="card-sub">ข้อมูลจากแบบฟอร์ม register.html (ถ้ามีใช้งานร่วม)</div>
         </div>
 
         <div class="card">
@@ -190,7 +394,7 @@
         </div>
       </div>
 
-      <h3>สถานะนักศึกษา (จากข้อมูลที่บันทึกในระบบ)</h3>
+      <h3>สถานะนักศึกษา (จากข้อมูลในฐานข้อมูลนักศึกษา)</h3>
       <div class="grid">
         <div class="card">
           <div class="card-title">สมัครใหม่</div>
@@ -221,14 +425,14 @@
     <p>ที่อยู่: 115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000 | โทร: 080-459-3311</p>
   </footer>
 
-  <!-- สคริปต์: นับจำนวนเข้าชม และแสดงแดชบอร์ดหน้าแรก -->
   <script>
+    // คีย์ที่ใช้ร่วมกับระบบอื่น (dashboard/admin)
     const VIEW_KEY            = "siteViews";
     const STORAGE_KEY         = "students";
     const LOGIN_COUNT_KEY     = "loginCount";
     const LOGGED_STUDENTS_KEY = "loggedStudents";
 
-    // นับจำนวนเข้าชมหน้าเว็บ (เก็บใน localStorage เครื่องนี้)
+    // ===== นับจำนวนเข้าชมหน้าเว็บ (เก็บใน localStorage เครื่องนี้) =====
     (function countView(){
       const current = parseInt(localStorage.getItem(VIEW_KEY) || "0", 10);
       localStorage.setItem(VIEW_KEY, String(current + 1));
@@ -241,6 +445,7 @@
       return JSON.parse(localStorage.getItem(LOGGED_STUDENTS_KEY) || "[]");
     }
 
+    // ===== Dashboard หน้าแรก =====
     function renderHomeDashboard() {
       const students       = loadStudents();
       const loggedStudents = loadLoggedStudents();
@@ -272,6 +477,68 @@
       document.getElementById("graduatedTotalHome").textContent = graduatedTotal;
       document.getElementById("employedTotalHome").textContent  = employedTotal;
     }
+
+    // ===== ฟอร์มสมัครเรียนแบบส่งไป LINE =====
+    document.getElementById("quickRegisterForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const fullName   = document.getElementById("fullName").value.trim();
+      const age        = document.getElementById("age").value.trim();
+      const gender     = document.getElementById("gender").value;
+      const education  = document.getElementById("education").value.trim();
+      const addressNo  = document.getElementById("addressNo").value.trim();
+      const tambon     = document.getElementById("tambon").value;
+      const amphoe     = document.getElementById("amphoe").value;
+      const province   = document.getElementById("province").value;
+      const postcode   = document.getElementById("postcode").value.trim();
+      const phone      = document.getElementById("phone").value.trim();
+      const lineId     = document.getElementById("lineId").value.trim();
+      const facebook   = document.getElementById("facebook").value.trim();
+      const extraInfo  = document.getElementById("extraInfo").value.trim();
+
+      if (!fullName) {
+        alert("กรุณากรอกชื่อ-นามสกุลผู้สมัคร");
+        return;
+      }
+
+      const lines = [];
+      lines.push("แบบฟอร์มสมัครเรียนใหม่ (หน้าเว็บ)");
+      lines.push("-------------------------");
+      lines.push("ชื่อ-นามสกุล: " + fullName);
+      if (age)       lines.push("อายุ: " + age);
+      if (gender)    lines.push("เพศ: " + gender);
+      if (education) lines.push("จบการศึกษา: " + education);
+
+      let addressLine = "";
+      if (addressNo) addressLine += addressNo;
+      if (tambon)    addressLine += (addressLine ? " " : "") + "ต." + tambon;
+      if (amphoe)    addressLine += (addressLine ? " " : "") + "อ." + amphoe;
+      if (province)  addressLine += (addressLine ? " " : "") + "จ." + province;
+      if (postcode)  addressLine += (addressLine ? " " : "") + " " + postcode;
+      if (addressLine) lines.push("ที่อยู่: " + addressLine);
+
+      if (phone)    lines.push("เบอร์โทร: " + phone);
+      if (lineId)   lines.push("ไลน์: " + lineId);
+      if (facebook) lines.push("เฟซบุ๊ก: " + facebook);
+      if (extraInfo) {
+        lines.push("ข้อมูลเพิ่มเติม:");
+        lines.push(extraInfo);
+      }
+      lines.push("-------------------------");
+      lines.push("หมายเหตุ: แนบรูปผู้สมัครเพิ่มเติมในแชท LINE อีกครั้ง");
+
+      const msg = lines.join("\n");
+
+      // ใช้ deep link ของ LINE เพื่อเปิดหน้าต่างส่งข้อความ
+      const url = "https://line.me/R/msg/text/?" + encodeURIComponent(msg);
+      window.open(url, "_blank");
+
+      const msgBox = document.getElementById("formMessage");
+      msgBox.style.display = "block";
+
+      // ไม่ล้างฟอร์มเผื่ออยากแก้ไขแล้วส่งซ้ำ แต่ถ้าต้องการล้าง ให้ uncomment บรรทัดถัดไป
+      // this.reset();
+    });
 
     document.addEventListener("DOMContentLoaded", renderHomeDashboard);
   </script>
