@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ผลการเรียน | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+    }
+    header {
+      text-align: center;
+      background-color: #007bff;
+      color: white;
+      padding: 16px 10px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 8px;
+      font-weight: bold;
+      font-size: 14px;
+    }
+    main {
+      max-width: 1200px;
+      margin: 20px auto 32px auto;
+      padding: 0 16px;
+    }
+    h1, h2 {
+      margin-top: 0;
+    }
+
+    .header-info {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    .header-info span {
+      display: inline-block;
+      margin-right: 16px;
+      margin-bottom: 4px;
+    }
+
+    .card {
+      border: 1px solid #ddd;
+      padding: 16px;
+      border-radius: 8px;
+      margin-bottom: 24px;
+      background: #ffffff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      margin-bottom: 12px;
+      background: white;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+      font-size: 14px;
+    }
+    th {
+      background: #f5f5f5;
+    }
+
+    select {
+      padding: 4px 8px;
+      margin-top: 8px;
+    }
+
+    .status-pass {
+      color: green;
+      font-weight: bold;
+    }
+    .status-fail {
+      color: red;
+      font-weight: bold;
+    }
+
+    .note {
+      font-size: 13px;
+      color: #6b7280;
+    }
+
+    .btn-back {
+      display: inline-block;
+      padding: 6px 12px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #111827;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .btn-back:hover {
+      background: #d1d5db;
+    }
+    .btn-link {
+      display: inline-block;
+      padding: 6px 12px;
+      background: #10b981;
+      border-radius: 999px;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+    .btn-link:hover {
+      background: #059669;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ระบบแสดงผลการเรียน</h1>
+    <p>โรงเรียนอุบลบุรีรักษ์การบริบาล</p>
+    <nav>
+      <a href="index.html">หน้าแรก</a>
+      <a href="courses.html">หลักสูตร</a>
+      <a href="learning.html">ระบบเรียนออนไลน์</a>
+      <a href="assessment.html">ผลการเรียน</a>
+      <a href="hours.html">ชั่วโมงเรียน</a>
+      <a href="dashboard.html">ฐานข้อมูลนักศึกษา (ผู้บริหาร)</a>
+      <a href="about.html">เกี่ยวกับเรา</a>
+      <a href="contact.html">ติดต่อเรา</a>
+    </nav>
+  </header>
+
+  <main>
+    <a href="index.html" class="btn-back">← กลับหน้าแรก</a>
+
+    <!-- 2.1 ระบบแสดงผลรวมการเรียน -->
+    <section id="overall-result" class="card">
+      <h2>2.1 ระบบแสดงผลรวมการเรียน</h2>
+
+      <!-- หัวตาราง -->
+      <div class="header-info">
+        <span><strong>ชื่อโรงเรียน:</strong> <span id="schoolName"></span></span>
+        <span><strong>ชื่อนักศึกษา:</strong> <span id="studentName"></span></span>
+        <span><strong>รหัสนักศึกษา:</strong> <span id="studentId"></span></span>
+        <span><strong>ปีการศึกษา:</strong> <span id="academicYear"></span></span>
+      </div>
+
+      <!-- ตัวกรองวิชา -->
+      <label for="subjectFilter"><strong>เลือกวิชา:</strong></label>
+      <select id="subjectFilter">
+        <option value="all">ทุกวิชา</option>
+        <!-- เพิ่ม option ด้วย JS -->
+      </select>
+
+      <!-- ตารางผลการเรียน -->
+      <table>
+        <thead>
+          <tr>
+            <th>ชื่อวิชา</th>
+            <th>คะแนนเต็ม</th>
+            <th>คะแนนที่สอบได้ (0–100)</th>
+            <th>ผลการเรียน (เกรด)</th>
+          </tr>
+        </thead>
+        <tbody id="gradeTableBody">
+          <!-- เติมข้อมูลด้วย JS -->
+        </tbody>
+      </table>
+
+      <!-- สถานะสำเร็จการศึกษา -->
+      <div id="graduationStatus"></div>
+
+      <p class="note">
+        เกณฑ์การให้ผลการเรียน: A = 80 ขึ้นไป, B = 70–79, C = 60–69, D = 50–59, F = ต่ำกว่า 50 (สอบตก)  
+        หากมีวิชาใดได้ F ถือว่า “ยังไม่สำเร็จการศึกษา”
+      </p>
+
+      <a href="hours.html" class="btn-link">ดูระบบชั่วโมงเรียน (2.1.1)</a>
+    </section>
+  </main>
+
+  <script>
+    // อ่านข้อมูลนักศึกษาจาก sessionStorage (หลังล็อกอิน) ถ้ามี
+    let studentInfo;
+    const currentStudentRaw = sessionStorage.getItem("currentStudent");
+
+    if (currentStudentRaw) {
+      try {
+        const s = JSON.parse(currentStudentRaw);
+        studentInfo = {
+          schoolName: "โรงเรียนอุบลบุรีรักษ์การบริบาล",
+          studentName: s.fullName || "นักศึกษา",
+          studentId: s.studentId || "-",
+          academicYear: "2568"
+        };
+      } catch (e) {
+        studentInfo = {
+          schoolName: "โรงเรียนอุบลบุรีรักษ์การบริบาล",
+          studentName: "นางสาวตัวอย่าง นักศึกษา",
+          studentId: "UBN001-2568",
+          academicYear: "2568"
+        };
+      }
+    } else {
+      // ยังไม่ได้ล็อกอิน ใช้ข้อมูลตัวอย่าง
+      studentInfo = {
+        schoolName: "โรงเรียนอุบลบุรีรักษ์การบริบาล",
+        studentName: "นางสาวตัวอย่าง นักศึกษา",
+        studentId: "UBN001-2568",
+        academicYear: "2568"
+      };
+    }
+
+    // ตัวอย่างข้อมูลผลคะแนนสอบหลังการเรียน
+    const examResults = [
+      { subjectId: 1, subjectName: "พื้นฐานการพยาบาล",       fullScore: 100, score: 85 },
+      { subjectId: 2, subjectName: "กายวิภาคและสรีรวิทยา", fullScore: 100, score: 76 },
+      { subjectId: 3, subjectName: "จริยธรรมวิชาชีพ",       fullScore: 100, score: 62 },
+      { subjectId: 4, subjectName: "การพยาบาลผู้สูงอายุ",  fullScore: 100, score: 54 },
+      { subjectId: 5, subjectName: "การดูแลผู้ป่วยเบื้องต้น", fullScore: 100, score: 45 } // ตัวอย่าง F
+    ];
+
+    function calculateGrade(score) {
+      if (score >= 80) return "A";
+      if (score >= 70) return "B";
+      if (score >= 60) return "C";
+      if (score >= 50) return "D";
+      return "F";
+    }
+
+    function renderStudentHeader() {
+      document.getElementById("schoolName").textContent   = studentInfo.schoolName;
+      document.getElementById("studentName").textContent  = studentInfo.studentName;
+      document.getElementById("studentId").textContent    = studentInfo.studentId;
+      document.getElementById("academicYear").textContent = studentInfo.academicYear;
+    }
+
+    function populateSubjectFilter() {
+      const select = document.getElementById("subjectFilter");
+      examResults.forEach(result => {
+        const option = document.createElement("option");
+        option.value = result.subjectId;
+        option.textContent = result.subjectName;
+        select.appendChild(option);
+      });
+
+      select.addEventListener("change", () => {
+        const selected = select.value;
+        if (selected === "all") {
+          renderGradeTable();
+        } else {
+          const subjectId = parseInt(selected, 10);
+          renderGradeTable(subjectId);
+        }
+      });
+    }
+
+    function renderGradeTable(filterSubjectId = null) {
+      const tbody = document.getElementById("gradeTableBody");
+      tbody.innerHTML = "";
+
+      let filteredResults = examResults;
+      if (filterSubjectId !== null) {
+        filteredResults = examResults.filter(r => r.subjectId === filterSubjectId);
+      }
+
+      filteredResults.forEach(result => {
+        const grade = calculateGrade(result.score);
+        const tr = document.createElement("tr");
+
+        const tdName  = document.createElement("td");
+        const tdFull  = document.createElement("td");
+        const tdScore = document.createElement("td");
+        const tdGrade = document.createElement("td");
+
+        tdName.textContent  = result.subjectName;
+        tdFull.textContent  = result.fullScore;
+        tdScore.textContent = result.score;
+        tdGrade.textContent = grade;
+
+        tr.appendChild(tdName);
+        tr.appendChild(tdFull);
+        tr.appendChild(tdScore);
+        tr.appendChild(tdGrade);
+
+        tbody.appendChild(tr);
+      });
+
+      const anyFail = examResults.some(r => calculateGrade(r.score) === "F");
+      const statusDiv = document.getElementById("graduationStatus");
+
+      if (!anyFail) {
+        statusDiv.innerHTML = '<span class="status-pass">สำเร็จการศึกษาแล้ว</span>';
+      } else {
+        statusDiv.innerHTML = '<span class="status-fail">ยังไม่สำเร็จการศึกษา (กรณีมีผลสอบเป็น F)</span>';
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      renderStudentHeader();
+      populateSubjectFilter();
+      renderGradeTable();
+    });
+  </script>
+</body>
+</html>
