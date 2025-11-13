@@ -1,88 +1,146 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<title>หลักสูตรทั้งหมด | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
-<style>
-  body { font-family:Arial; padding:20px; background:#f7f9fc; }
-  h1 { color:#0055cc; }
-  .course-box {
-    background:#fff;
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:15px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
-  }
-  .course-title {
-    font-size:20px;
-    font-weight:bold;
-    color:#0055cc;
-    text-decoration:none;
-  }
-  .course-title:hover { text-decoration:underline; }
-  .sub { color:#666; font-size:14px; margin:4px 0; }
-  .btn {
-    display:inline-block;
-    padding:8px 14px;
-    background:#28a745;
-    color:white;
-    border-radius:6px;
-    text-decoration:none;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>หลักสูตรทั้งหมด | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background:#f9f9f9;
+      margin:0;
+      padding:0;
+    }
+
+    header {
+      background:#007bff;
+      padding:20px;
+      text-align:center;
+      color:white;
+    }
+
+    main {
+      max-width:1200px;
+      margin:30px auto;
+      padding:10px;
+    }
+
+    h2 {
+      color:#0056b3;
+      text-align:center;
+      margin-bottom:30px;
+    }
+
+    .course-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+      gap:20px;
+    }
+
+    .course-card {
+      background:white;
+      border-radius:10px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      padding:20px;
+    }
+
+    .course-card h3 {
+      margin-top:0;
+      color:#007bff;
+    }
+
+    .btn {
+      display:inline-block;
+      background:#28a745;
+      padding:10px 20px;
+      color:white;
+      border-radius:5px;
+      text-decoration:none;
+      margin-top:10px;
+    }
+
+    .btn:hover {
+      background:#218838;
+    }
+  </style>
+
 </head>
 <body>
 
-<h1>📘 หลักสูตรทั้งหมด</h1>
-<p>เลือกหลักสูตรเพื่อดูรายละเอียดและสมัครเรียน</p>
+<header>
+  <h1>หลักสูตรที่เปิดสอน</h1>
+  <p>โรงเรียนอุบลบุรีรักษ์การบริบาล | Ubon Buri Rak Nursing Assistant School</p>
+</header>
 
-<div class="course-box">
-  <a class="course-title" href="courses/na840.html">หลักสูตรพนักงานผู้ช่วยพยาบาล 840 ชม.</a>
-  <div class="sub">กระทรวงศึกษาธิการ</div>
-  <a href="https://apipoooo-afk.github.io/URR.github.io/index.html?#register-section" 
-   class="btn">สมัครเรียนหลักสูตรนี้</a>
+<main>
 
-</div>
+  <h2>เลือกหลักสูตรเพื่อดูรายละเอียดเพิ่มเติม</h2>
 
-<div class="course-box">
-  <a class="course-title" href="courses/elderkid840.html">หลักสูตรการดูแลผู้สูงอายุและเด็กเล็ก 840 ชม.</a>
-  <div class="sub">กระทรวงศึกษาธิการ</div>
-  <a href="https://apipoooo-afk.github.io/URR.github.io/index.html?#register-section" 
-   class="btn">สมัครเรียนหลักสูตรนี้</a>
+  <div class="course-grid">
 
-</div>
+    <!-- 1) ผู้ช่วยพยาบาล 840 ชม -->
+    <div class="course-card">
+      <h3>หลักสูตรพนักงานผู้ช่วยพยาบาล 840 ชม.  
+        <small style="color:#777;">(กระทรวงศึกษาธิการ)</small>
+      </h3>
+      <p>เรียนรู้ทักษะงานผู้ช่วยพยาบาลแบบเข้มข้น พร้อมฝึกงานในโรงพยาบาลจริง</p>
+      <a href="na840.html" class="btn">ดูรายละเอียด</a>
+      <a href="https://apipoooo-afk.github.io/URR.github.io/index.html?#register-section" class="btn">สมัครเรียนหลักสูตรนี้</a>
+    </div>
 
-<div class="course-box">
-  <a class="course-title" href="courses/elder420.html">หลักสูตรการดูแลผู้สูงอายุ 420 ชม.</a>
-  <div class="sub">กระทรวงสาธารณสุข</div>
-  <a href="https://apipoooo-afk.github.io/URR.github.io/index.html?#register-section" 
-   class="btn">สมัครเรียนหลักสูตรนี้</a>
+    <!-- 2) ผู้สูงอายุ+เด็กเล็ก 840 ชม -->
+    <div class="course-card">
+      <h3>หลักสูตรการดูแลผู้สูงอายุและเด็กเล็ก 840 ชม.  
+        <small style="color:#777;">(กระทรวงศึกษาธิการ)</small>
+      </h3>
+      <p>เรียน 2 สายงานในหลักสูตรเดียว พร้อมโอกาสทำงานทั้งศูนย์เด็กเล็กและบ้านพักคนชรา</p>
+      <a href="elderkid840.html" class="btn">ดูรายละเอียด</a>
+      <a href="https://apipoooo-afk.github.io/URR.github.io/index.html?#register-section" class="btn">สมัครเรียนหลักสูตรนี้</a>
+    </div>
 
-</div>
+    <!-- 3) ผู้สูงอายุ 420 ชม -->
+    <div class="course-card">
+      <h3>หลักสูตรการดูแลผู้สูงอายุ 420 ชม.  
+        <small style="color:#777;">(กระทรวงสาธารณสุข)</small>
+      </h3>
+      <p>เตรียมความพร้อมเป็นผู้ดูแลผู้สูงอายุมืออาชีพ พร้อมงานรองรับจำนวนมาก</p>
+      <a href="elder420.html" class="btn">ดูรายละเอียด</a>
+      <a href="https://apipoooo-afk.github.io/URR.github.io/index.html?#register-section" class="btn">สมัครเรียนหลักสูตรนี้</a>
+    </div>
 
-<div class="course-box">
-  <a class="course-title" href="courses/kid420.html">หลักสูตรการดูแลเด็กเล็ก 420 ชม.</a>
-  <div class="sub">กระทรวงศึกษาธิการ</div>
-  <a href="https://apipoooo-afk.github.io/URR.github.io/index.html?#register-section" 
-   class="btn">สมัครเรียนหลักสูตรนี้</a>
+    <!-- 4) เด็กเล็ก 420 ชม -->
+    <div class="course-card">
+      <h3>หลักสูตรการดูแลเด็กเล็ก 420 ชม.  
+        <small style="color:#777;">(กระทรวงศึกษาธิการ)</small>
+      </h3>
+      <p>ปูพื้นฐานงานผู้ช่วยครู ดูแลและส่งเสริมพัฒนาการเด็กเล็ก</p>
+      <a href="kid420.html" class="btn">ดูรายละเอียด</a>
+      <a href="https://apipoooo-afk.github.io/URR.github.io/index.html?#register-section" class="btn">สมัครเรียนหลักสูตรนี้</a>
+    </div>
 
-</div>
+    <!-- 5) Caregiver 510 ชม -->
+    <div class="course-card">
+      <h3>หลักสูตรผู้ให้การดูแล 510 ชม.  
+        <small style="color:#777;">(สภาการพยาบาล)</small>
+      </h3>
+      <p>ดูแลผู้ป่วย ผู้สูงอายุ เข้าใจปัญหาสุขภาพ และช่วยเหลือด้านกายภาพ</p>
+      <a href="caregiver510.html" class="btn">ดูรายละเอียด</a>
+      <a href="https://apipoooo-afk.github.io/URR.github.io/index.html?#register-section" class="btn">สมัครเรียนหลักสูตรนี้</a>
+    </div>
 
-<div class="course-box">
-  <a class="course-title" href="courses/caregiver510.html">หลักสูตรผู้ให้การดูแล 510 ชม.</a>
-  <div class="sub">สภาการพยาบาล</div>
-  <a href="https://apipoooo-afk.github.io/URR.github.io/index.html?#register-section" 
-   class="btn">สมัครเรียนหลักสูตรนี้</a>
+    <!-- 6) ผู้สูงอายุเบื้องต้น 70 ชม -->
+    <div class="course-card">
+      <h3>หลักสูตรการดูแลผู้สูงอายุเบื้องต้น 70 ชม.  
+        <small style="color:#777;">(กระทรวงสาธารณสุข)</small>
+      </h3>
+      <p>ทักษะพื้นฐานสำหรับดูแลผู้สูงอายุที่บ้าน หรือเพื่อเสริมทักษะในครอบครัว</p>
+      <a href="basic70.html" class="btn">ดูรายละเอียด</a>
+      <a href="https://apipoooo-afk.github.io/URR.github.io/index.html?#register-section" class="btn">สมัครเรียนหลักสูตรนี้</a>
+    </div>
 
-</div>
-
-<div class="course-box">
-  <a class="course-title" href="courses/basic70.html">หลักสูตรการดูแลผู้สูงอายุเบื้องต้น 70 ชม.</a>
-  <div class="sub">กระทรวงสาธารณสุข</div>
-  <a href="https://apipoooo-afk.github.io/URR.github.io/index.html?#register-section" 
-   class="btn">สมัครเรียนหลักสูตรนี้</a>
-
-</div>
+  </div>
+</main>
 
 </body>
 </html>
