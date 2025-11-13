@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>เข้าสู่ระบบ | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+
+  <style>
+    body { font-family: Arial, sans-serif; background:#f2f2f2; margin:0; }
+    header { background:#007bff; color:white; text-align:center; padding:20px; }
+    main {
+      max-width: 450px;
+      margin: 30px auto;
+      background:white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    h2 { text-align:center; margin-top:0; }
+    .form-group { margin-bottom: 12px; text-align:left; }
+    label { display:block; font-weight:bold; margin-bottom:5px; }
+    input {
+      width:100%;
+      padding:10px;
+      border-radius:5px;
+      border:1px solid #ccc;
+      box-sizing:border-box;
+    }
+    button {
+      width:100%;
+      padding:12px;
+      border:none;
+      border-radius:5px;
+      background:#28a745;
+      color:white;
+      font-size:16px;
+      cursor:pointer;
+      margin-top:8px;
+    }
+    button:hover { background:#218838; }
+    .error { color:red; font-weight:bold; margin-top:10px; }
+    a { color:#007bff; text-decoration:none; display:inline-block; margin-top:10px; }
+    a:hover { text-decoration:underline; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>เข้าสู่ระบบนักศึกษา</h1>
+  <p>โรงเรียนอุบลบุรีรักษ์การบริบาล</p>
+</header>
+
+<main>
+  <h2>เข้าสู่ระบบ</h2>
+
+  <div id="msg" class="error" style="display:none;"></div>
+
+  <form id="loginForm">
+    <div class="form-group">
+      <label for="studentId">รหัสนักศึกษา</label>
+      <input type="text" id="studentId" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">รหัสผ่าน</label>
+      <input type="password" id="password" required>
+    </div>
+
+    <button type="submit">เข้าสู่ระบบ</button>
+  </form>
+
+  <a href="register.html">ยังไม่มีบัญชี? สมัครเรียน</a><br>
+  <a href="index.html">← กลับหน้าแรก</a>
+</main>
+
+<script>
+  // ใช้คีย์เดียวกับหน้า register.html / dashboard.html
+  const STORAGE_KEY          = "students";
+  const LOGIN_COUNT_KEY      = "loginCount";
+  const LOGGED_STUDENTS_KEY  = "loggedStudents";
+
+  function loadStudents() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  }
+
+  function loadLoggedStudents() {
+    return JSON.parse(localStorage.getItem(LOGGED_STUDENTS_KEY) || "[]");
+  }
+
+  function saveLoggedStudents(list) {
+    localStorage.setItem(LOGGED_STUDENTS_KEY, JSON.stringify(list));
+  }
+
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const studentId = document.getElementById("studentId").value.trim();
+    const password  = document.getElementById("password").value;
+    const msgBox    = document.getElementById("msg");
+
+    msgBox.style.display = "none";
+    msgBox.textContent   = "";
+
+    const students = loadStudents();
+    const user = students.find(s => s.studentId === studentId && s.password === password);
+
+    if (!user) {
+      msgBox.textContent = "รหัสนักศึกษาหรือรหัสผ่านไม่ถูกต้อง";
+      msgBox.style.display = "block";
+      return;
+    }
+
+    // เก็บข้อมูลผู้ใช้ที่ล็อกอินไว้ใน sessionStorage
+    sessionStorage.setItem("currentStudent", JSON.stringify(user));
+
+    // เพิ่มจำนวนครั้งการล็อกอิน
+    const currentCount = parseInt(localStorage.getItem(LOGIN_COUNT_KEY) || "0", 10);
+    localStorage.setItem(LOGIN_COUNT_KEY, String(currentCount + 1));
+
+    // เก็บรายชื่อผู้ที่เคยล็อกอิน (ไม่ซ้ำ)
+    const logged = loadLoggedStudents();
+    if (!logged.includes(user.studentId)) {
+      logged.push(user.studentId);
+      saveLoggedStudents(logged);
+    }
+
+    // ไปหน้าแดชบอร์ด (ยังไม่สร้าง แต่เดี๋ยวเราจะทำในขั้นถัดไป)
+    window.location.href = "dashboard.html";
+  });
+</script>
+
+</body>
+</html>
