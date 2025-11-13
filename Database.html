@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ฐานข้อมูลนักศึกษา (ผู้บริหาร) | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      text-align: center;
+      background-color: #007bff;
+      color: white;
+      padding: 16px 10px;
+    }
+    main {
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 16px 24px 16px;
+    }
+    h1, h2, h3 {
+      margin-top: 0;
+    }
+    .top-actions {
+      margin-bottom: 16px;
+    }
+    .top-actions a {
+      display: inline-block;
+      padding: 8px 14px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      color: #111827;
+      margin-right: 8px;
+    }
+    .top-actions a:hover {
+      background: #d1d5db;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 16px 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
+    .card-title {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 4px;
+    }
+    .admin-login-box {
+      margin-top: 8px;
+    }
+    .admin-login-box input {
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      width: 220px;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+    .admin-login-box button {
+      padding: 6px 12px;
+      margin-left: 4px;
+      border-radius: 6px;
+      border: none;
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+    .admin-login-box button:hover {
+      background: #1d4ed8;
+    }
+    .admin-msg {
+      font-size: 0.8rem;
+      margin-top: 4px;
+    }
+    .admin-msg.ok {
+      color: #16a34a;
+      font-weight: bold;
+    }
+    .admin-msg.err {
+      color: #dc2626;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      background: #fff;
+    }
+    th, td {
+      border: 1px solid #e5e7eb;
+      padding: 8px;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+    th {
+      background: #f3f4f6;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      color: #fff;
+    }
+    .badge-new        { background: #6b7280; }
+    .badge-learning   { background: #10b981; }
+    .badge-intern     { background: #f59e0b; }
+    .badge-graduated  { background: #3b82f6; }
+    .badge-employed   { background: #8b5cf6; }
+
+    /* ซ่อนตารางก่อนเป็นผู้บริหาร */
+    #student-db-section {
+      display: none;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ฐานข้อมูลนักศึกษา (เฉพาะผู้บริหาร)</h1>
+    <p>โรงเรียนอุบลบุรีรักษ์การบริบาล</p>
+  </header>
+
+  <main>
+    <div class="top-actions">
+      <a href="index.html">← กลับหน้าแรก</a>
+      <a href="register.html">เปิดหน้าสมัครเรียน</a>
+      <a href="login.html">เปิดหน้าเข้าสู่ระบบนักศึกษา</a>
+    </div>
+
+    <!-- บล็อกเข้าใช้ของผู้บริหาร -->
+    <div class="card">
+      <div class="card-title">เข้าสู่ระบบผู้บริหารโรงเรียน</div>
+      <p style="margin-bottom:6px;">
+        กรุณากรอกรหัสผ่านผู้บริหารเพื่อเข้าดูรายละเอียดฐานข้อมูลนักศึกษา
+      </p>
+      <div class="admin-login-box">
+        <input type="password" id="adminPasswordInput" placeholder="รหัสผ่านผู้บริหาร">
+        <button type="button" onclick="checkAdmin()">ยืนยัน</button>
+        <div id="adminMsg" class="admin-msg"></div>
+      </div>
+      <p class="card-title" style="margin-top:10px;">
+        * ข้อมูลถูกเก็บในเบราว์เซอร์ (localStorage) เหมาะกับการลองใช้งาน / ระบบภายใน
+      </p>
+    </div>
+
+    <!-- ตารางฐานข้อมูลนักศึกษา: แสดงเฉพาะเมื่อเป็นผู้บริหาร -->
+    <section id="student-db-section">
+      <h2>ตารางฐานข้อมูลนักศึกษา</h2>
+      <table id="studentsTable">
+        <thead>
+          <tr>
+            <th>รหัสนักศึกษา</th>
+            <th>ชื่อ-นามสกุล</th>
+            <th>หลักสูตร</th>
+            <th>สถานะ</th>
+            <th>วันที่สมัคร</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- เติมด้วย JS -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script>
+    // คีย์เก็บข้อมูลใน localStorage ให้ตรงกับ register.html
+    const STORAGE_KEY        = "students";
+    const ADMIN_PASSWORD     = "UBR-ADMIN-2025";   // เปลี่ยนได้
+    const ADMIN_SESSION_KEY  = "isAdminDashboard"; // flag ใน sessionStorage
+
+    function loadStudents() {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+    }
+
+    function statusBadgeClass(status) {
+      switch (status) {
+        case "new":        return "badge badge-new";
+        case "learning":   return "badge badge-learning";
+        case "intern":     return "badge badge-intern";
+        case "graduated":  return "badge badge-graduated";
+        case "employed":   return "badge badge-employed";
+        default:           return "badge badge-new";
+      }
+    }
+
+    function statusLabel(status) {
+      switch (status) {
+        case "new":        return "สมัครใหม่";
+        case "learning":   return "กำลังเรียนออนไลน์";
+        case "intern":     return "ฝึกงาน";
+        case "graduated":  return "จบการศึกษา";
+        case "employed":   return "บรรจุงานแล้ว";
+        default:           return status || "ไม่ระบุ";
+      }
+    }
+
+    function showStudentTable() {
+      const students = loadStudents();
+      const section  = document.getElementById("student-db-section");
+      const tbody    = document.querySelector("#studentsTable tbody");
+
+      section.style.display = "block";
+      tbody.innerHTML = "";
+
+      students.forEach(s => {
+        const tr = document.createElement("tr");
+
+        const tdId     = document.createElement("td");
+        const tdName   = document.createElement("td");
+        const tdCourse = document.createElement("td");
+        const tdStatus = document.createElement("td");
+        const tdDate   = document.createElement("td");
+
+        tdId.textContent     = s.studentId || "-";
+        tdName.textContent   = s.fullName || "-";
+        tdCourse.textContent = s.course || "-";
+
+        const span = document.createElement("span");
+        span.className = statusBadgeClass(s.status);
+        span.textContent = statusLabel(s.status);
+        tdStatus.appendChild(span);
+
+        tdDate.textContent = s.createdAt ? s.createdAt.substring(0,10) : "-";
+
+        tr.appendChild(tdId);
+        tr.appendChild(tdName);
+        tr.appendChild(tdCourse);
+        tr.appendChild(tdStatus);
+        tr.appendChild(tdDate);
+
+        tbody.appendChild(tr);
+      });
+    }
+
+    function checkAdmin() {
+      const input = document.getElementById("adminPasswordInput").value;
+      const msg   = document.getElementById("adminMsg");
+
+      msg.textContent = "";
+      msg.className   = "admin-msg";
+
+      if (!input) {
+        msg.textContent = "กรุณากรอกรหัสผ่านผู้บริหาร";
+        msg.classList.add("err");
+        return;
+      }
+
+      if (input === ADMIN_PASSWORD) {
+        sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
+        showStudentTable();
+        msg.textContent = "เข้าสู่ระบบผู้บริหารสำเร็จ — แสดงตารางฐานข้อมูลแล้ว";
+        msg.classList.add("ok");
+      } else {
+        msg.textContent = "รหัสผ่านไม่ถูกต้อง";
+        msg.classList.add("err");
+      }
+    }
+
+    // ถ้าใน session เคยยืนยันเป็นผู้บริหารแล้ว ให้แสดงตารางทันที
+    window.addEventListener("DOMContentLoaded", () => {
+      if (sessionStorage.getItem(ADMIN_SESSION_KEY) === "true") {
+        showStudentTable();
+        const msg = document.getElementById("adminMsg");
+        msg.textContent = "คุณกำลังดูข้อมูลในโหมดผู้บริหาร (จาก session เดิม)";
+        msg.classList.add("ok");
+      }
+    });
+  </script>
+</body>
+</html>
