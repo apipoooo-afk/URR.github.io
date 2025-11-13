@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สมัครเรียน | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+
+  <style>
+    body { font-family: Arial; background: #f2f2f2; margin: 0; }
+    header { background: #007bff; color: white; padding: 20px; text-align: center; }
+    main { max-width: 600px; margin: 30px auto; background: white; padding: 20px; border-radius: 10px; }
+    .form-group { margin-bottom: 12px; text-align: left; }
+    label { font-weight: bold; display: block; margin-bottom: 5px; }
+    input, select { width: 100%; padding: 10px; border-radius: 5px; border:1px solid #ccc; }
+    button { background: #28a745; color:white; padding: 12px; border:none; border-radius: 5px; cursor:pointer; width:100%; }
+    button:hover { background: #218838; }
+    .success { color:green; font-weight:bold; margin-top: 10px; }
+    .error { color:red; font-weight:bold; margin-top: 10px; }
+    a { color:#007bff; display:inline-block; margin-top:10px; text-decoration:none; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>สมัครเรียนออนไลน์</h1>
+  <p>โรงเรียนอุบลบุรีรักษ์การบริบาล</p>
+</header>
+
+<main>
+  <h2>กรอกข้อมูลสมัครเรียน</h2>
+
+  <div id="msg"></div>
+
+  <form id="regForm">
+    <div class="form-group">
+      <label>ชื่อนักศึกษา</label>
+      <input type="text" id="fullName" required>
+    </div>
+
+    <div class="form-group">
+      <label>รหัสนักศึกษา (สำหรับเข้าสู่ระบบ)</label>
+      <input type="text" id="stud
