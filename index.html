@@ -478,69 +478,92 @@
       document.getElementById("employedTotalHome").textContent  = employedTotal;
     }
 
-    // ===== ฟอร์มสมัครเรียนแบบส่งไป LINE =====
-    document.getElementById("quickRegisterForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+   // ===== ฟอร์มสมัครเรียนแบบส่งไป LINE + บันทึกลงฐานข้อมูลนักศึกษา =====
+document.getElementById("quickRegisterForm").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-      const fullName   = document.getElementById("fullName").value.trim();
-      const age        = document.getElementById("age").value.trim();
-      const gender     = document.getElementById("gender").value;
-      const education  = document.getElementById("education").value.trim();
-      const addressNo  = document.getElementById("addressNo").value.trim();
-      const tambon     = document.getElementById("tambon").value;
-      const amphoe     = document.getElementById("amphoe").value;
-      const province   = document.getElementById("province").value;
-      const postcode   = document.getElementById("postcode").value.trim();
-      const phone      = document.getElementById("phone").value.trim();
-      const lineId     = document.getElementById("lineId").value.trim();
-      const facebook   = document.getElementById("facebook").value.trim();
-      const extraInfo  = document.getElementById("extraInfo").value.trim();
+  const fullName   = document.getElementById("fullName").value.trim();
+  const age        = document.getElementById("age").value.trim();
+  const gender     = document.getElementById("gender").value;
+  const education  = document.getElementById("education").value.trim();
+  const addressNo  = document.getElementById("addressNo").value.trim();
+  const tambon     = document.getElementById("tambon").value;
+  const amphoe     = document.getElementById("amphoe").value;
+  const province   = document.getElementById("province").value;
+  const postcode   = document.getElementById("postcode").value.trim();
+  const phone      = document.getElementById("phone").value.trim();
+  const lineId     = document.getElementById("lineId").value.trim();
+  const facebook   = document.getElementById("facebook").value.trim();
+  const extraInfo  = document.getElementById("extraInfo").value.trim();
 
-      if (!fullName) {
-        alert("กรุณากรอกชื่อ-นามสกุลผู้สมัคร");
-        return;
-      }
+  if (!fullName) {
+    alert("กรุณากรอกชื่อ-นามสกุลผู้สมัคร");
+    return;
+  }
 
-      const lines = [];
-      lines.push("แบบฟอร์มสมัครเรียนใหม่ (หน้าเว็บ)");
-      lines.push("-------------------------");
-      lines.push("ชื่อ-นามสกุล: " + fullName);
-      if (age)       lines.push("อายุ: " + age);
-      if (gender)    lines.push("เพศ: " + gender);
-      if (education) lines.push("จบการศึกษา: " + education);
+  // ===== 1) สร้าง studentId อัตโนมัติ =====
+  const timestamp = Date.now().toString().slice(-6); // ตัวเลขท้าย 6 หลัก
+  const random4   = Math.floor(1000 + Math.random() * 9000); // 4 หลักสุ่ม
+  const studentId = `UBR-${timestamp}-${random4}`; // เช่น UBR-281241-8374
 
-      let addressLine = "";
-      if (addressNo) addressLine += addressNo;
-      if (tambon)    addressLine += (addressLine ? " " : "") + "ต." + tambon;
-      if (amphoe)    addressLine += (addressLine ? " " : "") + "อ." + amphoe;
-      if (province)  addressLine += (addressLine ? " " : "") + "จ." + province;
-      if (postcode)  addressLine += (addressLine ? " " : "") + " " + postcode;
-      if (addressLine) lines.push("ที่อยู่: " + addressLine);
+  // ===== 2) บันทึกลงฐานข้อมูลนักศึกษา (localStorage/students) =====
+  const STORAGE_KEY = "students";
+  const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
-      if (phone)    lines.push("เบอร์โทร: " + phone);
-      if (lineId)   lines.push("ไลน์: " + lineId);
-      if (facebook) lines.push("เฟซบุ๊ก: " + facebook);
-      if (extraInfo) {
-        lines.push("ข้อมูลเพิ่มเติม:");
-        lines.push(extraInfo);
-      }
-      lines.push("-------------------------");
-      lines.push("หมายเหตุ: แนบรูปผู้สมัครเพิ่มเติมในแชท LINE อีกครั้ง");
+  const newStudent = {
+    studentId,
+    fullName,
+    age,
+    gender,
+    education,
+    address: {
+      addressNo, tambon, amphoe, province, postcode
+    },
+    phone,
+    lineId,
+    facebook,
+    extraInfo,
+    status: "new",            // สมัครใหม่ตามระบบ
+    createdAt: new Date().toISOString()
+  };
 
-      const msg = lines.join("\n");
+  existing.push(newStudent);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
 
-      // ใช้ deep link ของ LINE เพื่อเปิดหน้าต่างส่งข้อความ
-      const url = "https://line.me/R/msg/text/?" + encodeURIComponent(msg);
-      window.open(url, "_blank");
+  // ===== 3) ส่งข้อความไป LINE =====
+  const lines = [];
+  lines.push("แบบฟอร์มสมัครเรียนใหม่ (หน้าเว็บ)");
+  lines.push("-------------------------");
+  lines.push("รหัสผู้สมัคร: " + studentId);
+  lines.push("ชื่อ-นามสกุล: " + fullName);
+  if (age) lines.push("อายุ: " + age);
+  if (gender) lines.push("เพศ: " + gender);
+  if (education) lines.push("จบการศึกษา: " + education);
 
-      const msgBox = document.getElementById("formMessage");
-      msgBox.style.display = "block";
+  let addressLine = "";
+  if (addressNo) addressLine += addressNo;
+  if (tambon) addressLine += " ต." + tambon;
+  if (amphoe) addressLine += " อ." + amphoe;
+  if (province) addressLine += " จ." + province;
+  if (postcode) addressLine += " " + postcode;
+  if (addressLine) lines.push("ที่อยู่: " + addressLine);
 
-      // ไม่ล้างฟอร์มเผื่ออยากแก้ไขแล้วส่งซ้ำ แต่ถ้าต้องการล้าง ให้ uncomment บรรทัดถัดไป
-      // this.reset();
-    });
+  if (phone) lines.push("เบอร์โทร: " + phone);
+  if (lineId) lines.push("ไลน์: " + lineId);
+  if (facebook) lines.push("เฟซบุ๊ก: " + facebook);
+  if (extraInfo) {
+    lines.push("ข้อมูลเพิ่มเติม:");
+    lines.push(extraInfo);
+  }
 
-    document.addEventListener("DOMContentLoaded", renderHomeDashboard);
-  </script>
-</body>
-</html>
+  lines.push("-------------------------");
+  lines.push("หมายเหตุ: กรุณาแนบรูปผู้สมัครในแชท LINE อีกครั้ง");
+
+  const msg = lines.join("\n");
+  const url = "https://line.me/R/msg/text/?" + encodeURIComponent(msg);
+  window.open(url, "_blank");
+
+  // ===== 4) แจ้งเตือนบนหน้าเว็บ =====
+  document.getElementById("formMessage").style.display = "block";
+});
+
