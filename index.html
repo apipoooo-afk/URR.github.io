@@ -2,10 +2,10 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta viewport="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>โรงเรียนอุบลบุรีรักษ์การบริบาล | Ubon Buri Rak Nursing Assistant School</title>
 
-  <!-- ถ้ามีไฟล์เดิมอยู่แล้ว ปล่อยสองบรรทัดนี้ไว้ได้ -->
+  <!-- ถ้ามีไฟล์ css เดิม ให้คงไว้ได้ -->
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="exam.css">
 
@@ -20,22 +20,17 @@
       text-align: center;
       background-color: #007bff;
       color: white;
-      padding: 16px 10px;
-    }
-    nav {
-      margin-top: 8px;
+      padding: 20px 10px;
     }
     nav a {
       color: white;
       text-decoration: none;
-      margin: 0 6px;
+      margin: 0 10px;
       font-weight: bold;
-      font-size: 13px;
     }
     nav a:hover {
       text-decoration: underline;
     }
-
     main {
       padding: 20px;
       max-width: 1200px;
@@ -44,12 +39,10 @@
     main > section {
       margin-bottom: 32px;
     }
-
     .intro {
       text-align: center;
-      margin: 30px 0 24px 0;
+      margin: 30px 0;
     }
-
     .btn {
       display: inline-block;
       padding: 10px 20px;
@@ -63,17 +56,15 @@
     .btn:hover {
       background-color: #218838;
     }
-
     footer {
       text-align: center;
       padding: 15px;
       background-color: #343a40;
       color: white;
       margin-top: 32px;
-      font-size: 14px;
-      line-height: 1.5;
     }
 
+    /* การ์ดหลักสูตร */
     .course-card {
       background: #ffffff;
       border-radius: 10px;
@@ -82,263 +73,138 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
+    /* DASHBOARD */
+    #dashboard {
+      margin-bottom: 32px;
+    }
+    #dashboard h2 {
+      margin-top: 0;
+      color: #0056b3;
+    }
+    .dash-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .dash-card {
+      background:#ffffff;
+      padding:16px;
+      border-radius:10px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.08);
+      width:160px;
+      text-align:center;
+    }
+    .dash-card h3 {
+      margin:0;
+      font-size:14px;
+      color:#1f3bb3;
+    }
+    .dash-card p {
+      margin:8px 0 0 0;
+      font-size:22px;
+      font-weight:bold;
+      color:#111;
+    }
+
     ul {
       padding-left: 20px;
     }
 
-    /* ===== ฟอร์มสมัครเรียน ===== */
-    #register-section {
-      background: #ffffff;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    /* ฟอร์มสมัคร (ง่าย ๆ พอให้ anchor ทำงาน) */
+    .register-box {
+      background:#ffffff;
+      border-radius:10px;
+      padding:20px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.05);
+      max-width:600px;
+      margin:0 auto;
     }
-    #register-section h2 {
-      margin-top: 0;
+    .register-box label {
+      display:block;
+      margin-top:8px;
+      margin-bottom:4px;
+      font-weight:bold;
     }
-    .form-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px 20px;
+    .register-box input,
+    .register-box textarea,
+    .register-box select {
+      width:100%;
+      padding:8px;
+      box-sizing:border-box;
+      border-radius:4px;
+      border:1px solid #ccc;
     }
-    .form-group {
-      text-align: left;
-      font-size: 14px;
-    }
-    .form-group label {
-      display: block;
-      margin-bottom: 4px;
-      font-weight: bold;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%;
-      padding: 8px 10px;
-      border-radius: 6px;
-      border: 1px solid #d1d5db;
-      box-sizing: border-box;
-      font-size: 14px;
-    }
-    .form-group textarea {
-      min-height: 80px;
-      resize: vertical;
-    }
-    .form-group input[type="file"] {
-      padding: 4px;
-    }
-    .form-note {
+    .small-note {
       font-size: 12px;
-      color: #6b7280;
-    }
-    .form-actions {
-      margin-top: 14px;
-      text-align: right;
-    }
-    .btn-submit {
-      background: #2563eb;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 15px;
-      cursor: pointer;
-    }
-    .btn-submit:hover {
-      background: #1d4ed8;
-    }
-    .msg-success {
-      margin-top: 10px;
-      font-size: 13px;
-      color: #16a34a;
-      font-weight: bold;
-    }
-
-    /* ===== Dashboard cards ===== */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-top: 12px;
-      margin-bottom: 8px;
-    }
-    .card {
-      background: #ffffff;
-      border-radius: 10px;
-      padding: 16px 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    .card-title {
-      font-size: 0.95rem;
-      color: #6b7280;
-      margin-bottom: 4px;
-    }
-    .card-value {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #111827;
-    }
-    .card-sub {
-      font-size: 0.85rem;
-      color: #6b7280;
-      margin-top: 4px;
+      color: #777;
     }
   </style>
 </head>
 <body>
+
+  <!-- HEADER + เมนู -->
   <header>
     <h1>โรงเรียนอุบลบุรีรักษ์การบริบาล</h1>
     <p>พนักงานผู้ช่วยพยาบาล รับรองโดยกระทรวงศึกษาธิการ กระทรวงสาธารณสุข และสภาการพยาบาล</p>
-    <p>ที่อยู่: 115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000</p>
     <nav>
       <a href="index.html">หน้าแรก</a>
-      <a href="#register-section">สมัครเรียน</a>
       <a href="courses.html">หลักสูตร</a>
-      <a href="learning.html">ระบบเรียนออนไลน์</a>
-      <a href="assessment.html">ผลการเรียน</a>
-      <a href="hours.html">ชั่วโมงเรียน</a>
-      <a href="dashboard.html">ฐานข้อมูลนักศึกษา (ผู้บริหาร)</a>
+      <a href="#register-section">สมัครเรียน</a>
+      <a href="#online-learning">ระบบเรียนออนไลน์</a>
+      <a href="#assessment">ผลการเรียน</a>
+      <a href="#certificates">การขอรับใบประกาศ</a>
       <a href="about.html">เกี่ยวกับเรา</a>
       <a href="contact.html">ติดต่อเรา</a>
     </nav>
   </header>
 
   <main>
+
     <!-- INTRO -->
     <section class="intro">
       <h2>ยินดีต้อนรับสู่การเรียนออนไลน์</h2>
       <p>เรียนสั้น จบไว ได้งานจริง 💉 พร้อมโอกาสทำงานในโรงพยาบาลและคลินิกชุมชน</p>
       <a href="#register-section" class="btn">สมัครเรียน</a>
-      <a href="login.html" class="btn">เข้าสู่ระบบ</a>
-      <a href="dashboard.html" class="btn">ฐานข้อมูลนักศึกษา (ผู้บริหาร)</a>
+      <a href="courses.html" class="btn">ดูรายละเอียดหลักสูตร</a>
     </section>
 
-    <!-- 🔹 ฟอร์มสมัครเรียน (เมนูสมัครเรียน) -->
-    <section id="register-section">
-      <h2>แบบฟอร์มสมัครเรียนออนไลน์</h2>
-      <p style="font-size:14px; color:#4b5563;">
-        กรุณากรอกข้อมูลให้ครบถ้วน เมื่อกด “ส่งข้อมูลไป LINE” ระบบจะเปิดหน้าต่าง LINE พร้อมข้อความสรุปให้คุณส่งต่อได้ทันที  
-        <span class="form-note">* การแนบรูปจะไม่ถูกส่งอัตโนมัติในข้อความ LINE กรุณาแนบรูปซ้ำในแชทเองอีกครั้ง</span>
+    <!-- DASHBOARD -->
+    <section id="dashboard">
+      <h2>📊 Dashboard สถิตินักศึกษา</h2>
+      <div class="dash-grid">
+        <div class="dash-card">
+          <h3>เข้าชมเว็บไซต์</h3>
+          <p id="stat-views">0</p>
+        </div>
+        <div class="dash-card">
+          <h3>ผู้สมัครเรียน</h3>
+          <p id="stat-registered">0</p>
+        </div>
+        <div class="dash-card">
+          <h3>กำลังเรียนออนไลน์</h3>
+          <p id="stat-learning">0</p>
+        </div>
+        <div class="dash-card">
+          <h3>กำลังฝึกงาน</h3>
+          <p id="stat-intern">0</p>
+        </div>
+        <div class="dash-card">
+          <h3>จบการศึกษา</h3>
+          <p id="stat-graduated">0</p>
+        </div>
+        <div class="dash-card">
+          <h3>บรรจุงานแล้ว</h3>
+          <p id="stat-employed">0</p>
+        </div>
+      </div>
+      <p class="small-note">
+        *ตัวเลขดึงจากข้อมูลในเบราว์เซอร์ (localStorage) เช่น รายชื่อนักศึกษาที่บันทึกจากแบบฟอร์มสมัครเรียน
       </p>
-
-      <form id="quickRegisterForm">
-        <div class="form-grid">
-          <!-- ชื่อ - อายุ - เพศ - จบการศึกษา -->
-          <div class="form-group">
-            <label for="fullName">ชื่อ-นามสกุลผู้สมัคร</label>
-            <input type="text" id="fullName" required>
-          </div>
-
-          <div class="form-group">
-            <label for="age">อายุ</label>
-            <input type="text" id="age" placeholder="เช่น 18 หรือ 18 ปี">
-          </div>
-
-          <div class="form-group">
-            <label for="gender">เพศ</label>
-            <select id="gender">
-              <option value="">เลือกเพศ</option>
-              <option value="หญิง">หญิง</option>
-              <option value="ชาย">ชาย</option>
-              <option value="อื่น ๆ">อื่น ๆ</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="education">จบการศึกษา</label>
-            <input type="text" id="education" placeholder="เช่น ม.3 / ม.6 / ปวช. / ปวส. / ป.ตรี">
-          </div>
-
-          <!-- ที่อยู่: เลขที่ / ตำบล / อำเภอ / จังหวัด / รหัสไปรษณีย์ -->
-          <div class="form-group">
-            <label for="addressNo">เลขที่ / บ้านเลขที่</label>
-            <input type="text" id="addressNo" placeholder="เช่น 115/3 หมู่ 4">
-          </div>
-
-          <div class="form-group">
-            <label for="tambon">ตำบล</label>
-            <select id="tambon">
-              <option value="">เลือกตำบล</option>
-              <option value="ขามใหญ่">ขามใหญ่</option>
-              <option value="ในเมือง">ในเมือง</option>
-              <option value="แจระแม">แจระแม</option>
-              <option value="อื่น ๆ">อื่น ๆ</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="amphoe">อำเภอ</label>
-            <select id="amphoe">
-              <option value="">เลือกอำเภอ</option>
-              <option value="เมืองอุบลราชธานี">เมืองอุบลราชธานี</option>
-              <option value="วารินชำราบ">วารินชำราบ</option>
-              <option value="เดชอุดม">เดชอุดม</option>
-              <option value="อื่น ๆ">อื่น ๆ</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="province">จังหวัด</label>
-            <select id="province">
-              <option value="">เลือกจังหวัด</option>
-              <option value="อุบลราชธานี">อุบลราชธานี</option>
-              <option value="ศรีสะเกษ">ศรีสะเกษ</option>
-              <option value="ยโสธร">ยโสธร</option>
-              <option value="อื่น ๆ">อื่น ๆ</option>
-            </select>
-          </div>
-
-          <div class="form-group">
-            <label for="postcode">รหัสไปรษณีย์</label>
-            <input type="text" id="postcode" placeholder="เช่น 34000">
-          </div>
-
-          <!-- ช่องติดต่อ -->
-          <div class="form-group">
-            <label for="phone">เบอร์โทร</label>
-            <input type="tel" id="phone" placeholder="เช่น 080-0000000">
-          </div>
-
-          <div class="form-group">
-            <label for="lineId">ไอดีไลน์</label>
-            <input type="text" id="lineId" placeholder="เช่น lineid1234">
-          </div>
-
-          <div class="form-group">
-            <label for="facebook">เฟซบุ๊ก</label>
-            <input type="text" id="facebook" placeholder="ชื่อเฟซ หรือลิงก์ Facebook">
-          </div>
-
-          <!-- แนบรูป -->
-          <div class="form-group">
-            <label for="photo">แนบรูปผู้สมัคร (ในเครื่อง)</label>
-            <input type="file" id="photo" accept="image/*">
-            <div class="form-note">
-              * ระบบจะไม่ส่งไฟล์รูปไป LINE ให้อัตโนมัติ  
-              กรุณาแนบรูปซ้ำในแชทไลน์เองอีกครั้งหลังจากส่งข้อความ
-            </div>
-          </div>
-        </div>
-
-        <!-- ข้อความเพิ่มเติม -->
-        <div class="form-group" style="margin-top:12px;">
-          <label for="extraInfo">ข้อมูลเพิ่มเติม / ข้อความฝากถึงโรงเรียน</label>
-          <textarea id="extraInfo" placeholder="เช่น สะดวกเรียนรอบเช้า / มีประสบการณ์ดูแลผู้สูงอายุ ฯลฯ"></textarea>
-        </div>
-
-        <div class="form-actions">
-          <button type="submit" class="btn-submit">ส่งข้อมูลไป LINE</button>
-        </div>
-
-        <div id="formMessage" class="msg-success" style="display:none;">
-          สร้างข้อความสำหรับส่งไป LINE แล้ว กรุณาตรวจสอบและกดส่งในแอป LINE อีกครั้ง
-        </div>
-      </form>
     </section>
 
     <!-- ทำไมต้องเรียนกับเรา -->
     <section>
-      <h3>ทำไมต้องเรียนกับเรา?</h3>
+      <h2>ทำไมต้องเรียนกับเรา?</h2>
       <ul>
         <li>หลักสูตรได้รับการรับรองจากกระทรวงศึกษาธิการ กระทรวงสาธารณสุข และสภาการพยาบาล</li>
         <li>เรียนออนไลน์แบบยืดหยุ่นตามเวลาของคุณ</li>
@@ -347,296 +213,203 @@
       </ul>
     </section>
 
-<!-- =================================== -->
-<!-- แสดงหลักสูตร – 2 แถว × 3 หัวข้อ -->
-<!-- =================================== -->
-<section id="courses">
-  <h2>🎓 เลือกหลักสูตรที่ต้องการ</h2>
+    <!-- สรุปหลักสูตร (ลิงก์ไป courses.html เป็นหลัก) -->
+    <section id="courses-summary">
+      <h2>หลักสูตรที่เปิดสอน</h2>
 
-  <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:20px;">
-
-    <!-- คอร์ส 1 -->
-    <div class="course-box">
-      <a href="courses/na840.html" class="course-title">หลักสูตรพนักงานผู้ช่วยพยาบาล 840 ชม.</a>
-      <div class="course-sub">กระทรวงศึกษาธิการ</div>
-      <a href="register.html" class="btn">สมัครเรียน</a>
-    </div>
-
-    <!-- คอร์ส 2 -->
-    <div class="course-box">
-      <a href="courses/elderkid840.html" class="course-title">หลักสูตรการดูแลผู้สูงอายุและเด็กเล็ก 840 ชม.</a>
-      <div class="course-sub">กระทรวงศึกษาธิการ</div>
-      <a href="register.html" class="btn">สมัครเรียน</a>
-    </div>
-
-    <!-- คอร์ส 3 -->
-    <div class="course-box">
-      <a href="courses/elder420.html" class="course-title">หลักสูตรการดูแลผู้สูงอายุ 420 ชม.</a>
-      <div class="course-sub">กระทรวงสาธารณสุข</div>
-      <a href="register.html" class="btn">สมัครเรียน</a>
-    </div>
-
-    <!-- คอร์ส 4 -->
-    <div class="course-box">
-      <a href="courses/kid420.html" class="course-title">หลักสูตรการดูแลเด็กเล็ก 420 ชม.</a>
-      <div class="course-sub">กระทรวงศึกษาธิการ</div>
-      <a href="register.html" class="btn">สมัครเรียน</a>
-    </div>
-
-    <!-- คอร์ส 5 -->
-    <div class="course-box">
-      <a href="courses/caregiver510.html" class="course-title">หลักสูตรผู้ให้การดูแล 510 ชม.</a>
-      <div class="course-sub">สภาการพยาบาล</div>
-      <a href="register.html" class="btn">สมัครเรียน</a>
-    </div>
-
-    <!-- คอร์ส 6 -->
-    <div class="course-box">
-      <a href="courses/basic70.html" class="course-title">หลักสูตรการดูแลผู้สูงอายุเบื้องต้น 70 ชม.</a>
-      <div class="course-sub">กระทรวงสาธารณสุข</div>
-      <a href="register.html" class="btn">สมัครเรียน</a>
-    </div>
-
-  </div>
-</section>
-
-<style>
-  .course-box {
-    background:#fff;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
-    text-align:center;
-  }
-  .course-title {
-    display:block;
-    font-size:20px;
-    font-weight:bold;
-    color:#0055cc;
-    margin-bottom:6px;
-    text-decoration:none;
-  }
-  .course-title:hover {
-    text-decoration:underline;
-  }
-  .course-sub {
-    font-size:14px;
-    color:#666;
-    margin-bottom:12px;
-  }
-  .btn {
-    display:inline-block;
-    padding:8px 16px;
-    background:#28a745;
-    color:#fff;
-    border-radius:6px;
-    text-decoration:none;
-  }
-  .btn:hover {
-    background:#218838;
-  }
-</style>
-
-    <!-- 🔽 Dashboard ภาพรวม อยู่ด้านล่างของเว็บ -->
-    <section id="home-dashboard">
-      <h2>แดชบอร์ดภาพรวม (มุมมองสาธารณะ)</h2>
-
-      <div class="grid">
-        <div class="card">
-          <div class="card-title">จำนวนครั้งที่เข้าดูเว็บไซต์</div>
-          <div class="card-value" id="viewsTotalHome">0</div>
-          <div class="card-sub">นับจากการเปิดหน้าเว็บไซต์นี้ (ในเครื่องนี้)</div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">ผู้สมัครเรียนทั้งหมด (จากระบบหลัก)</div>
-          <div class="card-value" id="studentsTotalHome">0</div>
-          <div class="card-sub">ข้อมูลจากแบบฟอร์ม register.html (ถ้ามีใช้งานร่วม)</div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">ผู้ที่เคยล็อกอินแล้ว</div>
-          <div class="card-value" id="loggedUsersTotalHome">0</div>
-          <div class="card-sub">นับจากรหัสนักศึกษาที่เคยเข้าสู่ระบบ</div>
-        </div>
-
-        <div class="card">
-          <div class="card-title">จำนวนครั้งที่ล็อกอิน</div>
-          <div class="card-value" id="loginCountTotalHome">0</div>
-          <div class="card-sub">ทุกครั้งที่เข้าสู่ระบบผ่านหน้า login.html</div>
-        </div>
+      <div class="course-card">
+        <h3>หลักสูตรพนักงานผู้ช่วยพยาบาล 840 ชม. <small>(กระทรวงศึกษาธิการ)</small></h3>
+        <p>เรียนรู้ทักษะงานผู้ช่วยพยาบาลแบบเข้มข้น พร้อมฝึกงานในโรงพยาบาลจริง</p>
+        <a href="courses.html" class="btn">ดูรายละเอียดทั้งหมด</a>
       </div>
 
-      <h3>สถานะนักศึกษา (จากข้อมูลในฐานข้อมูลนักศึกษา)</h3>
-      <div class="grid">
-        <div class="card">
-          <div class="card-title">สมัครใหม่</div>
-          <div class="card-value" id="newTotalHome">0</div>
-        </div>
-        <div class="card">
-          <div class="card-title">กำลังเรียนออนไลน์</div>
-          <div class="card-value" id="learningTotalHome">0</div>
-        </div>
-        <div class="card">
-          <div class="card-title">ฝึกงาน</div>
-          <div class="card-value" id="internTotalHome">0</div>
-        </div>
-        <div class="card">
-          <div class="card-title">จบการศึกษา</div>
-          <div class="card-value" id="graduatedTotalHome">0</div>
-        </div>
-        <div class="card">
-          <div class="card-title">บรรจุงานแล้ว</div>
-          <div class="card-value" id="employedTotalHome">0</div>
-        </div>
+      <div class="course-card">
+        <h3>หลักสูตรการดูแลผู้สูงอายุและเด็กเล็ก 840 ชม. <small>(กระทรวงศึกษาธิการ)</small></h3>
+        <p>เรียน 2 สายงานในหลักสูตรเดียว ทั้งดูแลผู้สูงอายุและเด็กเล็ก</p>
+        <a href="courses.html" class="btn">ดูรายละเอียดทั้งหมด</a>
+      </div>
+
+      <div class="course-card">
+        <h3>หลักสูตรการดูแลผู้สูงอายุ 420 ชม. <small>(กระทรวงสาธารณสุข)</small></h3>
+        <p>เตรียมความพร้อมเป็นผู้ดูแลผู้สูงอายุมืออาชีพ พร้อมงานรองรับจำนวนมาก</p>
+        <a href="courses.html" class="btn">ดูรายละเอียดทั้งหมด</a>
+      </div>
+
+      <div class="course-card">
+        <h3>หลักสูตรการดูแลเด็กเล็ก 420 ชม. <small>(กระทรวงศึกษาธิการ)</small></h3>
+        <p>ปูพื้นฐานงานผู้ช่วยครู ดูแลและส่งเสริมพัฒนาการเด็กเล็ก</p>
+        <a href="courses.html" class="btn">ดูรายละเอียดทั้งหมด</a>
+      </div>
+
+      <div class="course-card">
+        <h3>หลักสูตรผู้ให้การดูแล 510 ชม. <small>(สภาการพยาบาล)</small></h3>
+        <p>ดูแลผู้ป่วย ผู้สูงอายุ เข้าใจปัญหาสุขภาพ และช่วยเหลือด้านกายภาพ</p>
+        <a href="courses.html" class="btn">ดูรายละเอียดทั้งหมด</a>
+      </div>
+
+      <div class="course-card">
+        <h3>หลักสูตรการดูแลผู้สูงอายุเบื้องต้น 70 ชม. <small>(กระทรวงสาธารณสุข)</small></h3>
+        <p>ทักษะพื้นฐานสำหรับดูแลผู้สูงอายุที่บ้าน หรือเพื่อเสริมทักษะในครอบครัว</p>
+        <a href="courses.html" class="btn">ดูรายละเอียดทั้งหมด</a>
       </div>
     </section>
+
+    <!-- ระบบเรียนออนไลน์ -->
+    <section id="online-learning">
+      <h2>ระบบการเรียนออนไลน์</h2>
+      <p>เลือกวิชาเรียนที่คุณสนใจ:</p>
+      <ul>
+        <li><a href="video1.html">วิชา 1: การดูแลผู้ป่วยเบื้องต้น</a></li>
+        <li><a href="video2.html">วิชา 2: การดูแลผู้สูงอายุ</a></li>
+        <li><a href="video3.html">วิชา 3: การดูแลเด็กเล็ก</a></li>
+        <li><a href="video4.html">วิชา 4: การช่วยงานพยาบาล</a></li>
+      </ul>
+    </section>
+
+    <!-- (ตัวอย่าง) ระบบประเมินผลสั้น ๆ -->
+    <section id="assessment">
+      <h2>ระบบทดสอบและวัดผล (ตัวอย่าง)</h2>
+      <ul>
+        <li><strong>นักศึกษา:</strong> <span id="testingStudentName">[ชื่อนักศึกษา]</span></li>
+        <li><strong>รหัสนักศึกษา:</strong> <span id="testingStudentId">[รหัส]</span></li>
+        <li><strong>วิชา:</strong> การดูแลผู้ป่วยเบื้องต้น</li>
+        <li><strong>ผลการเรียน (ตัวอย่าง):</strong> <span style="color: green;">A</span> (80+)</li>
+        <li><strong>จำนวนชั่วโมงสะสม (ตัวอย่าง):</strong> 420 ชม.</li>
+      </ul>
+    </section>
+
+    <!-- ฟอร์มสมัครเรียน (จุด Anchor) -->
+    <section id="register-section">
+      <h2>แบบฟอร์มสมัครเรียนออนไลน์</h2>
+      <div class="register-box">
+        <p class="small-note">
+          *ฟอร์มนี้เป็นตัวอย่างเบื้องต้น – คุณสามารถปรับเพิ่มช่องให้ตรงกับระบบจริงของโรงเรียนได้
+        </p>
+        <form id="quickRegisterForm">
+          <label for="fullName">ชื่อ-นามสกุลผู้สมัคร</label>
+          <input type="text" id="fullName" name="fullName" required>
+
+          <label for="phone">เบอร์โทรติดต่อ</label>
+          <input type="text" id="phone" name="phone">
+
+          <label for="lineId">LINE ID</label>
+          <input type="text" id="lineId" name="lineId">
+
+          <label for="courseSelect">หลักสูตรที่สนใจ</label>
+          <select id="courseSelect" name="courseSelect">
+            <option value="">-- เลือกหลักสูตร --</option>
+            <option value="NA840">พนักงานผู้ช่วยพยาบาล 840 ชม.</option>
+            <option value="ELDERKID840">การดูแลผู้สูงอายุและเด็กเล็ก 840 ชม.</option>
+            <option value="ELDER420">การดูแลผู้สูงอายุ 420 ชม.</option>
+            <option value="KID420">การดูแลเด็กเล็ก 420 ชม.</option>
+            <option value="CAREGIVER510">ผู้ให้การดูแล 510 ชม.</option>
+            <option value="BASIC70">การดูแลผู้สูงอายุเบื้องต้น 70 ชม.</option>
+          </select>
+
+          <label for="extraInfo">ข้อมูลเพิ่มเติม / ข้อความถึงเจ้าหน้าที่</label>
+          <textarea id="extraInfo" name="extraInfo" rows="3"></textarea>
+
+          <button type="submit" class="btn">ส่งข้อมูล (บันทึกในเครื่องนี้)</button>
+        </form>
+        <p id="formMessage" style="display:none; color:green; margin-top:8px;">
+          บันทึกข้อมูลผู้สมัครลงในระบบเบื้องต้นแล้ว (localStorage)
+        </p>
+      </div>
+    </section>
+
+    <!-- ใบประกาศ -->
+    <section id="certificates">
+      <h2>การออกใบประกาศนียบัตร</h2>
+      <p>เมื่อจบหลักสูตร คุณสามารถขอรับใบประกาศนียบัตรได้</p>
+      <button class="btn">ดูตัวอย่างใบประกาศ</button>
+    </section>
+
   </main>
 
   <footer>
-    <p>© 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล</p>
-    <p>ที่อยู่: 115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000 | โทร: 080-459-3311</p>
+    <p>© 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | ที่อยู่: 115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000 | ติดต่อ: 080-459-3311</p>
   </footer>
 
+  <!-- SCRIPT: Dashboard + ฟอร์มสมัคร (localStorage เบื้องต้น) -->
   <script>
-    // คีย์ที่ใช้ร่วมกับระบบอื่น (dashboard/admin)
-    const VIEW_KEY            = "siteViews";
-    const STORAGE_KEY         = "students";
-    const LOGIN_COUNT_KEY     = "loginCount";
-    const LOGGED_STUDENTS_KEY = "loggedStudents";
+    document.addEventListener("DOMContentLoaded", function() {
+      // --- นับจำนวนเข้าชมเว็บ ---
+      let views = parseInt(localStorage.getItem("siteViews") || "0", 10);
+      views += 1;
+      localStorage.setItem("siteViews", views.toString());
 
-    // ===== นับจำนวนเข้าชมหน้าเว็บ (เก็บใน localStorage เครื่องนี้) =====
-    (function countView(){
-      const current = parseInt(localStorage.getItem(VIEW_KEY) || "0", 10);
-      localStorage.setItem(VIEW_KEY, String(current + 1));
-    })();
+      const students = JSON.parse(localStorage.getItem("students") || "[]");
 
-    function loadStudents() {
-      return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
-    }
-    function loadLoggedStudents() {
-      return JSON.parse(localStorage.getItem(LOGGED_STUDENTS_KEY) || "[]");
-    }
+      function safeSet(id, value) {
+        const el = document.getElementById(id);
+        if (el) el.textContent = value;
+      }
 
-    // ===== Dashboard หน้าแรก =====
-    function renderHomeDashboard() {
-      const students       = loadStudents();
-      const loggedStudents = loadLoggedStudents();
+      function countStatus(status) {
+        return students.filter(s => s.status === status).length;
+      }
 
-      const viewsTotal = parseInt(localStorage.getItem(VIEW_KEY) || "0", 10);
-      const loginCount = parseInt(localStorage.getItem(LOGIN_COUNT_KEY) || "0", 10);
+      safeSet("stat-views", views);
+      safeSet("stat-registered", students.length);
+      safeSet("stat-learning", countStatus("learning"));
+      safeSet("stat-intern", countStatus("intern"));
+      safeSet("stat-graduated", countStatus("graduated"));
+      safeSet("stat-employed", countStatus("employed"));
 
-      document.getElementById("viewsTotalHome").textContent        = viewsTotal;
-      document.getElementById("studentsTotalHome").textContent     = students.length;
-      document.getElementById("loggedUsersTotalHome").textContent  = loggedStudents.length;
-      document.getElementById("loginCountTotalHome").textContent   = loginCount;
+      // sync ตัวอย่างชื่อใน section assessment
+      if (students.length > 0) {
+        const last = students[students.length - 1];
+        safeSet("testingStudentName", last.fullName || "[ชื่อนักศึกษา]");
+        safeSet("testingStudentId", last.studentId || "[รหัส]");
+      }
+    });
 
-      let newTotal = 0, learningTotal = 0, internTotal = 0,
-          graduatedTotal = 0, employedTotal = 0;
+    // ฟอร์มสมัครเรียน (เก็บใน localStorage เฉย ๆ)
+    document.getElementById("quickRegisterForm").addEventListener("submit", function(e) {
+      e.preventDefault();
 
-      students.forEach(s => {
-        switch (s.status) {
-          case "new":       newTotal++;       break;
-          case "learning":  learningTotal++;  break;
-          case "intern":    internTotal++;    break;
-          case "graduated": graduatedTotal++; break;
-          case "employed":  employedTotal++;  break;
-        }
-      });
+      const fullName  = document.getElementById("fullName").value.trim();
+      const phone     = document.getElementById("phone").value.trim();
+      const lineId    = document.getElementById("lineId").value.trim();
+      const course    = document.getElementById("courseSelect").value;
+      const extraInfo = document.getElementById("extraInfo").value.trim();
 
-      document.getElementById("newTotalHome").textContent       = newTotal;
-      document.getElementById("learningTotalHome").textContent  = learningTotal;
-      document.getElementById("internTotalHome").textContent    = internTotal;
-      document.getElementById("graduatedTotalHome").textContent = graduatedTotal;
-      document.getElementById("employedTotalHome").textContent  = employedTotal;
-    }
+      if (!fullName) {
+        alert("กรุณากรอกชื่อ-นามสกุลผู้สมัคร");
+        return;
+      }
 
-   // ===== ฟอร์มสมัครเรียนแบบส่งไป LINE + บันทึกลงฐานข้อมูลนักศึกษา =====
-document.getElementById("quickRegisterForm").addEventListener("submit", function(e) {
-  e.preventDefault();
+      const STORAGE_KEY = "students";
+      const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
 
-  const fullName   = document.getElementById("fullName").value.trim();
-  const age        = document.getElementById("age").value.trim();
-  const gender     = document.getElementById("gender").value;
-  const education  = document.getElementById("education").value.trim();
-  const addressNo  = document.getElementById("addressNo").value.trim();
-  const tambon     = document.getElementById("tambon").value;
-  const amphoe     = document.getElementById("amphoe").value;
-  const province   = document.getElementById("province").value;
-  const postcode   = document.getElementById("postcode").value.trim();
-  const phone      = document.getElementById("phone").value.trim();
-  const lineId     = document.getElementById("lineId").value.trim();
-  const facebook   = document.getElementById("facebook").value.trim();
-  const extraInfo  = document.getElementById("extraInfo").value.trim();
+      // สร้าง studentId แบบง่าย ๆ
+      const timestamp = Date.now().toString().slice(-6);
+      const random4   = Math.floor(1000 + Math.random() * 9000);
+      const studentId = "UBR-" + timestamp + "-" + random4;
 
-  if (!fullName) {
-    alert("กรุณากรอกชื่อ-นามสกุลผู้สมัคร");
-    return;
-  }
+      const newStudent = {
+        studentId,
+        fullName,
+        phone,
+        lineId,
+        course,
+        extraInfo,
+        status: "new",
+        createdAt: new Date().toISOString()
+      };
 
-  // ===== 1) สร้าง studentId อัตโนมัติ =====
-  const timestamp = Date.now().toString().slice(-6); // ตัวเลขท้าย 6 หลัก
-  const random4   = Math.floor(1000 + Math.random() * 9000); // 4 หลักสุ่ม
-  const studentId = `UBR-${timestamp}-${random4}`; // เช่น UBR-281241-8374
+      existing.push(newStudent);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
 
-  // ===== 2) บันทึกลงฐานข้อมูลนักศึกษา (localStorage/students) =====
-  const STORAGE_KEY = "students";
-  const existing = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      // รีเฟรช Dashboard (จำนวนผู้สมัคร)
+      const statReg = document.getElementById("stat-registered");
+      if (statReg) statReg.textContent = existing.length.toString();
 
-  const newStudent = {
-    studentId,
-    fullName,
-    age,
-    gender,
-    education,
-    address: {
-      addressNo, tambon, amphoe, province, postcode
-    },
-    phone,
-    lineId,
-    facebook,
-    extraInfo,
-    status: "new",            // สมัครใหม่ตามระบบ
-    createdAt: new Date().toISOString()
-  };
+      document.getElementById("formMessage").style.display = "block";
+      // ถ้าต้องให้ฟอร์มเคลียร์ ก็เพิ่มได้:
+      // e.target.reset();
+    });
+  </script>
 
-  existing.push(newStudent);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(existing));
-
-  // ===== 3) ส่งข้อความไป LINE =====
-  const lines = [];
-  lines.push("แบบฟอร์มสมัครเรียนใหม่ (หน้าเว็บ)");
-  lines.push("-------------------------");
-  lines.push("รหัสผู้สมัคร: " + studentId);
-  lines.push("ชื่อ-นามสกุล: " + fullName);
-  if (age) lines.push("อายุ: " + age);
-  if (gender) lines.push("เพศ: " + gender);
-  if (education) lines.push("จบการศึกษา: " + education);
-
-  let addressLine = "";
-  if (addressNo) addressLine += addressNo;
-  if (tambon) addressLine += " ต." + tambon;
-  if (amphoe) addressLine += " อ." + amphoe;
-  if (province) addressLine += " จ." + province;
-  if (postcode) addressLine += " " + postcode;
-  if (addressLine) lines.push("ที่อยู่: " + addressLine);
-
-  if (phone) lines.push("เบอร์โทร: " + phone);
-  if (lineId) lines.push("ไลน์: " + lineId);
-  if (facebook) lines.push("เฟซบุ๊ก: " + facebook);
-  if (extraInfo) {
-    lines.push("ข้อมูลเพิ่มเติม:");
-    lines.push(extraInfo);
-  }
-
-  lines.push("-------------------------");
-  lines.push("หมายเหตุ: กรุณาแนบรูปผู้สมัครในแชท LINE อีกครั้ง");
-
-  const msg = lines.join("\n");
-  const url = "https://line.me/R/msg/text/?" + encodeURIComponent(msg);
-  window.open(url, "_blank");
-
-  // ===== 4) แจ้งเตือนบนหน้าเว็บ =====
-  document.getElementById("formMessage").style.display = "block";
-});
-
+</body>
+</html>
