@@ -34,6 +34,14 @@
       padding:4px;
       box-shadow:0 2px 6px rgba(0,0,0,0.25);
     }
+    .header-main h1 {
+      margin:0;
+      font-size:22px;
+    }
+    .header-main p {
+      margin:0;
+      font-size:13px;
+    }
 
     nav {
       margin-top:12px;
@@ -130,6 +138,52 @@
       color:#333;
     }
 
+    /* สมัครเรียน grid */
+    .register-grid {
+      margin-top:16px;
+      background:white;
+      padding:16px;
+      border-radius:12px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.12);
+      display:grid;
+      grid-template-columns: repeat(5,1fr);
+      gap:10px;
+    }
+    .register-grid input,
+    .register-grid select {
+      width:100%;
+      padding:8px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      font-size:13px;
+      box-sizing:border-box;
+    }
+    .register-submit {
+      grid-column: span 5;
+      text-align:center;
+      margin-top:10px;
+    }
+    .register-submit button {
+      padding:10px 20px;
+      border:none;
+      background:#0d6efd;
+      color:white;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .register-submit button:hover {
+      background:#0b57d0;
+    }
+
+    footer {
+      background:#111827;
+      color:white;
+      padding:12px;
+      text-align:center;
+      font-size:12px;
+      margin-top:40px;
+    }
   </style>
 </head>
 
@@ -137,7 +191,7 @@
 
 <header>
   <div class="header-main">
-    <img src="https://www.urrschool.com/favicon.ico">
+    <img src="https://www.urrschool.com/favicon.ico" alt="โลโก้โรงเรียน">
     <div>
       <h1>โรงเรียนอุบลบุรีรักษ์การบริบาล</h1>
       <p>Ubon Buri Rak Nursing Assistant School</p>
@@ -152,7 +206,7 @@
     <a href="dashboard.html">ฐานข้อมูลนักศึกษา</a>
 
     <!-- ระบบต่าง ๆ -->
-    <a href="learning-online.html">เรียนออนไลน์</a>
+    <a href="online-learning.html">เรียนออนไลน์</a>
     <a href="learning-class.html">เรียนในห้องเรียน</a>
     <a href="exam.html">ระบบสอบ</a>
     <a href="grade.html">ผลการเรียน</a>
@@ -195,10 +249,8 @@
     <div class="dash-card"><h3>จบการศึกษา</h3><p id="stat-graduated">0</p></div>
     <div class="dash-card"><h3>บรรจุงานแล้ว</h3><p id="stat-employed">0</p></div>
   </div>
-  <!-- ========================= -->
-  <!--  สมัครเรียน (4×5 ช่อง)  -->
-  <!-- ========================= -->
 
+  <!-- สมัครเรียน -->
   <h2 class="section-title" id="register-section">✏️ สมัครเรียน</h2>
 
   <form id="applyForm" class="register-grid">
@@ -229,14 +281,10 @@
 
   <hr style="margin:40px 0; opacity:0.2;">
 
-  <!-- ================================= -->
-  <!--  ระบบงานว่าง – แสดงในหน้าแรก   -->
-  <!-- ================================= -->
-
+  <!-- งานว่าง -->
   <h2 class="section-title" id="jobs">💼 ตำแหน่งงานว่าง</h2>
 
   <div style="display:flex; flex-wrap:wrap; gap:12px;">
-    
     <div style="
       flex:1 1 240px; 
       background:white;
@@ -308,14 +356,9 @@
         สมัครตำแหน่งนี้
       </button>
     </div>
-
   </div>
 
-
-  <!-- ========================= -->
-  <!--  ติดต่อโรงเรียน          -->
-  <!-- ========================= -->
-
+  <!-- ติดต่อเรา -->
   <h2 class="section-title" id="contact">📞 ติดต่อโรงเรียน</h2>
 
   <div style="
@@ -324,7 +367,6 @@
     border-radius:12px;
     box-shadow:0 2px 8px rgba(0,0,0,0.12);
     line-height:1.6;">
-    
     <strong>โรงเรียนอุบลบุรีรักษ์การบริบาล</strong><br>
     115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000<br>
     📞 โทร: <a href="tel:0804593311">080-459-3311</a><br>
@@ -335,23 +377,25 @@
     </a>
   </div>
 
-<script>
-  /* ==============================
-     CONFIG LOCALSTORAGE KEY
-     ============================== */
-  const MEMBERS_KEY = "ubr_members";
-  const CURRENT_USER_KEY = "ubr_current_user";
-  const APPLY_KEY = "urr_apply";           // ใบสมัครเรียน
-  const STATS_KEY = "urr_stats";           // สถิติ Dashboard
+</main>
 
-  /* ==============================
-     โหลดข้อมูล
-     ============================== */
-  function load(key) {
+<footer>
+  © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | โทร 080-459-3311
+</footer>
+
+<script>
+  // ใช้ key เดียวกับ login.html
+  const CURRENT_USER_KEY = "urr_current_user";
+  const APPLY_KEY = "urr_apply";
+  const STATS_KEY = "urr_stats";
+
+  function load(key, defaultValue) {
     try {
-      return JSON.parse(localStorage.getItem(key) || "[]");
+      const raw = localStorage.getItem(key);
+      if (!raw) return defaultValue;
+      return JSON.parse(raw);
     } catch {
-      return [];
+      return defaultValue;
     }
   }
 
@@ -359,19 +403,14 @@
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  /* ==============================
-     ดึงข้อมูลผู้ใช้ปัจจุบัน
-     ============================== */
   function getCurrentMember() {
-    const id = localStorage.getItem(CURRENT_USER_KEY);
-    if (!id) return null;
-    const members = load(MEMBERS_KEY);
-    return members.find(m => m.email === id || m.citizenId === id) || null;
+    try {
+      return JSON.parse(localStorage.getItem(CURRENT_USER_KEY) || "null");
+    } catch {
+      return null;
+    }
   }
 
-  /* ==============================
-     อัปเดตแถบ Login บนสุด
-     ============================== */
   function updateTopLoginBar() {
     const user = getCurrentMember();
     const status = document.getElementById("loginStatusTop");
@@ -383,7 +422,8 @@
       loginBtn.style.display = "inline-block";
       logoutBtn.style.display = "none";
     } else {
-      status.textContent = "เข้าสู่ระบบแล้ว (" + user.firstName + ")";
+      const name = (user.firstName || "") + (user.lastName ? " " + user.lastName : "");
+      status.textContent = "เข้าสู่ระบบแล้ว (" + (name || user.email || "User") + ")";
       loginBtn.style.display = "none";
       logoutBtn.style.display = "inline-block";
     }
@@ -399,72 +439,50 @@
     updateTopLoginBar();
   };
 
-  /* ==============================
-     บันทึกใบสมัครเรียน
-     ============================== */
+  // บันทึกใบสมัครเรียนแบบเก็บ localStorage แยกจาก Firebase
   document.getElementById("applyForm").addEventListener("submit", function (e) {
     e.preventDefault();
-
     const formData = new FormData(this);
     const data = Object.fromEntries(formData);
 
-    const list = load(APPLY_KEY);
-
+    const list = load(APPLY_KEY, []);
     const item = {
       id: "APP-" + Date.now(),
       ...data,
       createdAt: new Date().toISOString()
     };
-
     list.push(item);
     save(APPLY_KEY, list);
 
     alert("ส่งใบสมัครเรียบร้อยแล้ว");
     this.reset();
-
     updateDashboard();
   });
 
-  /* ==============================
-     อัปเดต Dashboard สถิติ
-     ============================== */
   function updateDashboard() {
-    let stats = load(STATS_KEY);
-    if (!stats || typeof stats !== "object") {
-      stats = { views: 0 };
-    }
+    let stats = load(STATS_KEY, { views: 0 });
 
-    // นับจำนวนใบสมัคร
-    const apply = load(APPLY_KEY);
-    const members = load(MEMBERS_KEY);
+    const apply = load(APPLY_KEY, []);
+    const currentUser = getCurrentMember();
 
     document.getElementById("stat-views").textContent = stats.views;
     document.getElementById("stat-registered").textContent = apply.length;
-    document.getElementById("stat-login").textContent =
-      members.filter(m => m.status === "approved").length;
+    // นับแบบง่าย ๆ: ถ้ามีคน login = 1, ถ้าไม่มีก็ 0
+    document.getElementById("stat-login").textContent = currentUser ? 1 : 0;
 
-    // จำลองค่าในอนาคต
+    // ค่าอื่นตอนนี้จำลองไว้ก่อน
     document.getElementById("stat-learning").textContent = 12;
     document.getElementById("stat-intern").textContent = 4;
     document.getElementById("stat-graduated").textContent = 35;
     document.getElementById("stat-employed").textContent = 19;
   }
 
-  /* ==============================
-     นับจำนวนเข้าชมเว็บไซต์
-     ============================== */
   function countView() {
-    let stats = load(STATS_KEY);
-    if (!stats || typeof stats !== "object") {
-      stats = { views: 0 };
-    }
+    let stats = load(STATS_KEY, { views: 0 });
     stats.views++;
     save(STATS_KEY, stats);
   }
 
-  /* ==============================
-     โหลดหน้า
-     ============================== */
   document.addEventListener("DOMContentLoaded", () => {
     countView();
     updateDashboard();
@@ -472,156 +490,5 @@
   });
 </script>
 
-<footer>
-  © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | โทร 080-459-3311
-</footer>
-
-</main>
 </body>
 </html>
-<script>
-  /* ==============================
-     CONFIG LOCALSTORAGE KEY
-     ============================== */
-  const MEMBERS_KEY = "ubr_members";
-  const CURRENT_USER_KEY = "ubr_current_user";
-  const APPLY_KEY = "urr_apply";           // ใบสมัครเรียน
-  const STATS_KEY = "urr_stats";           // สถิติ Dashboard
-
-  /* ==============================
-     โหลดข้อมูล
-     ============================== */
-  function load(key) {
-    try {
-      return JSON.parse(localStorage.getItem(key) || "[]");
-    } catch {
-      return [];
-    }
-  }
-
-  function save(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
-  }
-
-  /* ==============================
-     ดึงข้อมูลผู้ใช้ปัจจุบัน
-     ============================== */
-  function getCurrentMember() {
-    const id = localStorage.getItem(CURRENT_USER_KEY);
-    if (!id) return null;
-    const members = load(MEMBERS_KEY);
-    return members.find(m => m.email === id || m.citizenId === id) || null;
-  }
-
-  /* ==============================
-     อัปเดตแถบ Login บนสุด
-     ============================== */
-  function updateTopLoginBar() {
-    const user = getCurrentMember();
-    const status = document.getElementById("loginStatusTop");
-    const loginBtn = document.getElementById("loginBtnTop");
-    const logoutBtn = document.getElementById("logoutBtnTop");
-
-    if (!user) {
-      status.textContent = "ยังไม่ได้เข้าสู่ระบบ";
-      loginBtn.style.display = "inline-block";
-      logoutBtn.style.display = "none";
-    } else {
-      status.textContent = "เข้าสู่ระบบแล้ว (" + user.firstName + ")";
-      loginBtn.style.display = "none";
-      logoutBtn.style.display = "inline-block";
-    }
-  }
-
-  document.getElementById("loginBtnTop").onclick = () => {
-    window.location.href = "login.html";
-  };
-
-  document.getElementById("logoutBtnTop").onclick = () => {
-    if (!confirm("ต้องการออกจากระบบหรือไม่?")) return;
-    localStorage.removeItem(CURRENT_USER_KEY);
-    updateTopLoginBar();
-  };
-
-  /* ==============================
-     บันทึกใบสมัครเรียน
-     ============================== */
-  document.getElementById("applyForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(this);
-    const data = Object.fromEntries(formData);
-
-    const list = load(APPLY_KEY);
-
-    const item = {
-      id: "APP-" + Date.now(),
-      ...data,
-      createdAt: new Date().toISOString()
-    };
-
-    list.push(item);
-    save(APPLY_KEY, list);
-
-    alert("ส่งใบสมัครเรียบร้อยแล้ว");
-    this.reset();
-
-    updateDashboard();
-  });
-
-  /* ==============================
-     อัปเดต Dashboard สถิติ
-     ============================== */
-  function updateDashboard() {
-    let stats = load(STATS_KEY);
-    if (!stats || typeof stats !== "object") {
-      stats = { views: 0 };
-    }
-
-    // นับจำนวนใบสมัคร
-    const apply = load(APPLY_KEY);
-    const members = load(MEMBERS_KEY);
-
-    document.getElementById("stat-views").textContent = stats.views;
-    document.getElementById("stat-registered").textContent = apply.length;
-    document.getElementById("stat-login").textContent =
-      members.filter(m => m.status === "approved").length;
-
-    // จำลองค่าในอนาคต
-    document.getElementById("stat-learning").textContent = 12;
-    document.getElementById("stat-intern").textContent = 4;
-    document.getElementById("stat-graduated").textContent = 35;
-    document.getElementById("stat-employed").textContent = 19;
-  }
-
-  /* ==============================
-     นับจำนวนเข้าชมเว็บไซต์
-     ============================== */
-  function countView() {
-    let stats = load(STATS_KEY);
-    if (!stats || typeof stats !== "object") {
-      stats = { views: 0 };
-    }
-    stats.views++;
-    save(STATS_KEY, stats);
-  }
-
-  /* ==============================
-     โหลดหน้า
-     ============================== */
-  document.addEventListener("DOMContentLoaded", () => {
-    countView();
-    updateDashboard();
-    updateTopLoginBar();
-  });
-</script>
-
-<footer>
-  © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | โทร 080-459-3311
-</footer>
-
-</main>
-</body>
-</html>
-<a href="admin-members.html">Admin จัดการสมาชิก</a>
-<a href="online-learning.html">ระบบเรียนออนไลน์</a>
