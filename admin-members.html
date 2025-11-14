@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin จัดการสมาชิก | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+
+  <style>
+    :root {
+      --pink:#ff6fb5;
+      --blue:#0d6efd;
+      --green:#20c997;
+      --bg:#f3f4f6;
+      --card:#ffffff;
+    }
+
+    * { box-sizing:border-box; }
+
+    body {
+      margin:0;
+      font-family:Arial,sans-serif;
+      background:
+        radial-gradient(circle at top left,#ffe0f3 0%,transparent 45%),
+        radial-gradient(circle at top right,#e0f2ff 0%,transparent 50%),
+        radial-gradient(circle at bottom,#e7fff4 0%,#f9fafb 60%);
+      color:#111827;
+    }
+
+    header {
+      background:linear-gradient(120deg,#ff6fb5,#0d6efd,#20c997);
+      color:white;
+      padding:12px 16px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.18);
+    }
+    .header-main {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .logo {
+      width:48px;
+      height:48px;
+      border-radius:50%;
+      background:white;
+      padding:4px;
+      object-fit:contain;
+      box-shadow:0 2px 6px rgba(0,0,0,0.25);
+    }
+    .header-text h1 {
+      margin:0;
+      font-size:20px;
+    }
+    .header-text p {
+      margin:0;
+      font-size:13px;
+      opacity:0.95;
+    }
+
+    nav {
+      margin-top:6px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      justify-content:center;
+    }
+    nav a {
+      color:white;
+      background:rgba(255,255,255,0.2);
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:12px;
+      text-decoration:none;
+      border:1px solid rgba(255,255,255,0.3);
+    }
+    nav a:hover {
+      background:white;
+      color:#ff2f92;
+    }
+
+    main {
+      max-width:1100px;
+      margin:24px auto 40px;
+      padding:0 16px;
+    }
+
+    .card {
+      background:var(--card);
+      border-radius:18px;
+      padding:18px 18px 20px;
+      box-shadow:0 4px 16px rgba(15,23,42,0.08);
+      margin-bottom:18px;
+    }
+
+    h2 {
+      margin:0 0 4px;
+      font-size:20px;
+    }
+    p.sub {
+      margin:0;
+      font-size:13px;
+      color:#4b5563;
+    }
+
+    .chip {
+      display:inline-block;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:11px;
+      background:#fff7fb;
+      border:1px solid rgba(255,255,255,0.3);
+      color:#4b5563;
+      margin-top:6px;
+    }
+
+    .admin-info {
+      font-size:13px;
+      margin-top:8px;
+      padding:8px 10px;
+      border-radius:10px;
+      background:#e0f2fe;
+      color:#1e3a8a;
+    }
+
+    .danger {
+      color:#b91c1c;
+      font-weight:bold;
+    }
+
+    .msg {
+      margin-top:8px;
+      font-size:13px;
+    }
+    .msg.error { color:#b91c1c; font-weight:bold; }
+    .msg.success { color:#047857; font-weight:bold; }
+
+    .controls-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:10px;
+      align-items:center;
+      font-size:13px;
+    }
+
+    .controls-row select,
+    .controls-row input[type="text"] {
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid #d1d5db;
+      font-size:12px;
+    }
+
+    .btn {
+      padding:6px 10px;
+      border-radius:999px;
+      border:none;
+      cursor:pointer;
+      font-size:12px;
+    }
+    .btn-primary {
+      background:#0d6efd;
+      color:white;
+    }
+    .btn-outline {
+      background:white;
+      border:1px solid #d1d5db;
+      color:#111827;
+    }
+    .btn-export {
+      background:#16a34a;
+      color:white;
+    }
+
+    table {
+      width:100%;
+      border-collapse:collapse;
+      margin-top:6px;
+      background:white;
+      font-size:13px;
+    }
+    th, td {
+      border:1px solid #e5e7eb;
+      padding:6px 6px;
+      text-align:left;
+    }
+    th {
+      background:#f3f4f6;
+      font-weight:bold;
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    .badge {
+      display:inline-block;
+      padding:2px 8px;
+      border-radius:999px;
+      font-size:11px;
+      color:white;
+    }
+    .badge-pending  { background:#6b7280; }
+    .badge-approved { background:#16a34a; }
+    .badge-rejected { background:#dc2626; }
+
+    .role-select {
+      padding:3px 6px;
+      border-radius:999px;
+      border:1px solid #d1d5db;
+      font-size:11px;
+      background:#f9fafb;
+    }
+
+    .actions button {
+      margin-right:4px;
+      margin-bottom:2px;
+    }
+
+    .metrics {
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:10px;
+    }
+    .metric-card {
+      flex:1 1 140px;
+      background:#f9fafb;
+      border-radius:12px;
+      padding:8px 10px;
+      border:1px solid #e5e7eb;
+      font-size:12px;
+    }
+    .metric-title {
+      color:#6b7280;
+      margin-bottom:2px;
+    }
+    .metric-value {
+      font-size:18px;
+      font-weight:bold;
+      color:#111827;
+    }
+
+    footer {
+      text-align:center;
+      padding:10px;
+      background:#111827;
+      color:#e5e7eb;
+      font-size:12px;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div class="header-main">
+    <img src="https://www.urrschool.com/favicon.ico" alt="URR Logo" class="logo" />
+    <div class="header-text">
+      <h1>Admin จัดการสมาชิก URR School</h1>
+      <p>อนุมัติสิทธิ์เข้าใช้งานระบบเรียนออนไลน์ / ระบบโรงเรียน</p>
+    </div>
+  </div>
+  <nav>
+    <a href="index.html">หน้าแรก</a>
+    <a href="login.html">เข้าสู่ระบบ</a>
+    <a href="register.html">สมัครสมาชิก</a>
+    <a href="forgot.html">ลืมรหัสผ่าน</a>
+    <a href="admin-members.html">Admin สมาชิก</a>
+  </nav>
+</header>
+
+<main>
+  <!-- กล่องแสดงสถานะ Admin -->
+  <div class="card">
+    <h2>สิทธิ์ผู้ดูแลระบบ (Admin)</h2>
+    <p class="sub">
+      หน้านี้ใช้สำหรับ: อนุมัติ / ปฏิเสธสมาชิก, เปลี่ยนบทบาท (Role), และดูฐานข้อมูลสมาชิกจาก Firestore <br>
+      สิทธิ์เต็มจะให้เฉพาะ <strong>Creator</strong> และ <strong>Admin</strong> ที่กำหนดในระบบเท่านั้น
+    </p>
+    <span class="chip">ข้อมูลสมาชิกเก็บใน Firestore collection: <strong>members</strong></span>
+
+    <div class="admin-info" id="adminInfo">
+      กำลังตรวจสอบสิทธิ์ผู้ใช้งาน...
+    </div>
+
+    <div id="adminMsg" class="msg"></div>
+  </div>
+
+  <!-- Metrics -->
+  <div class="card" id="metricsCard" style="display:none;">
+    <h2>สรุปสถิติสมาชิก</h2>
+    <div class="metrics">
+      <div class="metric-card">
+        <div class="metric-title">สมาชิกทั้งหมด</div>
+        <div class="metric-value" id="m-total">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">รออนุมัติ (Pending)</div>
+        <div class="metric-value" id="m-pending">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">อนุมัติแล้ว (Approved)</div>
+        <div class="metric-value" id="m-approved">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-title">ถูกปฏิเสธ (Rejected)</div>
+        <div class="metric-value" id="m-rejected">0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ตารางสมาชิก -->
+  <div class="card" id="tableCard" style="display:none;">
+    <h2>จัดการสมาชิกในระบบ</h2>
+    <p class="sub">
+      ฟิลด์หลัก: ชื่อ, อีเมล, เบอร์, เลขบัตร, สถานะ (pending/approved/rejected), บทบาท (user/admin/creator)
+    </p>
+
+    <div class="controls-row">
+      <span>กรองสถานะ:</span>
+      <select id="filterStatus">
+        <option value="all">ทั้งหมด</option>
+        <option value="pending">รออนุมัติ</option>
+        <option value="approved">อนุมัติแล้ว</option>
+        <option value="rejected">ถูกปฏิเสธ</option>
+      </select>
+
+      <span>ค้นหา:</span>
+      <input type="text" id="searchInput" placeholder="ชื่อ / อีเมล / โทรศัพท์ / เลขบัตร" />
+
+      <button class="btn btn-outline" id="btnReload">รีโหลดข้อมูล</button>
+      <button class="btn btn-export" id="btnExport">Export CSV</button>
+    </div>
+
+    <table id="membersTable">
+      <thead>
+        <tr>
+          <th>ชื่อ-นามสกุล</th>
+          <th>อีเมล</th>
+          <th>โทรศัพท์</th>
+          <th>เลขบัตร</th>
+          <th>สถานะ</th>
+          <th>บทบาท</th>
+          <th>สมัครเมื่อ</th>
+          <th>การจัดการ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- แถวข้อมูลจะถูกเติมโดย JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ถ้าไม่มีสิทธิ์ -->
+  <div class="card" id="noAccessCard" style="display:none;">
+    <h2 class="danger">ไม่มีสิทธิ์เข้าถึงหน้าผู้ดูแลระบบ</h2>
+    <p class="sub">
+      กรุณาเข้าสู่ระบบด้วยบัญชีที่เป็น Creator หรือ Admin <br>
+      หากคิดว่าควรมีสิทธิ์ ให้ติดต่อผู้ดูแลระบบหลักของโรงเรียน
+    </p>
+    <div class="links" style="margin-top:8px;">
+      <a href="login.html">ไปหน้าเข้าสู่ระบบ</a> |
+      <a href="index.html">กลับหน้าแรก</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | หน้าจัดการสมาชิกสำหรับผู้ดูแลระบบ
+</footer>
+
+<script type="module">
+  // ==================== Firebase Setup ====================
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import {
+    getAuth,
+    onAuthStateChanged
+  } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    getDocs,
+    doc,
+    getDoc,
+    updateDoc,
+    serverTimestamp,
+    query,
+    orderBy
+  } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBhlCI3LfdCnOJzrTbK59nxL-77VyF9Mm0",
+    authDomain: "urrschool-system.firebaseapp.com",
+    projectId: "urrschool-system",
+    storageBucket: "urrschool-system.firebasestorage.app",
+    messagingSenderId: "183740550258",
+    appId: "1:183740550258:web:674b73d1843553574fc6eb",
+    measurementId: "G-GHLCDECTDF"
+  };
+
+  const app  = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  // 👉 เปลี่ยนเป็นอีเมลของ "ผู้สร้างเว็บ" ที่ต้องการให้เป็น Creator สูงสุด
+  const CREATOR_EMAIL = "admin@urrschool.com";
+
+  let currentUser = null;
+  let currentUserRole = null;  // 'creator' | 'admin' | 'user' | null
+  let membersCache = [];
+
+  const adminInfoEl   = document.getElementById("adminInfo");
+  const adminMsgEl    = document.getElementById("adminMsg");
+  const metricsCardEl = document.getElementById("metricsCard");
+  const tableCardEl   = document.getElementById("tableCard");
+  const noAccessCard  = document.getElementById("noAccessCard");
+
+  function showAdminMsg(text, type = "") {
+    adminMsgEl.textContent = text;
+    adminMsgEl.className = "msg " + (type || "");
+  }
+
+  // ==================== Load Current User & Role ====================
+  async function resolveCurrentUserRole(user) {
+    if (!user) return null;
+
+    // ถ้าอีเมลตรงกับ Creator → role สูงสุด
+    if (user.email === CREATOR_EMAIL) {
+      return "creator";
+    }
+
+    // ถ้าไม่ใช่ Creator ให้ไปดูใน Firestore (collection members, document = uid)
+    try {
+      const profileRef = doc(db, "members", user.uid);
+      const snap = await getDoc(profileRef);
+      if (snap.exists()) {
+        const data = snap.data();
+        return data.role || "user";
+      }
+    } catch (err) {
+      console.error("resolveCurrentUserRole error:", err);
+    }
+    return "user";
+  }
+
+  function hasAdminAccess(role) {
+    return role === "creator" || role === "admin";
+  }
+
+  // ==================== Load Members ====================
+  async function loadMembers() {
+    membersCache = [];
+
+    try {
+      showAdminMsg("กำลังดึงข้อมูลสมาชิกจาก Firestore...", "");
+      const q = query(collection(db, "members"), orderBy("createdAt", "desc"));
+      const snap = await getDocs(q);
+
+      snap.forEach(docSnap => {
+        const data = docSnap.data();
+        membersCache.push({
+          id: docSnap.id,
+          ...data
+        });
+      });
+
+      showAdminMsg("โหลดข้อมูลสมาชิกสำเร็จ (" + membersCache.length + " รายการ)", "success");
+      updateMetrics();
+      renderTable();
+    } catch (err) {
+      console.error(err);
+      showAdminMsg("ไม่สามารถโหลดข้อมูลสมาชิกได้", "error");
+    }
+  }
+
+  function updateMetrics() {
+    const total    = membersCache.length;
+    const pending  = membersCache.filter(m => m.status === "pending").length;
+    const approved = membersCache.filter(m => m.status === "approved").length;
+    const rejected = membersCache.filter(m => m.status === "rejected").length;
+
+    document.getElementById("m-total").textContent    = total;
+    document.getElementById("m-pending").textContent  = pending;
+    document.getElementById("m-approved").textContent = approved;
+    document.getElementById("m-rejected").textContent = rejected;
+  }
+
+  // ==================== Render Table ====================
+  function statusBadgeClass(status) {
+    switch (status) {
+      case "approved": return "badge badge-approved";
+      case "rejected": return "badge badge-rejected";
+      case "pending":
+      default:         return "badge badge-pending";
+    }
+  }
+
+  function statusLabel(status) {
+    switch (status) {
+      case "approved": return "อนุมัติแล้ว";
+      case "rejected": return "ถูกปฏิเสธ";
+      case "pending":
+      default:         return "รออนุมัติ";
+    }
+  }
+
+  function renderTable() {
+    const tbody = document.querySelector("#membersTable tbody");
+    tbody.innerHTML = "";
+
+    const filterStatus = document.getElementById("filterStatus").value;
+    const searchText   = document.getElementById("searchInput").value.trim().toLowerCase();
+
+    let list = membersCache;
+
+    if (filterStatus !== "all") {
+      list = list.filter(m => (m.status || "pending") === filterStatus);
+    }
+
+    if (searchText) {
+      list = list.filter(m => {
+        const text = [
+          m.firstName || "",
+          m.lastName || "",
+          m.email || "",
+          m.phone || "",
+          m.citizenId || ""
+        ].join(" ").toLowerCase();
+        return text.includes(searchText);
+      });
+    }
+
+    list.forEach(m => {
+      const tr = document.createElement("tr");
+
+      const fullName = (m.firstName || "") + " " + (m.lastName || "");
+
+      const tdName   = document.createElement("td");
+      const tdEmail  = document.createElement("td");
+      const tdPhone  = document.createElement("td");
+      const tdCid    = document.createElement("td");
+      const tdStatus = document.createElement("td");
+      const tdRole   = document.createElement("td");
+      const tdDate   = document.createElement("td");
+      const tdAct    = document.createElement("td");
+
+      tdName.textContent  = fullName.trim() || "-";
+      tdEmail.textContent = m.email || "-";
+      tdPhone.textContent = m.phone || "-";
+      tdCid.textContent   = m.citizenId || "-";
+
+      const badge = document.createElement("span");
+      badge.className = statusBadgeClass(m.status || "pending");
+      badge.textContent = statusLabel(m.status || "pending");
+      tdStatus.appendChild(badge);
+
+      // Role select (Creator สามารถแก้ทุกคน, Admin แก้ได้แต่ห้ามแตะ Creator)
+      const select = document.createElement("select");
+      select.className = "role-select";
+      ["user","admin","creator"].forEach(role => {
+        const opt = document.createElement("option");
+        opt.value = role;
+        opt.textContent = role;
+        select.appendChild(opt);
+      });
+      select.value = m.role || "user";
+
+      // ป้องกันไม่ให้ admin ลบสิทธิ์ creator
+      if (currentUserRole === "admin" && m.role === "creator") {
+        select.disabled = true;
+      }
+
+      select.addEventListener("change", async () => {
+        if (!hasAdminAccess(currentUserRole)) return;
+        if (!confirm("ยืนยันเปลี่ยนบทบาทของสมาชิกคนนี้เป็น '" + select.value + "' ?")) {
+          select.value = m.role || "user";
+          return;
+        }
+        await updateMemberRole(m.id, select.value);
+      });
+
+      tdRole.appendChild(select);
+
+      // createdAt
+      let createdStr = "-";
+      if (m.createdAt && m.createdAt.toDate) {
+        createdStr = m.createdAt.toDate().toISOString().substring(0,10);
+      } else if (typeof m.createdAt === "string") {
+        createdStr = m.createdAt.substring(0,10);
+      }
+      tdDate.textContent = createdStr;
+
+      // Actions
+      tdAct.className = "actions";
+
+      const btnApprove = document.createElement("button");
+      btnApprove.className = "btn btn-primary";
+      btnApprove.textContent = "อนุมัติ";
+      btnApprove.addEventListener("click", async () => {
+        if (!hasAdminAccess(currentUserRole)) return;
+        if (!confirm("ยืนยันอนุมัติสมาชิกคนนี้?")) return;
+        await updateMemberStatus(m.id, "approved");
+      });
+
+      const btnReject = document.createElement("button");
+      btnReject.className = "btn btn-outline";
+      btnReject.textContent = "ปฏิเสธ";
+      btnReject.addEventListener("click", async () => {
+        if (!hasAdminAccess(currentUserRole)) return;
+        if (!confirm("ยืนยันปฏิเสธสมาชิกคนนี้?")) return;
+        await updateMemberStatus(m.id, "rejected");
+      });
+
+      const btnPending = document.createElement("button");
+      btnPending.className = "btn btn-outline";
+      btnPending.textContent = "ตั้งเป็น Pending";
+      btnPending.addEventListener("click", async () => {
+        if (!hasAdminAccess(currentUserRole)) return;
+        if (!confirm("ยืนยันเปลี่ยนสถานะกลับเป็นรออนุมัติ (pending)?")) return;
+        await updateMemberStatus(m.id, "pending");
+      });
+
+      // Admin ไม่มีสิทธิ์ลบ creator
+      if (currentUserRole === "admin" && m.role === "creator") {
+        tdAct.appendChild(document.createTextNode("Creator (แก้ไขไม่ได้)"));
+      } else {
+        tdAct.appendChild(btnApprove);
+        tdAct.appendChild(btnReject);
+        tdAct.appendChild(btnPending);
+      }
+
+      tr.appendChild(tdName);
+      tr.appendChild(tdEmail);
+      tr.appendChild(tdPhone);
+      tr.appendChild(tdCid);
+      tr.appendChild(tdStatus);
+      tr.appendChild(tdRole);
+      tr.appendChild(tdDate);
+      tr.appendChild(tdAct);
+
+      tbody.appendChild(tr);
+    });
+  }
+
+  // ==================== Update Member Status / Role ====================
+  async function updateMemberStatus(memberId, newStatus) {
+    try {
+      const ref = doc(db, "members", memberId);
+      await updateDoc(ref, {
+        status: newStatus,
+        approvedBy: currentUser ? (currentUser.email || null) : null,
+        approvedAt: serverTimestamp()
+      });
+      showAdminMsg("อัปเดตสถานะสมาชิกสำเร็จ", "success");
+      await loadMembers();
+    } catch (err) {
+      console.error(err);
+      showAdminMsg("อัปเดตสถานะสมาชิกไม่สำเร็จ", "error");
+    }
+  }
+
+  async function updateMemberRole(memberId, newRole) {
+    try {
+      const ref = doc(db, "members", memberId);
+      await updateDoc(ref, {
+        role: newRole
+      });
+      showAdminMsg("อัปเดตบทบาทสมาชิกสำเร็จ", "success");
+      await loadMembers();
+    } catch (err) {
+      console.error(err);
+      showAdminMsg("อัปเดตบทบาทสมาชิกไม่สำเร็จ", "error");
+    }
+  }
+
+  // ==================== Export CSV ====================
+  function exportCsv() {
+    if (!membersCache || membersCache.length === 0) {
+      alert("ยังไม่มีข้อมูลสมาชิกในระบบ");
+      return;
+    }
+
+    const headers = [
+      "id","firstName","lastName","email","phone",
+      "citizenId","status","role","createdAt","approvedBy","approvedAt"
+    ];
+    const rows = [headers.join(",")];
+
+    membersCache.forEach(m => {
+      const createdAtStr = m.createdAt && m.createdAt.toDate
+        ? m.createdAt.toDate().toISOString()
+        : (m.createdAt || "");
+      const approvedAtStr = m.approvedAt && m.approvedAt.toDate
+        ? m.approvedAt.toDate().toISOString()
+        : (m.approvedAt || "");
+
+      const row = [
+        m.id || "",
+        m.firstName || "",
+        m.lastName || "",
+        m.email || "",
+        m.phone || "",
+        m.citizenId || "",
+        m.status || "",
+        m.role || "",
+        createdAtStr,
+        m.approvedBy || "",
+        approvedAtStr
+      ].map(v => `"${String(v).replace(/"/g,'""')}"`);
+      rows.push(row.join(","));
+    });
+
+    const csvContent = rows.join("\r\n");
+    const blob = new Blob([csvContent], {type:"text/csv;charset=utf-8;"});
+    const url  = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "members_admin_export.csv";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  // ==================== Event Binding ====================
+  document.addEventListener("DOMContentLoaded", () => {
+    document.getElementById("filterStatus").addEventListener("change", renderTable);
+    document.getElementById("searchInput").addEventListener("input", renderTable);
+    document.getElementById("btnReload").addEventListener("click", loadMembers);
+    document.getElementById("btnExport").addEventListener("click", exportCsv);
+  });
+
+  // ==================== Auth Guard ====================
+  onAuthStateChanged(auth, async (user) => {
+    currentUser = user;
+
+    if (!user) {
+      adminInfoEl.textContent = "ยังไม่ได้เข้าสู่ระบบ กรุณาเข้าสู่ระบบด้วยบัญชี Admin หรือ Creator ก่อน";
+      metricsCardEl.style.display = "none";
+      tableCardEl.style.display   = "none";
+      noAccessCard.style.display  = "block";
+      return;
+    }
+
+    adminInfoEl.textContent = "กำลังตรวจสอบสิทธิ์ของ: " + (user.email || user.uid);
+
+    currentUserRole = await resolveCurrentUserRole(user);
+
+    adminInfoEl.innerHTML =
+      "เข้าสู่ระบบด้วย: <strong>" + (user.email || user.uid) +
+      "</strong> | Role ปัจจุบัน: <strong>" + currentUserRole + "</strong>";
+
+    if (!hasAdminAccess(currentUserRole)) {
+      showAdminMsg("คุณไม่มีสิทธิ์เข้าถึงหน้าผู้ดูแลระบบ (ต้องเป็น Admin หรือ Creator)", "error");
+      metricsCardEl.style.display = "none";
+      tableCardEl.style.display   = "none";
+      noAccessCard.style.display  = "block";
+      return;
+    }
+
+    // มีสิทธิ์ → แสดง UI Admin และโหลดข้อมูล
+    metricsCardEl.style.display = "block";
+    tableCardEl.style.display   = "block";
+    noAccessCard.style.display  = "none";
+
+    await loadMembers();
+  });
+</script>
+
+</body>
+</html>
