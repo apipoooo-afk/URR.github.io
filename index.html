@@ -10,12 +10,12 @@
 
   <style>
     :root {
-      --primary: #0055ff;
-      --primary-dark: #003bb5;
-      --accent: #ff6b6b;   /* ชมพูแดง */
-      --accent-2: #10b981; /* เขียวมินต์ */
-      --accent-3: #38bdf8; /* ฟ้า */
-      --bg-soft: #fdf2ff;
+      /* โทนเฉพาะ: ชมพูหลัก + ฟ้า + เขียว */
+      --pink-main: #d63384;
+      --pink-soft: #f8d7ec;
+      --blue-main: #0d6efd;
+      --green-main: #20c997;
+      --bg-soft: #fff7fb;
       --card-bg: #ffffff;
     }
 
@@ -25,8 +25,11 @@
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at top left, #e0f2fe 0%, #fdf2ff 35%, #ecfdf5 70%, #eff6ff 100%);
-      color: #222;
+      background:
+        radial-gradient(circle at top left, #ffe0f3 0%, transparent 45%),
+        radial-gradient(circle at top right, #e0f2ff 0%, transparent 50%),
+        radial-gradient(circle at bottom, #e7fff4 0%, #f9fafb 60%);
+      color: #212529;
     }
 
     /* HEADER */
@@ -34,9 +37,9 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: linear-gradient(120deg, #ec4899, #3b82f6, #22c55e);
+      background: linear-gradient(120deg, #d63384, #0d6efd, #20c997);
       color: white;
-      padding: 10px 12px 8px;
+      padding: 10px 12px 6px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.18);
     }
 
@@ -45,14 +48,16 @@
       align-items: center;
       gap: 10px;
       margin-bottom: 6px;
+      flex-wrap: wrap;
     }
 
+    /* โลโก้ดึงจากเว็บ urrschool.com (ปรับเป็นไฟล์ของคุณได้ทีหลัง) */
     .logo {
-      height: 44px;
-      width: auto;
-      border-radius: 999px;
+      height: 48px;
+      width: 48px;
+      border-radius: 50%;
       background: white;
-      padding: 3px;
+      padding: 4px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.25);
       object-fit: contain;
     }
@@ -64,7 +69,7 @@
     .header-text p {
       margin: 0;
       font-size: 13px;
-      opacity: 0.95;
+      opacity: 0.96;
     }
 
     /* NAV */
@@ -89,7 +94,7 @@
     }
     nav a:hover {
       background: white;
-      color: #1d4ed8;
+      color: #d63384;
       transform: translateY(-1px);
       box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     }
@@ -118,14 +123,14 @@
       font-size: 12px;
       cursor: pointer;
       background: #ffffff;
-      color: #1d4ed8;
+      color: #d63384;
       font-weight: bold;
       box-shadow: 0 2px 5px rgba(0,0,0,0.12);
       transition: all 0.2s ease;
     }
     .top-bar button:hover {
       transform: translateY(-1px);
-      background: #fee2e2;
+      background: #ffe0f3;
     }
     .login-status {
       font-size: 11px;
@@ -150,7 +155,7 @@
 
     section h2 {
       margin-top: 0;
-      color: #0f172a;
+      color: #1f2933;
       font-size: 20px;
       display: flex;
       align-items: center;
@@ -160,7 +165,7 @@
       font-size: 22px;
     }
 
-    /* ปุ่มกลับหน้าก่อน */
+    /*ปุ่มย้อนกลับ*/
     .back-btn {
       position: absolute;
       top: 12px;
@@ -168,9 +173,9 @@
       border-radius: 999px;
       padding: 3px 9px;
       font-size: 11px;
-      border: 1px solid #fecaca;
-      background: #fee2e2;
-      color: #1f2937;
+      border: 1px solid #ffb3d5;
+      background: #ffe0f3;
+      color: #1f2933;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -178,14 +183,14 @@
       transition: all 0.2s ease;
     }
     .back-btn:hover {
-      background: #fecaca;
+      background: #ffcfe9;
       transform: translateY(-1px);
     }
 
     /* INTRO */
     .intro {
       text-align: center;
-      background: radial-gradient(circle at top, rgba(59,130,246,0.15), transparent 60%);
+      background: radial-gradient(circle at top, rgba(214,51,132,0.18), transparent 60%);
     }
     .intro h2 {
       justify-content: center;
@@ -194,13 +199,13 @@
     .intro p {
       margin: 8px 0 12px;
       font-size: 15px;
-      color: #4b5563;
+      color: #495057;
     }
 
     .btn {
       display: inline-block;
       padding: 8px 18px;
-      background: linear-gradient(135deg, #22c55e, #14b8a6);
+      background: linear-gradient(135deg, #20c997, #0d6efd);
       color: white;
       text-decoration: none;
       font-size: 13px;
@@ -208,27 +213,27 @@
       margin: 3px;
       border: none;
       cursor: pointer;
-      box-shadow: 0 4px 10px rgba(34,197,94,0.35);
+      box-shadow: 0 4px 10px rgba(32,201,151,0.35);
       transition: all 0.2s ease;
     }
     .btn:hover {
       transform: translateY(-1px) scale(1.01);
-      box-shadow: 0 6px 14px rgba(34,197,94,0.50);
+      box-shadow: 0 6px 14px rgba(32,201,151,0.50);
     }
     .btn-secondary {
-      background: linear-gradient(135deg, #3b82f6, #a855f7);
-      box-shadow: 0 4px 10px rgba(59,130,246,0.35);
+      background: linear-gradient(135deg, #d63384, #0d6efd);
+      box-shadow: 0 4px 10px rgba(214,51,132,0.35);
     }
     .btn-secondary:hover {
-      box-shadow: 0 6px 14px rgba(37,99,235,0.5);
+      box-shadow: 0 6px 14px rgba(214,51,132,0.5);
     }
 
     /* DASHBOARD */
     #dashboard {
-      background: radial-gradient(circle at top left, rgba(59,130,246,0.08), transparent 60%), #ffffff;
+      background: radial-gradient(circle at top left, rgba(13,110,253,0.08), transparent 60%), #ffffff;
     }
     #dashboard h2 {
-      color: #1d4ed8;
+      color: #0d6efd;
     }
     .dash-grid {
       display: flex;
@@ -238,7 +243,7 @@
     .dash-card {
       flex: 1 1 130px;
       min-width: 130px;
-      background: linear-gradient(135deg, #fee2e2, #e0f2fe);
+      background: linear-gradient(135deg, #ffe0f3, #e0f2ff);
       padding: 9px 11px;
       border-radius: 14px;
       box-shadow: 0 3px 8px rgba(15,23,42,0.08);
@@ -252,7 +257,7 @@
       width: 70px;
       height: 70px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(59,130,246,0.2), transparent 60%);
+      background: radial-gradient(circle, rgba(13,110,253,0.23), transparent 60%);
       right: -20px;
       top: -20px;
       opacity: 0.7;
@@ -281,21 +286,24 @@
       font-size: 14px;
     }
 
-    /* เมนูรวม (ทุกเมนูในบล็อกเดียว) */
+    /* เมนูรวม (อยู่บล็อกเดียว ใต้ header) */
+    #menu-overview {
+      background: linear-gradient(135deg,#fff7fb,#e0f2ff);
+    }
     #menu-overview .menu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
       gap: 8px;
       margin-top: 4px;
     }
     .menu-card {
-      background: linear-gradient(135deg, #fef3c7, #e0f2fe);
+      background: linear-gradient(135deg, #ffe0f3, #e0f2ff);
       border-radius: 10px;
       padding: 8px 8px;
       font-size: 13px;
       text-align: center;
       cursor: pointer;
-      box-shadow: 0 2px 6px rgba(148,163,184,0.6);
+      box-shadow: 0 2px 6px rgba(148,163,184,0.7);
       color: #111827;
       transition: all 0.15s ease;
     }
@@ -306,11 +314,11 @@
     }
     .menu-card:hover {
       transform: translateY(-1px);
-      box-shadow: 0 4px 10px rgba(148,163,184,0.8);
-      background: linear-gradient(135deg, #f9a8d4, #bfdbfe);
+      box-shadow: 0 4px 10px rgba(148,163,184,0.9);
+      background: linear-gradient(135deg, #f8d7ec, #cfe8ff);
     }
 
-    /* การ์ดหลักสูตร (แถวเดียวแนวนอน) */
+    /* การ์ดหลักสูตร: แถวเดียวแนวนอน */
     .course-row {
       display: flex;
       gap: 8px;
@@ -318,11 +326,11 @@
       padding-bottom: 4px;
     }
     .course-card {
-      background: linear-gradient(135deg, #ffffff, #fdf2ff);
+      background: linear-gradient(135deg, #ffffff, #fff7fb);
       border-radius: 12px;
       padding: 10px 12px;
-      box-shadow: 0 2px 8px rgba(148,163,184,0.3);
-      border-left: 4px solid #3b82f6;
+      box-shadow: 0 2px 8px rgba(148,163,184,0.35);
+      border-left: 4px solid #d63384;
       min-width: 240px;
       flex: 0 0 auto;
     }
@@ -341,20 +349,20 @@
       color: #4b5563;
     }
 
-    /* ฟอร์มสมัครเรียน: กลับมาเป็น grid 4 แถว (2 ช่องต่อแถว) */
+    /* ฟอร์มสมัครเรียน: 4 แถว 2 คอลัมน์ */
     #register-section {
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto 22px auto;
     }
     .register-box {
-      background:#fef9c3;
+      background:#fff7fb;
       border-radius:14px;
       padding:14px 14px;
-      box-shadow:inset 0 0 0 1px #fde68a;
+      box-shadow:inset 0 0 0 1px #f8d7ec;
     }
     .register-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(160px,1fr));
+      grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
       gap: 8px 14px;
       margin-bottom: 6px;
     }
@@ -380,8 +388,8 @@
     .register-box textarea:focus,
     .register-box select:focus {
       outline:none;
-      border-color:#ec4899;
-      box-shadow:0 0 0 2px rgba(236,72,153,0.25);
+      border-color:#d63384;
+      box-shadow:0 0 0 2px rgba(214,51,132,0.25);
     }
     .register-box textarea {
       resize: vertical;
@@ -428,7 +436,7 @@
       white-space: nowrap;
     }
     th {
-      background:#dbeafe;
+      background:#ffe0f3;
       color:#1f2937;
       font-weight:bold;
     }
@@ -447,7 +455,7 @@
     footer {
       text-align: center;
       padding: 12px;
-      background-color: #0f172a;
+      background-color: #1f1f2d;
       color: white;
       margin-top: 8px;
       font-size: 12px;
@@ -465,7 +473,7 @@
       padding:10px 12px;
     }
 
-    /* CHAT WIDGET (AI ถามตอบอัตโนมัติ) */
+    /* CHAT WIDGET (AI) */
     #chat-widget {
       position: fixed;
       bottom: 16px;
@@ -476,7 +484,7 @@
     #chat-toggle-btn {
       border-radius: 999px;
       border: none;
-      background: linear-gradient(135deg, #ec4899, #3b82f6, #22c55e);
+      background: linear-gradient(135deg, #d63384, #0d6efd, #20c997);
       color: white;
       padding: 10px 14px;
       font-weight: bold;
@@ -498,7 +506,7 @@
       overflow: hidden;
     }
     #chat-header {
-      background: linear-gradient(135deg,#3b82f6,#ec4899);
+      background: linear-gradient(135deg,#d63384,#0d6efd);
       color: white;
       padding: 8px 10px;
       font-size: 13px;
@@ -521,7 +529,7 @@
       white-space: pre-wrap;
     }
     .chat-msg.user {
-      background:#3b82f6;
+      background:#0d6efd;
       color:white;
       margin-left:auto;
       border-bottom-right-radius:2px;
@@ -549,7 +557,7 @@
       border-radius:999px;
       border:none;
       padding: 4px 10px;
-      background:#22c55e;
+      background:#20c997;
       color:white;
       font-size:12px;
       cursor:pointer;
@@ -583,8 +591,8 @@
   <!-- HEADER + MENU + LOGIN -->
   <header>
     <div class="header-main">
-      <!-- โลโก้โรงเรียน มุมซ้าย -->
-      <img src="logo.png" alt="โลโก้โรงเรียนอุบลบุรีรักษ์การบริบาล" class="logo">
+      <!-- โลโก้มุมซ้าย: ถ้าจะใช้ไฟล์ในโฟลเดอร์ เปลี่ยน src เป็น logo.png -->
+      <img src="https://www.urrschool.com/favicon.ico" alt="โลโก้โรงเรียนอุบลบุรีรักษ์การบริบาล" class="logo">
       <div class="header-text">
         <h1>โรงเรียนอุบลบุรีรักษ์การบริบาล</h1>
         <p>พนักงานผู้ช่วยพยาบาล รับรองโดยกระทรวงศึกษาธิการ กระทรวงสาธารณสุข และสภาการพยาบาล</p>
@@ -592,6 +600,7 @@
     </div>
 
     <nav>
+      <a href="#menu-overview">เมนูรวม</a>
       <a href="#home">หน้าแรก</a>
       <a href="#register-section">สมัครเรียน</a>
       <a href="#courses-summary">หลักสูตร</a>
@@ -617,13 +626,69 @@
 
   <main>
 
-    <!-- แบบฟอร์มสมัครเรียน: Grid 4 แถว -->
+    <!-- เมนูรวมในบล็อกเดียว ใต้ Header -->
+    <section id="menu-overview">
+      <button class="back-btn" onclick="goBack()">← ย้อนกลับหน้าก่อนนี้</button>
+      <h2><span class="icon">🧭</span>ภาพรวมเมนูการใช้งาน</h2>
+      <div class="menu-grid">
+        <div class="menu-card" onclick="location.hash='#home'">
+          หน้าแรก
+          <span>ภาพรวม / ข่าว / แนะนำโรงเรียน</span>
+        </div>
+        <div class="menu-card" onclick="location.hash='#register-section'">
+          สมัครเรียน
+          <span>กรอกใบสมัครออนไลน์</span>
+        </div>
+        <div class="menu-card" onclick="location.hash='#courses-summary'">
+          หลักสูตร
+          <span>รายละเอียดหลักสูตรทั้งหมด</span>
+        </div>
+        <div class="menu-card" onclick="location.hash='#online-learning'">
+          ระบบเรียนออนไลน์
+          <span>บทเรียนวิดีโอ (ต้องมีสิทธิ์)</span>
+        </div>
+        <div class="menu-card" onclick="location.hash='#student-status'">
+          ผลการเรียน
+          <span>สถานะและเกรดนักศึกษา</span>
+        </div>
+        <div class="menu-card" onclick="location.hash='#certificates'">
+          ใบประกาศนียบัตร
+          <span>ขอรับและตรวจสอบใบประกาศ</span>
+        </div>
+        <div class="menu-card" onclick="location.hash='#students-db'">
+          ฐานข้อมูลนักเรียน
+          <span>สำหรับ Admin ที่ได้รับอนุญาต</span>
+        </div>
+        <div class="menu-card" onclick="location.hash='#jobs'">
+          ตำแหน่งงานว่าง
+          <span>งานรองรับหลังเรียนจบ</span>
+        </div>
+        <div class="menu-card" onclick="location.hash='#ai-knowledge'">
+          ข้อมูล AI
+          <span>คลังคำตอบสำหรับ Chatbot</span>
+        </div>
+        <div class="menu-card" onclick="location.hash='#admin-panel'">
+          Admin / สิทธิ์ระบบ
+          <span>สำหรับ Creator / Admin</span>
+        </div>
+        <div class="menu-card" onclick="location.hash='#about'">
+          เกี่ยวกับเรา
+          <span>วิสัยทัศน์ ประวัติโรงเรียน</span>
+        </div>
+        <div class="menu-card" onclick="location.hash='#contact'">
+          ติดต่อเรา
+          <span>โทร / LINE / Facebook</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ฟอร์มสมัครเรียน: 4 แถว 2 คอลัมน์ -->
     <section id="register-section">
       <button class="back-btn" onclick="goBack()">← ย้อนกลับหน้าก่อนนี้</button>
       <h2><span class="icon">📝</span>แบบฟอร์มสมัครเรียนออนไลน์</h2>
       <div class="register-box">
         <p class="small-note">
-          *ฟอร์มนี้บันทึกข้อมูลไว้ในเครื่องของคุณ (localStorage) โรงเรียนสามารถปรับต่อเชื่อมระบบจริงภายหลังได้
+          *ฟอร์มนี้บันทึกข้อมูลไว้ในเครื่องของคุณ (localStorage) โรงเรียนสามารถนำไปต่อยอดเชื่อมฐานข้อมูลจริงได้ภายหลัง
         </p>
         <form id="quickRegisterForm">
           <div class="register-grid">
@@ -701,66 +766,10 @@
     <section id="home" class="intro">
       <button class="back-btn" onclick="goBack()">← ย้อนกลับหน้าก่อนนี้</button>
       <h2><span class="icon">🎓</span>ยินดีต้อนรับสู่การเรียนออนไลน์</h2>
-      <p>เรียนสั้น จบไว ได้งานจริง 💉 พร้อมโอกาสทำงานในโรงพยาบาล คลินิก และศูนย์ดูแลผู้สูงอายุทั่วประเทศ</p>
+      <p>เรียนสั้น จบไว ได้งานจริง พร้อมโอกาสทำงานในโรงพยาบาล คลินิก และศูนย์ดูแลผู้สูงอายุทั่วประเทศ</p>
       <div>
         <a href="#register-section" class="btn">สมัครเรียนทันที</a>
         <a href="#courses-summary" class="btn btn-secondary">ดูรายละเอียดหลักสูตร</a>
-      </div>
-    </section>
-
-    <!-- MENU OVERVIEW: ทุกเมนูในบล็อกเดียว -->
-    <section id="menu-overview">
-      <button class="back-btn" onclick="goBack()">← ย้อนกลับหน้าก่อนนี้</button>
-      <h2><span class="icon">🧭</span>ภาพรวมเมนูการใช้งาน</h2>
-      <div class="menu-grid">
-        <div class="menu-card" onclick="location.hash='#home'">
-          หน้าแรก
-          <span>ข่าวสาร/ภาพรวมโรงเรียน</span>
-        </div>
-        <div class="menu-card" onclick="location.hash='#register-section'">
-          สมัครเรียน
-          <span>กรอกใบสมัครออนไลน์</span>
-        </div>
-        <div class="menu-card" onclick="location.hash='#courses-summary'">
-          หลักสูตร
-          <span>รายละเอียดหลักสูตรทั้งหมด</span>
-        </div>
-        <div class="menu-card" onclick="location.hash='#online-learning'">
-          ระบบเรียนออนไลน์
-          <span>วิดีโอการเรียน (ต้องมีสิทธิ์)</span>
-        </div>
-        <div class="menu-card" onclick="location.hash='#student-status'">
-          ผลการเรียน
-          <span>เช็คผลและสถานะนักศึกษา</span>
-        </div>
-        <div class="menu-card" onclick="location.hash='#certificates'">
-          ใบประกาศนียบัตร
-          <span>การขอรับใบประกาศ</span>
-        </div>
-        <div class="menu-card" onclick="location.hash='#students-db'">
-          ฐานข้อมูลนักเรียน
-          <span>เฉพาะ Admin ที่ได้รับอนุญาต</span>
-        </div>
-        <div class="menu-card" onclick="location.hash='#jobs'">
-          ตำแหน่งงานว่าง
-          <span>โอกาสงานหลังจบหลักสูตร</span>
-        </div>
-        <div class="menu-card" onclick="location.hash='#ai-knowledge'">
-          ข้อมูล AI
-          <span>ฐานข้อมูลตอบคำถาม AI</span>
-        </div>
-        <div class="menu-card" onclick="location.hash='#admin-panel'">
-          จัดการ Admin/สิทธิ์
-          <span>สำหรับ Creator/Admin</span>
-        </div>
-        <div class="menu-card" onclick="location.hash='#about'">
-          เกี่ยวกับเรา
-          <span>ประวัติและวิสัยทัศน์</span>
-        </div>
-        <div class="menu-card" onclick="location.hash='#contact'">
-          ติดต่อเรา
-          <span>โทร / LINE / Facebook</span>
-        </div>
       </div>
     </section>
 
@@ -807,7 +816,7 @@
         <li>หลักสูตรได้รับการรับรองจากกระทรวงศึกษาธิการ กระทรวงสาธารณสุข และสภาการพยาบาล</li>
         <li>เรียนออนไลน์แบบยืดหยุ่นตามเวลาของคุณ พร้อมการสอนแบบตัวต่อตัวเมื่อจำเป็น</li>
         <li>มีทั้งการเรียนแบบวิดีโอ เวิร์กชอป และการฝึกปฏิบัติจริงในสถานพยาบาล</li>
-        <li>โอกาสฝึกงาน และแนวโน้มได้งานทำหลังเรียนจบสูง</li>
+        <li>มีเครือข่ายโรงพยาบาลและสถานประกอบการรองรับตำแหน่งงานจำนวนมาก</li>
       </ul>
     </section>
 
@@ -995,7 +1004,7 @@
       <p>โรงเรียนอุบลบุรีรักษ์การบริบาล เป็นสถาบันที่มุ่งผลิตบุคลากรด้านการดูแลสุขภาพที่มีคุณภาพ ทั้งด้านความรู้ ทักษะ และจริยธรรม เพื่อรองรับสังคมสูงวัยและความต้องการบุคลากรในระบบสาธารณสุข</p>
       <ul>
         <li>ที่อยู่: 115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000</li>
-        <li>โทรศัพท์: 080-459-3311</li>
+        <li>โทรศัพท์: 080-459-3311, 064-034-1659, 094-267-7173, 097-329-8686</li>
         <li>เวลาทำการ: จันทร์ – เสาร์ 09:00–17:00 น.</li>
       </ul>
     </section>
@@ -1027,7 +1036,7 @@
         <div class="contact-box">
           <p><strong>ช่องทางติดต่ออื่น ๆ</strong></p>
           <ul>
-            <li>โทร: 080-459-3311</li>
+            <li>โทร: 080-459-3311, 064-034-1659, 094-267-7173, 097-329-8686</li>
             <li>LINE: @ubonburirak</li>
             <li>Facebook: โรงเรียนอุบลบุรีรักษ์การบริบาล</li>
           </ul>
@@ -1057,7 +1066,7 @@
     </div>
   </div>
 
-  <!-- SCRIPT (เหมือนเวอร์ชันก่อน ปรับให้ทำงานร่วม layout ใหม่) -->
+  <!-- SCRIPT -->
   <script>
     const STORAGE_KEY_STUDENTS = "students";
     const STORAGE_KEY_USERS = "ubr_users";
@@ -1085,7 +1094,6 @@
       if (el) el.textContent = value;
     }
 
-    /* -------- User & Admin Management -------- */
     function getUsers() {
       try {
         const raw = localStorage.getItem(STORAGE_KEY_USERS) || "[]";
@@ -1216,7 +1224,7 @@
             <td style="text-align:center;">
               <input type="checkbox" class="perm-checkbox" data-perm="certificates" ${u.permissions.certificates ? "checked" : ""} ${disabledPerm}>
             </td>
-            <td style="text-align:center;">
+            <td style="text-align:center%;">
               <input type="checkbox" class="perm-checkbox" data-perm="studentsDb" ${u.permissions.studentsDb ? "checked" : ""} ${disabledPerm}>
             </td>
             <td style="text-align:center;">
@@ -1317,7 +1325,7 @@
       }, { capture: true });
     }
 
-    /* -------- CHAT AI -------- */
+    /* CHAT AI */
     function toggleChat(forceOpen) {
       const panel = document.getElementById("chat-panel");
       if (!panel) return;
