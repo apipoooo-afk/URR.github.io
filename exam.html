@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ระบบทำข้อสอบ | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+
+  <link rel="stylesheet" href="assets/style.css"> 
+  <link rel="stylesheet" href="exam.css"> 
+
+  <style>
+    :root {
+      /* โทนเฉพาะ: ชมพูหลัก + ฟ้า + เขียว */
+      --pink-main: #d63384;
+      --pink-soft: #f8d7ec;
+      --blue-main: #0d6efd;
+      --green-main: #20c997;
+      --bg-soft: #fff7fb;
+      --card-bg: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, #ffe0f3 0%, transparent 45%),
+        radial-gradient(circle at top right, #e0f2ff 0%, transparent 50%),
+        radial-gradient(circle at bottom, #e7fff4 0%, #f9fafb 60%);
+      color: #212529;
+    }
+
+    /* HEADER (เหมือนเดิม) */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: linear-gradient(120deg, #d63384, #0d6efd, #20c997);
+      color: white;
+      padding: 10px 12px 6px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+    }
+
+    .header-main {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      height: 48px;
+      width: 48px;
+      border-radius: 50%;
+      background: white;
+      padding: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      object-fit: contain;
+    }
+
+    .header-text h1 {
+      margin: 0 0 2px;
+      font-size: 22px;
+    }
+    .header-text p {
+      margin: 0;
+      font-size: 13px;
+      opacity: 0.96;
+    }
+
+    /* NAV (เหมือนเดิม) */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: all 0.2s ease;
+    }
+    nav a:hover {
+      background: white;
+      color: #d63384;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+
+    /* LOGIN BAR (เหมือนเดิม) */
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 4px 0 4px;
+      border-top: 1px solid rgba(255,255,255,0.25);
+    }
+    .top-bar input {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.7);
+      font-size: 12px;
+      min-width: 120px;
+    }
+    .top-bar button {
+      border-radius: 999px;
+      border: none;
+      padding: 4px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      background: #ffffff;
+      color: #d63384;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+      transition: all 0.2s ease;
+    }
+    .top-bar button:hover {
+      transform: translateY(-1px);
+      background: #ffe0f3;
+    }
+    .login-status {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+
+    main {
+      padding: 16px 14px 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* สไตล์ปุ่มย้อนกลับ (เหมือนเดิม) */
+    .back-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 11px;
+      border: 1px solid #ffb3d5;
+      background: #ffe0f3;
+      color: #1f2933;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      background: #ffcfe9;
+      transform: translateY(-1px);
+    }
+    
+    /* สไตล์ปุ่ม (เหมือนเดิม) */
+    .btn {
+      display: inline-block;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, #20c997, #0d6efd);
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      border-radius: 999px;
+      margin: 3px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(32,201,151,0.35);
+      transition: all 0.2s ease;
+    }
+    .btn:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 6px 14px rgba(32,201,151,0.50);
+    }
+    .btn-secondary {
+      background: linear-gradient(135deg, #d63384, #0d6efd);
+      box-shadow: 0 4px 10px rgba(214,51,132,0.35);
+    }
+    .btn-secondary:hover {
+      box-shadow: 0 6px 14px rgba(214,51,132,0.5);
+    }
+
+    /* SECTION ที่ล็อก (เหมือนเดิม) */
+    .locked {
+      position: relative;
+      filter: blur(1px) grayscale(0.2);
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    .locked::before {
+      content: "กรุณาเข้าสู่ระบบ และตรวจสอบสิทธิ์การใช้งาน เพื่อเข้าทำข้อสอบ";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15,23,42,0.70);
+      color: #e5e7eb;
+      font-weight: bold;
+      font-size: 14px;
+      text-align: center;
+      padding: 0 20px;
+      z-index: 5;
+    }
+    
+    /* CHAT WIDGET (เหมือนเดิม) */
+    #chat-widget {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 999;
+      font-size: 13px;
+    }
+    #chat-toggle-btn {
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #d63384, #0d6efd, #20c997);
+      color: white;
+      padding: 10px 14px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      gap:6px;
+    }
+    #chat-panel {
+      width: 280px;
+      max-height: 360px;
+      background:white;
+      border-radius: 14px;
+      box-shadow: 0 8px 22px rgba(15,23,42,0.45);
+      margin-top: 8px;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #chat-header {
+      background: linear-gradient(135deg,#d63384,#0d6efd);
+      color: white;
+      padding: 8px 10px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #chat-messages {
+      flex: 1;
+      padding: 8px;
+      overflow-y: auto;
+      background:#f9fafb;
+    }
+    .chat-msg {
+      margin-bottom: 6px;
+      max-width: 90%;
+      padding: 6px 8px;
+      border-radius: 10px;
+      line-height: 1.3;
+      white-space: pre-wrap;
+    }
+    .chat-msg.user {
+      background:#0d6efd;
+      color:white;
+      margin-left:auto;
+      border-bottom-right-radius:2px;
+    }
+    .chat-msg.ai {
+      background:white;
+      color:#111827;
+      border-bottom-left-radius:2px;
+      border:1px solid #e5e7eb;
+    }
+    #chat-input-row {
+      padding: 6px;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      gap: 4px;
+    }
+    #chat-input {
+      flex:1;
+      border-radius:999px;
+      border:1px solid #d1d5db;
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+    #chat-send-btn {
+      border-radius:999px;
+      border:none;
+      padding: 4px 10px;
+      background:#20c997;
+      color:white;
+      font-size:12px;
+      cursor:pointer;
+    }
+
+    footer {
+      text-align: center;
+      padding: 12px;
+      background-color: #1f1f2d;
+      color: white;
+      margin-top: 8px;
+      font-size: 12px;
+    }
+    
+    @media (max-width: 768px) {
+      main {
+        padding: 12px 8px 28px;
+      }
+      .back-btn {
+        position: static;
+        margin-bottom: 6px;
+      }
+      #chat-panel {
+        width: 90vw;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <header>
+    <div class="header-main">
+      <img src="https://www.urrschool.com/favicon.ico" alt="โลโก้โรงเรียนอุบลบุรีรักษ์การบริบาล" class="logo">
+      <div class="header-text">
+        <h1>โรงเรียนอุบลบุรีรักษ์การบริบาล</h1>
+        <p>พนักงานผู้ช่วยพยาบาล รับรองโดยกระทรวงศึกษาธิการ กระทรวงสาธารณสุข และสภาการพยาบาล</p>
+      </div>
+    </div>
+
+    <nav>
+      <a href="index.html#menu-overview">เมนูรวม</a>
+      <a href="index.html#home">หน้าแรก</a>
+      <a href="index.html#register-section">สมัครเรียน</a>
+      <a href="index.html#courses-summary">หลักสูตร</a>
+      
+      <a href="#top" style="background:white; color:#d63384;">ระบบเรียนออนไลน์</a> 
+      
+      <a href="index.html#student-status">ผลการเรียนและสถานะนักศึกษา</a>
+      <a href="index.html#certificates">การขอรับใบประกาศ</a>
+      <a href="index.html#students-db" id="studentsDbNav" style="display:none;">ฐานข้อมูลนักเรียน</a>
+      <a href="index.html#jobs">ตำแหน่งงานว่าง</a>
+      <a href="index.html#ai-knowledge" id="aiKnowledgeNav" style="display:none;">ฐานข้อมูลคำตอบ AI</a>
+      <a href="index.html#admin-panel" id="adminNavLink" style="display:none;">จัดการ Admin/สิทธิ์</a>
+      <a href="index.html#about">เกี่ยวกับเรา</a>
+      <a href="index.html#contact">ติดต่อเรา</a>
+    </nav>
+
+    <div class="top-bar">
+      <input type="text" id="loginUser" placeholder="ชื่อผู้ใช้ / รหัสนักศึกษา">
+      <input type="password" id="loginPass" placeholder="รหัสผ่าน">
+      <button id="loginBtn">เข้าสู่ระบบ</button>
+      <button id="logoutBtn" style="display:none;">ออกจากระบบ</button>
+      <span class="login-status" id="loginStatus">ยังไม่ได้เข้าสู่ระบบ</span>
+    </div>
+  </header>
+
+  <main>
+  
+    <section id="online-learning" class="exam-container locked">
+      
+      <button class="back-btn" onclick="goBack()">← ย้อนกลับ</button> 
+      <h2><span class="icon">📝</span>แบบทดสอบวัดผล (ตัวอย่าง)</h2>
+    
+      <div>
+        <div class="question-block">
+          <span>ข้อ 1.</span> การปฐมพยาบาลเบื้องต้น (First Aid) หมายถึงอะไร?
+        </div>
+    
+        <div class="answer-options">
+          <button class="option" onclick="selectAnswer(this)">
+            ก. การรักษาพยาบาลโดยแพทย์
+          </button>
+          <button class="option" onclick="selectAnswer(this)">
+            ข. การช่วยเหลือผู้ป่วยหรือผู้บาดเจ็บเบื้องต้น ณ สถานที่เกิดเหตุ
+          </button>
+          <button class="option" onclick="selectAnswer(this)">
+            ค. การนำส่งผู้ป่วยไปโรงพยาบาล
+          </button>
+          <button class="option" onclick="selectAnswer(this)">
+            ง. การจ่ายยาโดยเภสัชกร
+          </button>
+        </div>
+      </div>
+
+      <div class="question-block">
+        <span>ข้อ 2.</span> หากพบผู้ป่วยหมดสติ ควรทำสิ่งใดเป็นอันดับแรก?
+      </div>
+  
+      <div class="answer-options">
+        <button class="option" onclick="selectAnswer(this)">
+          ก. โทร 1669
+        </button>
+        <button class="option" onclick="selectAnswer(this)">
+          ข. ตรวจสอบว่าสถานที่เกิดเหตุปลอดภัยหรือไม่
+        </button>
+        <button class="option" onclick="selectAnswer(this)">
+          ค. เริ่มทำ CPR ทันที
+        </button>
+        <button class="option" onclick="selectAnswer(this)">
+          ง. หาน้ำให้ผู้ป่วยดื่ม
+        </button>
+      </div>
+    
+      <div class="exam-nav">
+        <button class="btn btn-secondary" disabled>← ข้อก่อนหน้า</button>
+        <span class="exam-progress">ข้อ 1-2 / 10</span>
+        <button class="btn">ข้อถัดไป →</button>
+      </div>
+      
+      <div class="exam-results" style="display:none;">
+        <h3>ผลการทดสอบ</h3>
+        <p>คุณได้ 8 / 10 คะแนน</p>
+        <a href="index.html#home" class="btn">กลับหน้าหลัก</a>
+      </div>
+    
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | ที่อยู่: 115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000 | ติดต่อ: 080-459-3311</p>
+  </footer>
+
+  <div id="chat-widget">
+    <button id="chat-toggle-btn">💬 ถาม-ตอบกับโรงเรียน</button>
+    <div id="chat-panel">
+      <div id="chat-header">
+        <span>AI ช่วยตอบคำถาม</span>
+        <button style="border:none;background:transparent;color:white;cursor:pointer;font-size:14px;" onclick="toggleChat(false)">✕</button>
+      </div>
+      <div id="chat-messages"></div>
+      <div id="chat-input-row">
+        <input type="text" id="chat-input" placeholder="พิมพ์คำถามของคุณ...">
+        <button id="chat-send-btn">ส่ง</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* ----- เริ่มคัดลอก SCRIPT ทั้งหมดจาก index.html ----- */
+    const STORAGE_KEY_STUDENTS = "students";
+    const STORAGE_KEY_USERS = "ubr_users";
+    const STORAGE_KEY_CUR_USER = "ubr_current_user";
+    const STORAGE_KEY_AI_KB = "ai_knowledge";
+
+    const PERM_KEYS = [
+      "onlineLearning",
+      "studentStatus",
+      "certificates",
+      "studentsDb",
+      "jobs"
+    ];
+
+    function goBack() {
+      if (document.referrer && document.referrer !== location.href) {
+        history.back();
+      } else {
+        // ถ้าไม่มีหน้าก่อนหน้า ให้กลับไปหน้า index
+        location.href = "index.html"; 
+      }
+    }
+
+    function safeSet(id, value) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = value;
+    }
+
+    function getUsers() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_USERS) || "[]";
+        const arr = JSON.parse(raw);
+        return Array.isArray(arr) ? arr : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users));
+    }
+
+    function getCurrentUser() {
+      const username = localStorage.getItem(STORAGE_KEY_CUR_USER);
+      if (!username) return null;
+      const users = getUsers();
+      return users.find(u => u.username === username) || null;
+    }
+
+    function setCurrentUser(username) {
+      if (!username) {
+        localStorage.removeItem(STORAGE_KEY_CUR_USER);
+      } else {
+        localStorage.setItem(STORAGE_KEY_CUR_USER, username);
+      }
+    }
+
+    function ensurePermissionsObject(user) {
+      if (!user.permissions) {
+        user.permissions = {
+          onlineLearning: false,
+          studentStatus: false,
+          certificates: false,
+          studentsDb: false,
+          jobs: false
+        };
+      } else {
+        PERM_KEYS.forEach(k => {
+          if (typeof user.permissions[k] !== "boolean") {
+            user.permissions[k] = false;
+          }
+        });
+      }
+      return user;
+    }
+
+    function countStatus(students, status) {
+      return students.filter(s => s.status === status).length;
+    }
+
+    function refreshDashboard(students, views) {
+      // หน้านี้ไม่มี Dashboard แต่ฟังก์ชันนี้อาจถูกเรียกใช้
+      // เราจะตรวจสอบก่อนว่า element มีอยู่จริงหรือไม่
+      safeSet("stat-views", views);
+      safeSet("stat-registered", students.length);
+      safeSet("stat-learning", countStatus(students, "learning"));
+      safeSet("stat-intern", countStatus(students, "intern"));
+      safeSet("stat-graduated", countStatus(students, "graduated"));
+      safeSet("stat-employed", countStatus(students, "employed"));
+
+      if (students.length > 0) {
+        const last = students[students.length - 1];
+        safeSet("testingStudentName", (last.firstName || "") + " " + (last.lastName || ""));
+        safeSet("testingStudentId", last.studentId || "[รหัส]");
+        safeSet("testingStudentStatus", last.status || "new");
+      }
+    }
+
+    function renderStudentsTable(students) {
+      const tbody = document.getElementById("studentTableBody");
+      if (!tbody) return; // หน้านี้ไม่มีตารางนี้
+      if (students.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="10">ยังไม่มีข้อมูลผู้สมัคร</td></tr>';
+        return;
+      }
+      tbody.innerHTML = students.map(s => `
+        <tr>
+          <td>${s.studentId || ""}</td>
+          <td>${(s.firstName || "") + " " + (s.lastName || "")}</td>
+          <td>${s.age || ""}</td>
+          <td>${s.gender || ""}</td>
+          <td>${s.education || ""}</td>
+          <td>${s.phone || ""}</td>
+          <td>${s.lineId || ""}</td>
+          <td>${s.facebook || ""}</td>
+          <td>${s.course || ""}</td>
+          <td>${s.status || ""}</td>
+        </tr>
+      `).join("");
+    }
+
+    function renderAdminUserTable() {
+      const tbody = document.getElementById("adminUserTableBody");
+      if (!tbody) return; // หน้านี้ไม่มีตารางนี้
+      const users = getUsers();
+      const current = getCurrentUser();
+
+      if (!users.length) {
+        tbody.innerHTML = '<tr><td colspan="8">ยังไม่มีผู้ใช้ในระบบ</td></tr>';
+        return;
+      }
+
+      const isCurrentCreator = current && current.role === "creator";
+
+      tbody.innerHTML = users.map(u => {
+        ensurePermissionsObject(u);
+        const isCreator = u.role === "creator";
+        const disabledRole = (!isCurrentCreator || isCreator) ? "disabled" : "";
+        const disabledPerm = (!current || (current.role !== "creator" && current.role !== "admin")) ? "disabled" : "";
+
+        return `
+          <tr data-username="${u.username}">
+            <td>${u.username}</td>
+            <td>${u.displayName || ""}</td>
+            <td>
+              <select class="role-select" ${disabledRole}>
+                <option value="user" ${u.role === "user" ? "selected" : ""}>User</option>
+                <option value="admin" ${u.role === "admin" ? "selected" : ""}>Admin</option>
+                <option value="creator" ${u.role === "creator" ? "selected" : ""} disabled>Creator</option>
+              </select>
+            </td>
+            <td style="text-align:center;">
+              <input type="checkbox" class="perm-checkbox" data-perm="onlineLearning" ${u.permissions.onlineLearning ? "checked" : ""} ${disabledPerm}>
+            </td>
+            <td style="text-align:center;">
+              <input type="checkbox" class="perm-checkbox" data-perm="studentStatus" ${u.permissions.studentStatus ? "checked" : ""} ${disabledPerm}>
+            </td>
+            <td style="text-align:center;">
+              <input type="checkbox" class="perm-checkbox" data-perm="certificates" ${u.permissions.certificates ? "checked" : ""} ${disabledPerm}>
+            </td>
+            <td style="text-align:center%;">
+              <input type="checkbox" class="perm-checkbox" data-perm="studentsDb" ${u.permissions.studentsDb ? "checked" : ""} ${disabledPerm}>
+            </td>
+            <td style="text-align:center;">
+              <input type="checkbox" class="perm-checkbox" data-perm="jobs" ${u.permissions.jobs ? "checked" : ""} ${disabledPerm}>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function updateLockedSections() {
+      const user = getCurrentUser();
+      const isLoggedIn = !!user;
+      const permissions = user ? ensurePermissionsObject(user).permissions : {};
+
+      // ค้นหา section ต่างๆ (บางอันอาจเป็น null ในหน้านี้)
+      const onlineSec = document.getElementById("online-learning");
+      const statusSec = document.getElementById("student-status");
+      const certSec = document.getElementById("certificates");
+      const jobsSec = document.getElementById("jobs");
+      const studentsDbSec = document.getElementById("students-db");
+      const adminSec = document.getElementById("admin-panel");
+      const aiKnowledgeSec = document.getElementById("ai-knowledge");
+
+      const studentsDbNav = document.getElementById("studentsDbNav");
+      const adminNavLink = document.getElementById("adminNavLink");
+      const aiKnowledgeNav = document.getElementById("aiKnowledgeNav");
+
+      function setLock(sec, allowed) {
+        if (!sec) return; // ถ้าไม่เจอ section นี้ในหน้า ก็ข้ามไป
+        if (allowed) sec.classList.remove("locked");
+        else sec.classList.add("locked");
+      }
+
+      // นี่คือส่วนที่ปลดล็อกหน้าข้อสอบ!
+      setLock(onlineSec, isLoggedIn && permissions.onlineLearning); 
+      
+      // ส่วนอื่นๆ ที่ไม่มีในหน้านี้ (เช่น statusSec) จะเป็น null
+      // และฟังก์ชัน setLock จะข้ามไปเองโดยไม่เกิด error
+      setLock(statusSec, isLoggedIn && permissions.studentStatus);
+      setLock(certSec, isLoggedIn && permissions.certificates);
+      setLock(jobsSec, isLoggedIn && permissions.jobs);
+
+      const canSeeDb = isLoggedIn && (user.role === "admin" || user.role === "creator") && permissions.studentsDb;
+      if (studentsDbSec) {
+        studentsDbSec.style.display = canSeeDb ? "block" : "none";
+      }
+      if (studentsDbNav) {
+        studentsDbNav.style.display = canSeeDb ? "inline-block" : "none";
+      }
+
+      const isAdminOrCreator = isLoggedIn && (user.role === "admin" || user.role === "creator");
+      if (adminSec) {
+        if (isAdminOrCreator) {
+          adminSec.classList.remove("locked");
+        } else {
+          adminSec.classList.add("locked");
+        }
+      }
+      if (adminNavLink) {
+        adminNavLink.style.display = isAdminOrCreator ? "inline-block" : "none";
+      }
+
+      if (aiKnowledgeSec) {
+        if (isAdminOrCreator) {
+          aiKnowledgeSec.classList.remove("locked");
+        } else {
+          aiKnowledgeSec.classList.add("locked");
+        }
+      }
+      if (aiKnowledgeNav) {
+        aiKnowledgeNav.style.display = isAdminOrCreator ? "inline-block" : "none";
+      }
+
+      // อัปเดตสถานะล็อกอิน (สำคัญมาก)
+      const loginStatus = document.getElementById("loginStatus");
+      const loginBtn = document.getElementById("loginBtn");
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (loginStatus) {
+        if (!isLoggedIn) {
+          loginStatus.textContent = "ยังไม่ได้เข้าสู่ระบบ";
+        } else {
+          const roleText = user.role === "creator" ? "Creator" :
+                           user.role === "admin" ? "Admin" : "User";
+          loginStatus.textContent = "เข้าสู่ระบบแล้ว (" + roleText + ")";
+        }
+      }
+      if (loginBtn && logoutBtn) {
+        loginBtn.style.display = isLoggedIn ? "none" : "inline-block";
+        logoutBtn.style.display = isLoggedIn ? "inline-block" : "none";
+      }
+
+      // หน้านี้ไม่มีตาราง admin แต่เราเรียกไว้เผื่อ
+      renderAdminUserTable(); 
+    }
+
+    function attachConfirmToForm(formId, message) {
+      const form = document.getElementById(formId);
+      if (!form) return;
+      form.addEventListener("submit", function (e) {
+        const ok = confirm(message || "ยืนยันการส่งข้อมูลหรือไม่?");
+        if (!ok) {
+          e.preventDefault();
+        }
+      }, { capture: true });
+    }
+
+    /* CHAT AI (ทำงานได้เลย) */
+    function toggleChat(forceOpen) {
+      const panel = document.getElementById("chat-panel");
+      if (!panel) return;
+      if (typeof forceOpen === "boolean") {
+        panel.style.display = forceOpen ? "flex" : "none";
+        return;
+      }
+      panel.style.display = panel.style.display === "flex" ? "none" : "flex";
+    }
+
+    function addChatMessage(sender, text) {
+      const box = document.getElementById("chat-messages");
+      if (!box) return;
+      const div = document.createElement("div");
+      div.className = "chat-msg " + (sender === "user" ? "user" : "ai");
+      div.textContent = text;
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function aiAnswer(message) {
+      const kb = (localStorage.getItem(STORAGE_KEY_AI_KB) || "").trim();
+      const lowerMsg = message.toLowerCase();
+      let reply = "";
+
+      if (kb) {
+        const lines = kb.split(/\n+/).filter(l => l.trim());
+        let matched = null;
+        for (const line of lines) {
+          const l = line.toLowerCase();
+          if (lowerMsg && l.includes(lowerMsg.split(" ")[0])) {
+            matched = line;
+            break;
+          }
+        }
+        if (matched) {
+          reply = "จากข้อมูลที่บันทึกไว้ในระบบ AI:\n" + matched;
+        }
+      }
+
+      if (!reply) {
+        reply =
+          "ขอบคุณสำหรับคำถามนะคะ 😊\n" +
+          "ตอนนี้ระบบตัวอย่างยังไม่ได้เชื่อมต่อฐานข้อมูลจริง แต่คุณสามารถดูข้อมูลหลักสูตรและการสมัครเรียนได้ที่เมนูด้านบน หรือโทร 080-459-3311 ค่ะ";
+      }
+
+      setTimeout(() => addChatMessage("ai", reply), 300);
+    }
+    
+    /* ----- ฟังก์ชันสำหรับหน้านี้โดยเฉพาะ ----- */
+    
+    // ฟังก์ชันตัวอย่างสำหรับเลือกคำตอบ
+    function selectAnswer(selectedButton) {
+      // เอา class 'selected' ออกจากปุ่มอื่นในกลุ่มเดียวกัน
+      const optionsContainer = selectedButton.closest('.answer-options');
+      if (!optionsContainer) return;
+      
+      optionsContainer.querySelectorAll('.option').forEach(btn => {
+        btn.classList.remove('selected');
+      });
+      
+      // เพิ่ม class 'selected' ให้ปุ่มที่เพิ่งกด
+      selectedButton.classList.add('selected');
+    }
+    
+
+    /* ----- จบส่วน SCRIPT ที่คัดลอกมา ----- */
+    
+
+    // DOMContentLoaded: นี่คือจุดที่ Script เริ่มทำงานเมื่อหน้าโหลด
+    document.addEventListener("DOMContentLoaded", function() {
+      // หน้านี้ไม่จำเป็นต้องนับ views หรือโหลด student data สำหรับ dashboard
+      // แต่เราต้องเรียกใช้ฟังก์ชันล็อกอินและแชท
+
+      // **สำคัญมาก: เรียกใช้ฟังก์ชันนี้เพื่อตรวจสอบสิทธิ์ทันทีที่หน้าโหลด**
+      updateLockedSections(); 
+
+      // โค้ดสำหรับฟอร์มอื่นๆ (เช่น สมัครเรียน) ไม่มีในหน้านี้
+      // JavaScript จะข้ามไปเองเพราะหา ID ไม่เจอ (เช่น if (regForm))
+
+      // โค้ดสำหรับปุ่ม Login/Logout (สำคัญมาก)
+      const loginBtn = document.getElementById("loginBtn");
+      const logoutBtn = document.getElementById("logoutBtn");
+
+      if (loginBtn) {
+        loginBtn.addEventListener("click", function() {
+          const username = (document.getElementById("loginUser").value || "").trim();
+          const password = (document.getElementById("loginPass").value || "").trim();
+          if (!username || !password) {
+            alert("กรุณากรอกชื่อผู้ใช้และรหัสผ่าน");
+            return;
+          }
+          if (!confirm("ยืนยันการเข้าสู่ระบบหรือไม่?")) {
+            return;
+          }
+
+          let users = getUsers();
+
+          if (users.length === 0) {
+            const creator = {
+              username,
+              displayName: username,
+              password,
+              role: "creator",
+              permissions: {
+                onlineLearning: true,
+                studentStatus: true,
+                certificates: true,
+                studentsDb: true,
+                jobs: true
+              }
+            };
+            users.push(creator);
+            saveUsers(users);
+            setCurrentUser(username);
+            alert("ตั้งค่าผู้ใช้คนแรกเป็น Creator แล้ว");
+          } else {
+            let user = users.find(u => u.username === username && u.password === password);
+            if (!user) {
+              user = {
+                username,
+                displayName: username,
+                password,
+                role: "user",
+                permissions: {
+                  onlineLearning: false,
+                  studentStatus: false,
+                  certificates: false,
+                  studentsDb: false,
+                  jobs: false
+                }
+              };
+              users.push(user);
+              saveUsers(users);
+              alert("สร้างบัญชีผู้ใช้ใหม่แล้ว โปรดติดต่อ Admin เพื่อขอสิทธิ์เข้าระบบต่าง ๆ");
+            }
+            setCurrentUser(username);
+          }
+          
+          // อัปเดตหน้าอีกครั้งหลังล็อกอิน
+          updateLockedSections(); 
+        });
+      }
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", function() {
+          if (!confirm("ต้องการออกจากระบบหรือไม่?")) {
+            return;
+          }
+          setCurrentUser(null);
+          
+          // อัปเดตหน้าอีกครั้งหลังล็อกเอาต์ (หน้าจะถูกล็อก)
+          updateLockedSections(); 
+        });
+      }
+
+      // โค้ดสำหรับ Admin Panel ไม่มีในหน้านี้
+      // โค้ดสำหรับ AI Knowledge Base ไม่มีในหน้านี้
+
+      // โค้ดสำหรับ Chat Widget (สำคัญ)
+      const chatToggleBtn = document.getElementById("chat-toggle-btn");
+      if (chatToggleBtn) {
+        chatToggleBtn.addEventListener("click", () => toggleChat());
+      }
+      const chatSendBtn = document.getElementById("chat-send-btn");
+      const chatInput = document.getElementById("chat-input");
+      if (chatSendBtn && chatInput) {
+        chatSendBtn.addEventListener("click", () => {
+          const msg = chatInput.value.trim();
+          if (!msg) return;
+          addChatMessage("user", msg);
+          chatInput.value = "";
+          aiAnswer(msg);
+        });
+        chatInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            chatSendBtn.click();
+          }
+        });
+      }
+
+      addChatMessage("ai", "สวัสดีค่ะ 👋 ยินดีต้อนรับสู่ระบบทำข้อสอบ\nหากมีปัญหาขัดข้อง กรุณาติดต่อเจ้าหน้าที่ค่ะ");
+    });
+  </script>
+
+</body>
+</html>
