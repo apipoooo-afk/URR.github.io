@@ -479,3 +479,147 @@
 </main>
 </body>
 </html>
+<script>
+  /* ==============================
+     CONFIG LOCALSTORAGE KEY
+     ============================== */
+  const MEMBERS_KEY = "ubr_members";
+  const CURRENT_USER_KEY = "ubr_current_user";
+  const APPLY_KEY = "urr_apply";           // ใบสมัครเรียน
+  const STATS_KEY = "urr_stats";           // สถิติ Dashboard
+
+  /* ==============================
+     โหลดข้อมูล
+     ============================== */
+  function load(key) {
+    try {
+      return JSON.parse(localStorage.getItem(key) || "[]");
+    } catch {
+      return [];
+    }
+  }
+
+  function save(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  /* ==============================
+     ดึงข้อมูลผู้ใช้ปัจจุบัน
+     ============================== */
+  function getCurrentMember() {
+    const id = localStorage.getItem(CURRENT_USER_KEY);
+    if (!id) return null;
+    const members = load(MEMBERS_KEY);
+    return members.find(m => m.email === id || m.citizenId === id) || null;
+  }
+
+  /* ==============================
+     อัปเดตแถบ Login บนสุด
+     ============================== */
+  function updateTopLoginBar() {
+    const user = getCurrentMember();
+    const status = document.getElementById("loginStatusTop");
+    const loginBtn = document.getElementById("loginBtnTop");
+    const logoutBtn = document.getElementById("logoutBtnTop");
+
+    if (!user) {
+      status.textContent = "ยังไม่ได้เข้าสู่ระบบ";
+      loginBtn.style.display = "inline-block";
+      logoutBtn.style.display = "none";
+    } else {
+      status.textContent = "เข้าสู่ระบบแล้ว (" + user.firstName + ")";
+      loginBtn.style.display = "none";
+      logoutBtn.style.display = "inline-block";
+    }
+  }
+
+  document.getElementById("loginBtnTop").onclick = () => {
+    window.location.href = "login.html";
+  };
+
+  document.getElementById("logoutBtnTop").onclick = () => {
+    if (!confirm("ต้องการออกจากระบบหรือไม่?")) return;
+    localStorage.removeItem(CURRENT_USER_KEY);
+    updateTopLoginBar();
+  };
+
+  /* ==============================
+     บันทึกใบสมัครเรียน
+     ============================== */
+  document.getElementById("applyForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData);
+
+    const list = load(APPLY_KEY);
+
+    const item = {
+      id: "APP-" + Date.now(),
+      ...data,
+      createdAt: new Date().toISOString()
+    };
+
+    list.push(item);
+    save(APPLY_KEY, list);
+
+    alert("ส่งใบสมัครเรียบร้อยแล้ว");
+    this.reset();
+
+    updateDashboard();
+  });
+
+  /* ==============================
+     อัปเดต Dashboard สถิติ
+     ============================== */
+  function updateDashboard() {
+    let stats = load(STATS_KEY);
+    if (!stats || typeof stats !== "object") {
+      stats = { views: 0 };
+    }
+
+    // นับจำนวนใบสมัคร
+    const apply = load(APPLY_KEY);
+    const members = load(MEMBERS_KEY);
+
+    document.getElementById("stat-views").textContent = stats.views;
+    document.getElementById("stat-registered").textContent = apply.length;
+    document.getElementById("stat-login").textContent =
+      members.filter(m => m.status === "approved").length;
+
+    // จำลองค่าในอนาคต
+    document.getElementById("stat-learning").textContent = 12;
+    document.getElementById("stat-intern").textContent = 4;
+    document.getElementById("stat-graduated").textContent = 35;
+    document.getElementById("stat-employed").textContent = 19;
+  }
+
+  /* ==============================
+     นับจำนวนเข้าชมเว็บไซต์
+     ============================== */
+  function countView() {
+    let stats = load(STATS_KEY);
+    if (!stats || typeof stats !== "object") {
+      stats = { views: 0 };
+    }
+    stats.views++;
+    save(STATS_KEY, stats);
+  }
+
+  /* ==============================
+     โหลดหน้า
+     ============================== */
+  document.addEventListener("DOMContentLoaded", () => {
+    countView();
+    updateDashboard();
+    updateTopLoginBar();
+  });
+</script>
+
+<footer>
+  © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | โทร 080-459-3311
+</footer>
+
+</main>
+</body>
+</html>
