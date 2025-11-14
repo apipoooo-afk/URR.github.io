@@ -133,4 +133,392 @@
     }
 
     h2.section-title {
-      margin-t
+      margin-top:30px;
+      text-align:center;
+      color:#333;
+    }
+
+    /* สมัครเรียน grid */
+    .register-grid {
+      margin-top:16px;
+      background:white;
+      padding:16px;
+      border-radius:12px;
+      box-shadow:0 2px 6px rgba(0,0,0,0.12);
+      display:grid;
+      grid-template-columns: repeat(5,1fr);
+      gap:10px;
+    }
+    .register-grid input,
+    .register-grid select {
+      width:100%;
+      padding:8px;
+      border-radius:6px;
+      border:1px solid #ccc;
+      font-size:13px;
+      box-sizing:border-box;
+    }
+    .register-submit {
+      grid-column: span 5;
+      text-align:center;
+      margin-top:10px;
+    }
+    .register-submit button {
+      padding:10px 20px;
+      border:none;
+      background:#0d6efd;
+      color:white;
+      border-radius:999px;
+      cursor:pointer;
+      font-size:14px;
+    }
+    .register-submit button:hover {
+      background:#0b57d0;
+    }
+
+    footer {
+      background:#111827;
+      color:white;
+      padding:12px;
+      text-align:center;
+      font-size:12px;
+      margin-top:40px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-main">
+    <img src="https://www.urrschool.com/favicon.ico" alt="โลโก้โรงเรียน">
+    <div>
+      <h1>โรงเรียนอุบลบุรีรักษ์การบริบาล</h1>
+      <p>Ubon Buri Rak Nursing Assistant School</p>
+    </div>
+  </div>
+
+  <nav>
+    <a href="#register-section">สมัครเรียน</a>
+    <a href="courses.html">หลักสูตร</a>
+    <a href="#jobs">งานว่าง</a>
+    <a href="#contact">ติดต่อเรา</a>
+    <a href="dashboard.html">ฐานข้อมูลนักศึกษา</a>
+
+    <!-- ระบบต่าง ๆ -->
+    <a href="online-learning.html">เรียนออนไลน์</a>
+    <a href="learning-class.html">เรียนในห้องเรียน</a>
+    <a href="exam.html">ระบบสอบ</a>
+    <a href="grade.html">ผลการเรียน</a>
+    <a href="payment.html">ชำระค่าเรียน</a>
+    <a href="certificate.html">ใบประกาศ</a>
+    <a href="hour.html">สะสมชั่วโมงเรียน</a>
+    <a href="internship.html">ฝึกงาน</a>
+    <a href="loan.html">ยื่นกู้ กยศ.</a>
+    <a href="job-apply.html">สมัครงาน</a>
+    <a href="ai-faq.html">ถาม–ตอบ อัตโนมัติ</a>
+    <a href="admin.html">Admin</a>
+  </nav>
+
+  <div class="top-bar">
+    <input id="loginUserTop" placeholder="อีเมล / เลขบัตร">
+    <input type="password" id="loginPassTop" placeholder="รหัสผ่าน (≥8)">
+    <button id="loginBtnTop">เข้าสู่ระบบ</button>
+    <button id="logoutBtnTop" style="display:none;">ออกจากระบบ</button>
+
+    <button class="top-link-btn"
+      onclick="window.location.href='login.html#register';">ลงทะเบียน</button>
+
+    <button class="top-link-btn"
+      onclick="window.location.href='login.html#forgot';">ลืมรหัส</button>
+
+    <span id="loginStatusTop">ยังไม่ได้เข้าสู่ระบบ</span>
+  </div>
+</header>
+
+<main>
+
+  <h2 class="section-title">📊 Dashboard ระบบโรงเรียน</h2>
+
+  <div class="dash-grid">
+    <div class="dash-card"><h3>เข้าชมเว็บไซต์</h3><p id="stat-views">0</p></div>
+    <div class="dash-card"><h3>สมัครเรียน</h3><p id="stat-registered">0</p></div>
+    <div class="dash-card"><h3>สมาชิก Login แล้ว</h3><p id="stat-login">0</p></div>
+    <div class="dash-card"><h3>กำลังเรียน</h3><p id="stat-learning">0</p></div>
+    <div class="dash-card"><h3>ฝึกงาน</h3><p id="stat-intern">0</p></div>
+    <div class="dash-card"><h3>จบการศึกษา</h3><p id="stat-graduated">0</p></div>
+    <div class="dash-card"><h3>บรรจุงานแล้ว</h3><p id="stat-employed">0</p></div>
+  </div>
+
+  <!-- สมัครเรียน -->
+  <h2 class="section-title" id="register-section">✏️ สมัครเรียน</h2>
+
+  <form id="applyForm" class="register-grid">
+
+    <!-- แถวที่ 1 -->
+    <input name="fname" placeholder="ชื่อ" required>
+    <input name="lname" placeholder="นามสกุล" required>
+    <input name="age" placeholder="อายุ" required>
+    <select name="gender" required>
+      <option value="">เพศ</option>
+      <option>ชาย</option>
+      <option>หญิง</option>
+      <option>อื่นๆ</option>
+    </select>
+    <input name="education" placeholder="วุฒิการศึกษา" required>
+
+    <!-- แถวที่ 2 -->
+    <input name="course" placeholder="หลักสูตรที่สนใจ" required>
+    <input name="phone" placeholder="เบอร์โทร" required>
+    <input name="line" placeholder="ไลน์" required>
+    <input name="facebook" placeholder="Facebook" required>
+    <input name="address" placeholder="ที่อยู่" required>
+
+    <div class="register-submit">
+      <button type="submit">ส่งใบสมัคร</button>
+    </div>
+  </form>
+
+  <hr style="margin:40px 0; opacity:0.2;">
+
+  <!-- งานว่าง -->
+  <h2 class="section-title" id="jobs">💼 ตำแหน่งงานว่าง</h2>
+
+  <div style="display:flex; flex-wrap:wrap; gap:12px;">
+    <div style="
+      flex:1 1 240px; 
+      background:white;
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+      <h3 style="margin:0; font-size:17px; color:#0d6efd;">ผู้ช่วยพยาบาล (NA)</h3>
+      <p style="font-size:13px; color:#666; margin-top:6px;">
+        โรงพยาบาลเอกชน / เงินเดือน 12,000–18,000 บาท
+      </p>
+      <button onclick="window.location.href='job-apply.html'"
+        style="
+          margin-top:10px;
+          width:100%;
+          padding:8px;
+          border:none;
+          background:#0d6efd;
+          color:white;
+          border-radius:8px;
+          cursor:pointer;">
+        สมัครตำแหน่งนี้
+      </button>
+    </div>
+
+    <div style="
+      flex:1 1 240px; 
+      background:white;
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+      <h3 style="margin:0; font-size:17px; color:#0d6efd;">ผู้ช่วยเภสัชกร</h3>
+      <p style="font-size:13px; color:#666; margin-top:6px;">
+        ร้านขายยา / เงินเดือน 13,000–20,000 บาท
+      </p>
+      <button onclick="window.location.href='job-apply.html'"
+        style="
+          margin-top:10px;
+          width:100%;
+          padding:8px;
+          border:none;
+          background:#0d6efd;
+          color:white;
+          border-radius:8px;
+          cursor:pointer;">
+        สมัครตำแหน่งนี้
+      </button>
+    </div>
+
+    <div style="
+      flex:1 1 240px; 
+      background:white;
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+      <h3 style="margin:0; font-size:17px; color:#0d6efd;">ผู้ดูแลผู้สูงอายุ</h3>
+      <p style="font-size:13px; color:#666; margin-top:6px;">
+        ศูนย์ดูแลผู้สูงอายุ / เงินเดือน 15,000–22,000 บาท
+      </p>
+      <button onclick="window.location.href='job-apply.html'"
+        style="
+          margin-top:10px;
+          width:100%;
+          padding:8px;
+          border:none;
+          background:#0d6efd;
+          color:white;
+          border-radius:8px;
+          cursor:pointer;">
+        สมัครตำแหน่งนี้
+      </button>
+    </div>
+  </div>
+
+  <!-- ติดต่อเรา -->
+  <h2 class="section-title" id="contact">📞 ติดต่อโรงเรียน</h2>
+
+  <div style="
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.12);
+    line-height:1.6;">
+    <strong>โรงเรียนอุบลบุรีรักษ์การบริบาล</strong><br>
+    115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000<br>
+    📞 โทร: <a href="tel:0804593311">080-459-3311</a><br>
+    💬 ไลน์: <a href="https://line.me/ti/p/urrnice1" target="_blank">urrnice1</a><br>
+    🌐 Facebook: 
+    <a href="https://www.facebook.com/khru.nis.xubl.buri.raks.kar.bribal" target="_blank">
+      คลิกเปิด Facebook
+    </a>
+  </div>
+
+</main>
+
+<footer>
+  © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | โทร 080-459-3311
+</footer>
+
+<script>
+  // ใช้ key เดียวกับ login.html
+  const CURRENT_USER_KEY = "urr_current_user";
+  const APPLY_KEY = "urr_apply";
+  const STATS_KEY = "urr_stats";
+
+  function load(key, defaultValue) {
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) return defaultValue;
+      return JSON.parse(raw);
+    } catch {
+      return defaultValue;
+    }
+  }
+
+  function save(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  function getCurrentMember() {
+    try {
+      return JSON.parse(localStorage.getItem(CURRENT_USER_KEY) || "null");
+    } catch {
+      return null;
+    }
+  }
+
+  function updateTopLoginBar() {
+    const user = getCurrentMember();
+    const status = document.getElementById("loginStatusTop");
+    const loginBtn = document.getElementById("loginBtnTop");
+    const logoutBtn = document.getElementById("logoutBtnTop");
+
+    if (!status || !loginBtn || !logoutBtn) return;
+
+    if (!user) {
+      status.textContent = "ยังไม่ได้เข้าสู่ระบบ";
+      loginBtn.style.display = "inline-block";
+      logoutBtn.style.display = "none";
+    } else {
+      const name = (user.firstName || "") + (user.lastName ? " " + user.lastName : "");
+      status.textContent = "เข้าสู่ระบบแล้ว (" + (name || user.email || "User") + ")";
+      loginBtn.style.display = "none";
+      logoutBtn.style.display = "inline-block";
+    }
+  }
+
+  function updateDashboard() {
+    let stats = load(STATS_KEY, { views: 0 });
+    if (typeof stats !== "object" || stats === null) {
+      stats = { views: 0 };
+      save(STATS_KEY, stats);
+    }
+
+    const apply = load(APPLY_KEY, []);
+    const currentUser = getCurrentMember();
+
+    const v = document.getElementById("stat-views");
+    const r = document.getElementById("stat-registered");
+    const l = document.getElementById("stat-login");
+    const learn = document.getElementById("stat-learning");
+    const intern = document.getElementById("stat-intern");
+    const grad = document.getElementById("stat-graduated");
+    const emp = document.getElementById("stat-employed");
+
+    if (v) v.textContent = stats.views ?? 0;
+    if (r) r.textContent = apply.length;
+    if (l) l.textContent = currentUser ? 1 : 0;
+
+    // ค่าอื่นตอนนี้จำลองไว้ก่อน
+    if (learn) learn.textContent = 12;
+    if (intern) intern.textContent = 4;
+    if (grad) grad.textContent = 35;
+    if (emp) emp.textContent = 19;
+  }
+
+  function countView() {
+    let stats = load(STATS_KEY, { views: 0 });
+    if (typeof stats !== "object" || stats === null) {
+      stats = { views: 0 };
+    }
+    stats.views = (stats.views || 0) + 1;
+    save(STATS_KEY, stats);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // ปุ่มล็อกอิน / ล็อกเอาต์ด้านบน
+    const loginBtnTop = document.getElementById("loginBtnTop");
+    const logoutBtnTop = document.getElementById("logoutBtnTop");
+
+    if (loginBtnTop) {
+      loginBtnTop.onclick = () => {
+        // ให้ไปจัดการล็อกอินที่หน้า login.html
+        window.location.href = "login.html";
+      };
+    }
+
+    if (logoutBtnTop) {
+      logoutBtnTop.onclick = () => {
+        if (!confirm("ต้องการออกจากระบบหรือไม่?")) return;
+        localStorage.removeItem(CURRENT_USER_KEY);
+        updateTopLoginBar();
+        updateDashboard();
+      };
+    }
+
+    // ฟอร์มสมัครเรียน
+    const applyForm = document.getElementById("applyForm");
+    if (applyForm) {
+      applyForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        const data = Object.fromEntries(formData);
+
+        const list = load(APPLY_KEY, []);
+        const item = {
+          id: "APP-" + Date.now(),
+          ...data,
+          createdAt: new Date().toISOString()
+        };
+        list.push(item);
+        save(APPLY_KEY, list);
+
+        alert("ส่งใบสมัครเรียบร้อยแล้ว");
+        this.reset();
+        updateDashboard();
+      });
+    }
+
+    // นับจำนวนเข้าชม และอัปเดต Dashboard + bar ด้านบน
+    countView();
+    updateDashboard();
+    updateTopLoginBar();
+  });
+</script>
+
+</body>
+</html>
