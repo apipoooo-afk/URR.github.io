@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>หลักสูตรที่เปิดสอน | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
 
+  <!-- ถ้ามีไฟล์ CSS เพิ่มเติมของเดิม สามารถคงไว้ได้ -->
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="exam.css">
 
@@ -50,6 +51,7 @@
       flex-wrap: wrap;
     }
 
+    /* ใช้โลโก้จากเว็บ หรือเปลี่ยนเป็นไฟล์ logo.png ของคุณก็ได้ */
     .logo {
       height: 48px;
       width: 48px;
@@ -70,7 +72,7 @@
       opacity: 0.96;
     }
 
-    /* NAV – ลิงก์กลับ index */
+    /* NAV – เมนูเชื่อมกลับ index.html */
     nav {
       display: flex;
       flex-wrap: wrap;
@@ -97,7 +99,7 @@
       box-shadow: 0 3px 8px rgba(0,0,0,0.15);
     }
 
-    /* LOGIN BAR (แชร์ UX เดิม แต่ไม่บังคับใช้สิทธิ์ในหน้านี้) */
+    /* LOGIN BAR (ใช้ localStorage เดียวกับ index.html) */
     .top-bar {
       display: flex;
       justify-content: center;
@@ -219,7 +221,7 @@
       color: #495057;
     }
 
-    /* แผงหลักสูตร */
+    /* Layout หลักสูตร */
     .course-layout {
       display: grid;
       grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr);
@@ -347,6 +349,7 @@
   <!-- HEADER + MENU + LOGIN (เชื่อมกลับ index.html) -->
   <header>
     <div class="header-main">
+      <!-- สามารถเปลี่ยน src เป็น logo.png ในโฟลเดอร์ของคุณได้ -->
       <img src="https://www.urrschool.com/favicon.ico" alt="โลโก้โรงเรียนอุบลบุรีรักษ์การบริบาล" class="logo">
       <div class="header-text">
         <h1>โรงเรียนอุบลบุรีรักษ์การบริบาล</h1>
@@ -528,10 +531,10 @@
           </ul>
           <p style="margin-top:8px;">
             หากยังไม่แน่ใจ สามารถติดต่อครูแนะแนวของโรงเรียนได้ที่เบอร์ 080-459-3311
-            หรือสอบถามผ่านกล่อง Chat มุมล่างขวาของหน้าเว็บไซต์ได้ตลอดเวลา
+            หรือสมัครเรียนเพื่อจองสิทธิ์ไว้ก่อนได้
           </p>
           <div style="margin-top:10px; text-align:center;">
-            <a href="index.html#contact" class="btn">ปรึกษาเพิ่มเติม</a>
+            <a href="index.html#register-section" class="btn">สมัคร/ปรึกษาเพิ่มเติม</a>
           </div>
         </aside>
       </div>
@@ -617,7 +620,7 @@
       }
     }
 
-    // ส่วนล็อกอิน: ให้แสดงสถานะสอดคล้องกับ index (ใช้ localStorage key เดียวกัน)
+    // ใช้ระบบ login เดียวกับ index.html
     const STORAGE_KEY_USERS = "ubr_users";
     const STORAGE_KEY_CUR_USER = "ubr_current_user";
 
@@ -703,7 +706,7 @@
           } else {
             let user = users.find(u => u.username === username && u.password === password);
             if (!user) {
-              alert("ไม่พบบัญชีผู้ใช้ หรือรหัสผ่านไม่ถูกต้อง (สมัคร/แก้ไขสิทธิ์ผ่านหน้า index)");
+              alert("ไม่พบบัญชีผู้ใช้ หรือรหัสผ่านไม่ถูกต้อง (จัดการบัญชีผ่านหน้า index)");
               return;
             }
             setCurrentUser(username);
