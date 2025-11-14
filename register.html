@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ลงทะเบียนสมาชิก | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>สมัครสมาชิก | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
 
   <style>
     :root {
-      --pink: #ff6fb5;
-      --blue: #0d6efd;
-      --green: #20c997;
-      --bg: #f9f5ff;
-      --card: #ffffff;
+      --pink:#ff6fb5;
+      --blue:#0d6efd;
+      --green:#20c997;
+      --card:#ffffff;
+      --bg:#f9fafb;
     }
-    * { box-sizing: border-box; }
+
+    * { box-sizing:border-box; }
 
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
+      margin:0;
+      font-family:Arial,sans-serif;
       background:
         radial-gradient(circle at top left,#ffe0f3 0%,transparent 45%),
         radial-gradient(circle at top right,#e0f2ff 0%,transparent 50%),
         radial-gradient(circle at bottom,#e7fff4 0%,#f9fafb 60%);
-      color:#212529;
+      color:#111827;
     }
 
     header {
-      background: linear-gradient(120deg,#ff6fb5,#0d6efd,#20c997);
-      color: white;
-      padding: 14px 16px;
+      background:linear-gradient(120deg,#ff6fb5,#0d6efd,#20c997);
+      color:white;
+      padding:12px 16px;
       box-shadow:0 2px 10px rgba(0,0,0,0.18);
     }
     .header-main {
@@ -43,12 +44,12 @@
       border-radius:50%;
       background:white;
       padding:4px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.25);
       object-fit:contain;
+      box-shadow:0 2px 6px rgba(0,0,0,0.25);
     }
     .header-text h1 {
       margin:0;
-      font-size:22px;
+      font-size:20px;
     }
     .header-text p {
       margin:0;
@@ -57,18 +58,19 @@
     }
 
     nav {
-      margin-top:8px;
+      margin-top:6px;
       display:flex;
       flex-wrap:wrap;
       gap:6px;
+      justify-content:center;
     }
     nav a {
       color:white;
-      text-decoration:none;
-      background:rgba(255,255,255,0.16);
-      border-radius:999px;
+      background:rgba(255,255,255,0.2);
       padding:4px 10px;
+      border-radius:999px;
       font-size:12px;
+      text-decoration:none;
       border:1px solid rgba(255,255,255,0.3);
     }
     nav a:hover {
@@ -77,30 +79,29 @@
     }
 
     main {
-      max-width: 900px;
-      margin: 24px auto 40px;
-      padding: 0 12px;
+      max-width:760px;
+      margin:26px auto 36px;
+      padding:0 16px;
     }
 
     .card {
       background:var(--card);
-      border-radius:18px;
-      padding:18px 18px 20px;
-      box-shadow:0 4px 14px rgba(15,23,42,0.08);
+      border-radius:20px;
+      padding:22px 20px 24px;
+      box-shadow:0 4px 16px rgba(15,23,42,0.08);
     }
 
     h2 {
-      margin-top:0;
+      margin:4px 0 2px;
       text-align:center;
-      font-size:20px;
-      color:#333;
+      font-size:21px;
+      color:#111827;
     }
     p.sub {
+      margin:0 0 18px;
       text-align:center;
       font-size:13px;
-      color:#555;
-      margin-top:4px;
-      margin-bottom:12px;
+      color:#4b5563;
     }
 
     .form-row {
@@ -112,106 +113,114 @@
       margin-bottom:10px;
       flex:1 1 100%;
     }
-    .form-group.half {
+    .half {
       flex:1 1 calc(50% - 5px);
     }
 
     label {
       display:block;
-      font-weight:bold;
       margin-bottom:4px;
+      font-weight:bold;
       font-size:13px;
     }
+
     input[type="text"],
     input[type="email"],
     input[type="tel"],
     input[type="password"] {
       width:100%;
-      padding:8px 10px;
-      border-radius:8px;
-      border:1px solid #d0d7e2;
+      padding:9px 10px;
+      border-radius:10px;
+      border:1px solid #d1d5db;
       font-size:13px;
     }
 
     .note {
       font-size:11px;
-      color:#666;
-      margin-top:2px;
-    }
-
-    .btn-main {
-      width:100%;
-      padding:10px;
-      border:none;
-      border-radius:999px;
-      font-size:14px;
-      cursor:pointer;
-      background:linear-gradient(135deg,#20c997,#0d6efd);
-      color:white;
-      font-weight:bold;
-      box-shadow:0 4px 12px rgba(32,201,151,0.45);
-      margin-top:8px;
-    }
-    .btn-main:hover { transform:translateY(-1px); }
-
-    .btn-ghost {
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px dashed #ff6fb5;
-      background:#fff7fc;
-      color:#ff2f92;
-      font-size:11px;
-      cursor:pointer;
+      color:#6b7280;
+      margin-top:3px;
     }
 
     .captcha-box {
       display:flex;
       align-items:center;
       gap:8px;
-      margin-top:4px;
+      margin-top:3px;
     }
     .captcha-text {
-      padding:6px 10px;
-      border-radius:8px;
+      padding:6px 12px;
+      border-radius:10px;
       background:#111827;
-      color:#f9fafb;
+      color:#e5e7eb;
       letter-spacing:2px;
       font-weight:bold;
       font-size:14px;
     }
+    .btn-ghost {
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px dashed #ff6fb5;
+      background:#fff7fb;
+      font-size:12px;
+      cursor:pointer;
+      color:#be185d;
+    }
+
+    .btn-main {
+      width:100%;
+      padding:11px;
+      border:none;
+      border-radius:999px;
+      font-size:15px;
+      font-weight:bold;
+      cursor:pointer;
+      background:linear-gradient(135deg,#20c997,#0d6efd);
+      color:white;
+      box-shadow:0 4px 16px rgba(32,201,151,0.45);
+      margin-top:8px;
+    }
+    .btn-main:hover {
+      transform:translateY(-1px);
+    }
 
     .msg {
-      font-size:12px;
-      margin-top:6px;
+      margin-top:10px;
+      font-size:13px;
+      text-align:center;
     }
     .msg.error {
-      color:#c1121f;
+      color:#b91c1c;
       font-weight:bold;
     }
     .msg.success {
-      color:#0f766e;
+      color:#047857;
       font-weight:bold;
     }
 
-    .link-small {
-      font-size:12px;
+    .links {
+      margin-top:12px;
+      text-align:center;
+      font-size:13px;
+    }
+    .links a {
       color:#0d6efd;
       text-decoration:none;
-      display:inline-block;
-      margin-top:8px;
+      margin:0 4px;
     }
-    .link-small:hover { text-decoration:underline; }
+    .links a:hover {
+      text-decoration:underline;
+    }
 
     footer {
       text-align:center;
       padding:12px;
-      background:#343a40;
-      color:white;
+      background:#111827;
+      color:#e5e7eb;
       font-size:12px;
     }
 
     @media (max-width:600px) {
-      .form-group.half { flex:1 1 100%; }
+      .half { flex:1 1 100%; }
     }
   </style>
 </head>
@@ -219,17 +228,17 @@
 
 <header>
   <div class="header-main">
-    <img src="https://www.urrschool.com/favicon.ico" alt="โลโก้โรงเรียน" class="logo">
+    <img src="https://www.urrschool.com/favicon.ico" alt="URR Logo" class="logo" />
     <div class="header-text">
-      <h1>โรงเรียนอุบลบุรีรักษ์การบริบาล</h1>
-      <p>ระบบลงทะเบียนสมาชิกเพื่อเข้าใช้งานระบบออนไลน์</p>
+      <h1>สมัครสมาชิกระบบ URR School</h1>
+      <p>สำหรับใช้เข้าสู่ระบบเรียนออนไลน์ / ระบบนักศึกษา</p>
     </div>
   </div>
   <nav>
     <a href="index.html">หน้าแรก</a>
     <a href="login.html">เข้าสู่ระบบ</a>
-    <a href="courses.html">หลักสูตร</a>
-    <a href="dashboard.html">ฐานข้อมูล (ผู้บริหาร)</a>
+    <a href="register.html">สมัครสมาชิก</a>
+    <a href="forgot.html">ลืมรหัสผ่าน</a>
   </nav>
 </header>
 
@@ -237,85 +246,100 @@
   <div class="card">
     <h2>ลงทะเบียนสมาชิกใหม่</h2>
     <p class="sub">
-      กรอกข้อมูลให้ครบถ้วน ระบบจะสร้างบัญชีใน Firebase และบันทึกข้อมูลสมาชิกในฐานข้อมูล Firestore<br>
-      สถานะเริ่มต้นจะเป็น <strong>รออนุมัติ (pending)</strong> โดยผู้ดูแล (Admin)
+      ใช้อีเมลจริงในการสมัคร ระบบจะสร้างบัญชีใน Firebase และบันทึกข้อมูลสมาชิกใน Firestore <br>
+      สถานะเริ่มต้นคือ <strong>รออนุมัติ (Pending)</strong> ให้ Admin กำหนดสิทธิ์ใช้งานภายหลัง
     </p>
 
-    <div id="regMsg" class="msg"></div>
+    <div id="msg" class="msg"></div>
 
-    <form id="registerForm">
+    <form id="regForm">
       <div class="form-row">
         <div class="form-group half">
           <label for="firstName">ชื่อ</label>
-          <input type="text" id="firstName" required>
+          <input type="text" id="firstName" required />
         </div>
         <div class="form-group half">
           <label for="lastName">นามสกุล</label>
-          <input type="text" id="lastName" required>
+          <input type="text" id="lastName" required />
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="email">อีเมล (ใช้สำหรับเข้าสู่ระบบ)</label>
-        <input type="email" id="email" required>
-      </div>
-
-      <div class="form-group">
-        <label for="phone">หมายเลขโทรศัพท์</label>
-        <input type="tel" id="phone" required>
+      <div class="form-row">
+        <div class="form-group half">
+          <label for="email">อีเมล</label>
+          <input type="email" id="email" required />
+          <div class="note">ใช้สำหรับเข้าสู่ระบบ และรับลิงก์รีเซ็ตรหัสผ่าน</div>
+        </div>
+        <div class="form-group half">
+          <label for="phone">เบอร์โทรศัพท์</label>
+          <input type="tel" id="phone" required />
+        </div>
       </div>
 
       <div class="form-group">
         <label for="citizenId">เลขบัตรประชาชน (ถ้ามี)</label>
-        <input type="text" id="citizenId" placeholder="13 หลัก (ไม่บังคับ)">
-      </div>
-
-      <div class="form-group">
-        <label>ทดสอบว่าเป็นมนุษย์</label>
-        <div class="captcha-box">
-          <span id="captchaText" class="captcha-text">!@#$</span>
-          <button type="button" class="btn-ghost" id="btnRefreshCaptcha">สุ่มใหม่</button>
-        </div>
-        <input type="text" id="captchaInput" placeholder="พิมพ์อักขระตามด้านบน" required>
-        <div class="note">ใช้ตัวอักษรพิเศษ 4 ตัว เช่น !@#$, %?*& ฯลฯ</div>
+        <input type="text" id="citizenId" placeholder="13 หลัก" />
+        <div class="note">ใช้เชื่อมกับระบบภายใน เช่น ผลการเรียน / ใบประกาศ</div>
       </div>
 
       <div class="form-row">
         <div class="form-group half">
           <label for="password">รหัสผ่าน</label>
-          <input type="password" id="password" required>
-          <div class="note">ไม่น้อยกว่า 8 ตัว และต้องมีตัวอักษรอย่างน้อย 1 ตัว (a-z หรือ A-Z)</div>
+          <input type="password" id="password" required />
+          <div class="note">อย่างน้อย 8 ตัว และต้องมีตัวอักษรอย่างน้อย 1 ตัว</div>
         </div>
         <div class="form-group half">
           <label for="password2">ยืนยันรหัสผ่าน</label>
-          <input type="password" id="password2" required>
+          <input type="password" id="password2" required />
         </div>
       </div>
 
-      <button type="submit" class="btn-main">ส่งข้อมูลลงทะเบียน</button>
+      <div class="form-group">
+        <label>ทดสอบว่าเป็นมนุษย์ (CAPTCHA)</label>
+        <div class="captcha-box">
+          <span id="captchaText" class="captcha-text">!@#$</span>
+          <button type="button" class="btn-ghost" id="btnCaptcha">สุ่มใหม่</button>
+        </div>
+        <input type="text" id="captchaInput" placeholder="พิมพ์อักขระตามที่เห็นด้านบน" />
+      </div>
+
+      <button type="submit" class="btn-main">ส่งข้อมูลสมัครสมาชิก</button>
     </form>
 
-    <a href="login.html" class="link-small">← มีบัญชีอยู่แล้ว? ไปหน้าเข้าสู่ระบบ</a>
+    <div class="links">
+      มีบัญชีอยู่แล้ว?
+      <a href="login.html">เข้าสู่ระบบ</a> ·
+      <a href="forgot.html">ลืมรหัสผ่าน</a>
+    </div>
   </div>
 </main>
 
 <footer>
-  © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | ระบบลงทะเบียนสมาชิกเชื่อมต่อ Firebase
+  © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | ระบบสมัครสมาชิกด้วย Firebase
 </footer>
 
-<!-- ระบบลงทะเบียน (เชื่อม Firebase) -->
+<!-- Firebase + Register Logic -->
 <script type="module">
-  // ===== Firebase SDK =====
+  // Firebase SDK (ใช้ตัวเดียวกับที่พี่ตั้งค่าไว้)
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
-  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    sendEmailVerification
+  } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
   import {
     getFirestore,
     doc,
     setDoc,
+    collection,
+    query,
+    where,
+    getDocs,
     serverTimestamp
   } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
-  // ===== Firebase Config ของพี่ =====
+  // === Firebase Config ของ URR School ===
   const firebaseConfig = {
     apiKey: "AIzaSyBhlCI3LfdCnOJzrTbK59nxL-77VyF9Mm0",
     authDomain: "urrschool-system.firebaseapp.com",
@@ -326,133 +350,163 @@
     measurementId: "G-GHLCDECTDF"
   };
 
-  // ===== Initialize Firebase =====
   const app  = initializeApp(firebaseConfig);
   const auth = getAuth(app);
   const db   = getFirestore(app);
 
-  console.log("✅ Firebase ready for registration");
+  function showMsg(text, type = "") {
+    const el = document.getElementById("msg");
+    el.textContent = text;
+    el.className = "msg " + (type || "");
+  }
 
-  // ===== Utils =====
   function generateCaptcha() {
     const chars = "!@#$%^&*?";
-    let out = "";
+    let s = "";
     for (let i = 0; i < 4; i++) {
-      out += chars.charAt(Math.floor(Math.random() * chars.length));
+      s += chars.charAt(Math.floor(Math.random() * chars.length));
     }
-    return out;
+    return s;
   }
 
-  function validatePasswordRule(pw) {
+  function validatePassword(pw) {
     if (!pw || pw.length < 8) return false;
-    return /[A-Za-z]/.test(pw); // ต้องมีตัวอักษรอย่างน้อย 1 ตัว
+    return /[A-Za-z]/.test(pw);
   }
 
-  function showMsg(text, type = "") {
-    const box = document.getElementById("regMsg");
-    if (!box) return;
-    box.textContent = text;
-    box.className = "msg " + (type === "error" ? "error" : type === "success" ? "success" : "");
+  // ตรวจว่า citizenId ซ้ำหรือไม่
+  async function citizenIdExists(cid) {
+    if (!cid) return false;
+    const qRef = query(
+      collection(db, "members"),
+      where("citizenId", "==", cid)
+    );
+    const snap = await getDocs(qRef);
+    return !snap.empty;
   }
 
-  // ===== DOM Ready =====
   document.addEventListener("DOMContentLoaded", () => {
-    const captchaTextEl = document.getElementById("captchaText");
-    const btnRefreshCaptcha = document.getElementById("btnRefreshCaptcha");
-    const form = document.getElementById("registerForm");
+    const captchaTextEl   = document.getElementById("captchaText");
+    const captchaInputEl  = document.getElementById("captchaInput");
+    const btnCaptcha      = document.getElementById("btnCaptcha");
+    const regForm         = document.getElementById("regForm");
 
-    // set initial captcha
-    if (captchaTextEl) {
-      captchaTextEl.textContent = generateCaptcha();
-    }
+    // ตั้งค่า captcha เริ่มต้น
+    let currentCaptcha = generateCaptcha();
+    captchaTextEl.textContent = currentCaptcha;
 
-    if (btnRefreshCaptcha && captchaTextEl) {
-      btnRefreshCaptcha.addEventListener("click", () => {
-        captchaTextEl.textContent = generateCaptcha();
-      });
-    }
+    btnCaptcha.addEventListener("click", () => {
+      currentCaptcha = generateCaptcha();
+      captchaTextEl.textContent = currentCaptcha;
+      captchaInputEl.value = "";
+    });
 
-    if (form) {
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        showMsg("");
+    regForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      showMsg("");
 
-        const firstName = document.getElementById("firstName").value.trim();
-        const lastName  = document.getElementById("lastName").value.trim();
-        const email     = document.getElementById("email").value.trim();
-        const phone     = document.getElementById("phone").value.trim();
-        const citizenId = document.getElementById("citizenId").value.trim();
-        const capIn     = document.getElementById("captchaInput").value.trim();
-        const capTx     = captchaTextEl ? captchaTextEl.textContent.trim() : "";
-        const pw1       = document.getElementById("password").value;
-        const pw2       = document.getElementById("password2").value;
+      const firstName = document.getElementById("firstName").value.trim();
+      const lastName  = document.getElementById("lastName").value.trim();
+      const email     = document.getElementById("email").value.trim();
+      const phone     = document.getElementById("phone").value.trim();
+      const citizenId = document.getElementById("citizenId").value.trim();
+      const pw1       = document.getElementById("password").value;
+      const pw2       = document.getElementById("password2").value;
+      const capIn     = captchaInputEl.value.trim();
 
-        // ตรวจข้อมูลเบื้องต้น
-        if (!firstName || !lastName || !email || !phone) {
-          showMsg("กรุณากรอกข้อมูลให้ครบถ้วน", "error");
+      // ตรวจสอบเบื้องต้น
+      if (!firstName || !lastName || !email || !phone) {
+        showMsg("กรุณากรอกข้อมูลให้ครบถ้วน", "error");
+        return;
+      }
+
+      if (citizenId && citizenId.length !== 13) {
+        showMsg("เลขบัตรประชาชนต้องมี 13 หลัก หรือเว้นว่าง", "error");
+        return;
+      }
+
+      if (!validatePassword(pw1)) {
+        showMsg("รหัสผ่านต้องไม่น้อยกว่า 8 ตัว และมีตัวอักษรอย่างน้อย 1 ตัว", "error");
+        return;
+      }
+
+      if (pw1 !== pw2) {
+        showMsg("ยืนยันรหัสผ่านไม่ตรงกัน", "error");
+        return;
+      }
+
+      if (capIn !== currentCaptcha) {
+        showMsg("ตัวอักขระ CAPTCHA ไม่ตรงกับที่แสดง", "error");
+        return;
+      }
+
+      try {
+        showMsg("กำลังตรวจสอบและสร้างบัญชี โปรดรอ...", "");
+
+        // เช็ค citizenId ซ้ำ (ถ้ามี)
+        if (citizenId && await citizenIdExists(citizenId)) {
+          showMsg("เลขบัตรประชาชนนี้มีอยู่ในระบบแล้ว", "error");
           return;
         }
 
-        if (capIn !== capTx) {
-          showMsg("ตัวอักขระพิเศษไม่ตรงกับที่แสดง กรุณาลองใหม่", "error");
-          return;
-        }
+        // สร้างผู้ใช้ใน Firebase Auth
+        const cred = await createUserWithEmailAndPassword(auth, email, pw1);
+        const user = cred.user;
 
-        if (!validatePasswordRule(pw1)) {
-          showMsg("รหัสผ่านต้องไม่น้อยกว่า 8 ตัว และมีตัวอักษรอย่างน้อย 1 ตัว", "error");
-          return;
-        }
-        if (pw1 !== pw2) {
-          showMsg("ยืนยันรหัสผ่านไม่ตรงกัน", "error");
-          return;
-        }
+        // บันทึก profile ใน Firestore (collection: members, doc = uid)
+        const profile = {
+          uid: user.uid,
+          firstName,
+          lastName,
+          email,
+          phone,
+          citizenId: citizenId || null,
+          status: "pending",     // ให้ Admin อนุมัติภายหลัง
+          role: "user",
+          createdAt: serverTimestamp(),
+          approvedBy: null,
+          approvedAt: null
+        };
 
-        showMsg("กำลังลงทะเบียน... กรุณารอสักครู่", "");
+        await setDoc(doc(db, "members", user.uid), profile);
 
+        // ส่งอีเมลยืนยัน (ถ้าต้องการ)
         try {
-          // 1) สร้างผู้ใช้ใน Firebase Auth
-          const cred = await createUserWithEmailAndPassword(auth, email, pw1);
-          const user = cred.user;
-
-          // 2) บันทึกข้อมูลสมาชิกใน Firestore
-          const memberDoc = {
-            uid: user.uid,
-            firstName,
-            lastName,
-            email,
-            phone,
-            citizenId: citizenId || null,
-            status: "pending",      // รอ Admin อนุมัติ
-            role: "user",
-            createdAt: serverTimestamp(),
-            approvedBy: null,
-            approvedAt: null
-          };
-
-          await setDoc(doc(db, "members", user.uid), memberDoc);
-
-          showMsg("ลงทะเบียนสำเร็จ! ระบบได้บันทึกข้อมูลแล้ว และรอการอนุมัติจาก Admin", "success");
-
-          // รีเซ็ตฟอร์ม + Captcha ใหม่
-          form.reset();
-          if (captchaTextEl) captchaTextEl.textContent = generateCaptcha();
-
-        } catch (err) {
-          console.error(err);
-          let msg = "เกิดข้อผิดพลาดในการลงทะเบียน";
-
-          if (err.code === "auth/email-already-in-use") {
-            msg = "อีเมลนี้ถูกใช้ลงทะเบียนแล้ว";
-          } else if (err.code === "auth/invalid-email") {
-            msg = "รูปแบบอีเมลไม่ถูกต้อง";
-          } else if (err.code === "auth/weak-password") {
-            msg = "รหัสผ่านอ่อนเกินไป กรุณาตั้งรหัสให้ปลอดภัยมากขึ้น";
-          }
-
-          showMsg(msg, "error");
+          await sendEmailVerification(user);
+        } catch (eVerify) {
+          console.warn("ส่งอีเมลยืนยันไม่ได้ (ไม่ critical):", eVerify);
         }
-      });
-    }
+
+        showMsg(
+          "ลงทะเบียนสำเร็จ! กรุณาตรวจสอบอีเมลเพื่อยืนยันตัวตน และรอให้ Admin อนุมัติสิทธิ์ก่อนเข้าสู่ระบบ",
+          "success"
+        );
+
+        regForm.reset();
+        currentCaptcha = generateCaptcha();
+        captchaTextEl.textContent = currentCaptcha;
+        captchaInputEl.value = "";
+
+        // อาจ redirect ไปหน้า login ภายหลังเล็กน้อย
+        setTimeout(() => {
+          window.location.href = "login.html";
+        }, 2500);
+
+      } catch (err) {
+        console.error(err);
+        let msg = "ไม่สามารถสมัครสมาชิกได้";
+
+        if (err.code === "auth/email-already-in-use") {
+          msg = "อีเมลนี้ถูกใช้งานในระบบแล้ว";
+        } else if (err.code === "auth/invalid-email") {
+          msg = "รูปแบบอีเมลไม่ถูกต้อง";
+        } else if (err.code === "auth/weak-password") {
+          msg = "รหัสผ่านไม่รัดกุม (สั้นเกินไป)";
+        }
+
+        showMsg(msg, "error");
+      }
+    });
   });
 </script>
 
