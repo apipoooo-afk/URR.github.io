@@ -1,76 +1,728 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<title>หลักสูตรทั้งหมด | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
-<style>
-  body { font-family:Arial; padding:20px; background:#f7f9fc; }
-  h1 { color:#0055cc; }
-  .course-box {
-    background:#fff;
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:15px;
-    box-shadow:0 2px 8px rgba(0,0,0,0.08);
-  }
-  .course-title {
-    font-size:20px;
-    font-weight:bold;
-    color:#0055cc;
-    text-decoration:none;
-  }
-  .course-title:hover { text-decoration:underline; }
-  .sub { color:#666; font-size:14px; margin:4px 0; }
-  .btn {
-    display:inline-block;
-    padding:8px 14px;
-    background:#28a745;
-    color:white;
-    border-radius:6px;
-    text-decoration:none;
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>หลักสูตรที่เปิดสอน | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="exam.css">
+
+  <style>
+    :root {
+      --pink-main: #d63384;
+      --pink-soft: #f8d7ec;
+      --blue-main: #0d6efd;
+      --green-main: #20c997;
+      --bg-soft: #fff7fb;
+      --card-bg: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top left, #ffe0f3 0%, transparent 45%),
+        radial-gradient(circle at top right, #e0f2ff 0%, transparent 50%),
+        radial-gradient(circle at bottom, #e7fff4 0%, #f9fafb 60%);
+      color: #212529;
+    }
+
+    /* HEADER */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: linear-gradient(120deg, #d63384, #0d6efd, #20c997);
+      color: white;
+      padding: 10px 12px 6px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.18);
+    }
+
+    .header-main {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      height: 48px;
+      width: 48px;
+      border-radius: 50%;
+      background: white;
+      padding: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+      object-fit: contain;
+    }
+
+    .header-text h1 {
+      margin: 0 0 2px;
+      font-size: 22px;
+    }
+    .header-text p {
+      margin: 0;
+      font-size: 13px;
+      opacity: 0.96;
+    }
+
+    /* NAV – ลิงก์กลับ index */
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      background: rgba(255,255,255,0.12);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.25);
+      transition: all 0.2s ease;
+    }
+    nav a:hover {
+      background: white;
+      color: #d63384;
+      transform: translateY(-1px);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    }
+
+    /* LOGIN BAR (แชร์ UX เดิม แต่ไม่บังคับใช้สิทธิ์ในหน้านี้) */
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding: 4px 0 4px;
+      border-top: 1px solid rgba(255,255,255,0.25);
+    }
+    .top-bar input {
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.7);
+      font-size: 12px;
+      min-width: 120px;
+    }
+    .top-bar button {
+      border-radius: 999px;
+      border: none;
+      padding: 4px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      background: #ffffff;
+      color: #d63384;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+      transition: all 0.2s ease;
+    }
+    .top-bar button:hover {
+      transform: translateY(-1px);
+      background: #ffe0f3;
+    }
+    .login-status {
+      font-size: 11px;
+      opacity: 0.9;
+    }
+
+    main {
+      padding: 16px 14px 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    main > section {
+      margin-bottom: 22px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      padding: 14px 16px 16px;
+      box-shadow: 0 4px 14px rgba(15,23,42,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    section h2 {
+      margin-top: 0;
+      color: #1f2933;
+      font-size: 20px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    section h2 span.icon {
+      font-size: 22px;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 11px;
+      border: 1px solid #ffb3d5;
+      background: #ffe0f3;
+      color: #1f2933;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.2s ease;
+    }
+    .back-btn:hover {
+      background: #ffcfe9;
+      transform: translateY(-1px);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 8px 18px;
+      background: linear-gradient(135deg, #20c997, #0d6efd);
+      color: white;
+      text-decoration: none;
+      font-size: 13px;
+      border-radius: 999px;
+      margin: 3px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(32,201,151,0.35);
+      transition: all 0.2s ease;
+    }
+    .btn:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow: 0 6px 14px rgba(32,201,151,0.50);
+    }
+    .btn-secondary {
+      background: linear-gradient(135deg, #d63384, #0d6efd);
+      box-shadow: 0 4px 10px rgba(214,51,132,0.35);
+    }
+
+    .intro {
+      background: radial-gradient(circle at top, rgba(214,51,132,0.12), transparent 60%);
+    }
+    .intro h2 {
+      justify-content: flex-start;
+    }
+    .intro p {
+      margin: 6px 0 10px;
+      font-size: 14px;
+      color: #495057;
+    }
+
+    /* แผงหลักสูตร */
+    .course-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.2fr);
+      gap: 14px;
+    }
+
+    .course-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .course-card {
+      background: linear-gradient(135deg, #ffffff, #fff7fb);
+      border-radius: 12px;
+      padding: 10px 12px;
+      box-shadow: 0 2px 8px rgba(148,163,184,0.35);
+      border-left: 4px solid #d63384;
+      position: relative;
+      overflow: hidden;
+    }
+    .course-card::after {
+      content: "";
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(13,110,253,0.18), transparent 60%);
+      right: -20px;
+      top: -20px;
+      opacity: 0.7;
+    }
+    .course-card h3 {
+      margin: 0 0 4px;
+      font-size: 15px;
+      color: #1f2937;
+    }
+    .course-card small {
+      font-size: 11px;
+      color: #6b7280;
+    }
+    .course-meta {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .course-meta span {
+      margin-right: 10px;
+    }
+    .course-card p {
+      margin: 6px 0 8px;
+      font-size: 13px;
+      color: #374151;
+    }
+    .course-tags {
+      font-size: 11px;
+      color: #0d6efd;
+    }
+
+    .course-summary-box {
+      background: #fff7fb;
+      border-radius: 12px;
+      padding: 10px 12px;
+      box-shadow: inset 0 0 0 1px #f8d7ec;
+      font-size: 13px;
+      color: #444;
+    }
+    .course-summary-box ul {
+      padding-left: 20px;
+      margin: 4px 0 0;
+      font-size: 13px;
+    }
+
+    /* ตารางเปรียบเทียบหลักสูตร */
+    .table-wrapper {
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 12px;
+      background:white;
+    }
+    th, td {
+      border:1px solid #e5e7eb;
+      padding:5px 7px;
+      text-align:left;
+      white-space: nowrap;
+    }
+    th {
+      background:#ffe0f3;
+      color:#1f2937;
+      font-weight:bold;
+    }
+    tr:nth-child(even) td {
+      background:#f9fafb;
+    }
+
+    @media (max-width: 900px) {
+      .course-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      main {
+        padding: 12px 8px 28px;
+      }
+      main > section {
+        padding: 12px 10px 14px;
+      }
+      .header-main {
+        flex-wrap: wrap;
+      }
+      .back-btn {
+        position: static;
+        margin-bottom: 6px;
+      }
+    }
+  </style>
 </head>
-<body>
+<body id="top">
 
-<h1>📘 หลักสูตรทั้งหมด</h1>
-<p>เลือกหลักสูตรเพื่อดูรายละเอียดและสมัครเรียน</p>
+  <!-- HEADER + MENU + LOGIN (เชื่อมกลับ index.html) -->
+  <header>
+    <div class="header-main">
+      <img src="https://www.urrschool.com/favicon.ico" alt="โลโก้โรงเรียนอุบลบุรีรักษ์การบริบาล" class="logo">
+      <div class="header-text">
+        <h1>โรงเรียนอุบลบุรีรักษ์การบริบาล</h1>
+        <p>หลักสูตรพนักงานผู้ช่วยพยาบาล และการดูแลผู้สูงอายุ/เด็กเล็ก ที่ได้มาตรฐาน</p>
+      </div>
+    </div>
 
-<div class="course-box">
-  <a class="course-title" href="courses/na840.html">หลักสูตรพนักงานผู้ช่วยพยาบาล 840 ชม.</a>
-  <div class="sub">กระทรวงศึกษาธิการ</div>
-  <a href="register.html" class="btn">สมัครเรียน</a>
-</div>
+    <nav>
+      <a href="index.html#menu-overview">เมนูรวม</a>
+      <a href="index.html#home">หน้าแรก</a>
+      <a href="index.html#register-section">สมัครเรียน</a>
+      <a href="courses.html">หลักสูตร (หน้านี้)</a>
+      <a href="index.html#online-learning">ระบบเรียนออนไลน์</a>
+      <a href="index.html#student-status">ผลการเรียนและสถานะนักศึกษา</a>
+      <a href="index.html#certificates">การขอรับใบประกาศ</a>
+      <a href="index.html#students-db">ฐานข้อมูลนักเรียน</a>
+      <a href="index.html#jobs">ตำแหน่งงานว่าง</a>
+      <a href="index.html#about">เกี่ยวกับเรา</a>
+      <a href="index.html#contact">ติดต่อเรา</a>
+    </nav>
 
-<div class="course-box">
-  <a class="course-title" href="courses/elderkid840.html">หลักสูตรการดูแลผู้สูงอายุและเด็กเล็ก 840 ชม.</a>
-  <div class="sub">กระทรวงศึกษาธิการ</div>
-  <a href="register.html" class="btn">สมัครเรียน</a>
-</div>
+    <div class="top-bar">
+      <input type="text" id="loginUser" placeholder="ชื่อผู้ใช้ / รหัสนักศึกษา">
+      <input type="password" id="loginPass" placeholder="รหัสผ่าน">
+      <button id="loginBtn">เข้าสู่ระบบ</button>
+      <button id="logoutBtn" style="display:none;">ออกจากระบบ</button>
+      <span class="login-status" id="loginStatus">ยังไม่ได้เข้าสู่ระบบ</span>
+    </div>
+  </header>
 
-<div class="course-box">
-  <a class="course-title" href="courses/elder420.html">หลักสูตรการดูแลผู้สูงอายุ 420 ชม.</a>
-  <div class="sub">กระทรวงสาธารณสุข</div>
-  <a href="register.html" class="btn">สมัครเรียน</a>
-</div>
+  <main>
 
-<div class="course-box">
-  <a class="course-title" href="courses/kid420.html">หลักสูตรการดูแลเด็กเล็ก 420 ชม.</a>
-  <div class="sub">กระทรวงศึกษาธิการ</div>
-  <a href="register.html" class="btn">สมัครเรียน</a>
-</div>
+    <!-- INTRO หลักสูตร -->
+    <section class="intro">
+      <button class="back-btn" onclick="goBack()">← กลับหน้าก่อน (เบราว์เซอร์)</button>
+      <h2><span class="icon">📚</span>หลักสูตรที่เปิดสอน</h2>
+      <p>
+        โรงเรียนอุบลบุรีรักษ์การบริบาล เปิดสอนหลักสูตรด้านการดูแลสุขภาพที่หลากหลาย
+        ครอบคลุมตั้งแต่พื้นฐานจนถึงการปฏิบัติงานจริงในโรงพยาบาล คลินิก
+        และศูนย์ดูแลผู้สูงอายุ/เด็กเล็ก
+      </p>
+      <a href="index.html#register-section" class="btn">สมัครเรียนทันที</a>
+      <a href="index.html#dashboard" class="btn btn-secondary">ดูสถิตินักศึกษา</a>
+    </section>
 
-<div class="course-box">
-  <a class="course-title" href="courses/caregiver510.html">หลักสูตรผู้ให้การดูแล 510 ชม.</a>
-  <div class="sub">สภาการพยาบาล</div>
-  <a href="register.html" class="btn">สมัครเรียน</a>
-</div>
+    <!-- รายละเอียดหลักสูตรแบบการ์ด + สรุป -->
+    <section>
+      <h2><span class="icon">📖</span>รายละเอียดหลักสูตร</h2>
 
-<div class="course-box">
-  <a class="course-title" href="courses/basic70.html">หลักสูตรการดูแลผู้สูงอายุเบื้องต้น 70 ชม.</a>
-  <div class="sub">กระทรวงสาธารณสุข</div>
-  <a href="register.html" class="btn">สมัครเรียน</a>
-</div>
+      <div class="course-layout">
+        <!-- ซ้าย: รายละเอียดแต่ละหลักสูตร -->
+        <div class="course-list">
+
+          <div class="course-card" id="course-na840">
+            <h3>หลักสูตรพนักงานผู้ช่วยพยาบาล 840 ชั่วโมง <small>(กระทรวงศึกษาธิการ)</small></h3>
+            <div class="course-meta">
+              <span>ระยะเวลาเรียน: ประมาณ 4–6 เดือน</span>
+              <span>รูปแบบ: ทฤษฎี + ปฏิบัติ + ฝึกงาน</span>
+            </div>
+            <p>
+              เน้นพื้นฐานทางการพยาบาล การช่วยเหลือผู้ป่วย การวัดสัญญาณชีพ การทำหัตถการเบื้องต้น
+              การดูแลด้านร่างกายและจิตใจของผู้ป่วย รวมทั้งการทำงานร่วมกับทีมสหสาขาวิชาชีพในโรงพยาบาล
+            </p>
+            <div class="course-tags">
+              #ผู้ช่วยพยาบาล #ทำงานในโรงพยาบาล #ทักษะปฏิบัติจริง
+            </div>
+            <div style="margin-top:8px;">
+              <a href="index.html#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+            </div>
+          </div>
+
+          <div class="course-card" id="course-elderkid840">
+            <h3>หลักสูตรการดูแลผู้สูงอายุและเด็กเล็ก 840 ชั่วโมง <small>(กระทรวงศึกษาธิการ)</small></h3>
+            <div class="course-meta">
+              <span>ระยะเวลาเรียน: ประมาณ 4–6 เดือน</span>
+              <span>รูปแบบ: ทฤษฎี + ปฏิบัติ</span>
+            </div>
+            <p>
+              เรียนรู้ทักษะการดูแลผู้สูงอายุ เช่น การช่วยเหลือกิจวัตรประจำวัน การป้องกันการหกล้ม
+              และการดูแลด้านจิตใจ รวมกับทักษะการดูแลเด็กเล็ก เช่น การส่งเสริมพัฒนาการ การให้อาหาร
+              และการดูแลความปลอดภัย
+            </p>
+            <div class="course-tags">
+              #ผู้สูงอายุ #เด็กเล็ก #สองสายงานในหลักสูตรเดียว
+            </div>
+            <div style="margin-top:8px;">
+              <a href="index.html#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+            </div>
+          </div>
+
+          <div class="course-card" id="course-elder420">
+            <h3>หลักสูตรการดูแลผู้สูงอายุ 420 ชั่วโมง <small>(กระทรวงสาธารณสุข)</small></h3>
+            <div class="course-meta">
+              <span>ระยะเวลาเรียน: ประมาณ 3 เดือน</span>
+              <span>รูปแบบ: ทฤษฎี + ปฏิบัติ</span>
+            </div>
+            <p>
+              มุ่งเน้นการดูแลผู้สูงอายุอย่างมืออาชีพ ทั้งด้านสุขอนามัย การเคลื่อนย้ายผู้ป่วย การป้องกันภาวะแทรกซ้อน
+              การสื่อสารกับผู้สูงอายุและครอบครัว รวมถึงจริยธรรมในการดูแลผู้สูงอายุ
+            </p>
+            <div class="course-tags">
+              #สังคมสูงวัย #Caregiver #ดูแลผู้สูงอายุ
+            </div>
+            <div style="margin-top:8px;">
+              <a href="index.html#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+            </div>
+          </div>
+
+          <div class="course-card" id="course-kid420">
+            <h3>หลักสูตรการดูแลเด็กเล็ก 420 ชั่วโมง <small>(กระทรวงศึกษาธิการ)</small></h3>
+            <div class="course-meta">
+              <span>ระยะเวลาเรียน: ประมาณ 3 เดือน</span>
+              <span>รูปแบบ: ทฤษฎี + ปฏิบัติ</span>
+            </div>
+            <p>
+              เน้นการดูแลเด็กเล็กตั้งแต่ทารกจนถึงปฐมวัย ทั้งด้านโภชนาการ การส่งเสริมพัฒนาการ
+              การเล่นและการเรียนรู้ การดูแลความสะอาด ความปลอดภัย และการทำงานร่วมกับผู้ปกครอง
+              และครูประจำชั้น
+            </p>
+            <div class="course-tags">
+              #ผู้ช่วยครู #เนอร์สเซอรี #ศูนย์เด็กเล็ก
+            </div>
+            <div style="margin-top:8px;">
+              <a href="index.html#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+            </div>
+          </div>
+
+          <div class="course-card" id="course-caregiver510">
+            <h3>หลักสูตรผู้ให้การดูแล 510 ชั่วโมง <small>(สภาการพยาบาล)</small></h3>
+            <div class="course-meta">
+              <span>ระยะเวลาเรียน: ประมาณ 3–4 เดือน</span>
+              <span>รูปแบบ: ทฤษฎี + ปฏิบัติ + ฝึกงาน</span>
+            </div>
+            <p>
+              เรียนรู้การดูแลผู้ป่วยและผู้สูงอายุในชุมชนและที่บ้าน เน้นการประเมินภาวะสุขภาพเบื้องต้น
+              การช่วยเหลือด้านกายภาพ การฟื้นฟูสมรรถภาพ และการประสานงานกับบุคลากรสาธารณสุขในพื้นที่
+            </p>
+            <div class="course-tags">
+              #HomeCare #CommunityCare #ผู้ให้การดูแล
+            </div>
+            <div style="margin-top:8px;">
+              <a href="index.html#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+            </div>
+          </div>
+
+          <div class="course-card" id="course-basic70">
+            <h3>หลักสูตรการดูแลผู้สูงอายุเบื้องต้น 70 ชั่วโมง <small>(กระทรวงสาธารณสุข)</small></h3>
+            <div class="course-meta">
+              <span>ระยะเวลาเรียน: ประมาณ 2–3 สัปดาห์</span>
+              <span>รูปแบบ: ทฤษฎี + ปฏิบัติ</span>
+            </div>
+            <p>
+              เหมาะสำหรับคนในครอบครัว หรือผู้ที่ต้องการทักษะพื้นฐานในการดูแลผู้สูงอายุ
+              เน้นการดูแลกิจวัตรประจำวัน การป้องกันอุบัติเหตุในบ้าน การจัดสิ่งแวดล้อมให้ปลอดภัย
+              และการสื่อสารอย่างเข้าใจผู้สูงอายุ
+            </p>
+            <div class="course-tags">
+              #ดูแลคนที่บ้าน #สั้นกระชับ #เริ่มต้นง่าย
+            </div>
+            <div style="margin-top:8px;">
+              <a href="index.html#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ขวา: กล่องสรุป/แนะแนว -->
+        <aside class="course-summary-box">
+          <h3 style="margin-top:0; font-size:15px; color:#d63384;">เลือกหลักสูตรอย่างไรให้เหมาะกับคุณ?</h3>
+          <p>
+            แนะนำแนวทางเบื้องต้นในการเลือกหลักสูตรให้ตรงกับเป้าหมายของผู้เรียน:
+          </p>
+          <ul>
+            <li><strong>ต้องการทำงานในโรงพยาบาล/คลินิก:</strong> เลือกหลักสูตรพนักงานผู้ช่วยพยาบาล 840 ชม.</li>
+            <li><strong>ต้องการทำงานกับทั้งผู้สูงอายุและเด็กเล็ก:</strong> เลือกหลักสูตรดูแลผู้สูงอายุและเด็กเล็ก 840 ชม.</li>
+            <li><strong>โฟกัสดูแลผู้สูงอายุโดยเฉพาะ:</strong> เลือกหลักสูตรดูแลผู้สูงอายุ 420 ชม. หรือผู้ให้การดูแล 510 ชม.</li>
+            <li><strong>ต้องการทำงานในศูนย์เด็กเล็ก/เนอร์สเซอรี:</strong> เลือกหลักสูตรดูแลเด็กเล็ก 420 ชม.</li>
+            <li><strong>ต้องการเสริมทักษะดูแลผู้สูงอายุในครอบครัว:</strong> เลือกหลักสูตรดูแลผู้สูงอายุเบื้องต้น 70 ชม.</li>
+          </ul>
+          <p style="margin-top:8px;">
+            หากยังไม่แน่ใจ สามารถติดต่อครูแนะแนวของโรงเรียนได้ที่เบอร์ 080-459-3311
+            หรือสอบถามผ่านกล่อง Chat มุมล่างขวาของหน้าเว็บไซต์ได้ตลอดเวลา
+          </p>
+          <div style="margin-top:10px; text-align:center;">
+            <a href="index.html#contact" class="btn">ปรึกษาเพิ่มเติม</a>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ตารางเปรียบเทียบหลักสูตร -->
+    <section>
+      <h2><span class="icon">📊</span>เปรียบเทียบหลักสูตรโดยสรุป</h2>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ชื่อหลักสูตร</th>
+              <th>ชั่วโมงรวม</th>
+              <th>หน่วยงานกำกับ</th>
+              <th>แนวทางงานรองรับ</th>
+              <th>เหมาะสำหรับ</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>พนักงานผู้ช่วยพยาบาล</td>
+              <td>840 ชม.</td>
+              <td>กระทรวงศึกษาธิการ</td>
+              <td>โรงพยาบาล, คลินิก, ศูนย์การแพทย์</td>
+              <td>ผู้ที่ต้องการทำงานในระบบสาธารณสุขเต็มเวลา</td>
+            </tr>
+            <tr>
+              <td>ดูแลผู้สูงอายุและเด็กเล็ก</td>
+              <td>840 ชม.</td>
+              <td>กระทรวงศึกษาธิการ</td>
+              <td>ศูนย์ดูแลผู้สูงอายุ, ศูนย์เด็กเล็ก, บ้านผู้สูงอายุ</td>
+              <td>ผู้ที่ต้องการยืดหยุ่นระหว่างงานดูแลผู้สูงอายุและเด็กเล็ก</td>
+            </tr>
+            <tr>
+              <td>ดูแลผู้สูงอายุ</td>
+              <td>420 ชม.</td>
+              <td>กระทรวงสาธารณสุข</td>
+              <td>ศูนย์ดูแลผู้สูงอายุ, บ้านพักคนชรา, ดูแลที่บ้าน</td>
+              <td>ผู้ที่มุ่งเน้นงานด้านผู้สูงอายุโดยเฉพาะ</td>
+            </tr>
+            <tr>
+              <td>ดูแลเด็กเล็ก</td>
+              <td>420 ชม.</td>
+              <td>กระทรวงศึกษาธิการ</td>
+              <td>ศูนย์เด็กเล็ก, เนอร์สเซอรี, โรงเรียนอนุบาล</td>
+              <td>ผู้ที่รักการทำงานกับเด็กและการศึกษาปฐมวัย</td>
+            </tr>
+            <tr>
+              <td>ผู้ให้การดูแล</td>
+              <td>510 ชม.</td>
+              <td>สภาการพยาบาล</td>
+              <td>Home care, Community care, หน่วยงานสาธารณสุขในชุมชน</td>
+              <td>ผู้ที่สนใจงานดูแลในชุมชน/ที่บ้าน</td>
+            </tr>
+            <tr>
+              <td>ดูแลผู้สูงอายุเบื้องต้น</td>
+              <td>70 ชม.</td>
+              <td>กระทรวงสาธารณสุข</td>
+              <td>ดูแลสมาชิกในครอบครัว, งาน part-time ดูแลผู้สูงอายุ</td>
+              <td>ผู้เริ่มต้น ต้องการทักษะพื้นฐานระยะสั้น</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:10px; text-align:center;">
+        <a href="index.html#register-section" class="btn btn-secondary">เลือกหลักสูตรและสมัครเรียนตอนนี้</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | 115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000 | ติดต่อ: 080-459-3311</p>
+  </footer>
+
+  <script>
+    function goBack() {
+      if (document.referrer && document.referrer !== location.href) {
+        history.back();
+      } else {
+        window.location.href = "index.html";
+      }
+    }
+
+    // ส่วนล็อกอิน: ให้แสดงสถานะสอดคล้องกับ index (ใช้ localStorage key เดียวกัน)
+    const STORAGE_KEY_USERS = "ubr_users";
+    const STORAGE_KEY_CUR_USER = "ubr_current_user";
+
+    function getUsers() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_USERS) || "[]";
+        const arr = JSON.parse(raw);
+        return Array.isArray(arr) ? arr : [];
+      } catch {
+        return [];
+      }
+    }
+    function getCurrentUser() {
+      const username = localStorage.getItem(STORAGE_KEY_CUR_USER);
+      if (!username) return null;
+      const users = getUsers();
+      return users.find(u => u.username === username) || null;
+    }
+    function setCurrentUser(username) {
+      if (!username) {
+        localStorage.removeItem(STORAGE_KEY_CUR_USER);
+      } else {
+        localStorage.setItem(STORAGE_KEY_CUR_USER, username);
+      }
+    }
+
+    function updateLoginBar() {
+      const user = getCurrentUser();
+      const statusEl = document.getElementById("loginStatus");
+      const loginBtn = document.getElementById("loginBtn");
+      const logoutBtn = document.getElementById("logoutBtn");
+
+      if (!user) {
+        if (statusEl) statusEl.textContent = "ยังไม่ได้เข้าสู่ระบบ";
+        if (loginBtn) loginBtn.style.display = "inline-block";
+        if (logoutBtn) logoutBtn.style.display = "none";
+      } else {
+        const roleText = user.role === "creator" ? "Creator" :
+                         user.role === "admin" ? "Admin" : "User";
+        if (statusEl) statusEl.textContent = "เข้าสู่ระบบแล้ว (" + roleText + ")";
+        if (loginBtn) loginBtn.style.display = "none";
+        if (logoutBtn) logoutBtn.style.display = "inline-block";
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      updateLoginBar();
+
+      const loginBtn = document.getElementById("loginBtn");
+      const logoutBtn = document.getElementById("logoutBtn");
+
+      if (loginBtn) {
+        loginBtn.addEventListener("click", function() {
+          const username = (document.getElementById("loginUser").value || "").trim();
+          const password = (document.getElementById("loginPass").value || "").trim();
+          if (!username || !password) {
+            alert("กรุณากรอกชื่อผู้ใช้และรหัสผ่าน");
+            return;
+          }
+          if (!confirm("ยืนยันการเข้าสู่ระบบหรือไม่?")) {
+            return;
+          }
+
+          let users = getUsers();
+          if (users.length === 0) {
+            const creator = {
+              username,
+              displayName: username,
+              password,
+              role: "creator",
+              permissions: {
+                onlineLearning: true,
+                studentStatus: true,
+                certificates: true,
+                studentsDb: true,
+                jobs: true
+              }
+            };
+            users.push(creator);
+            localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users));
+            setCurrentUser(username);
+            alert("ตั้งค่าผู้ใช้คนแรกเป็น Creator แล้ว (ควบคุมสิทธิ์ผ่านหน้า index)");
+          } else {
+            let user = users.find(u => u.username === username && u.password === password);
+            if (!user) {
+              alert("ไม่พบบัญชีผู้ใช้ หรือรหัสผ่านไม่ถูกต้อง (สมัคร/แก้ไขสิทธิ์ผ่านหน้า index)");
+              return;
+            }
+            setCurrentUser(username);
+          }
+          updateLoginBar();
+        });
+      }
+
+      if (logoutBtn) {
+        logoutBtn.addEventListener("click", function() {
+          if (!confirm("ต้องการออกจากระบบหรือไม่?")) {
+            return;
+          }
+          setCurrentUser(null);
+          updateLoginBar();
+        });
+      }
+    });
+  </script>
 
 </body>
 </html>
