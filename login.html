@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ระบบเรียนออนไลน์ | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+  <title>เข้าสู่ระบบ / ลงทะเบียน | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
   <style>
     body {
       margin:0;
-      font-family: Arial, sans-serif;
+      font-family:Arial,sans-serif;
       background:#f3f4f6;
     }
     header {
-      background: linear-gradient(120deg,#ff6fb5,#0d6efd,#20c997);
+      background:linear-gradient(120deg,#ff6fb5,#0d6efd,#20c997);
       color:white;
-      padding:12px 16px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.18);
+      padding:14px 16px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.18);
     }
     .header-main {
       display:flex;
@@ -47,7 +47,7 @@
     nav a {
       color:white;
       text-decoration:none;
-      background:rgba(255,255,255,0.16);
+      background:rgba(255,255,255,0.18);
       border-radius:999px;
       padding:4px 10px;
       font-size:12px;
@@ -59,61 +59,81 @@
     }
 
     main {
-      max-width: 900px;
+      max-width:900px;
       margin:24px auto 40px;
       padding:0 12px;
     }
 
     .card {
       background:white;
-      border-radius:16px;
-      padding:16px 18px 20px;
-      box-shadow:0 4px 14px rgba(15,23,42,0.08);
+      border-radius:18px;
+      padding:18px 18px 22px;
+      box-shadow:0 4px 16px rgba(15,23,42,0.08);
+    }
+
+    .tabs {
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      margin-bottom:12px;
+    }
+    .tab-btn {
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid #d1d5db;
+      background:#f9fafb;
+      font-size:13px;
+      cursor:pointer;
+    }
+    .tab-btn.active {
+      background:#0d6efd;
+      color:white;
+      border-color:#0d6efd;
+      font-weight:bold;
     }
 
     h2 {
-      margin-top:0;
+      margin:4px 0 12px;
       font-size:20px;
-      text-align:center;
     }
+
     .msg {
       font-size:13px;
       margin-bottom:10px;
     }
+    .msg.info { color:#4b5563; }
     .msg.error { color:#b91c1c; font-weight:bold; }
-    .msg.info  { color:#4b5563; }
-    .msg.success { color:#0f766e; font-weight:bold; }
+    .msg.success { color:#047857; font-weight:bold; }
 
-    .user-info {
-      padding:10px;
-      border-radius:10px;
-      background:#ecfdf5;
-      border:1px solid #bbf7d0;
-      font-size:12px;
-      margin-bottom:12px;
-    }
-
-    .course-list {
-      margin-top:10px;
-      border-top:1px solid #e5e7eb;
-      padding-top:10px;
-    }
-    table {
-      width:100%;
-      border-collapse:collapse;
+    form {
       font-size:13px;
     }
-    th, td {
-      border:1px solid #e5e7eb;
-      padding:6px 8px;
-      text-align:left;
+    label {
+      display:block;
+      margin-top:8px;
+      margin-bottom:2px;
     }
-    th {
-      background:#f9fafb;
+    input, select {
+      width:100%;
+      padding:7px 9px;
+      border-radius:8px;
+      border:1px solid #d1d5db;
+      font-size:13px;
+      box-sizing:border-box;
+    }
+
+    .row-2 {
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .row-2 > div {
+      flex:1 1 160px;
     }
 
     .btn-main {
-      padding:8px 14px;
+      margin-top:12px;
+      padding:9px 16px;
       border-radius:999px;
       border:none;
       background:#0d6efd;
@@ -123,6 +143,15 @@
     }
     .btn-main:hover {
       background:#0b57d0;
+    }
+    .small-note {
+      font-size:12px;
+      color:#6b7280;
+      margin-top:6px;
+    }
+
+    .hidden {
+      display:none;
     }
 
     footer {
@@ -137,64 +166,130 @@
 <body>
 <header>
   <div class="header-main">
-    <img src="https://www.urrschool.com/favicon.ico" alt="โลโก้">
+    <img src="https://www.urrschool.com/favicon.ico" alt="โลโก้ URR">
     <div>
-      <h1>ระบบเรียนออนไลน์</h1>
-      <p>โรงเรียนอุบลบุรีรักษ์การบริบาล | URRSCHOOL ONLINE</p>
+      <h1>เข้าสู่ระบบ / ลงทะเบียนสมาชิก</h1>
+      <p>โรงเรียนอุบลบุรีรักษ์การบริบาล | URR School</p>
     </div>
   </div>
   <nav>
     <a href="index.html">หน้าแรก</a>
     <a href="courses.html">หลักสูตร</a>
-    <a href="login.html">เข้าสู่ระบบ</a>
+    <a href="online-learning.html">เรียนออนไลน์</a>
+    <a href="admin.html">Admin</a>
   </nav>
 </header>
 
 <main>
   <div class="card">
-    <h2>วิชาเรียนออนไลน์ของคุณ</h2>
-    <div id="msgBox" class="msg info">กำลังตรวจสอบสถานะการเข้าสู่ระบบ...</div>
-
-    <div id="userBox" class="user-info" style="display:none;">
-      <div><strong>ชื่อผู้ใช้:</strong> <span id="uName"></span></div>
-      <div><strong>อีเมล:</strong> <span id="uEmail"></span></div>
-      <div><strong>บทบาท:</strong> <span id="uRole"></span></div>
-      <button id="btnLogout" class="btn-main" style="margin-top:8px;">ออกจากระบบ</button>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="login">เข้าสู่ระบบ</button>
+      <button class="tab-btn" data-tab="register">ลงทะเบียนสมาชิกใหม่</button>
+      <button class="tab-btn" data-tab="forgot">ลืมรหัสผ่าน</button>
     </div>
 
-    <div id="coursesArea" class="course-list" style="display:none;">
-      <h3 style="margin-top:0;">รายวิชาที่เปิดให้เรียน</h3>
-      <table>
-        <thead>
-          <tr>
-            <th>รหัสวิชา</th>
-            <th>ชื่อวิชา</th>
-            <th>สถานะ</th>
-          </tr>
-        </thead>
-        <tbody id="courseTableBody">
-          <!-- จะใส่ตัวอย่าง / หรือโหลดจาก Firestore ก็ได้ -->
-        </tbody>
-      </table>
-    </div>
+    <div id="globalMsg" class="msg info">กรุณาเลือกทำรายการ: เข้าสู่ระบบ / ลงทะเบียน / ลืมรหัสผ่าน</div>
+
+    <!-- เข้าสู่ระบบ -->
+    <section id="tab-login">
+      <h2>เข้าสู่ระบบสำหรับสมาชิกที่มีบัญชีแล้ว</h2>
+      <form id="loginForm">
+        <label for="loginEmail">อีเมล</label>
+        <input type="email" id="loginEmail" required placeholder="กรอกอีเมลที่ใช้สมัคร">
+
+        <label for="loginPassword">รหัสผ่าน</label>
+        <input type="password" id="loginPassword" required placeholder="รหัสผ่านอย่างน้อย 8 ตัวอักษร">
+
+        <button type="submit" class="btn-main" id="btnLogin">เข้าสู่ระบบ</button>
+        <div class="small-note">
+          ยังไม่เป็นสมาชิก? เลือกแท็บ "<strong>ลงทะเบียนสมาชิกใหม่</strong>" ด้านบนก่อน
+        </div>
+      </form>
+    </section>
+
+    <!-- ลงทะเบียน -->
+    <section id="tab-register" class="hidden">
+      <h2>ลงทะเบียนสมาชิกใหม่</h2>
+      <form id="registerForm">
+        <div class="row-2">
+          <div>
+            <label for="regFirstName">ชื่อ</label>
+            <input type="text" id="regFirstName" required placeholder="เช่น นางสาวสุชาดา">
+          </div>
+          <div>
+            <label for="regLastName">นามสกุล</label>
+            <input type="text" id="regLastName" required placeholder="เช่น ใจดี">
+          </div>
+        </div>
+
+        <label for="regEmail">อีเมล (ใช้สำหรับเข้าสู่ระบบ)</label>
+        <input type="email" id="regEmail" required placeholder="กรอกอีเมลที่ใช้งานได้จริง">
+
+        <div class="row-2">
+          <div>
+            <label for="regPhone">เบอร์โทรศัพท์</label>
+            <input type="tel" id="regPhone" required placeholder="เช่น 080-1234567">
+          </div>
+          <div>
+            <label for="regCitizenId">เลขบัตรประชาชน</label>
+            <input type="text" id="regCitizenId" required placeholder="เลขบัตร 13 หลัก">
+          </div>
+        </div>
+
+        <div class="row-2">
+          <div>
+            <label for="regPassword">รหัสผ่าน</label>
+            <input type="password" id="regPassword" required placeholder="อย่างน้อย 8 ตัวอักษร">
+          </div>
+          <div>
+            <label for="regPassword2">ยืนยันรหัสผ่าน</label>
+            <input type="password" id="regPassword2" required placeholder="กรอกรหัสผ่านซ้ำอีกครั้ง">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-main" id="btnRegister">ลงทะเบียน</button>
+        <div class="small-note">
+          หลังลงทะเบียนแล้ว สถานะของคุณจะเป็น <strong>รออนุมัติ (pending)</strong><br>
+          ผู้บริหารจะตรวจสอบและอนุมัติในภายหลัง จึงจะเข้าเรียนออนไลน์และระบบอื่น ๆ ได้
+        </div>
+      </form>
+    </section>
+
+    <!-- ลืมรหัสผ่าน -->
+    <section id="tab-forgot" class="hidden">
+      <h2>ลืมรหัสผ่าน</h2>
+      <form id="forgotForm">
+        <label for="forgotEmail">อีเมลที่ใช้สมัคร</label>
+        <input type="email" id="forgotEmail" required placeholder="กรอกอีเมลที่ใช้ลงทะเบียน">
+
+        <button type="submit" class="btn-main" id="btnForgot">ส่งลิงก์สำหรับตั้งรหัสผ่านใหม่</button>
+        <div class="small-note">
+          ระบบจะส่งอีเมลจาก Firebase เพื่อให้คุณตั้งรหัสผ่านใหม่
+        </div>
+      </form>
+    </section>
   </div>
 </main>
 
 <footer>
-  © 2025 URRSCHOOL | ระบบเรียนออนไลน์เชื่อมต่อ Firebase Auth
+  © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | ระบบสมาชิกเชื่อมต่อ Firebase Auth + Firestore
 </footer>
 
 <script type="module">
+  // ================= Firebase Setup =================
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
   import {
     getAuth,
-    onAuthStateChanged,
-    signOut
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail,
+    onAuthStateChanged
   } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
   import {
     getFirestore,
     doc,
-    getDoc
+    setDoc,
+    serverTimestamp
   } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -211,103 +306,223 @@
   const auth = getAuth(app);
   const db   = getFirestore(app);
 
-  const msgBox   = document.getElementById("msgBox");
-  const userBox  = document.getElementById("userBox");
-  const uName    = document.getElementById("uName");
-  const uEmail   = document.getElementById("uEmail");
-  const uRole    = document.getElementById("uRole");
-  const btnLogout= document.getElementById("btnLogout");
-  const coursesArea   = document.getElementById("coursesArea");
-  const tbodyCourses  = document.getElementById("courseTableBody");
+  // ================= DOM helper =================
+  const globalMsg      = document.getElementById("globalMsg");
+  const tabButtons     = document.querySelectorAll(".tab-btn");
+  const tabLogin       = document.getElementById("tab-login");
+  const tabRegister    = document.getElementById("tab-register");
+  const tabForgot      = document.getElementById("tab-forgot");
 
-  function setMsg(text, type="info") {
-    msgBox.textContent = text;
-    msgBox.className = "msg " + type;
+  const loginForm      = document.getElementById("loginForm");
+  const registerForm   = document.getElementById("registerForm");
+  const forgotForm     = document.getElementById("forgotForm");
+
+  const loginEmail     = document.getElementById("loginEmail");
+  const loginPassword  = document.getElementById("loginPassword");
+  const btnLogin       = document.getElementById("btnLogin");
+
+  const regFirstName   = document.getElementById("regFirstName");
+  const regLastName    = document.getElementById("regLastName");
+  const regEmail       = document.getElementById("regEmail");
+  const regPhone       = document.getElementById("regPhone");
+  const regCitizenId   = document.getElementById("regCitizenId");
+  const regPassword    = document.getElementById("regPassword");
+  const regPassword2   = document.getElementById("regPassword2");
+  const btnRegister    = document.getElementById("btnRegister");
+
+  const forgotEmail    = document.getElementById("forgotEmail");
+  const btnForgot      = document.getElementById("btnForgot");
+
+  function setGlobalMsg(text, type="info") {
+    globalMsg.textContent = text;
+    globalMsg.className = "msg " + type;
   }
 
-  async function loadMemberProfile(uid) {
-    const snap = await getDoc(doc(db, "members", uid));
-    if (!snap.exists()) return null;
-    return snap.data();
-  }
+  // ================= Tab Switching =================
+  function showTab(name) {
+    tabLogin.classList.add("hidden");
+    tabRegister.classList.add("hidden");
+    tabForgot.classList.add("hidden");
 
-  function renderCourseList() {
-    // ตัวอย่างแบบ fix ไว้ก่อน
-    const sampleCourses = [
-      { code:"OL-101", name:"การดูแลผู้ป่วยพื้นฐาน", status:"เปิดเรียน" },
-      { code:"OL-201", name:"การดูแลผู้สูงอายุ", status:"เปิดเรียน" },
-      { code:"OL-301", name:"การดูแลเด็กเล็ก", status:"เปิดเรียน" }
-    ];
-    tbodyCourses.innerHTML = "";
-    sampleCourses.forEach(c => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${c.code}</td>
-        <td>${c.name}</td>
-        <td>${c.status}</td>
-      `;
-      tbodyCourses.appendChild(tr);
+    if (name === "login") tabLogin.classList.remove("hidden");
+    if (name === "register") tabRegister.classList.remove("hidden");
+    if (name === "forgot") tabForgot.classList.remove("hidden");
+
+    tabButtons.forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.tab === name);
     });
+
+    // อัปเดต hash ใน URL ให้อิงกับปุ่ม
+    if (name === "login")   window.location.hash = "#login";
+    if (name === "register")window.location.hash = "#register";
+    if (name === "forgot")  window.location.hash = "#forgot";
   }
 
-  onAuthStateChanged(auth, async (user) => {
-    if (!user) {
-      // ยังไม่ล็อกอิน
-      userBox.style.display = "none";
-      coursesArea.style.display = "none";
-      setMsg("ยังไม่ได้เข้าสู่ระบบ กรุณาเข้าสู่ระบบก่อนใช้งานระบบเรียนออนไลน์", "error");
+  tabButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const tab = btn.dataset.tab;
+      showTab(tab);
+      if (tab === "login") {
+        setGlobalMsg("กรุณากรอกอีเมลและรหัสผ่านเพื่อเข้าสู่ระบบ", "info");
+      } else if (tab === "register") {
+        setGlobalMsg("กรอกข้อมูลให้ครบถ้วนเพื่อสมัครสมาชิกใหม่", "info");
+      } else {
+        setGlobalMsg("กรอกอีเมลที่ใช้สมัคร เพื่อรับลิงก์ตั้งรหัสผ่านใหม่", "info");
+      }
+    });
+  });
+
+  // เปิดแท็บตาม hash ใน URL
+  function initTabFromHash() {
+    const hash = window.location.hash || "#login";
+    if (hash === "#register") {
+      showTab("register");
+      setGlobalMsg("กรอกข้อมูลเพื่อสมัครสมาชิกใหม่", "info");
+    } else if (hash === "#forgot") {
+      showTab("forgot");
+      setGlobalMsg("กรอกอีเมลเพื่อรับลิงก์ตั้งรหัสผ่านใหม่", "info");
+    } else {
+      showTab("login");
+      setGlobalMsg("กรุณากรอกอีเมลและรหัสผ่านเพื่อเข้าสู่ระบบ", "info");
+    }
+  }
+
+  // ================= Register Flow =================
+  registerForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const firstName = regFirstName.value.trim();
+    const lastName  = regLastName.value.trim();
+    const email     = regEmail.value.trim();
+    const phone     = regPhone.value.trim();
+    const citizenId = regCitizenId.value.trim();
+    const pw        = regPassword.value;
+    const pw2       = regPassword2.value;
+
+    if (!firstName || !lastName || !email || !phone || !citizenId || !pw || !pw2) {
+      setGlobalMsg("กรุณากรอกข้อมูลให้ครบทุกช่อง", "error");
+      return;
+    }
+    if (pw.length < 8) {
+      setGlobalMsg("รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร", "error");
+      return;
+    }
+    if (pw !== pw2) {
+      setGlobalMsg("รหัสผ่านและยืนยันรหัสผ่านไม่ตรงกัน", "error");
       return;
     }
 
+    btnRegister.disabled = true;
+    setGlobalMsg("กำลังลงทะเบียนสมาชิกใหม่...", "info");
+
     try {
-      setMsg("พบผู้ใช้ที่ล็อกอินอยู่ กำลังโหลดข้อมูล...", "info");
-      const profile = await loadMemberProfile(user.uid);
+      const cred = await createUserWithEmailAndPassword(auth, email, pw);
+      const uid = cred.user.uid;
 
-      if (!profile) {
-        setMsg("เข้าสู่ระบบแล้ว แต่ไม่พบข้อมูลสมาชิกในฐานข้อมูล Firestore", "error");
-        userBox.style.display = "none";
-        coursesArea.style.display = "none";
-        return;
+      await setDoc(doc(db, "members", uid), {
+        firstName,
+        lastName,
+        email,
+        phone,
+        citizenId,
+        status: "pending",     // รออนุมัติ
+        role: "user",
+        createdAt: serverTimestamp()
+      });
+
+      setGlobalMsg("ลงทะเบียนสำเร็จ! สถานะของคุณคือ 'รออนุมัติ (pending)' กรุณารอผู้ดูแลระบบอนุมัติแล้วจึงเข้าเรียนออนไลน์ได้", "success");
+      registerForm.reset();
+      showTab("login");
+    } catch (err) {
+      console.error(err);
+      let msg = "ไม่สามารถลงทะเบียนได้";
+      if (err.code === "auth/email-already-in-use") {
+        msg = "อีเมลนี้ถูกใช้ลงทะเบียนแล้ว กรุณาใช้เมลอื่น หรือเข้าสู่ระบบ";
       }
-
-      if (profile.status !== "approved") {
-        setMsg("บัญชีของคุณยังไม่ได้รับการอนุมัติ (สถานะ: " + (profile.status || "ไม่ทราบ") + ")", "error");
-        userBox.style.display = "none";
-        coursesArea.style.display = "none";
-        return;
-      }
-
-      // แสดงข้อมูลผู้ใช้
-      userBox.style.display = "block";
-      coursesArea.style.display = "block";
-      uName.textContent  = (profile.firstName || "") + " " + (profile.lastName || "");
-      uEmail.textContent = profile.email || user.email || "";
-      uRole.textContent  = profile.role || "user";
-
-      setMsg("ยินดีต้อนรับสู่ระบบเรียนออนไลน์", "success");
-      renderCourseList();
-    } catch (e) {
-      console.error(e);
-      setMsg("เกิดข้อผิดพลาดในการโหลดข้อมูลผู้ใช้/รายวิชา", "error");
+      setGlobalMsg(msg, "error");
+    } finally {
+      btnRegister.disabled = false;
     }
   });
 
-  if (btnLogout) {
-    btnLogout.addEventListener("click", async () => {
-      if (!confirm("ต้องการออกจากระบบหรือไม่?")) return;
-      try {
-        await signOut(auth);
-      } catch (e) {
-        console.warn("Error signOut:", e);
-      }
-      setMsg("ออกจากระบบเรียบร้อยแล้ว", "success");
-      userBox.style.display = "none";
-      coursesArea.style.display = "none";
+  // ================= Login Flow =================
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const email = loginEmail.value.trim();
+    const pw    = loginPassword.value;
+
+    if (!email || !pw) {
+      setGlobalMsg("กรุณากรอกอีเมลและรหัสผ่านให้ครบ", "error");
+      return;
+    }
+    if (pw.length < 8) {
+      setGlobalMsg("รหัสผ่านต้องมีความยาวอย่างน้อย 8 ตัวอักษร", "error");
+      return;
+    }
+
+    btnLogin.disabled = true;
+    setGlobalMsg("กำลังเข้าสู่ระบบ...", "info");
+
+    try {
+      await signInWithEmailAndPassword(auth, email, pw);
+      setGlobalMsg("เข้าสู่ระบบสำเร็จ กำลังนำคุณไปยังระบบเรียนออนไลน์...", "success");
       setTimeout(() => {
-        window.location.href = "login.html";
+        window.location.href = "online-learning.html";
       }, 800);
-    });
-  }
+    } catch (err) {
+      console.error(err);
+      let msg = "เข้าสู่ระบบไม่สำเร็จ กรุณาตรวจสอบอีเมล/รหัสผ่าน";
+      if (err.code === "auth/user-not-found") {
+        msg = "ไม่พบบัญชีผู้ใช้ในระบบ กรุณาลงทะเบียนสมาชิกใหม่ก่อน";
+      } else if (err.code === "auth/wrong-password") {
+        msg = "รหัสผ่านไม่ถูกต้อง กรุณาลองใหม่ หรือใช้เมนู 'ลืมรหัสผ่าน'";
+      }
+      setGlobalMsg(msg, "error");
+    } finally {
+      btnLogin.disabled = false;
+    }
+  });
+
+  // ================= Forgot Password Flow =================
+  forgotForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = forgotEmail.value.trim();
+    if (!email) {
+      setGlobalMsg("กรุณากรอกอีเมลที่ใช้สมัคร", "error");
+      return;
+    }
+
+    btnForgot.disabled = true;
+    setGlobalMsg("กำลังส่งอีเมลสำหรับตั้งรหัสผ่านใหม่...", "info");
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+      setGlobalMsg("ส่งลิงก์ตั้งรหัสผ่านใหม่ไปที่อีเมลแล้ว กรุณาตรวจสอบกล่องจดหมาย/สแปม", "success");
+      forgotForm.reset();
+    } catch (err) {
+      console.error(err);
+      let msg = "ไม่สามารถส่งอีเมลสำหรับตั้งรหัสผ่านใหม่ได้";
+      if (err.code === "auth/user-not-found") {
+        msg = "ไม่พบบัญชีผู้ใช้ที่ใช้อีเมลนี้ในระบบ";
+      }
+      setGlobalMsg(msg, "error");
+    } finally {
+      btnForgot.disabled = false;
+    }
+  });
+
+  // ================= Check if already logged in =================
+  onAuthStateChanged(auth, (user) => {
+    // ถ้าต้องการให้ auto-redirect เมื่อเคยล็อกอินแล้ว สามารถใช้ส่วนนี้
+    if (user) {
+      // ยังให้ผู้ใช้กด login เองก็ได้ เลยไม่ redirect ทันที
+      // setGlobalMsg("คุณล็อกอินอยู่แล้ว: " + (user.email || ""), "info");
+    }
+  });
+
+  // init แท็บตาม hash
+  initTabFromHash();
 </script>
 
 </body>
