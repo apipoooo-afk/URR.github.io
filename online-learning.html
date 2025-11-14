@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ระบบเรียนออนไลน์ | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
 
   <style>
     :root {
-      --pink:#ff6fb5;
-      --blue:#0d6efd;
-      --green:#20c997;
-      --bg:#f3f4f6;
-      --card:#ffffff;
+      --pink: #ff6fb5;
+      --blue: #0d6efd;
+      --green: #20c997;
+      --bg: #f9f5ff;
+      --card: #ffffff;
     }
 
-    * { box-sizing:border-box; }
+    * { box-sizing: border-box; }
 
     body {
-      margin:0;
-      font-family:Arial,sans-serif;
+      margin: 0;
+      font-family: Arial, sans-serif;
       background:
         radial-gradient(circle at top left,#ffe0f3 0%,transparent 45%),
         radial-gradient(circle at top right,#e0f2ff 0%,transparent 50%),
@@ -27,9 +27,9 @@
     }
 
     header {
-      background:linear-gradient(120deg,#ff6fb5,#0d6efd,#20c997);
+      background: linear-gradient(120deg,#ff6fb5,#0d6efd,#20c997);
       color:white;
-      padding:12px 16px;
+      padding:12px 14px 14px;
       box-shadow:0 2px 10px rgba(0,0,0,0.18);
     }
     .header-main {
@@ -44,12 +44,12 @@
       border-radius:50%;
       background:white;
       padding:4px;
-      object-fit:contain;
       box-shadow:0 2px 6px rgba(0,0,0,0.25);
+      object-fit:contain;
     }
     .header-text h1 {
       margin:0;
-      font-size:20px;
+      font-size:22px;
     }
     .header-text p {
       margin:0;
@@ -58,19 +58,18 @@
     }
 
     nav {
-      margin-top:6px;
+      margin-top:8px;
       display:flex;
       flex-wrap:wrap;
       gap:6px;
-      justify-content:center;
     }
     nav a {
       color:white;
-      background:rgba(255,255,255,0.2);
-      padding:4px 10px;
-      border-radius:999px;
-      font-size:12px;
       text-decoration:none;
+      background:rgba(255,255,255,0.16);
+      border-radius:999px;
+      padding:4px 10px;
+      font-size:12px;
       border:1px solid rgba(255,255,255,0.3);
     }
     nav a:hover {
@@ -79,102 +78,30 @@
     }
 
     main {
-      max-width:1100px;
-      margin:24px auto 40px;
-      padding:0 16px;
+      max-width: 960px;
+      margin: 24px auto 40px;
+      padding: 0 12px;
+    }
+
+    h2 {
+      margin-top:0;
+      font-size:20px;
+      text-align:left;
+      color:#111827;
+    }
+    .sub {
+      font-size:13px;
+      color:#4b5563;
+      margin-top:2px;
+      margin-bottom:12px;
     }
 
     .card {
       background:var(--card);
       border-radius:18px;
-      padding:18px 18px 20px;
-      box-shadow:0 4px 16px rgba(15,23,42,0.08);
+      padding:16px 18px 18px;
       margin-bottom:18px;
-    }
-
-    h2 {
-      margin:0 0 6px;
-      font-size:20px;
-    }
-    p.sub {
-      margin:0;
-      font-size:13px;
-      color:#4b5563;
-    }
-
-    .user-info {
-      font-size:13px;
-      padding:8px 10px;
-      border-radius:10px;
-      background:#e0f2fe;
-      color:#1e3a8a;
-      margin-top:8px;
-    }
-
-    .msg {
-      margin-top:8px;
-      font-size:13px;
-    }
-    .msg.error { color:#b91c1c; font-weight:bold; }
-    .msg.success { color:#047857; font-weight:bold; }
-
-    .controls-row {
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:8px;
-      margin-bottom:10px;
-      align-items:center;
-      font-size:13px;
-    }
-
-    .controls-row select,
-    .controls-row input[type="text"],
-    .controls-row input[type="number"] {
-      padding:6px 8px;
-      border-radius:999px;
-      border:1px solid #d1d5db;
-      font-size:12px;
-    }
-
-    .btn {
-      padding:6px 10px;
-      border-radius:999px;
-      border:none;
-      cursor:pointer;
-      font-size:12px;
-    }
-    .btn-primary {
-      background:#0d6efd;
-      color:white;
-    }
-    .btn-outline {
-      background:white;
-      border:1px solid #d1d5db;
-      color:#111827;
-    }
-    .btn-export {
-      background:#16a34a;
-      color:white;
-    }
-
-    table {
-      width:100%;
-      border-collapse:collapse;
-      margin-top:6px;
-      background:white;
-      font-size:13px;
-    }
-    th, td {
-      border:1px solid #e5e7eb;
-      padding:6px 6px;
-      text-align:left;
-    }
-    th {
-      background:#f3f4f6;
-      font-weight:bold;
-      font-size:12px;
-      white-space:nowrap;
+      box-shadow:0 4px 14px rgba(15,23,42,0.08);
     }
 
     .badge {
@@ -182,180 +109,226 @@
       padding:2px 8px;
       border-radius:999px;
       font-size:11px;
-      color:white;
+      background:#e5e7eb;
+      color:#374151;
+      margin-left:4px;
     }
-    .badge-not { background:#6b7280; }
-    .badge-progress { background:#f59e0b; }
-    .badge-done { background:#16a34a; }
+    .badge-ok    { background:#dcfce7; color:#166534; }
+    .badge-warn  { background:#fef3c7; color:#92400e; }
+    .badge-error { background:#fee2e2; color:#b91c1c; }
 
-    .status-select {
-      padding:3px 6px;
-      border-radius:999px;
-      border:1px solid #d1d5db;
-      font-size:11px;
-      background:#f9fafb;
+    .status-row {
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+      font-size:13px;
     }
 
-    .course-list {
+    .form-row {
       display:flex;
       flex-wrap:wrap;
       gap:10px;
-      margin-top:12px;
     }
-    .course-card {
-      flex:1 1 260px;
-      background:#f9fafb;
-      border-radius:14px;
-      padding:10px 12px;
-      border:1px solid #e5e7eb;
-    }
-    .course-card h3 {
-      margin:0 0 4px;
-      font-size:15px;
-      color:#0d6efd;
-    }
-    .course-card p {
-      margin:0;
-      font-size:12px;
-      color:#4b5563;
-    }
-    .course-meta {
-      margin-top:4px;
-      font-size:11px;
-      color:#6b7280;
-    }
-    .course-actions {
+    .form-group {
+      flex:1 1 200px;
       margin-top:8px;
     }
+    label {
+      display:block;
+      font-size:13px;
+      font-weight:bold;
+      margin-bottom:4px;
+    }
+    input[type="text"],
+    input[type="password"] {
+      width:100%;
+      padding:8px 10px;
+      border-radius:8px;
+      border:1px solid #d1d5db;
+      font-size:13px;
+    }
 
-    .no-access {
-      font-size:14px;
+    .btn-main {
+      padding:9px 14px;
+      border-radius:999px;
+      border:none;
+      font-size:13px;
+      cursor:pointer;
+      background:linear-gradient(135deg,#20c997,#0d6efd);
+      color:white;
+      font-weight:bold;
+      box-shadow:0 3px 10px rgba(32,201,151,0.45);
+    }
+    .btn-main:hover {
+      transform:translateY(-1px);
+    }
+
+    .btn-ghost {
+      padding:7px 12px;
+      border-radius:999px;
+      border:1px dashed #9ca3af;
+      background:#f9fafb;
+      font-size:12px;
+      cursor:pointer;
+    }
+
+    .msg {
+      font-size:12px;
+      margin-top:6px;
+    }
+    .msg.error {
       color:#b91c1c;
-      padding:10px;
-      border-radius:10px;
-      background:#fee2e2;
+      font-weight:bold;
+    }
+    .msg.success {
+      color:#15803d;
+      font-weight:bold;
+    }
+
+    table {
+      width:100%;
+      border-collapse:collapse;
       margin-top:10px;
+      font-size:13px;
+      background:white;
+    }
+    th,td {
+      border:1px solid #e5e7eb;
+      padding:6px 8px;
+      text-align:left;
+    }
+    th {
+      background:#f3f4f6;
+      font-weight:bold;
     }
 
     footer {
       text-align:center;
-      padding:10px;
+      padding:12px;
       background:#111827;
-      color:#e5e7eb;
+      color:white;
       font-size:12px;
+    }
+
+    @media (max-width:640px) {
+      .form-row { flex-direction:column; }
     }
   </style>
 </head>
 <body>
+
 <header>
   <div class="header-main">
-    <img src="https://www.urrschool.com/favicon.ico" alt="URR Logo" class="logo" />
+    <img src="https://www.urrschool.com/favicon.ico" alt="โลโก้โรงเรียน" class="logo">
     <div class="header-text">
-      <h1>ระบบเรียนออนไลน์ URR School</h1>
-      <p>เข้าเรียนออนไลน์ เก็บชั่วโมงเรียน และบันทึกผลการเรียน</p>
+      <h1>ระบบเรียนออนไลน์</h1>
+      <p>โรงเรียนอุบลบุรีรักษ์การบริบาล | ต้องเข้าสู่ระบบ 2 ชั้นก่อนเข้าเรียนได้</p>
     </div>
   </div>
+
   <nav>
     <a href="index.html">หน้าแรก</a>
-    <a href="login.html">เข้าสู่ระบบ</a>
-    <a href="register.html">สมัครสมาชิก</a>
-    <a href="online-learning.html">ระบบเรียนออนไลน์</a>
-    <a href="admin-members.html">Admin สมาชิก</a>
+    <a href="login.html">เข้าสู่ระบบหลัก</a>
+    <a href="register.html">ลงทะเบียนสมาชิก</a>
+    <a href="dashboard.html">ฐานข้อมูล (Admin)</a>
   </nav>
 </header>
 
 <main>
-  <!-- สถานะผู้ใช้ -->
-  <div class="card">
-    <h2>สถานะผู้ใช้งาน</h2>
-    <p class="sub">
-      ต้องล็อกอินก่อนจึงจะเข้าใช้ระบบเรียนออนไลน์ได้ ระบบจะบันทึกข้อมูลใน Firestore และสามารถ Export เป็น Excel (.csv)
-    </p>
-    <div id="userInfo" class="user-info">
-      กำลังตรวจสอบสถานะการเข้าสู่ระบบ...
-    </div>
-    <div id="userMsg" class="msg"></div>
-  </div>
 
-  <!-- ถ้ายังไม่ได้ล็อกอิน -->
-  <div class="card" id="noLoginCard" style="display:none;">
-    <h2>ยังไม่ได้เข้าสู่ระบบ</h2>
+  <!-- ชั้นที่ 1: สถานะสมาชิก -->
+  <section class="card" id="memberStatusCard">
+    <h2>ขั้นที่ 1: ตรวจสอบการเข้าสู่ระบบสมาชิก</h2>
     <p class="sub">
-      กรุณาเข้าสู่ระบบก่อนเข้าใช้งานระบบเรียนออนไลน์
-    </p>
-    <div class="no-access">
-      คุณยังไม่ได้ล็อกอิน | <a href="login.html">ไปหน้าเข้าสู่ระบบ</a> |
-      <a href="register.html">สมัครสมาชิกใหม่</a>
-    </div>
-  </div>
-
-  <!-- รายวิชาออนไลน์ของฉัน -->
-  <div class="card" id="myCoursesCard" style="display:none;">
-    <h2>รายวิชาออนไลน์ของฉัน</h2>
-    <p class="sub">
-      ระบบจะแสดงวิชาที่คุณลงทะเบียนเรียนแล้ว สามารถปรับสถานะ เพิ่มชั่วโมงเรียน และ Export ข้อมูลออกเป็น Excel ได้
+      ต้องเป็นสมาชิกที่เข้าสู่ระบบผ่าน Firebase แล้ว และมีสถานะ <strong>approved</strong> จึงจะเข้าเรียนออนไลน์ได้
     </p>
 
-    <div class="controls-row">
-      <span>Export ข้อมูลชั่วโมงเรียนของฉัน:</span>
-      <button class="btn btn-export" id="btnExportMyCourses">Export CSV</button>
+    <div class="status-row">
+      <div>
+        สถานะปัจจุบัน:
+        <span id="memberStatusText" class="badge badge-error">ยังไม่ได้ตรวจสอบ</span>
+      </div>
+      <div id="memberNameText"></div>
     </div>
 
-    <table id="myCoursesTable">
+    <div style="margin-top:8px; font-size:13px;">
+      <button id="btnGoLogin" class="btn-main">ไปหน้าเข้าสู่ระบบ</button>
+      <button id="btnRefreshMember" class="btn-ghost">รีเฟรชสถานะ</button>
+    </div>
+
+    <div id="memberMsg" class="msg"></div>
+  </section>
+
+  <!-- ชั้นที่ 2: รหัสเข้าสู่ระบบเรียนออนไลน์ -->
+  <section class="card" id="secondLoginCard" style="display:none;">
+    <h2>ขั้นที่ 2: รหัสเข้าสู่ระบบเรียนออนไลน์ (ชั้นที่ 2)</h2>
+    <p class="sub">
+      เพื่อความปลอดภัยของระบบเรียนออนไลน์ ให้กรอกรหัสเข้าใช้งานอีกชั้นหนึ่ง<br>
+      (รหัสนี้สามารถเปลี่ยนภายหลังโดยผู้ดูแลระบบได้)
+    </p>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="onlineCodeInput">รหัสเข้าเรียนออนไลน์</label>
+        <input type="password" id="onlineCodeInput" placeholder="เช่น UBR-ONLINE-2025">
+      </div>
+      <div class="form-group" style="align-self:flex-end;">
+        <button id="btnVerifyOnlineCode" class="btn-main">ยืนยันรหัสเข้าเรียนออนไลน์</button>
+      </div>
+    </div>
+
+    <div id="secondLoginMsg" class="msg"></div>
+  </section>
+
+  <!-- พื้นที่เรียนออนไลน์ -->
+  <section class="card" id="learningArea" style="display:none;">
+    <h2>ระบบเรียนออนไลน์ | รายวิชาที่เปิดเรียน</h2>
+    <p class="sub">
+      แสดงรายวิชาที่คุณสามารถเข้าเรียนได้ พร้อมจำนวนชั่วโมงเรียน และสถานะความก้าวหน้า<br>
+      สามารถ Export รายวิชาและชั่วโมงเรียนออกเป็นไฟล์ CSV (เปิดด้วย Excel) ได้
+    </p>
+
+    <div style="display:flex; flex-wrap:wrap; gap:8px; align-items:center; margin-bottom:6px;">
+      <button id="btnExportCourses" class="btn-ghost">Export รายวิชาเป็น CSV</button>
+      <span style="font-size:12px; color:#6b7280;">
+        * ข้อมูลนี้เก็บในเบราว์เซอร์ เพื่อทดสอบการออกแบบระบบ
+      </span>
+    </div>
+
+    <table id="coursesTable">
       <thead>
         <tr>
-          <th>รายวิชา</th>
-          <th>สถานะ</th>
+          <th>รหัสวิชา</th>
+          <th>ชื่อวิชา</th>
+          <th>ชั่วโมงทั้งหมด</th>
           <th>ชั่วโมงที่เรียนแล้ว</th>
-          <th>ชั่วโมงรวมของวิชา</th>
-          <th>แก้ไขข้อมูล</th>
-          <th>อัปเดตล่าสุด</th>
+          <th>ชั่วโมงคงเหลือ</th>
+          <th>สถานะ</th>
         </tr>
       </thead>
       <tbody>
-        <!-- แถวข้อมูลจะถูกเติมด้วย JS -->
+        <!-- เติมด้วย JS -->
       </tbody>
     </table>
-  </div>
+  </section>
 
-  <!-- รายวิชาที่เปิดสอน (เลือกลงทะเบียน) -->
-  <div class="card" id="availableCoursesCard" style="display:none;">
-    <h2>รายวิชาออนไลน์ที่เปิดให้เรียน</h2>
-    <p class="sub">
-      เลือกรายวิชาที่ต้องการลงทะเบียนเรียนออนไลน์ (ข้อมูลวิชาถูกดึงจาก Firestore collection: <strong>onlineCourses</strong>)
-    </p>
-    <div id="coursesMsg" class="msg"></div>
-    <div class="course-list" id="courseList">
-      <!-- รายวิชาที่เปิดสอน -->
-    </div>
-  </div>
 </main>
 
 <footer>
-  © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | ระบบเรียนออนไลน์ (เชื่อม Firebase)
+  © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | ระบบเรียนออนไลน์ 2 ชั้น (Firebase + Online Code)
 </footer>
 
+<!-- SCRIPT: Firebase + Double Login + Export -->
 <script type="module">
-  // ============ Firebase Setup ============
+  // ===== Firebase SDK =====
   import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
   import {
     getAuth,
     onAuthStateChanged
   } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
-  import {
-    getFirestore,
-    collection,
-    doc,
-    getDoc,
-    getDocs,
-    query,
-    where,
-    orderBy,
-    setDoc,
-    updateDoc,
-    serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
 
+  // ===== Firebase Config (ชุดเดียวกับ login.html) =====
   const firebaseConfig = {
     apiKey: "AIzaSyBhlCI3LfdCnOJzrTbK59nxL-77VyF9Mm0",
     authDomain: "urrschool-system.firebaseapp.com",
@@ -368,372 +341,294 @@
 
   const app  = initializeApp(firebaseConfig);
   const auth = getAuth(app);
-  const db   = getFirestore(app);
 
-  // collection names
-  const COL_COURSES     = "onlineCourses";
-  const COL_ENROLLMENTS = "onlineEnrollments";
+  console.log("✅ Firebase loaded on online-learning page");
 
-  let currentUser = null;
-  let coursesCache = [];       // รายวิชาทั้งหมด
-  let enrollmentsCache = [];   // การลงทะเบียนของ user ปัจจุบัน
+  // ===== KEY ต่าง ๆ =====
+  const CURRENT_USER_KEY    = "urr_current_user";          // จาก login.html
+  const ONLINE_SESSION_KEY  = "urr_online_learning_ok";    // login ชั้นที่ 2
+  const ONLINE_COURSES_KEY  = "urr_online_learning_courses";
 
-  const userInfoEl          = document.getElementById("userInfo");
-  const userMsgEl           = document.getElementById("userMsg");
-  const myCoursesCardEl     = document.getElementById("myCoursesCard");
-  const availableCoursesEl  = document.getElementById("availableCoursesCard");
-  const noLoginCardEl       = document.getElementById("noLoginCard");
-  const coursesMsgEl        = document.getElementById("coursesMsg");
+  const ONLINE_CODE = "UBR-ONLINE-2025"; // ★★ เปลี่ยนรหัสที่นี่ได้ตามต้องการ ★★
 
-  function showUserMsg(text, type = "") {
-    userMsgEl.textContent = text;
-    userMsgEl.className = "msg " + (type || "");
-  }
-
-  function showCoursesMsg(text, type = "") {
-    coursesMsgEl.textContent = text;
-    coursesMsgEl.className = "msg " + (type || "");
-  }
-
-  // ============ Load Data ============
-  async function loadCourses() {
-    coursesCache = [];
+  // ===== UTIL =====
+  function loadJson(key, fallback) {
     try {
-      const q = query(collection(db, COL_COURSES), orderBy("title","asc"));
-      const snap = await getDocs(q);
-      snap.forEach(docSnap => {
-        coursesCache.push({ id: docSnap.id, ...docSnap.data() });
-      });
-      if (coursesCache.length === 0) {
-        showCoursesMsg("ยังไม่มีการสร้างรายวิชาออนไลน์ใน Firestore (onlineCourses)", "error");
-      } else {
-        showCoursesMsg("โหลดรายวิชาออนไลน์สำเร็จ ("+coursesCache.length+" รายการ)", "success");
+      const raw = localStorage.getItem(key);
+      if (!raw) return fallback;
+      return JSON.parse(raw);
+    } catch {
+      return fallback;
+    }
+  }
+
+  function saveJson(key, value) {
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
+  function getLocalProfile() {
+    try {
+      return JSON.parse(localStorage.getItem(CURRENT_USER_KEY) || "null");
+    } catch {
+      return null;
+    }
+  }
+
+  function getSecondLoginFlag() {
+    return sessionStorage.getItem(ONLINE_SESSION_KEY) === "true";
+  }
+
+  function setSecondLoginFlag(val) {
+    if (val) {
+      sessionStorage.setItem(ONLINE_SESSION_KEY, "true");
+    } else {
+      sessionStorage.removeItem(ONLINE_SESSION_KEY);
+    }
+  }
+
+  // ===== อัปเดต UI ของขั้นที่ 1 =====
+  function updateMemberStatusUI(profile, authUser) {
+    const statusSpan = document.getElementById("memberStatusText");
+    const nameSpan   = document.getElementById("memberNameText");
+    const msgEl      = document.getElementById("memberMsg");
+
+    if (!statusSpan || !nameSpan || !msgEl) return;
+
+    if (!authUser) {
+      statusSpan.textContent = "ยังไม่ได้เข้าสู่ระบบ Firebase";
+      statusSpan.className = "badge badge-error";
+      nameSpan.textContent = "";
+      msgEl.textContent = "กรุณาเข้าสู่ระบบที่หน้า login.html ก่อน (ขั้นที่ 1)";
+      msgEl.className = "msg error";
+
+      // บล็อกขั้นที่ 2 และพื้นที่เรียนออนไลน์
+      document.getElementById("secondLoginCard").style.display = "none";
+      document.getElementById("learningArea").style.display    = "none";
+      return;
+    }
+
+    if (!profile) {
+      statusSpan.textContent = "ไม่พบข้อมูลโปรไฟล์ในเบราว์เซอร์";
+      statusSpan.className = "badge badge-warn";
+      nameSpan.textContent = authUser.email || "";
+      msgEl.textContent =
+        "ระบบพบว่าคุณล็อกอิน Firebase แล้ว แต่ไม่มี profile ใน localStorage (urr_current_user) กรุณาลองล็อกอินใหม่อีกครั้งที่หน้า login.html";
+      msgEl.className = "msg error";
+
+      document.getElementById("secondLoginCard").style.display = "none";
+      document.getElementById("learningArea").style.display    = "none";
+      return;
+    }
+
+    // มี profile แล้ว
+    const fullName = (profile.firstName || "") + (profile.lastName ? " " + profile.lastName : "");
+    nameSpan.textContent = `สมาชิก: ${fullName || profile.email || authUser.email || "ไม่ทราบชื่อ"} (role: ${profile.role || "user"})`;
+
+    if (profile.status !== "approved") {
+      statusSpan.textContent = "สถานะ: " + (profile.status || "unknown");
+      statusSpan.className = "badge badge-error";
+      msgEl.textContent =
+        "บัญชีของคุณยังไม่ได้รับการอนุมัติ (approved) จากผู้ดูแล จึงยังเข้าเรียนออนไลน์ไม่ได้";
+      msgEl.className = "msg error";
+
+      document.getElementById("secondLoginCard").style.display = "none";
+      document.getElementById("learningArea").style.display    = "none";
+      return;
+    }
+
+    statusSpan.textContent = "เข้าสู่ระบบแล้ว (approved)";
+    statusSpan.className = "badge badge-ok";
+    msgEl.textContent = "ผ่านขั้นที่ 1 เรียบร้อย สามารถกรอกรหัสชั้นที่ 2 เพื่อเข้าเรียนออนไลน์ได้";
+    msgEl.className = "msg success";
+
+    // เปิดขั้นที่ 2
+    document.getElementById("secondLoginCard").style.display = "block";
+
+    // ถ้าเคยผ่านรหัสออนไลน์แล้ว ให้เปิดพื้นที่เรียนเลย
+    if (getSecondLoginFlag()) {
+      showLearningArea();
+    }
+  }
+
+  // ===== ระบบชั้นที่ 2: รหัสเข้าเรียนออนไลน์ =====
+  function setupSecondLogin() {
+    const btn = document.getElementById("btnVerifyOnlineCode");
+    const input = document.getElementById("onlineCodeInput");
+    const msgEl = document.getElementById("secondLoginMsg");
+
+    if (!btn || !input || !msgEl) return;
+
+    btn.addEventListener("click", () => {
+      const code = (input.value || "").trim();
+      msgEl.textContent = "";
+      msgEl.className = "msg";
+
+      if (!code) {
+        msgEl.textContent = "กรุณากรอกรหัสเข้าเรียนออนไลน์";
+        msgEl.className = "msg error";
+        return;
       }
-    } catch (err) {
-      console.error("loadCourses error:", err);
-      showCoursesMsg("ไม่สามารถโหลดรายวิชาออนไลน์ได้", "error");
+
+      if (code !== ONLINE_CODE) {
+        msgEl.textContent = "รหัสเข้าเรียนออนไลน์ไม่ถูกต้อง";
+        msgEl.className = "msg error";
+        return;
+      }
+
+      setSecondLoginFlag(true);
+      msgEl.textContent = "ยืนยันรหัสถูกต้อง! เปิดระบบเรียนออนไลน์แล้ว";
+      msgEl.className = "msg success";
+      showLearningArea();
+    });
+  }
+
+  function showLearningArea() {
+    document.getElementById("learningArea").style.display = "block";
+  }
+
+  // ===== ระบบรายวิชา + Export CSV =====
+  function initCoursesIfEmpty() {
+    let courses = loadJson(ONLINE_COURSES_KEY, null);
+    if (!courses || !Array.isArray(courses) || courses.length === 0) {
+      courses = [
+        {
+          code: "NA101",
+          name: "พื้นฐานการพยาบาลผู้ป่วยทั่วไป",
+          totalHours: 30,
+          learnedHours: 6
+        },
+        {
+          code: "NA102",
+          name: "การดูแลผู้สูงอายุและผู้ป่วยติดเตียง",
+          totalHours: 40,
+          learnedHours: 12
+        },
+        {
+          code: "NA103",
+          name: "ทักษะปฏิบัติในห้องพยาบาล (ออนไลน์เสริม)",
+          totalHours: 20,
+          learnedHours: 5
+        }
+      ];
+      saveJson(ONLINE_COURSES_KEY, courses);
     }
+    return courses;
   }
 
-  async function loadEnrollments() {
-    if (!currentUser) return;
-    enrollmentsCache = [];
-    try {
-      const q = query(
-        collection(db, COL_ENROLLMENTS),
-        where("uid","==",currentUser.uid)
-      );
-      const snap = await getDocs(q);
-      snap.forEach(docSnap => {
-        enrollmentsCache.push({ id: docSnap.id, ...docSnap.data() });
-      });
-    } catch (err) {
-      console.error("loadEnrollments error:", err);
-    }
-  }
-
-  function getCourseById(courseId) {
-    return coursesCache.find(c => c.id === courseId) || null;
-  }
-
-  function findEnrollment(courseId) {
-    return enrollmentsCache.find(e => e.courseId === courseId) || null;
-  }
-
-  // ============ Render My Courses ============
-  function statusBadgeClass(status) {
-    switch (status) {
-      case "in_progress": return "badge badge-progress";
-      case "done":        return "badge badge-done";
-      case "not_started":
-      default:            return "badge badge-not";
-    }
-  }
-
-  function statusLabel(status) {
-    switch (status) {
-      case "in_progress": return "กำลังเรียน";
-      case "done":        return "เรียนจบแล้ว";
-      case "not_started":
-      default:            return "ยังไม่เริ่ม";
-    }
-  }
-
-  function renderMyCourses() {
-    const tbody = document.querySelector("#myCoursesTable tbody");
+  function renderCourses() {
+    const tbody = document.querySelector("#coursesTable tbody");
+    if (!tbody) return;
     tbody.innerHTML = "";
 
-    if (!enrollmentsCache || enrollmentsCache.length === 0) {
-      const tr = document.createElement("tr");
-      const td = document.createElement("td");
-      td.colSpan = 6;
-      td.textContent = "ยังไม่มีรายวิชาออนไลน์ที่คุณลงทะเบียน";
-      tbody.appendChild(tr);
-      tr.appendChild(td);
-      return;
-    }
+    const courses = initCoursesIfEmpty();
 
-    enrollmentsCache.forEach(e => {
-      const course = getCourseById(e.courseId);
+    courses.forEach(c => {
+      const remain = Math.max(0, (c.totalHours || 0) - (c.learnedHours || 0));
+      const status =
+        remain <= 0 ? "เรียนครบแล้ว" :
+        c.learnedHours > 0 ? "กำลังเรียน" : "ยังไม่เริ่ม";
+
       const tr = document.createElement("tr");
 
-      const tdCourse = document.createElement("td");
-      const tdStatus = document.createElement("td");
-      const tdHours  = document.createElement("td");
+      const tdCode   = document.createElement("td");
+      const tdName   = document.createElement("td");
       const tdTotal  = document.createElement("td");
-      const tdEdit   = document.createElement("td");
-      const tdTime   = document.createElement("td");
+      const tdDone   = document.createElement("td");
+      const tdRemain = document.createElement("td");
+      const tdStatus = document.createElement("td");
 
-      tdCourse.textContent = course ? (course.title || "-") : "(วิชาไม่พบ)";
+      tdCode.textContent   = c.code || "-";
+      tdName.textContent   = c.name || "-";
+      tdTotal.textContent  = c.totalHours ?? "-";
+      tdDone.textContent   = c.learnedHours ?? 0;
+      tdRemain.textContent = remain;
+      tdStatus.textContent = status;
 
-      const badge = document.createElement("span");
-      badge.className = statusBadgeClass(e.status || "not_started");
-      badge.textContent = statusLabel(e.status || "not_started");
-      tdStatus.appendChild(badge);
-
-      tdHours.textContent = (e.hours || 0) + " ชม.";
-      tdTotal.textContent = course && course.totalHours
-        ? course.totalHours + " ชม."
-        : "-";
-
-      const statusSelect = document.createElement("select");
-      statusSelect.className = "status-select";
-      [
-        { v:"not_started", t:"ยังไม่เริ่ม" },
-        { v:"in_progress", t:"กำลังเรียน" },
-        { v:"done",        t:"เรียนจบแล้ว" }
-      ].forEach(opt => {
-        const o = document.createElement("option");
-        o.value = opt.v;
-        o.textContent = opt.t;
-        statusSelect.appendChild(o);
-      });
-      statusSelect.value = e.status || "not_started";
-
-      const hoursInput = document.createElement("input");
-      hoursInput.type = "number";
-      hoursInput.min  = "0";
-      hoursInput.step = "0.5";
-      hoursInput.value = e.hours || 0;
-      hoursInput.style.maxWidth = "80px";
-      hoursInput.style.marginLeft = "4px";
-
-      const btnSave = document.createElement("button");
-      btnSave.className = "btn btn-primary";
-      btnSave.textContent = "บันทึก";
-      btnSave.style.marginLeft = "4px";
-
-      btnSave.addEventListener("click", async () => {
-        const newStatus = statusSelect.value;
-        const newHours  = parseFloat(hoursInput.value || "0");
-        if (newHours < 0) {
-          alert("จำนวนชั่วโมงต้องไม่ติดลบ");
-          return;
-        }
-        await updateEnrollment(e.id, newStatus, newHours);
-      });
-
-      tdEdit.appendChild(statusSelect);
-      tdEdit.appendChild(hoursInput);
-      tdEdit.appendChild(btnSave);
-
-      let updatedStr = "-";
-      if (e.updatedAt && e.updatedAt.toDate) {
-        updatedStr = e.updatedAt.toDate().toISOString().substring(0,10);
-      } else if (typeof e.updatedAt === "string") {
-        updatedStr = e.updatedAt.substring(0,10);
-      }
-      tdTime.textContent = updatedStr;
-
-      tr.appendChild(tdCourse);
-      tr.appendChild(tdStatus);
-      tr.appendChild(tdHours);
+      tr.appendChild(tdCode);
+      tr.appendChild(tdName);
       tr.appendChild(tdTotal);
-      tr.appendChild(tdEdit);
-      tr.appendChild(tdTime);
+      tr.appendChild(tdDone);
+      tr.appendChild(tdRemain);
+      tr.appendChild(tdStatus);
 
       tbody.appendChild(tr);
     });
   }
 
-  // ============ Render Available Courses ============
-  function renderAvailableCourses() {
-    const container = document.getElementById("courseList");
-    container.innerHTML = "";
-
-    if (!coursesCache || coursesCache.length === 0) {
-      const div = document.createElement("div");
-      div.textContent = "ยังไม่มีรายวิชาออนไลน์ที่เปิดในระบบ";
-      container.appendChild(div);
-      return;
-    }
-
-    coursesCache.forEach(c => {
-      const enrolled = findEnrollment(c.id);
-
-      const card = document.createElement("div");
-      card.className = "course-card";
-
-      const h3 = document.createElement("h3");
-      h3.textContent = c.title || "(ไม่ระบุชื่อวิชา)";
-      const p = document.createElement("p");
-      p.textContent = c.description || "ยังไม่มีคำอธิบายรายวิชา";
-
-      const meta = document.createElement("div");
-      meta.className = "course-meta";
-      const hoursText = c.totalHours ? c.totalHours + " ชั่วโมง" : "จำนวนชั่วโมงไม่ระบุ";
-      meta.textContent = "ชั่วโมงรวม: " + hoursText;
-
-      const actions = document.createElement("div");
-      actions.className = "course-actions";
-
-      const btn = document.createElement("button");
-      btn.className = "btn btn-primary";
-
-      if (enrolled) {
-        btn.textContent = "ลงทะเบียนแล้ว";
-        btn.disabled = true;
-      } else {
-        btn.textContent = "ลงทะเบียนเรียนวิชานี้";
-        btn.addEventListener("click", async () => {
-          await enrollCourse(c.id);
-        });
-      }
-
-      actions.appendChild(btn);
-
-      card.appendChild(h3);
-      card.appendChild(p);
-      card.appendChild(meta);
-      card.appendChild(actions);
-
-      container.appendChild(card);
-    });
-  }
-
-  // ============ Firestore Operations ============
-  async function enrollCourse(courseId) {
-    if (!currentUser) return;
-    try {
-      const enrollId = currentUser.uid + "_" + courseId;
-      const ref = doc(db, COL_ENROLLMENTS, enrollId);
-      const snap = await getDoc(ref);
-      if (!snap.exists()) {
-        await setDoc(ref, {
-          uid: currentUser.uid,
-          email: currentUser.email || null,
-          courseId,
-          status: "not_started",
-          hours: 0,
-          createdAt: serverTimestamp(),
-          updatedAt: serverTimestamp()
-        });
-      }
-      await loadEnrollments();
-      renderMyCourses();
-      renderAvailableCourses();
-      showCoursesMsg("ลงทะเบียนรายวิชาเรียบร้อย", "success");
-    } catch (err) {
-      console.error("enrollCourse error:", err);
-      showCoursesMsg("ไม่สามารถลงทะเบียนรายวิชาได้", "error");
-    }
-  }
-
-  async function updateEnrollment(enrollId, newStatus, newHours) {
-    try {
-      const ref = doc(db, COL_ENROLLMENTS, enrollId);
-      await updateDoc(ref, {
-        status: newStatus,
-        hours: newHours,
-        updatedAt: serverTimestamp()
-      });
-      await loadEnrollments();
-      renderMyCourses();
-      showUserMsg("บันทึกข้อมูลการเรียนเรียบร้อย", "success");
-    } catch (err) {
-      console.error("updateEnrollment error:", err);
-      showUserMsg("บันทึกข้อมูลการเรียนไม่สำเร็จ", "error");
-    }
-  }
-
-  // ============ Export CSV ============
-  function exportMyCoursesCsv() {
-    if (!currentUser) return;
-    if (!enrollmentsCache || enrollmentsCache.length === 0) {
-      alert("คุณยังไม่มีรายวิชาออนไลน์ในระบบ");
+  function exportCoursesCsv() {
+    const courses = initCoursesIfEmpty();
+    if (!courses || courses.length === 0) {
+      alert("ยังไม่มีข้อมูลรายวิชาในระบบ");
       return;
     }
 
     const headers = [
-      "courseId","courseTitle","status","hours","totalHours","updatedAt"
+      "code","name","totalHours","learnedHours","remainHours","status"
     ];
     const rows = [headers.join(",")];
 
-    enrollmentsCache.forEach(e => {
-      const c = getCourseById(e.courseId);
-      const updatedStr = e.updatedAt && e.updatedAt.toDate
-        ? e.updatedAt.toDate().toISOString()
-        : (e.updatedAt || "");
+    courses.forEach(c => {
+      const remain = Math.max(0, (c.totalHours || 0) - (c.learnedHours || 0));
+      const status =
+        remain <= 0 ? "เรียนครบแล้ว" :
+        c.learnedHours > 0 ? "กำลังเรียน" : "ยังไม่เริ่ม";
 
       const row = [
-        e.courseId || "",
-        c ? (c.title || "") : "",
-        e.status || "",
-        e.hours || 0,
-        c && c.totalHours ? c.totalHours : "",
-        updatedStr
+        c.code || "",
+        c.name || "",
+        c.totalHours ?? "",
+        c.learnedHours ?? "",
+        remain,
+        status
       ].map(v => `"${String(v).replace(/"/g,'""')}"`);
+
       rows.push(row.join(","));
     });
 
     const csvContent = rows.join("\r\n");
     const blob = new Blob([csvContent], {type:"text/csv;charset=utf-8;"});
-    const url  = URL.createObjectURL(blob);
+    const url = URL.createObjectURL(blob);
+
     const a = document.createElement("a");
     a.href = url;
-    a.download = "online_learning_" + (currentUser.uid || "user") + ".csv";
+    a.download = "online_learning_courses.csv";
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
   }
 
-  // ============ Auth Guard ============
-  onAuthStateChanged(auth, async (user) => {
-    currentUser = user;
+  // ===== DOM READY & Firebase Auth =====
+  document.addEventListener("DOMContentLoaded", () => {
+    // ปุ่มไปหน้า login
+    document.getElementById("btnGoLogin").addEventListener("click", () => {
+      window.location.href = "login.html";
+    });
 
-    if (!user) {
-      userInfoEl.textContent = "ยังไม่ได้เข้าสู่ระบบ";
-      showUserMsg("กรุณาเข้าสู่ระบบก่อนเข้าใช้ระบบเรียนออนไลน์", "error");
-      noLoginCardEl.style.display      = "block";
-      myCoursesCardEl.style.display    = "none";
-      availableCoursesEl.style.display = "none";
-      return;
+    // ปุ่มรีเฟรชสถานะ
+    document.getElementById("btnRefreshMember").addEventListener("click", () => {
+      const profile = getLocalProfile();
+      const authUser = auth.currentUser;
+      updateMemberStatusUI(profile, authUser);
+    });
+
+    // ปุ่ม Export
+    const btnExport = document.getElementById("btnExportCourses");
+    if (btnExport) {
+      btnExport.addEventListener("click", exportCoursesCsv);
     }
 
-    userInfoEl.innerHTML =
-      "เข้าสู่ระบบด้วย: <strong>" + (user.email || user.uid) + "</strong>" +
-      (user.displayName ? " | ชื่อ: " + user.displayName : "");
+    // ตั้งค่าระบบชั้นที่ 2
+    setupSecondLogin();
 
-    showUserMsg("กำลังโหลดข้อมูลรายวิชาและการลงทะเบียนของคุณ...", "");
-
-    noLoginCardEl.style.display      = "none";
-    myCoursesCardEl.style.display    = "block";
-    availableCoursesEl.style.display = "block";
-
-    await loadCourses();
-    await loadEnrollments();
-    renderMyCourses();
-    renderAvailableCourses();
-    showUserMsg("โหลดข้อมูลเรียบร้อย", "success");
+    // render รายวิชา (เฉย ๆ ไว้ก่อน ส่วนการแสดง/ซ่อนดูที่ second login)
+    renderCourses();
   });
 
-  // ============ Events ============
-  document.addEventListener("DOMContentLoaded", () => {
-    const btnExport = document.getElementById("btnExportMyCourses");
-    if (btnExport) {
-      btnExport.addEventListener("click", exportMyCoursesCsv);
-    }
+  // ติดตามสถานะ Firebase Auth
+  onAuthStateChanged(auth, (user) => {
+    const profile = getLocalProfile();
+    updateMemberStatusUI(profile, user);
   });
 </script>
 
