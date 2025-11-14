@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ลืมรหัสผ่าน | โรงเรียนอุบลบุรีรักษ์การบริบาล</title>
+
+  <style>
+    :root {
+      --pink:#ff6fb5;
+      --blue:#0d6efd;
+      --green:#20c997;
+      --card:#fff;
+    }
+
+    body {
+      margin:0;
+      background:
+        radial-gradient(circle at top left,#ffe0f3 0%,transparent 45%),
+        radial-gradient(circle at top right,#e0f2ff 0%,transparent 50%),
+        radial-gradient(circle at bottom,#e7fff4 0%,#f9fafb 60%);
+      font-family:Arial, sans-serif;
+    }
+
+    header {
+      background:linear-gradient(120deg,#ff6fb5,#0d6efd,#20c997);
+      color:white;
+      padding:12px 16px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.18);
+    }
+
+    nav a {
+      margin-right:6px;
+      background:rgba(255,255,255,0.2);
+      padding:4px 10px;
+      border-radius:999px;
+      text-decoration:none;
+      font-size:13px;
+      color:white;
+      border:1px solid rgba(255,255,255,0.3);
+    }
+    nav a:hover {
+      background:white;
+      color:#ff2f92;
+    }
+
+    main {
+      max-width:680px;
+      margin:30px auto;
+      padding:0 16px;
+    }
+
+    .card {
+      background:#fff;
+      border-radius:20px;
+      padding:22px;
+      box-shadow:0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align:center;
+      margin:4px;
+      color:#333;
+    }
+    p.sub {
+      text-align:center;
+      color:#666;
+      margin-bottom:18px;
+      font-size:13px;
+    }
+
+    .form-group {
+      margin-bottom:14px;
+    }
+    label {
+      display:block;
+      font-size:13px;
+      margin-bottom:5px;
+      font-weight:bold;
+    }
+    input {
+      width:100%;
+      padding:10px;
+      border-radius:10px;
+      border:1px solid #d1d5db;
+      font-size:14px;
+    }
+
+    button {
+      width:100%;
+      padding:10px;
+      border:none;
+      border-radius:999px;
+      background:linear-gradient(135deg,#20c997,#0d6efd);
+      color:white;
+      font-size:15px;
+      font-weight:bold;
+      cursor:pointer;
+      margin-top:8px;
+      box-shadow:0 4px 14px rgba(32,201,151,0.4);
+    }
+    button:hover { transform:translateY(-2px); }
+
+    .msg {
+      margin-top:10px;
+      font-size:14px;
+      text-align:center;
+    }
+    .msg.error { color:#c1121f; font-weight:bold; }
+    .msg.success { color:#0f766e; font-weight:bold; }
+
+    footer {
+      margin-top:26px;
+      text-align:center;
+      padding:12px;
+      background:#333;
+      color:white;
+      font-size:13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1 style="margin:0;font-size:20px;">โรงเรียนอุบลบุรีรักษ์การบริบาล</h1>
+  <nav style="margin-top:6px;">
+    <a href="index.html">หน้าแรก</a>
+    <a href="login.html">เข้าสู่ระบบ</a>
+    <a href="register.html">สมัครสมาชิก</a>
+  </nav>
+</header>
+
+<main>
+  <div class="card">
+
+    <h2>ลืมรหัสผ่าน</h2>
+    <p class="sub">กรอกอีเมล หรือเลขบัตรประชาชน ระบบจะส่งลิงก์รีเซ็ตรหัสผ่านไปให้</p>
+
+    <div id="msg" class="msg"></div>
+
+    <div class="form-group">
+      <label>อีเมล หรือ เลขบัตรประชาชน</label>
+      <input type="text" id="idInput" placeholder="เช่น abc@gmail.com หรือ 1234567890123" />
+    </div>
+
+    <button id="btnReset">ส่งลิงก์รีเซ็ตรหัสผ่าน</button>
+
+  </div>
+</main>
+
+<footer>
+  © 2025 ระบบลืมรหัสผ่าน | Firebase Authentication
+</footer>
+
+<!-- Firebase Logic -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+  import {
+    getAuth,
+    sendPasswordResetEmail
+  } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-auth.js";
+
+  import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    getDocs
+  } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+  // Firebase Config
+  const firebaseConfig = {
+    apiKey: "AIzaSyBhlCI3LfdCnOJzrTbK59nxL-77VyF9Mm0",
+    authDomain: "urrschool-system.firebaseapp.com",
+    projectId: "urrschool-system",
+    storageBucket: "urrschool-system.firebasestorage.app",
+    messagingSenderId: "183740550258",
+    appId: "1:183740550258:web:674b73d1843553574fc6eb",
+    measurementId: "G-GHLCDECTDF"
+  };
+
+  const app  = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db   = getFirestore(app);
+
+  function showMsg(t, type = "") {
+    const box = document.getElementById("msg");
+    box.textContent = t;
+    box.className = "msg " + type;
+  }
+
+  // ดึงอีเมลจากเลขบัตรประชาชน
+  async function emailFromCitizenId(cid) {
+    const qRef = query(
+      collection(db, "members"),
+      where("citizenId", "==", cid)
+    );
+    const snap = await getDocs(qRef);
+    if (snap.empty) return null;
+    return snap.docs[0].data().email || null;
+  }
+
+  document.getElementById("btnReset").addEventListener("click", async () => {
+    showMsg("");
+
+    const id = document.getElementById("idInput").value.trim();
+    if (!id) {
+      showMsg("กรุณากรอกอีเมลหรือเลขบัตรประชาชน", "error");
+      return;
+    }
+
+    let emailToUse = id;
+
+    // ถ้าไม่มี @ → แปลว่าเป็น citizen ID
+    if (!id.includes("@")) {
+      emailToUse = await emailFromCitizenId(id);
+      if (!emailToUse) {
+        showMsg("ไม่พบบัญชีจากเลขบัตรนี้ในระบบ", "error");
+        return;
+      }
+    }
+
+    try {
+      await sendPasswordResetEmail(auth, emailToUse);
+      showMsg("ส่งลิงก์รีเซ็ตรหัสผ่านไปที่ " + emailToUse, "success");
+    } catch (err) {
+      console.error(err);
+      let m = "ไม่สามารถส่งลิงก์ได้";
+
+      if (err.code === "auth/user-not-found") m = "ไม่พบบัญชีผู้ใช้นี้";
+      if (err.code === "auth/invalid-email") m = "รูปแบบอีเมลไม่ถูกต้อง";
+
+      showMsg(m, "error");
+    }
+  });
+</script>
+
+</body>
+</html>
