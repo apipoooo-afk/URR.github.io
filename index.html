@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>โรงเรียนอุบลบุรีรักษ์การบริบาล | Ubon Buri Rak Nursing Assistant School</title>
 
-  <!-- ถ้ามีไฟล์ css เดิม ให้คงไว้ได้ -->
   <link rel="stylesheet" href="assets/style.css">
   <link rel="stylesheet" href="exam.css">
 
@@ -19,9 +18,7 @@
       --card-bg: #ffffff;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       font-family: Arial, sans-serif;
@@ -117,16 +114,16 @@
     }
 
     main {
-      padding: 20px 16px 40px;
+      padding: 18px 16px 40px;
       max-width: 1200px;
       margin: auto;
     }
 
     main > section {
-      margin-bottom: 32px;
+      margin-bottom: 24px;
       background: var(--card-bg);
       border-radius: 16px;
-      padding: 18px 18px 20px;
+      padding: 16px 18px 18px;
       box-shadow: 0 4px 14px rgba(15,23,42,0.08);
       position: relative;
       overflow: hidden;
@@ -140,7 +137,6 @@
       align-items: center;
       gap: 6px;
     }
-
     section h2 span.icon {
       font-size: 22px;
     }
@@ -266,18 +262,25 @@
       font-size: 14px;
     }
 
-    /* การ์ดหลักสูตร */
+    /* การ์ดหลักสูตร (แถวเดียวแนวนอน) */
+    .course-row {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
     .course-card {
       background: linear-gradient(135deg, #ffffff, #f9fafb);
       border-radius: 12px;
-      padding: 14px 16px;
-      margin-bottom: 12px;
+      padding: 12px 14px;
       box-shadow: 0 2px 8px rgba(148,163,184,0.3);
       border-left: 4px solid #3b82f6;
+      min-width: 260px;
+      flex: 0 0 auto;
     }
     .course-card h3 {
       margin: 0 0 4px;
-      font-size: 16px;
+      font-size: 15px;
       color: #1f2937;
     }
     .course-card small {
@@ -290,19 +293,16 @@
       color: #4b5563;
     }
 
-    /* ฟอร์มสมัคร (ใหม่) */
+    /* ฟอร์มสมัครเรียน: ให้เป็นคอลัมเดียว และอยู่ด้านซ้ายสุดหน้าแรก */
+    #register-section {
+      max-width: 420px;
+      margin: 0 auto 24px 0; /* ซ้ายสุดของ main */
+    }
     .register-box {
       background:#f9fafb;
       border-radius:14px;
       padding:18px 16px;
       box-shadow:inset 0 0 0 1px #e5e7eb;
-      max-width:650px;
-      margin:0 auto;
-    }
-    .register-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
-      gap: 10px 16px;
     }
     .register-box label {
       display:block;
@@ -321,6 +321,7 @@
       font-size:13px;
       transition: all 0.15s ease;
       background:white;
+      margin-bottom:8px;
     }
     .register-box input:focus,
     .register-box textarea:focus,
@@ -382,6 +383,14 @@
       background:#f9fafb;
     }
 
+    /* ADMIN PANEL */
+    #admin-panel table {
+      font-size: 12px;
+    }
+    #admin-panel th, #admin-panel td {
+      padding:4px 6px;
+    }
+
     footer {
       text-align: center;
       padding: 15px;
@@ -403,6 +412,96 @@
       padding:12px 14px;
     }
 
+    /* CHAT WIDGET (AI ถามตอบอัตโนมัติ) */
+    #chat-widget {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 999;
+      font-size: 13px;
+    }
+    #chat-toggle-btn {
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #3b82f6, #9333ea);
+      color: white;
+      padding: 10px 14px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+      display: flex;
+      align-items: center;
+      gap:6px;
+    }
+    #chat-panel {
+      width: 280px;
+      max-height: 360px;
+      background:white;
+      border-radius: 14px;
+      box-shadow: 0 8px 22px rgba(15,23,42,0.45);
+      margin-top: 8px;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #chat-header {
+      background: linear-gradient(135deg,#3b82f6,#10b981);
+      color: white;
+      padding: 8px 10px;
+      font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #chat-messages {
+      flex: 1;
+      padding: 8px;
+      overflow-y: auto;
+      background:#f9fafb;
+    }
+    .chat-msg {
+      margin-bottom: 6px;
+      max-width: 90%;
+      padding: 6px 8px;
+      border-radius: 10px;
+      line-height: 1.3;
+      white-space: pre-wrap;
+    }
+    .chat-msg.user {
+      background:#2563eb;
+      color:white;
+      margin-left:auto;
+      border-bottom-right-radius:2px;
+    }
+    .chat-msg.ai {
+      background:white;
+      color:#111827;
+      border-bottom-left-radius:2px;
+      border:1px solid #e5e7eb;
+    }
+    #chat-input-row {
+      padding: 6px;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      gap: 4px;
+    }
+    #chat-input {
+      flex:1;
+      border-radius:999px;
+      border:1px solid #d1d5db;
+      padding: 4px 8px;
+      font-size: 12px;
+    }
+    #chat-send-btn {
+      border-radius:999px;
+      border:none;
+      padding: 4px 10px;
+      background:#22c55e;
+      color:white;
+      font-size:12px;
+      cursor:pointer;
+    }
+
     @media (max-width: 768px) {
       main {
         padding: 14px 10px 28px;
@@ -417,6 +516,9 @@
         position: static;
         margin-bottom: 8px;
       }
+      #chat-panel {
+        width: 90vw;
+      }
     }
   </style>
 </head>
@@ -429,19 +531,21 @@
 
     <nav>
       <a href="#home">หน้าแรก</a>
-      <a href="#courses-summary">หลักสูตร</a>
       <a href="#register-section">สมัครเรียน</a>
+      <a href="#courses-summary">หลักสูตร</a>
       <a href="#online-learning">ระบบเรียนออนไลน์</a>
       <a href="#student-status">ผลการเรียนและสถานะนักศึกษา</a>
       <a href="#certificates">การขอรับใบประกาศ</a>
-      <a href="#students-db">ฐานข้อมูลนักเรียน</a>
+      <a href="#students-db" id="studentsDbNav" style="display:none;">ฐานข้อมูลนักเรียน</a>
       <a href="#jobs">ตำแหน่งงานว่าง</a>
+      <a href="#ai-knowledge" id="aiKnowledgeNav" style="display:none;">ฐานข้อมูลคำตอบ AI</a>
+      <a href="#admin-panel" id="adminNavLink" style="display:none;">จัดการ Admin/สิทธิ์</a>
       <a href="#about">เกี่ยวกับเรา</a>
       <a href="#contact">ติดต่อเรา</a>
     </nav>
 
     <div class="top-bar">
-      <input type="text" id="loginUser" placeholder="รหัสนักศึกษา / อีเมล">
+      <input type="text" id="loginUser" placeholder="ชื่อผู้ใช้ / รหัสนักศึกษา">
       <input type="password" id="loginPass" placeholder="รหัสผ่าน">
       <button id="loginBtn">เข้าสู่ระบบ</button>
       <button id="logoutBtn" style="display:none;">ออกจากระบบ</button>
@@ -450,6 +554,71 @@
   </header>
 
   <main>
+
+    <!-- ฟอร์มสมัครเรียน (ซ้ายสุดหน้าแรก) -->
+    <section id="register-section">
+      <button class="back-btn" onclick="goBack()">← ย้อนกลับหน้าก่อนนี้</button>
+      <h2><span class="icon">📝</span>แบบฟอร์มสมัครเรียนออนไลน์</h2>
+      <div class="register-box">
+        <p class="small-note">
+          *ฟอร์มนี้บันทึกข้อมูลไว้ในเครื่องของคุณ (localStorage) โรงเรียนสามารถปรับต่อเชื่อมระบบจริงภายหลังได้
+        </p>
+        <form id="quickRegisterForm">
+          <label for="firstName">ชื่อ</label>
+          <input type="text" id="firstName" name="firstName" required>
+
+          <label for="lastName">นามสกุล</label>
+          <input type="text" id="lastName" name="lastName" required>
+
+          <label for="age">อายุ (ปี)</label>
+          <input type="number" id="age" name="age" min="15" max="80">
+
+          <label for="gender">เพศ</label>
+          <select id="gender" name="gender">
+            <option value="">-- เลือกเพศ --</option>
+            <option value="หญิง">หญิง</option>
+            <option value="ชาย">ชาย</option>
+            <option value="อื่น ๆ">อื่น ๆ</option>
+          </select>
+
+          <label for="education">วุฒิการศึกษา</label>
+          <input type="text" id="education" name="education" placeholder="ม.3 / ม.6 / ปวช. / ปวส. / ปริญญาตรี ฯลฯ">
+
+          <label for="phone">เบอร์ติดต่อ</label>
+          <input type="text" id="phone" name="phone">
+
+          <label for="lineId">LINE ID</label>
+          <input type="text" id="lineId" name="lineId">
+
+          <label for="facebook">Facebook</label>
+          <input type="text" id="facebook" name="facebook" placeholder="ลิงก์โปรไฟล์ หรือชื่อบัญชี">
+
+          <label for="address">ที่อยู่ปัจจุบัน</label>
+          <textarea id="address" name="address" rows="2"></textarea>
+
+          <label for="courseSelect">หลักสูตรที่สนใจ</label>
+          <select id="courseSelect" name="courseSelect">
+            <option value="">-- เลือกหลักสูตร --</option>
+            <option value="NA840">พนักงานผู้ช่วยพยาบาล 840 ชม.</option>
+            <option value="ELDERKID840">การดูแลผู้สูงอายุและเด็กเล็ก 840 ชม.</option>
+            <option value="ELDER420">การดูแลผู้สูงอายุ 420 ชม.</option>
+            <option value="KID420">การดูแลเด็กเล็ก 420 ชม.</option>
+            <option value="CAREGIVER510">ผู้ให้การดูแล 510 ชม.</option>
+            <option value="BASIC70">การดูแลผู้สูงอายุเบื้องต้น 70 ชม.</option>
+          </select>
+
+          <label for="extraInfo">ข้อมูลเพิ่มเติม / ข้อความถึงเจ้าหน้าที่</label>
+          <textarea id="extraInfo" name="extraInfo" rows="3"></textarea>
+
+          <div style="margin-top:12px; text-align:center;">
+            <button type="submit" class="btn">ส่งใบสมัคร</button>
+          </div>
+        </form>
+        <p id="formMessage" style="display:none; color:green; margin-top:8px; text-align:center;">
+          ✅ บันทึกข้อมูลผู้สมัครลงในระบบเบื้องต้นแล้ว (localStorage)
+        </p>
+      </div>
+    </section>
 
     <!-- HOME + INTRO -->
     <section id="home" class="intro">
@@ -509,49 +678,51 @@
       </ul>
     </section>
 
-    <!-- สรุปหลักสูตร -->
+    <!-- สรุปหลักสูตร: แถวเดียวแนวนอน -->
     <section id="courses-summary">
       <button class="back-btn" onclick="goBack()">← ย้อนกลับหน้าก่อนนี้</button>
       <h2><span class="icon">📚</span>หลักสูตรที่เปิดสอน</h2>
 
-      <div class="course-card">
-        <h3>หลักสูตรพนักงานผู้ช่วยพยาบาล 840 ชม. <small>(กระทรวงศึกษาธิการ)</small></h3>
-        <p>เรียนรู้ทักษะงานผู้ช่วยพยาบาลแบบเข้มข้น พร้อมฝึกงานในโรงพยาบาลจริง</p>
-        <a href="#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
-      </div>
+      <div class="course-row">
+        <div class="course-card">
+          <h3>พนักงานผู้ช่วยพยาบาล 840 ชม. <small>(กระทรวงศึกษาธิการ)</small></h3>
+          <p>เรียนรู้ทักษะงานผู้ช่วยพยาบาลแบบเข้มข้น พร้อมฝึกงานในโรงพยาบาลจริง</p>
+          <a href="#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+        </div>
 
-      <div class="course-card">
-        <h3>หลักสูตรการดูแลผู้สูงอายุและเด็กเล็ก 840 ชม. <small>(กระทรวงศึกษาธิการ)</small></h3>
-        <p>เรียน 2 สายงานในหลักสูตรเดียว ทั้งดูแลผู้สูงอายุและเด็กเล็ก</p>
-        <a href="#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
-      </div>
+        <div class="course-card">
+          <h3>ดูแลผู้สูงอายุและเด็กเล็ก 840 ชม. <small>(กระทรวงศึกษาธิการ)</small></h3>
+          <p>เรียน 2 สายงานในหลักสูตรเดียว ทั้งดูแลผู้สูงอายุและเด็กเล็ก</p>
+          <a href="#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+        </div>
 
-      <div class="course-card">
-        <h3>หลักสูตรการดูแลผู้สูงอายุ 420 ชม. <small>(กระทรวงสาธารณสุข)</small></h3>
-        <p>เตรียมความพร้อมเป็นผู้ดูแลผู้สูงอายุมืออาชีพ พร้อมงานรองรับจำนวนมาก</p>
-        <a href="#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
-      </div>
+        <div class="course-card">
+          <h3>ดูแลผู้สูงอายุ 420 ชม. <small>(กระทรวงสาธารณสุข)</small></h3>
+          <p>เตรียมความพร้อมเป็นผู้ดูแลผู้สูงอายุมืออาชีพ พร้อมงานรองรับจำนวนมาก</p>
+          <a href="#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+        </div>
 
-      <div class="course-card">
-        <h3>หลักสูตรการดูแลเด็กเล็ก 420 ชม. <small>(กระทรวงศึกษาธิการ)</small></h3>
-        <p>ปูพื้นฐานงานผู้ช่วยครู ดูแลและส่งเสริมพัฒนาการเด็กเล็ก</p>
-        <a href="#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
-      </div>
+        <div class="course-card">
+          <h3>ดูแลเด็กเล็ก 420 ชม. <small>(กระทรวงศึกษาธิการ)</small></h3>
+          <p>ปูพื้นฐานงานผู้ช่วยครู ดูแลและส่งเสริมพัฒนาการเด็กเล็ก</p>
+          <a href="#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+        </div>
 
-      <div class="course-card">
-        <h3>หลักสูตรผู้ให้การดูแล 510 ชม. <small>(สภาการพยาบาล)</small></h3>
-        <p>ดูแลผู้ป่วย ผู้สูงอายุ เข้าใจปัญหาสุขภาพ และช่วยเหลือด้านกายภาพ</p>
-        <a href="#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
-      </div>
+        <div class="course-card">
+          <h3>ผู้ให้การดูแล 510 ชม. <small>(สภาการพยาบาล)</small></h3>
+          <p>ดูแลผู้ป่วย ผู้สูงอายุ เข้าใจปัญหาสุขภาพ และช่วยเหลือด้านกายภาพ</p>
+          <a href="#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+        </div>
 
-      <div class="course-card">
-        <h3>หลักสูตรการดูแลผู้สูงอายุเบื้องต้น 70 ชม. <small>(กระทรวงสาธารณสุข)</small></h3>
-        <p>ทักษะพื้นฐานสำหรับดูแลผู้สูงอายุที่บ้าน หรือเพื่อเสริมทักษะในครอบครัว</p>
-        <a href="#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+        <div class="course-card">
+          <h3>การดูแลผู้สูงอายุเบื้องต้น 70 ชม. <small>(กระทรวงสาธารณสุข)</small></h3>
+          <p>ทักษะพื้นฐานสำหรับดูแลผู้สูงอายุที่บ้าน หรือเพื่อเสริมทักษะในครอบครัว</p>
+          <a href="#register-section" class="btn btn-secondary">สมัครหลักสูตรนี้</a>
+        </div>
       </div>
     </section>
 
-    <!-- ระบบเรียนออนไลน์ (ล็อกหลัง Login) -->
+    <!-- ระบบเรียนออนไลน์ (ล็อกตามสิทธิ์) -->
     <section id="online-learning" class="locked">
       <button class="back-btn" onclick="goBack()">← ย้อนกลับหน้าก่อนนี้</button>
       <h2><span class="icon">💻</span>ระบบการเรียนออนไลน์</h2>
@@ -579,83 +750,7 @@
       <p class="small-note">*ข้อมูลจริงสามารถดึงจากระบบฐานข้อมูลของโรงเรียนในอนาคต</p>
     </section>
 
-    <!-- ฟอร์มสมัครเรียน (หน้าใบสมัครเรียนตามข้อ 3) -->
-    <section id="register-section">
-      <button class="back-btn" onclick="goBack()">← ย้อนกลับหน้าก่อนนี้</button>
-      <h2><span class="icon">📝</span>แบบฟอร์มสมัครเรียนออนไลน์</h2>
-      <div class="register-box">
-        <p class="small-note">
-          *ฟอร์มนี้บันทึกข้อมูลไว้ในเครื่องของคุณ (localStorage) โรงเรียนสามารถปรับต่อเชื่อมระบบจริงภายหลังได้
-        </p>
-        <form id="quickRegisterForm">
-          <div class="register-grid">
-            <div>
-              <label for="firstName">ชื่อ</label>
-              <input type="text" id="firstName" name="firstName" required>
-            </div>
-            <div>
-              <label for="lastName">นามสกุล</label>
-              <input type="text" id="lastName" name="lastName" required>
-            </div>
-            <div>
-              <label for="age">อายุ (ปี)</label>
-              <input type="number" id="age" name="age" min="15" max="80">
-            </div>
-            <div>
-              <label for="gender">เพศ</label>
-              <select id="gender" name="gender">
-                <option value="">-- เลือกเพศ --</option>
-                <option value="หญิง">หญิง</option>
-                <option value="ชาย">ชาย</option>
-                <option value="อื่น ๆ">อื่น ๆ</option>
-              </select>
-            </div>
-            <div>
-              <label for="education">วุฒิการศึกษา</label>
-              <input type="text" id="education" name="education" placeholder="ม.3 / ม.6 / ปวช. / ปวส. / ปริญญาตรี ฯลฯ">
-            </div>
-            <div>
-              <label for="phone">เบอร์ติดต่อ</label>
-              <input type="text" id="phone" name="phone">
-            </div>
-            <div>
-              <label for="lineId">LINE ID</label>
-              <input type="text" id="lineId" name="lineId">
-            </div>
-            <div>
-              <label for="facebook">Facebook</label>
-              <input type="text" id="facebook" name="facebook" placeholder="ลิงก์โปรไฟล์ หรือชื่อบัญชี">
-            </div>
-          </div>
-
-          <label for="address" style="margin-top:10px; display:block;">ที่อยู่ปัจจุบัน</label>
-          <textarea id="address" name="address" rows="2"></textarea>
-
-          <label for="courseSelect" style="margin-top:10px; display:block;">หลักสูตรที่สนใจ</label>
-          <select id="courseSelect" name="courseSelect">
-            <option value="">-- เลือกหลักสูตร --</option>
-            <option value="NA840">พนักงานผู้ช่วยพยาบาล 840 ชม.</option>
-            <option value="ELDERKID840">การดูแลผู้สูงอายุและเด็กเล็ก 840 ชม.</option>
-            <option value="ELDER420">การดูแลผู้สูงอายุ 420 ชม.</option>
-            <option value="KID420">การดูแลเด็กเล็ก 420 ชม.</option>
-            <option value="CAREGIVER510">ผู้ให้การดูแล 510 ชม.</option>
-            <option value="BASIC70">การดูแลผู้สูงอายุเบื้องต้น 70 ชม.</option>
-          </select>
-
-          <label for="extraInfo" style="margin-top:10px; display:block;">ข้อมูลเพิ่มเติม / ข้อความถึงเจ้าหน้าที่</label>
-          <textarea id="extraInfo" name="extraInfo" rows="3"></textarea>
-
-          <div style="margin-top:12px; text-align:center;">
-            <button type="submit" class="btn">ส่งใบสมัคร</button>
-          </div>
-        </form>
-        <p id="formMessage" style="display:none; color:green; margin-top:8px; text-align:center;">
-          ✅ บันทึกข้อมูลผู้สมัครลงในระบบเบื้องต้นแล้ว (localStorage)
-        </p>
-      </div>
-    </section>
-
-    <!-- ใบประกาศ -->
+    <!-- การออกใบประกาศ -->
     <section id="certificates" class="locked">
       <button class="back-btn" onclick="goBack()">← ย้อนกลับหน้าก่อนนี้</button>
       <h2><span class="icon">📜</span>การออกใบประกาศนียบัตร</h2>
@@ -668,10 +763,10 @@
       <button class="btn">ดูตัวอย่างใบประกาศ (ตัวอย่าง)</button>
     </section>
 
-    <!-- ฐานข้อมูลนักเรียน -->
-    <section id="students-db" class="locked">
+    <!-- ฐานข้อมูลนักเรียน: แสดงเฉพาะ Admin ที่ได้รับสิทธิ์ และจะถูกซ่อนถ้าไม่มีสิทธิ์ -->
+    <section id="students-db" style="display:none;">
       <button class="back-btn" onclick="goBack()">← ย้อนกลับหน้าก่อนนี้</button>
-      <h2><span class="icon">📇</span>ฐานข้อมูลนักเรียน (จากข้อมูลที่สมัคร)</h2>
+      <h2><span class="icon">📇</span>ฐานข้อมูลนักเรียน (เฉพาะ Admin)</h2>
       <p class="small-note">*ข้อมูลนี้ดึงจาก localStorage ของเบราว์เซอร์เครื่องนี้เท่านั้น</p>
       <div class="table-wrapper">
         <table>
@@ -706,6 +801,58 @@
         <li>ผู้ช่วยในคลินิกเสริมความงาม – ขอนแก่น</li>
       </ul>
       <p class="small-note">*ในระบบจริงสามารถเชื่อมกับฐานข้อมูลงานของโรงเรียน/พันธมิตรได้</p>
+    </section>
+
+    <!-- AI Knowledge Page: แหล่งข้อมูลให้ AI ตอบ (อีกหน้า) -->
+    <section id="ai-knowledge" class="locked">
+      <button class="back-btn" onclick="goBack()">← ย้อนกลับหน้าก่อนนี้</button>
+      <h2><span class="icon">🤖</span>ฐานข้อมูลคำตอบสำหรับ AI</h2>
+      <p class="small-note">
+        ผู้ดูแลระบบสามารถเพิ่มข้อมูล คำอธิบาย คำถาม-คำตอบเบื้องต้น เพื่อให้ระบบ AI ด้านขวาล่างนำไปใช้ตอบคำถามนักเรียน/ผู้สนใจได้
+      </p>
+      <label for="aiKnowledgeInput">ข้อมูล/โน้ตสำหรับ AI (เช่น คำถาม-คำตอบ, เงื่อนไขการสมัคร, ช่องทางติดต่อ ฯลฯ)</label>
+      <textarea id="aiKnowledgeInput" rows="8" style="width:100%;"></textarea>
+      <div style="margin-top:8px; text-align:right;">
+        <button class="btn" id="saveAiKnowledgeBtn">บันทึกข้อมูล AI</button>
+      </div>
+      <p class="small-note" id="aiKnowledgeSavedMsg" style="display:none; color:green; margin-top:4px;">
+        ✅ บันทึกข้อมูล AI แล้ว
+      </p>
+    </section>
+
+    <!-- ADMIN PANEL: ผู้สร้างเว็บ/Creator ตั้ง Admin และสิทธิ์ -->
+    <section id="admin-panel" class="locked">
+      <button class="back-btn" onclick="goBack()">← ย้อนกลับหน้าก่อนนี้</button>
+      <h2><span class="icon">🛡️</span>จัดการ Admin และสิทธิ์การใช้งานระบบ</h2>
+      <p class="small-note">
+        ผู้สร้างเว็บ (Creator) มีสิทธิ์กำหนดว่าใครเป็น Admin และปรับสิทธิ์การเข้าใช้งานระบบต่าง ๆ <br>
+        Admin สามารถปรับสิทธิ์การใช้งานให้ผู้ใช้ทั่วไปได้ แต่ไม่สามารถแต่งตั้ง/ปลด Admin หรือ Creator
+      </p>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>ชื่อผู้ใช้</th>
+              <th>ชื่อที่แสดง</th>
+              <th>บทบาท</th>
+              <th>Online</th>
+              <th>ผลการเรียน</th>
+              <th>ใบประกาศ</th>
+              <th>ฐานข้อมูลนักเรียน</th>
+              <th>ตำแหน่งงานว่าง</th>
+            </tr>
+          </thead>
+          <tbody id="adminUserTableBody">
+            <tr><td colspan="8">ยังไม่มีผู้ใช้ในระบบ</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top:8px; text-align:right;">
+        <button class="btn" id="saveUserPermissionsBtn">บันทึกสิทธิ์ผู้ใช้</button>
+      </div>
+      <p class="small-note">
+        หมายเหตุ: บทบาท <strong>Creator</strong> เป็นผู้สร้างเว็บคนแรก ไม่สามารถแก้ไขหรือลบได้ในหน้านี้
+      </p>
     </section>
 
     <!-- เกี่ยวกับเรา -->
@@ -761,15 +908,41 @@
     <p>© 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล | ที่อยู่: 115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000 | ติดต่อ: 080-459-3311</p>
   </footer>
 
-  <!-- SCRIPT: Dashboard + ฟอร์มสมัคร + Login + ยืนยันก่อนส่ง -->
+  <!-- CHAT WIDGET: ตอบถามอัตโนมัติ + AI -->
+  <div id="chat-widget">
+    <button id="chat-toggle-btn">💬 ถาม-ตอบกับโรงเรียน</button>
+    <div id="chat-panel">
+      <div id="chat-header">
+        <span>AI ช่วยตอบคำถาม</span>
+        <button style="border:none;background:transparent;color:white;cursor:pointer;font-size:14px;" onclick="toggleChat(false)">✕</button>
+      </div>
+      <div id="chat-messages"></div>
+      <div id="chat-input-row">
+        <input type="text" id="chat-input" placeholder="พิมพ์คำถามของคุณ...">
+        <button id="chat-send-btn">ส่ง</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT ZONE -->
   <script>
     const STORAGE_KEY_STUDENTS = "students";
+    const STORAGE_KEY_USERS = "ubr_users";
+    const STORAGE_KEY_CUR_USER = "ubr_current_user";
+    const STORAGE_KEY_AI_KB = "ai_knowledge";
+
+    const PERM_KEYS = [
+      "onlineLearning",
+      "studentStatus",
+      "certificates",
+      "studentsDb",
+      "jobs"
+    ];
 
     function goBack() {
       if (document.referrer && document.referrer !== location.href) {
         history.back();
       } else {
-        // ถ้าไม่มีหน้าก่อน ให้กลับไปหัวเว็บ
         location.hash = "#top";
       }
     }
@@ -777,6 +950,56 @@
     function safeSet(id, value) {
       const el = document.getElementById(id);
       if (el) el.textContent = value;
+    }
+
+    /* -------- User & Admin Management -------- */
+
+    function getUsers() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_USERS) || "[]";
+        const arr = JSON.parse(raw);
+        return Array.isArray(arr) ? arr : [];
+      } catch {
+        return [];
+      }
+    }
+
+    function saveUsers(users) {
+      localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(users));
+    }
+
+    function getCurrentUser() {
+      const username = localStorage.getItem(STORAGE_KEY_CUR_USER);
+      if (!username) return null;
+      const users = getUsers();
+      return users.find(u => u.username === username) || null;
+    }
+
+    function setCurrentUser(username) {
+      if (!username) {
+        localStorage.removeItem(STORAGE_KEY_CUR_USER);
+      } else {
+        localStorage.setItem(STORAGE_KEY_CUR_USER, username);
+      }
+    }
+
+    function ensurePermissionsObject(user) {
+      if (!user.permissions) {
+        user.permissions = {
+          onlineLearning: false,
+          studentStatus: false,
+          certificates: false,
+          studentsDb: false,
+          jobs: false
+        };
+      } else {
+        PERM_KEYS.forEach(k => {
+          if (typeof user.permissions[k] !== "boolean") {
+            user.permissions[k] = false;
+          }
+        });
+      }
+      return user;
     }
 
     function countStatus(students, status) {
@@ -822,6 +1045,139 @@
       `).join("");
     }
 
+    function renderAdminUserTable() {
+      const tbody = document.getElementById("adminUserTableBody");
+      if (!tbody) return;
+      const users = getUsers();
+      const current = getCurrentUser();
+
+      if (!users.length) {
+        tbody.innerHTML = '<tr><td colspan="8">ยังไม่มีผู้ใช้ในระบบ</td></tr>';
+        return;
+      }
+
+      const isCurrentCreator = current && current.role === "creator";
+
+      tbody.innerHTML = users.map(u => {
+        ensurePermissionsObject(u);
+        const isCreator = u.role === "creator";
+        const disabledRole = (!isCurrentCreator || isCreator) ? "disabled" : "";
+        const disabledPerm = (!current || (current.role !== "creator" && current.role !== "admin")) ? "disabled" : "";
+
+        return `
+          <tr data-username="${u.username}">
+            <td>${u.username}</td>
+            <td>${u.displayName || ""}</td>
+            <td>
+              <select class="role-select" ${disabledRole}>
+                <option value="user" ${u.role === "user" ? "selected" : ""}>User</option>
+                <option value="admin" ${u.role === "admin" ? "selected" : ""}>Admin</option>
+                <option value="creator" ${u.role === "creator" ? "selected" : ""} disabled>Creator</option>
+              </select>
+            </td>
+            <td style="text-align:center;">
+              <input type="checkbox" class="perm-checkbox" data-perm="onlineLearning" ${u.permissions.onlineLearning ? "checked" : ""} ${disabledPerm}>
+            </td>
+            <td style="text-align:center;">
+              <input type="checkbox" class="perm-checkbox" data-perm="studentStatus" ${u.permissions.studentStatus ? "checked" : ""} ${disabledPerm}>
+            </td>
+            <td style="text-align:center;">
+              <input type="checkbox" class="perm-checkbox" data-perm="certificates" ${u.permissions.certificates ? "checked" : ""} ${disabledPerm}>
+            </td>
+            <td style="text-align:center;">
+              <input type="checkbox" class="perm-checkbox" data-perm="studentsDb" ${u.permissions.studentsDb ? "checked" : ""} ${disabledPerm}>
+            </td>
+            <td style="text-align:center;">
+              <input type="checkbox" class="perm-checkbox" data-perm="jobs" ${u.permissions.jobs ? "checked" : ""} ${disabledPerm}>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function updateLockedSections() {
+      const user = getCurrentUser();
+      const isLoggedIn = !!user;
+      const permissions = user ? ensurePermissionsObject(user).permissions : {};
+
+      const onlineSec = document.getElementById("online-learning");
+      const statusSec = document.getElementById("student-status");
+      const certSec = document.getElementById("certificates");
+      const jobsSec = document.getElementById("jobs");
+      const studentsDbSec = document.getElementById("students-db");
+      const adminSec = document.getElementById("admin-panel");
+      const aiKnowledgeSec = document.getElementById("ai-knowledge");
+
+      const studentsDbNav = document.getElementById("studentsDbNav");
+      const adminNavLink = document.getElementById("adminNavLink");
+      const aiKnowledgeNav = document.getElementById("aiKnowledgeNav");
+
+      function setLock(sec, allowed) {
+        if (!sec) return;
+        if (allowed) sec.classList.remove("locked");
+        else sec.classList.add("locked");
+      }
+
+      setLock(onlineSec, isLoggedIn && permissions.onlineLearning);
+      setLock(statusSec, isLoggedIn && permissions.studentStatus);
+      setLock(certSec, isLoggedIn && permissions.certificates);
+      setLock(jobsSec, isLoggedIn && permissions.jobs);
+
+      const canSeeDb = isLoggedIn && (user.role === "admin" || user.role === "creator") && permissions.studentsDb;
+      if (studentsDbSec) {
+        if (canSeeDb) {
+          studentsDbSec.style.display = "block";
+        } else {
+          studentsDbSec.style.display = "none";
+        }
+      }
+      if (studentsDbNav) {
+        studentsDbNav.style.display = canSeeDb ? "inline-block" : "none";
+      }
+
+      const isAdminOrCreator = isLoggedIn && (user.role === "admin" || user.role === "creator");
+      if (adminSec) {
+        if (isAdminOrCreator) {
+          adminSec.classList.remove("locked");
+        } else {
+          adminSec.classList.add("locked");
+        }
+      }
+      if (adminNavLink) {
+        adminNavLink.style.display = isAdminOrCreator ? "inline-block" : "none";
+      }
+
+      if (aiKnowledgeSec) {
+        if (isAdminOrCreator) {
+          aiKnowledgeSec.classList.remove("locked");
+        } else {
+          aiKnowledgeSec.classList.add("locked");
+        }
+      }
+      if (aiKnowledgeNav) {
+        aiKnowledgeNav.style.display = isAdminOrCreator ? "inline-block" : "none";
+      }
+
+      const loginStatus = document.getElementById("loginStatus");
+      const loginBtn = document.getElementById("loginBtn");
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (loginStatus) {
+        if (!isLoggedIn) {
+          loginStatus.textContent = "ยังไม่ได้เข้าสู่ระบบ";
+        } else {
+          const roleText = user.role === "creator" ? "Creator" :
+                           user.role === "admin" ? "Admin" : "User";
+          loginStatus.textContent = "เข้าสู่ระบบแล้ว (" + roleText + ")";
+        }
+      }
+      if (loginBtn && logoutBtn) {
+        loginBtn.style.display = isLoggedIn ? "none" : "inline-block";
+        logoutBtn.style.display = isLoggedIn ? "inline-block" : "none";
+      }
+
+      renderAdminUserTable();
+    }
+
     function attachConfirmToForm(formId, message) {
       const form = document.getElementById(formId);
       if (!form) return;
@@ -833,53 +1189,73 @@
       }, { capture: true });
     }
 
-    function updateLockedSections() {
-      const isLoggedIn = localStorage.getItem("ubr_logged_in") === "1";
-      const lockedIds = ["online-learning", "student-status", "certificates", "students-db", "jobs"];
-      lockedIds.forEach(id => {
-        const sec = document.getElementById(id);
-        if (!sec) return;
-        if (isLoggedIn) {
-          sec.classList.remove("locked");
-        } else {
-          sec.classList.add("locked");
-        }
-      });
+    /* -------- CHAT AI -------- */
 
-      const loginStatus = document.getElementById("loginStatus");
-      const loginBtn = document.getElementById("loginBtn");
-      const logoutBtn = document.getElementById("logoutBtn");
-      if (loginStatus) {
-        loginStatus.textContent = isLoggedIn
-          ? "เข้าสู่ระบบแล้ว – เข้าถึงระบบเรียนออนไลน์และฐานข้อมูลได้"
-          : "ยังไม่ได้เข้าสู่ระบบ";
+    function toggleChat(forceOpen) {
+      const panel = document.getElementById("chat-panel");
+      if (!panel) return;
+      if (typeof forceOpen === "boolean") {
+        panel.style.display = forceOpen ? "flex" : "none";
+        return;
       }
-      if (loginBtn && logoutBtn) {
-        loginBtn.style.display = isLoggedIn ? "none" : "inline-block";
-        logoutBtn.style.display = isLoggedIn ? "inline-block" : "none";
+      panel.style.display = panel.style.display === "flex" ? "none" : "flex";
+    }
+
+    function addChatMessage(sender, text) {
+      const box = document.getElementById("chat-messages");
+      if (!box) return;
+      const div = document.createElement("div");
+      div.className = "chat-msg " + (sender === "user" ? "user" : "ai");
+      div.textContent = text;
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function aiAnswer(message) {
+      const kb = (localStorage.getItem(STORAGE_KEY_AI_KB) || "").trim();
+      const lowerMsg = message.toLowerCase();
+      let reply = "";
+
+      if (kb) {
+        const lines = kb.split(/\n+/).filter(l => l.trim());
+        let matched = null;
+        for (const line of lines) {
+          const l = line.toLowerCase();
+          if (lowerMsg && l.includes(lowerMsg.split(" ")[0])) {
+            matched = line;
+            break;
+          }
+        }
+        if (matched) {
+          reply = "จากข้อมูลที่บันทึกไว้ในระบบ AI:\n" + matched;
+        }
       }
+
+      if (!reply) {
+        reply =
+          "ขอบคุณสำหรับคำถามนะคะ 😊\n" +
+          "ตอนนี้ระบบตัวอย่างยังไม่ได้เชื่อมต่อฐานข้อมูลจริง แต่คุณสามารถดูข้อมูลหลักสูตรและการสมัครเรียนได้ที่เมนูด้านบน หรือโทร 080-459-3311 ค่ะ";
+      }
+
+      setTimeout(() => addChatMessage("ai", reply), 300);
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-      // ---นับจำนวนเข้าชมเว็บ---
+      // --- นับจำนวนเข้าชมเว็บ ---
       let views = parseInt(localStorage.getItem("siteViews") || "0", 10);
       views += 1;
       localStorage.setItem("siteViews", views.toString());
 
       const students = JSON.parse(localStorage.getItem(STORAGE_KEY_STUDENTS) || "[]");
-
       refreshDashboard(students, views);
-      renderStudentsTable(students);
 
-      // --- Login state ---
+      // --- Login / Users ---
       updateLockedSections();
 
-      // --- ฟอร์มสมัครเรียน (เก็บ localStorage) + ยืนยันก่อนส่ง ---
       const regForm = document.getElementById("quickRegisterForm");
       if (regForm) {
         regForm.addEventListener("submit", function(e) {
           e.preventDefault();
-
           if (!confirm("คุณยืนยันการส่งใบสมัครหรือไม่?")) {
             return;
           }
@@ -928,55 +1304,195 @@
           localStorage.setItem(STORAGE_KEY_STUDENTS, JSON.stringify(existing));
 
           refreshDashboard(existing, views);
-          renderStudentsTable(existing);
+
+          const current = getCurrentUser();
+          const canSeeDb = current && (current.role === "admin" || current.role === "creator") &&
+                           ensurePermissionsObject(current).permissions.studentsDb;
+          if (canSeeDb) {
+            renderStudentsTable(existing);
+          }
 
           const msg = document.getElementById("formMessage");
           if (msg) msg.style.display = "block";
-
-          // regForm.reset(); // ถ้าต้องการเคลียร์ฟอร์มหลังส่ง ให้เปิดบรรทัดนี้
         });
       }
 
-      // --- ฟอร์มติดต่อ (ยืนยันก่อนส่ง) ---
       attachConfirmToForm("contactForm", "ยืนยันการส่งข้อความติดต่อโรงเรียนหรือไม่?");
       const contactForm = document.getElementById("contactForm");
       if (contactForm) {
         contactForm.addEventListener("submit", function(e) {
-          e.preventDefault(); // ยืนยันไปแล้วใน attachConfirmToForm
+          e.preventDefault();
           const msg = document.getElementById("contactMessage");
           if (msg) msg.style.display = "block";
         });
       }
 
-      // --- Login / Logout + ยืนยันก่อนส่ง ---
       const loginBtn = document.getElementById("loginBtn");
       const logoutBtn = document.getElementById("logoutBtn");
 
       if (loginBtn) {
         loginBtn.addEventListener("click", function() {
-          const u = document.getElementById("loginUser").value.trim();
-          const p = document.getElementById("loginPass").value.trim();
-          if (!u || !p) {
+          const username = (document.getElementById("loginUser").value || "").trim();
+          const password = (document.getElementById("loginPass").value || "").trim();
+          if (!username || !password) {
             alert("กรุณากรอกชื่อผู้ใช้และรหัสผ่าน");
             return;
           }
           if (!confirm("ยืนยันการเข้าสู่ระบบหรือไม่?")) {
             return;
           }
-          // ตัวอย่าง: ให้ผ่านทุกคน (ระบบจริงค่อยเชื่อมฐานข้อมูล)
-          localStorage.setItem("ubr_logged_in", "1");
+
+          let users = getUsers();
+
+          // ถ้ายังไม่มีผู้ใช้เลย คนแรกที่ล็อกอินจะเป็น Creator
+          if (users.length === 0) {
+            const creator = {
+              username,
+              displayName: username,
+              password,
+              role: "creator",
+              permissions: {
+                onlineLearning: true,
+                studentStatus: true,
+                certificates: true,
+                studentsDb: true,
+                jobs: true
+              }
+            };
+            users.push(creator);
+            saveUsers(users);
+            setCurrentUser(username);
+            alert("ตั้งค่าผู้ใช้คนแรกเป็น Creator แล้ว");
+          } else {
+            let user = users.find(u => u.username === username && u.password === password);
+            if (!user) {
+              // สร้าง user ใหม่ (ต้องรอ Admin/Creator ให้สิทธิ์ระบบต่าง ๆ)
+              user = {
+                username,
+                displayName: username,
+                password,
+                role: "user",
+                permissions: {
+                  onlineLearning: false,
+                  studentStatus: false,
+                  certificates: false,
+                  studentsDb: false,
+                  jobs: false
+                }
+              };
+              users.push(user);
+              saveUsers(users);
+              alert("สร้างบัญชีผู้ใช้ใหม่แล้ว โปรดติดต่อ Admin เพื่อขอสิทธิ์เข้าระบบต่าง ๆ");
+            }
+            setCurrentUser(username);
+          }
+
           updateLockedSections();
+
+          const allStudents = JSON.parse(localStorage.getItem(STORAGE_KEY_STUDENTS) || "[]");
+          const current = getCurrentUser();
+          const canSeeDb = current && (current.role === "admin" || current.role === "creator") &&
+                           ensurePermissionsObject(current).permissions.studentsDb;
+          if (canSeeDb) {
+            renderStudentsTable(allStudents);
+          }
         });
       }
+
       if (logoutBtn) {
         logoutBtn.addEventListener("click", function() {
           if (!confirm("ต้องการออกจากระบบหรือไม่?")) {
             return;
           }
-          localStorage.removeItem("ubr_logged_in");
+          setCurrentUser(null);
           updateLockedSections();
         });
       }
+
+      const savePermBtn = document.getElementById("saveUserPermissionsBtn");
+      if (savePermBtn) {
+        savePermBtn.addEventListener("click", function() {
+          const current = getCurrentUser();
+          if (!current || (current.role !== "creator" && current.role !== "admin")) {
+            alert("คุณไม่มีสิทธิ์แก้ไขสิทธิ์ผู้ใช้");
+            return;
+          }
+          const isCreator = current.role === "creator";
+
+          const users = getUsers();
+          const tbody = document.getElementById("adminUserTableBody");
+          if (!tbody) return;
+          const rows = tbody.querySelectorAll("tr[data-username]");
+          rows.forEach(row => {
+            const uname = row.getAttribute("data-username");
+            const u = users.find(x => x.username === uname);
+            if (!u) return;
+            ensurePermissionsObject(u);
+
+            const roleSelect = row.querySelector(".role-select");
+            if (roleSelect && isCreator && u.role !== "creator") {
+              u.role = roleSelect.value;
+            }
+
+            const permChecks = row.querySelectorAll(".perm-checkbox");
+            permChecks.forEach(chk => {
+              const key = chk.getAttribute("data-perm");
+              if (!key) return;
+              // Admin/Creator เปลี่ยนสิทธิ์ได้ (แต่ Creator ปรับ Creator ของตัวเองไม่ได้)
+              if (current.role === "creator" || current.role === "admin") {
+                u.permissions[key] = chk.checked;
+              }
+            });
+          });
+
+          saveUsers(users);
+          alert("บันทึกสิทธิ์ผู้ใช้เรียบร้อยแล้ว");
+          updateLockedSections();
+        });
+      }
+
+      // โหลด AI knowledge
+      const kbInput = document.getElementById("aiKnowledgeInput");
+      if (kbInput) {
+        kbInput.value = localStorage.getItem(STORAGE_KEY_AI_KB) || "";
+      }
+      const kbSaveBtn = document.getElementById("saveAiKnowledgeBtn");
+      if (kbSaveBtn) {
+        kbSaveBtn.addEventListener("click", function() {
+          if (!confirm("บันทึกข้อมูลสำหรับ AI หรือไม่?")) return;
+          const text = (kbInput.value || "").trim();
+          localStorage.setItem(STORAGE_KEY_AI_KB, text);
+          const msg = document.getElementById("aiKnowledgeSavedMsg");
+          if (msg) msg.style.display = "block";
+          setTimeout(() => { if (msg) msg.style.display = "none"; }, 2000);
+        });
+      }
+
+      // CHAT
+      const chatToggleBtn = document.getElementById("chat-toggle-btn");
+      if (chatToggleBtn) {
+        chatToggleBtn.addEventListener("click", () => toggleChat());
+      }
+      const chatSendBtn = document.getElementById("chat-send-btn");
+      const chatInput = document.getElementById("chat-input");
+      if (chatSendBtn && chatInput) {
+        chatSendBtn.addEventListener("click", () => {
+          const msg = chatInput.value.trim();
+          if (!msg) return;
+          addChatMessage("user", msg);
+          chatInput.value = "";
+          aiAnswer(msg);
+        });
+        chatInput.addEventListener("keydown", (e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            chatSendBtn.click();
+          }
+        });
+      }
+
+      // Welcome message
+      addChatMessage("ai", "สวัสดีค่ะ 👋 ยินดีต้อนรับสู่โรงเรียนอุบลบุรีรักษ์การบริบาล\nคุณสามารถถามเรื่องการสมัครเรียน หลักสูตร หรือการติดต่อโรงเรียนได้เลยค่ะ");
     });
   </script>
 
