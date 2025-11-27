@@ -11,7 +11,6 @@
       padding:0;
       font-family:Arial,sans-serif;
       background:#f5f6fa;
-      color:#222;
     }
 
     header {
@@ -19,9 +18,6 @@
       color:white;
       padding:18px 12px;
       box-shadow:0 2px 8px rgba(0,0,0,0.18);
-      position:sticky;
-      top:0;
-      z-index:100;
     }
 
     .header-main {
@@ -29,9 +25,7 @@
       align-items:center;
       gap:12px;
       flex-wrap:wrap;
-      justify-content:space-between;
     }
-
     .header-main img {
       width:60px;
       height:60px;
@@ -39,23 +33,14 @@
       background:white;
       padding:4px;
       box-shadow:0 2px 6px rgba(0,0,0,0.25);
-      object-fit:cover;
     }
-
-    .header-title {
-      display:flex;
-      flex-direction:column;
-      gap:2px;
+    .header-main h1 {
+      margin:0;
+      font-size:22px;
     }
-
-    .header-title-main {
-      font-size:18px;
-      font-weight:bold;
-    }
-
-    .header-title-sub {
+    .header-main p {
+      margin:0;
       font-size:13px;
-      opacity:0.9;
     }
 
     nav {
@@ -65,7 +50,6 @@
       justify-content:center;
       gap:6px;
     }
-
     nav a {
       color:white;
       background:rgba(255,255,255,0.18);
@@ -75,12 +59,12 @@
       font-size:13px;
       border:1px solid rgba(255,255,255,0.25);
     }
-
     nav a:hover {
       background:white;
       color:#ff2f92;
     }
 
+    /* Top Login Bar */
     .top-bar {
       margin-top:12px;
       padding:6px 0;
@@ -90,14 +74,12 @@
       gap:6px;
       border-top:1px solid rgba(255,255,255,0.35);
     }
-
     .top-bar input {
       padding:6px 10px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,0.9);
       min-width:160px;
     }
-
     .top-bar button {
       border-radius:999px;
       border:none;
@@ -108,7 +90,6 @@
       background:white;
       color:#ff2f92;
     }
-
     .top-bar button:hover {
       background:#ffeafb;
     }
@@ -121,94 +102,16 @@
 
     main {
       max-width:1200px;
-      margin:0 auto;
-      padding:25px 12px 40px;
+      margin:25px auto;
+      padding:0 12px;
     }
 
-    section {
-      background:white;
-      border-radius:14px;
-      padding:18px 16px;
-      margin-bottom:20px;
-      box-shadow:0 2px 6px rgba(0,0,0,0.08);
-    }
-
-    section h2 {
-      margin:0 0 12px 0;
-      color:#0d6efd;
-      font-size:22px;
-    }
-
-    .tag {
-      display:inline-block;
-      font-size:11px;
-      padding:3px 10px;
-      border-radius:999px;
-      background:#e9f3ff;
-      color:#0d6efd;
-      margin-bottom:8px;
-      font-weight:600;
-    }
-
-    .hero-highlight {
-      font-size:15px;
-      margin-top:8px;
-      color:#333;
-      line-height:1.6;
-    }
-
-    .hero-list {
-      margin:10px 0 0 20px;
-      padding:0;
-      font-size:14px;
-      color:#444;
-      line-height:1.8;
-    }
-
-    .hero-cta {
-      margin-top:16px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
-
-    .btn-primary,
-    .btn-outline {
-      font-size:14px;
-      border-radius:999px;
-      padding:8px 18px;
-      border:none;
-      cursor:pointer;
-      text-decoration:none;
-      display:inline-block;
-    }
-
-    .btn-primary {
-      background:#0d6efd;
-      color:white;
-    }
-
-    .btn-outline {
-      background:white;
-      color:#0d6efd;
-      border:1px solid #0d6efd;
-    }
-
-    .btn-primary:hover {
-      background:#0b57d0;
-    }
-
-    .btn-outline:hover {
-      background:#e9f3ff;
-    }
-
+    /* Dashboard Cards */
     .dash-grid {
       display:flex;
       flex-wrap:wrap;
       gap:12px;
-      margin-top:12px;
     }
-
     .dash-card {
       flex:1 1 160px;
       background:white;
@@ -217,441 +120,264 @@
       text-align:center;
       box-shadow:0 2px 6px rgba(0,0,0,0.12);
     }
-
     .dash-card h3 {
       margin:0;
       font-size:15px;
       color:#0d6efd;
     }
-
     .dash-card p {
       margin:8px 0 0;
-      font-size:28px;
+      font-size:24px;
       font-weight:bold;
       color:#333;
     }
 
-    .courses-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:12px;
-      margin-top:12px;
+    h2.section-title {
+      margin-top:30px;
+      text-align:center;
+      color:#333;
     }
 
-    .course-card {
-      background:#f8fafc;
-      border-radius:10px;
-      padding:14px;
-      border:1px solid #e2e8f0;
-    }
-
-    .course-title {
-      font-weight:bold;
-      color:#0d6efd;
-      margin-bottom:8px;
-      font-size:16px;
-    }
-
-    .course-body {
-      color:#444;
-      margin-bottom:8px;
-      font-size:14px;
-      line-height:1.5;
-    }
-
-    .course-meta {
-      font-size:12px;
-      color:#777;
-    }
-
+    /* สมัครเรียน grid */
     .register-grid {
       margin-top:16px;
       background:white;
-      padding:20px;
+      padding:16px;
       border-radius:12px;
       box-shadow:0 2px 6px rgba(0,0,0,0.12);
       display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-      gap:12px;
+      grid-template-columns: repeat(5,1fr);
+      gap:10px;
     }
-
     .register-grid input,
     .register-grid select {
       width:100%;
-      padding:10px;
+      padding:8px;
       border-radius:6px;
       border:1px solid #ccc;
-      font-size:14px;
+      font-size:13px;
       box-sizing:border-box;
     }
-
     .register-submit {
-      grid-column:1/-1;
+      grid-column: span 5;
       text-align:center;
       margin-top:10px;
     }
-
     .register-submit button {
-      padding:12px 30px;
+      padding:10px 20px;
       border:none;
       background:#0d6efd;
       color:white;
       border-radius:999px;
       cursor:pointer;
-      font-size:15px;
-      font-weight:bold;
+      font-size:14px;
     }
-
     .register-submit button:hover {
       background:#0b57d0;
-    }
-
-    .jobs-grid {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:14px;
-      margin-top:12px;
-    }
-
-    .job-card {
-      background:white;
-      border-radius:12px;
-      padding:18px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.12);
-    }
-
-    .job-card h3 {
-      margin:0 0 8px 0;
-      font-size:18px;
-      color:#0d6efd;
-    }
-
-    .job-card p {
-      font-size:14px;
-      color:#666;
-      margin:8px 0;
-    }
-
-    .job-card button {
-      margin-top:12px;
-      width:100%;
-      padding:10px;
-      border:none;
-      background:#0d6efd;
-      color:white;
-      border-radius:8px;
-      cursor:pointer;
-      font-size:14px;
-    }
-
-    .job-card button:hover {
-      background:#0b57d0;
-    }
-
-    .two-col {
-      display:grid;
-      grid-template-columns:1.4fr 1fr;
-      gap:16px;
-    }
-
-    @media (max-width:768px) {
-      .two-col {
-        grid-template-columns:1fr;
-      }
-      .register-grid {
-        grid-template-columns:1fr;
-      }
     }
 
     footer {
       background:#111827;
       color:white;
-      padding:20px 12px;
+      padding:12px;
       text-align:center;
-      font-size:13px;
+      font-size:12px;
       margin-top:40px;
-    }
-
-    footer a {
-      color:#60a5fa;
-      text-decoration:none;
-    }
-
-    footer a:hover {
-      text-decoration:underline;
     }
   </style>
 </head>
 
 <body>
-  <header>
-    <div class="header-main">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <img src="https://www.urrschool.com/favicon.ico" alt="URR School Logo">
-        <div class="header-title">
-          <div class="header-title-main">โรงเรียนอุบลบุรีรักษ์การบริบาล</div>
-          <div class="header-title-sub">Ubon Buri Rak Nursing Assistant School</div>
-        </div>
-      </div>
+
+<header>
+  <div class="header-main">
+    <img src="https://www.urrschool.com/favicon.ico" alt="โลโก้โรงเรียน">
+    <div>
+      <h1>โรงเรียนอุบลบุรีรักษ์การบริบาล</h1>
+      <p>Ubon Buri Rak Nursing Assistant School</p>
+    </div>
+  </div>
+
+  <nav>
+    <a href="#register-section">สมัครเรียน</a>
+    <a href="courses.html">หลักสูตร</a>
+    <a href="#jobs">งานว่าง</a>
+    <a href="#contact">ติดต่อเรา</a>
+    <a href="dashboard.html">ฐานข้อมูลนักศึกษา</a>
+
+    <!-- ระบบต่าง ๆ -->
+    <a href="online-learning.html">เรียนออนไลน์</a>
+    <a href="learning-class.html">เรียนในห้องเรียน</a>
+    <a href="exam.html">ระบบสอบ</a>
+    <a href="grade.html">ผลการเรียน</a>
+    <a href="payment.html">ชำระค่าเรียน</a>
+    <a href="certificate.html">ใบประกาศ</a>
+    <a href="hour.html">สะสมชั่วโมงเรียน</a>
+    <a href="internship.html">ฝึกงาน</a>
+    <a href="loan.html">ยื่นกู้ กยศ.</a>
+    <a href="job-apply.html">สมัครงาน</a>
+    <a href="ai-faq.html">ถาม–ตอบ อัตโนมัติ</a>
+    <a href="admin-members.html">Admin</a>
+</nav>
+  </nav>
+
+  <div class="top-bar">
+    <input id="loginUserTop" placeholder="อีเมล / เลขบัตร">
+    <input type="password" id="loginPassTop" placeholder="รหัสผ่าน (≥8)">
+    <button id="loginBtnTop">เข้าสู่ระบบ</button>
+    <button id="logoutBtnTop" style="display:none;">ออกจากระบบ</button>
+
+    <button class="top-link-btn"
+      onclick="window.location.href='login.html#register';">ลงทะเบียน</button>
+
+    <button class="top-link-btn"
+      onclick="window.location.href='login.html#forgot';">ลืมรหัส</button>
+
+    <span id="loginStatusTop">ยังไม่ได้เข้าสู่ระบบ</span>
+  </div>
+</header>
+
+<main>
+
+  <h2 class="section-title">📊 Dashboard ระบบโรงเรียน</h2>
+
+  <div class="dash-grid">
+    <div class="dash-card"><h3>เข้าชมเว็บไซต์</h3><p id="stat-views">0</p></div>
+    <div class="dash-card"><h3>สมัครเรียน</h3><p id="stat-registered">0</p></div>
+    <div class="dash-card"><h3>สมาชิก Login แล้ว</h3><p id="stat-login">0</p></div>
+    <div class="dash-card"><h3>กำลังเรียน</h3><p id="stat-learning">0</p></div>
+    <div class="dash-card"><h3>ฝึกงาน</h3><p id="stat-intern">0</p></div>
+    <div class="dash-card"><h3>จบการศึกษา</h3><p id="stat-graduated">0</p></div>
+    <div class="dash-card"><h3>บรรจุงานแล้ว</h3><p id="stat-employed">0</p></div>
+  </div>
+
+  <!-- สมัครเรียน -->
+  <h2 class="section-title" id="register-section">✏️ สมัครเรียน</h2>
+
+  <form id="applyForm" class="register-grid">
+
+    <!-- แถวที่ 1 -->
+    <input name="fname" placeholder="ชื่อ" required>
+    <input name="lname" placeholder="นามสกุล" required>
+    <input name="age" placeholder="อายุ" required>
+    <select name="gender" required>
+      <option value="">เพศ</option>
+      <option>ชาย</option>
+      <option>หญิง</option>
+      <option>อื่นๆ</option>
+    </select>
+    <input name="education" placeholder="วุฒิการศึกษา" required>
+
+    <!-- แถวที่ 2 -->
+    <input name="course" placeholder="หลักสูตรที่สนใจ" required>
+    <input name="phone" placeholder="เบอร์โทร" required>
+    <input name="line" placeholder="ไลน์" required>
+    <input name="facebook" placeholder="Facebook" required>
+    <input name="address" placeholder="ที่อยู่" required>
+
+    <div class="register-submit">
+      <button type="submit">ส่งใบสมัคร</button>
+    </div>
+  </form>
+
+  <hr style="margin:40px 0; opacity:0.2;">
+
+  <!-- งานว่าง -->
+  <h2 class="section-title" id="jobs">💼 ตำแหน่งงานว่าง</h2>
+
+  <div style="display:flex; flex-wrap:wrap; gap:12px;">
+    <div style="
+      flex:1 1 240px; 
+      background:white;
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+      <h3 style="margin:0; font-size:17px; color:#0d6efd;">ผู้ช่วยพยาบาล (NA)</h3>
+      <p style="font-size:13px; color:#666; margin-top:6px;">
+        โรงพยาบาลเอกชน / เงินเดือน 12,000–18,000 บาท
+      </p>
+      <button onclick="window.location.href='job-apply.html'"
+        style="
+          margin-top:10px;
+          width:100%;
+          padding:8px;
+          border:none;
+          background:#0d6efd;
+          color:white;
+          border-radius:8px;
+          cursor:pointer;">
+        สมัครตำแหน่งนี้
+      </button>
     </div>
 
-    <nav>
-      <a href="?section=hero">หน้าแรก</a>
-      <a href="?section=courses-summary">สรุปหลักสูตร</a>
-      <a href="?section=admission">การสมัครเรียน</a>
-      <a href="?section=dashboard">Dashboard</a>
-      <a href="?section=register-section">สมัครเรียน</a>
-      <a href="?section=jobs">งานว่าง</a>
-      <a href="?section=contact">ติดต่อเรา</a>
-      <a href="courses.html">หลักสูตรเต็ม</a>
-      <a href="dashboard.html">ฐานข้อมูลนักศึกษา</a>
-      <a href="online-learning.html">เรียนออนไลน์</a>
-      <a href="exam.html">ระบบสอบ</a>
-      <a href="grade.html">ผลการเรียน</a>
-      <a href="payment.html">ชำระค่าเรียน</a>
-      <a href="certificate.html">ใบประกาศ</a>
-      <a href="admin-members.html">Admin</a>
-    </nav>
-
-    <div class="top-bar">
-      <input id="loginUserTop" placeholder="อีเมล / เลขบัตร">
-      <input type="password" id="loginPassTop" placeholder="รหัสผ่าน (≥8)">
-      <button id="loginBtnTop">เข้าสู่ระบบ</button>
-      <button id="logoutBtnTop" style="display:none;">ออกจากระบบ</button>
-      <button class="top-link-btn" onclick="window.location.href='login.html#register';">ลงทะเบียน</button>
-      <button class="top-link-btn" onclick="window.location.href='login.html#forgot';">ลืมรหัส</button>
-      <span id="loginStatusTop">ยังไม่ได้เข้าสู่ระบบ</span>
+    <div style="
+      flex:1 1 240px; 
+      background:white;
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+      <h3 style="margin:0; font-size:17px; color:#0d6efd;">ผู้ช่วยเภสัชกร</h3>
+      <p style="font-size:13px; color:#666; margin-top:6px;">
+        ร้านขายยา / เงินเดือน 13,000–20,000 บาท
+      </p>
+      <button onclick="window.location.href='job-apply.html'"
+        style="
+          margin-top:10px;
+          width:100%;
+          padding:8px;
+          border:none;
+          background:#0d6efd;
+          color:white;
+          border-radius:8px;
+          cursor:pointer;">
+        สมัครตำแหน่งนี้
+      </button>
     </div>
-  </header>
 
-  <main>
-    <!-- HERO -->
-    <section id="hero">
-      <span class="tag">Welcome</span>
-      <h2>ยินดีต้อนรับสู่ URR School</h2>
-      <p class="hero-highlight">
-        สถาบันที่มุ่งเน้นการสร้างบุคลากรด้านการบริบาลและสุขภาพ
-        ให้พร้อมทำงานจริงในโรงพยาบาล คลินิก และหน่วยบริการทั่วประเทศ
+    <div style="
+      flex:1 1 240px; 
+      background:white;
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.12);">
+      <h3 style="margin:0; font-size:17px; color:#0d6efd;">ผู้ดูแลผู้สูงอายุ</h3>
+      <p style="font-size:13px; color:#666; margin-top:6px;">
+        ศูนย์ดูแลผู้สูงอายุ / เงินเดือน 15,000–22,000 บาท
       </p>
-      <ul class="hero-list">
-        <li>หลักสูตรเน้นปฏิบัติ ใช้เวลาเรียนสั้น เข้าใจง่าย</li>
-        <li>จบแล้วมีโอกาสทำงานต่อทันที ผ่านเครือข่ายสถานพยาบาลพันธมิตร</li>
-        <li>มีแนวทางเรียนต่อด้านพยาบาลและสาธารณสุขอย่างต่อเนื่อง</li>
-      </ul>
-      <div class="hero-cta">
-        <a href="?section=admission" class="btn-primary">ดูขั้นตอนการสมัครเรียน</a>
-        <a href="?section=courses-summary" class="btn-outline">ดูสรุปหลักสูตรทั้งหมด</a>
-      </div>
-    </section>
+      <button onclick="window.location.href='job-apply.html'"
+        style="
+          margin-top:10px;
+          width:100%;
+          padding:8px;
+          border:none;
+          background:#0d6efd;
+          color:white;
+          border-radius:8px;
+          cursor:pointer;">
+        สมัครตำแหน่งนี้
+      </button>
+    </div>
+  </div>
 
-    <!-- Dashboard -->
-    <section id="dashboard">
-      <span class="tag">Statistics</span>
-      <h2>📊 Dashboard ระบบโรงเรียน</h2>
-      <div class="dash-grid">
-        <div class="dash-card"><h3>เข้าชมเว็บไซต์</h3><p id="stat-views">1,247</p></div>
-        <div class="dash-card"><h3>สมัครเรียน</h3><p id="stat-registered">156</p></div>
-        <div class="dash-card"><h3>สมาชิก Login แล้ว</h3><p id="stat-login">89</p></div>
-        <div class="dash-card"><h3>กำลังเรียน</h3><p id="stat-learning">142</p></div>
-        <div class="dash-card"><h3>ฝึกงาน</h3><p id="stat-intern">37</p></div>
-        <div class="dash-card"><h3>จบการศึกษา</h3><p id="stat-graduated">68</p></div>
-        <div class="dash-card"><h3>บรรจุงานแล้ว</h3><p id="stat-employed">52</p></div>
-      </div>
-    </section>
+  <!-- ติดต่อเรา -->
+  <h2 class="section-title" id="contact">📞 ติดต่อโรงเรียน</h2>
 
-    <!-- สรุปหลักสูตร -->
-    <section id="courses-summary">
-      <span class="tag">Courses Overview</span>
-      <h2>สรุปหลักสูตรการเรียนการสอน</h2>
-      <p style="font-size:14px;color:#555;margin-bottom:12px;">
-        เมื่อผู้สนใจกดลิงก์จาก Facebook ระบบจะเลื่อนมาที่ส่วนนี้ให้อัตโนมัติ
-      </p>
+  <div style="
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.12);
+    line-height:1.6;">
+    <strong>โรงเรียนอุบลบุรีรักษ์การบริบาล</strong><br>
+    115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000<br>
+    📞 โทร: <a href="tel:0804593311">080-459-3311</a><br>
+    💬 ไลน์: <a href="https://line.me/ti/p/urrnice1" target="_blank">urrnice1</a><br>
+    🌐 Facebook: 
+    <a href="https://www.facebook.com/khru.nis.xubl.buri.raks.kar.bribal" target="_blank">
+      คลิกเปิด Facebook
+    </a>
+  </div>
 
-      <div class="courses-grid">
-        <div class="course-card">
-          <div class="course-title">หลักสูตรพนักงานผู้ช่วยการพยาบาล</div> 
-          <div class="course-body">
-            เน้นทักษะการดูแลผู้ป่วยพื้นฐาน การวัดสัญญาณชีพ การช่วยเหลือในการทำหัตถการเบื้องต้น
-          </div>
-          <div class="course-meta">
-            ระยะเวลา 1–3 เดือน • เหมาะสำหรับผู้ที่ต้องการเริ่มต้นทำงานด้านสุขภาพ
-          </div>
-        </div>
+</main>
 
-        <div class="course-card">
-          <div class="course-title">หลักสูตรพนักงานผู้ช่วยเภสัชกร</div> 
-          <div class="course-body">
-            เรียนรู้พื้นฐานเภสัชกรรม การจัดยา การเก็บรักษายา และการให้คำแนะนำเกี่ยวกับยาแก่ผู้ป่วย
-          </div>
-          <div class="course-meta">
-            เหมาะสำหรับทำงานร้านยา คลินิก และหน่วยบริการสาธารณสุข
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">หลักสูตรพนักงานผู้ช่วยทันตแพทย์</div> 
-          <div class="course-body">
-            ฝึกการเตรียมเครื่องมือ ช่วยทันตแพทย์ในการรักษา และการดูแลผู้ป่วยด้านทันตกรรม
-          </div>
-          <div class="course-meta">
-            มีโอกาสทำงานกับคลินิกทันตกรรมเอกชนและโรงพยาบาล
-          </div>
-        </div>
-
-        <div class="course-card">
-          <div class="course-title">หลักสูตรต่อยอด/อบรมระยะสั้น</div>
-          <div class="course-body">
-            หลักสูตรเสริมทักษะ เช่น การดูแลผู้สูงอายุ การดูแลผู้ป่วยติดเตียง และหัวข้อเฉพาะด้านอื่น ๆ
-          </div>
-          <div class="course-meta">
-            รูปแบบอบรมสั้น เหมาะสำหรับผู้มีประสบการณ์ที่ต้องการเสริมทักษะ
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- การสมัครเรียน -->
-    <section id="admission">
-      <span class="tag">Admission</span>
-      <h2>ขั้นตอนการสมัครเรียน</h2>
-      <div class="two-col">
-        <div>
-          <ol style="font-size:14px;margin-left:20px;line-height:1.8;">
-            <li>กรอกแบบฟอร์มสมัครเรียนออนไลน์ หรือสมัครด้วยตนเองที่โรงเรียน</li>
-            <li>เตรียมเอกสาร เช่น วุฒิการศึกษา สำเนาบัตรประชาชน รูปถ่าย ฯลฯ</li>
-            <li>เจ้าหน้าที่นัดหมายสัมภาษณ์ และชี้แจงรายละเอียดหลักสูตร/ค่าใช้จ่าย</li>
-            <li>ยืนยันสิทธิ์และชำระค่าใช้จ่ายตามเงื่อนไข</li>
-          </ol>
-          <p style="font-size:13px;color:#555;margin-top:12px;">
-            ตัวอย่างลิงก์สำหรับ Make.com:<br>
-            <code style="background:#f0f0f0;padding:4px 8px;border-radius:4px;font-size:12px;">
-              https://apipoooo-afk.github.io/URR.github.io/index.html?section=admission
-            </code>
-          </p>
-        </div>
-        <div style="font-size:14px;color:#444;">
-          <strong>ข้อมูลที่ควรเตรียมก่อนสมัคร:</strong>
-          <ul style="margin-top:8px;line-height:1.8;">
-            <li>ชื่อ–สกุล และข้อมูลการติดต่อ</li>
-            <li>ระดับการศึกษาสูงสุด</li>
-            <li>หลักสูตรที่สนใจ</li>
-            <li>ช่วงเวลาที่สะดวกเรียน</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ฟอร์มสมัครเรียน -->
-    <section id="register-section">
-      <span class="tag">Register</span>
-      <h2>✏️ แบบฟอร์มสมัครเรียน</h2>
-
-      <form id="applyForm" class="register-grid">
-        <input name="fname" placeholder="ชื่อ" required>
-        <input name="lname" placeholder="นามสกุล" required>
-        <input name="age" type="number" placeholder="อายุ" required>
-        <select name="gender" required>
-          <option value="">เพศ</option>
-          <option>ชาย</option>
-          <option>หญิง</option>
-          <option>อื่นๆ</option>
-        </select>
-        <input name="education" placeholder="วุฒิการศึกษา" required>
-        <input name="course" placeholder="หลักสูตรที่สนใจ" required>
-        <input name="phone" type="tel" placeholder="เบอร์โทร" required>
-        <input name="line" placeholder="ไลน์" required>
-        <input name="facebook" placeholder="Facebook" required>
-        <input name="address" placeholder="ที่อยู่" required>
-
-        <div class="register-submit">
-          <button type="submit">ส่งใบสมัคร</button>
-        </div>
-      </form>
-    </section>
-
-    <!-- งานว่าง -->
-    <section id="jobs">
-      <span class="tag">Job Openings</span>
-      <h2>💼 ตำแหน่งงานว่าง</h2>
-
-      <div class="jobs-grid">
-        <div class="job-card">
-          <h3>ผู้ช่วยพยาบาล (NA)</h3>
-          <p>โรงพยาบาลเอกชน / เงินเดือน 12,000–18,000 บาท</p>
-          <button onclick="window.location.href='job-apply.html'">สมัครตำแหน่งนี้</button>
-        </div>
-
-        <div class="job-card">
-          <h3>ผู้ช่วยเภสัชกร</h3>
-          <p>ร้านขายยา / เงินเดือน 13,000–20,000 บาท</p>
-          <button onclick="window.location.href='job-apply.html'">สมัครตำแหน่งนี้</button>
-        </div>
-
-        <div class="job-card">
-          <h3>ผู้ดูแลผู้สูงอายุ</h3>
-          <p>ศูนย์ดูแลผู้สูงอายุ / เงินเดือน 15,000–22,000 บาท</p>
-          <button onclick="window.location.href='job-apply.html'">สมัครตำแหน่งนี้</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ติดต่อ -->
-    <section id="contact">
-      <span class="tag">Contact</span>
-      <h2>📞 ติดต่อโรงเรียน</h2>
-      <div style="font-size:14px;line-height:1.8;">
-        <strong>โรงเรียนอุบลบุรีรักษ์การบริบาล</strong><br>
-        115/3 หมู่ 4 ตำบลขามใหญ่ อำเภอเมือง จังหวัดอุบลราชธานี 34000<br>
-        📞 โทร: <a href="tel:0804593311">080-459-3311</a><br>
-        💬 ไลน์: <a href="https://line.me/ti/p/urrnice1" target="_blank">urrnice1</a><br>
-        🌐 Facebook: 
-        <a href="https://www.facebook.com/khru.nis.xubl.buri.raks.kar.bribal" target="_blank">
-          คลิกเปิด Facebook
-        </a>
-      </div>
-      <p style="font-size:13px;color:#555;margin-top:12px;">
-        ลิงก์สำหรับ Make.com:<br>
-        <code style="background:#f0f0f0;padding:4px 8px;border-radius:4px;font-size:12px;">
-          https://apipoooo-afk.github.io/URR.github.io/index.html?section=contact
-        </code>
-      </p>
-    </section>
-  </main>
-
-  <footer>
-    © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล (URR School). All rights reserved.<br>
-    พัฒนาโดย URR Development Team
-  </footer>
-
-  <script>
-    function scrollToSectionId(id) {
-      if (!id) return;
-      const el = document.getElementById(id);
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-      const params = new URLSearchParams(window.location.search);
-      const sectionFromQuery = params.get("section");
-
-      if (sectionFromQuery) {
-        setTimeout(() => scrollToSectionId(sectionFromQuery), 100);
-        return;
-      }
-
-      if (window.location.hash) {
-        const hashId = window.location.hash.replace("#", "");
-        setTimeout(() => scrollToSectionId(hashId), 100);
-      }
-    });
-
-    document.getElementById("applyForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      alert("ขอบคุณสำหรับการสมัครเรียน! เจ้าหน้าที่จะติดต่อกลับโดยเร็วที่สุด");
-      this.reset();
-    });
-  </script>
-</body>
-</html>
+<footer>
