@@ -11,6 +11,7 @@
       padding:0;
       font-family:Arial,sans-serif;
       background:#f5f6fa;
+      color:#222;
     }
 
     header {
@@ -184,6 +185,123 @@
       font-size:12px;
       margin-top:40px;
     }
+
+    /* -------- ส่วนที่เพิ่มใหม่: hero + courses + admission + layout -------- */
+
+    section {
+      background:white;
+      border-radius:12px;
+      padding:16px;
+      box-shadow:0 1px 6px rgba(0,0,0,0.06);
+      margin-bottom:18px;
+    }
+
+    .tag {
+      display:inline-block;
+      font-size:11px;
+      padding:2px 8px;
+      border-radius:999px;
+      background:#e9f3ff;
+      color:#0d6efd;
+      margin-bottom:6px;
+    }
+
+    .hero-highlight {
+      font-size:14px;
+      margin-top:6px;
+      color:#333;
+    }
+
+    .hero-list {
+      margin:6px 0 0 18px;
+      padding:0;
+      font-size:13px;
+      color:#444;
+    }
+
+    .hero-cta {
+      margin-top:10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .btn-primary,
+    .btn-outline {
+      font-size:13px;
+      border-radius:999px;
+      padding:6px 14px;
+      border:none;
+      cursor:pointer;
+    }
+
+    .btn-primary {
+      background:#0d6efd;
+      color:white;
+    }
+
+    .btn-outline {
+      background:white;
+      color:#0d6efd;
+      border:1px solid #0d6efd;
+    }
+
+    .btn-primary:hover {
+      filter:brightness(1.05);
+    }
+
+    .btn-outline:hover {
+      background:#e9f3ff;
+    }
+
+    .courses-grid {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:10px;
+      margin-top:8px;
+    }
+
+    .course-card {
+      background:#f8fafc;
+      border-radius:10px;
+      padding:10px 10px 12px;
+      border:1px solid #e2e8f0;
+      font-size:13px;
+    }
+
+    .course-title {
+      font-weight:bold;
+      color:#0d6efd;
+      margin-bottom:4px;
+      font-size:14px;
+    }
+
+    .course-body {
+      color:#444;
+      margin-bottom:6px;
+    }
+
+    .course-meta {
+      font-size:12px;
+      color:#777;
+    }
+
+    .two-col {
+      display:grid;
+      grid-template-columns:1.4fr 1fr;
+      gap:12px;
+    }
+    @media (max-width:900px) {
+      .register-grid {
+        grid-template-columns:repeat(2,1fr);
+      }
+      .register-submit {
+        grid-column:span 2;
+      }
+      .two-col {
+        grid-template-columns:1fr;
+      }
+    }
   </style>
 </head>
 
@@ -218,7 +336,6 @@
     <a href="job-apply.html">สมัครงาน</a>
     <a href="ai-faq.html">ถาม–ตอบ อัตโนมัติ</a>
     <a href="admin-members.html">Admin</a>
-</nav>
   </nav>
 
   <div class="top-bar">
@@ -239,6 +356,78 @@
 
 <main>
 
+  <!-- HERO ใหม่ -->
+  <section id="hero">
+    <span class="tag">Welcome</span>
+    <h2>ยินดีต้อนรับสู่ URR School</h2>
+    <p class="hero-highlight">
+      สถาบันที่มุ่งเน้นการสร้างบุคลากรด้านการบริบาลและสุขภาพ
+      ให้พร้อมทำงานจริงในโรงพยาบาล คลินิก และหน่วยบริการทั่วประเทศ
+    </p>
+    <ul class="hero-list">
+      <li>หลักสูตรเน้นปฏิบัติ ใช้เวลาเรียนสั้น เข้าใจง่าย</li>
+      <li>จบแล้วมีโอกาสทำงานต่อทันที ผ่านเครือข่ายสถานพยาบาลพันธมิตร</li>
+      <li>มีแนวทางเรียนต่อด้านพยาบาลและสาธารณสุขอย่างต่อเนื่อง</li>
+    </ul>
+    <div class="hero-cta">
+      <a href="?section=admission"><button type="button" class="btn-primary">ดูขั้นตอนการสมัครเรียน</button></a>
+      <a href="?section=courses-summary"><button type="button" class="btn-outline">ดูสรุปหลักสูตรทั้งหมด</button></a>
+    </div>
+  </section>
+
+  <!-- สรุปหลักสูตร ใช้ id=courses-summary สำหรับ Make.com -->
+  <section id="courses-summary">
+    <span class="tag">Courses Overview</span>
+    <h2>สรุปหลักสูตรการเรียนการสอน</h2>
+    <p style="font-size:13px;">
+      ส่วนนี้คือ <strong>courses-summary</strong> ที่คุณสามารถแนบลิงก์จากโพสต์ Facebook ผ่าน Make.com ได้ เช่น<br>
+      <code>https://apipoooo-afk.github.io/URR.github.io/index.html?section=courses-summary</code>
+    </p>
+
+    <div class="courses-grid">
+      <div class="course-card">
+        <div class="course-title">หลักสูตรพนักงานผู้ช่วยการพยาบาล</div>
+        <div class="course-body">
+          เน้นทักษะการดูแลผู้ป่วยพื้นฐาน การวัดสัญญาณชีพ การช่วยเหลือแพทย์และพยาบาลในการทำหัตถการเบื้องต้น
+        </div>
+        <div class="course-meta">
+          ระยะเวลา 1–3 เดือน • เหมาะสำหรับผู้ที่ต้องการเริ่มต้นทำงานด้านสุขภาพ
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-title">หลักสูตรพนักงานผู้ช่วยเภสัชกร</div>
+        <div class="course-body">
+          เรียนรู้พื้นฐานเภสัชกรรม การจัดยา การเก็บรักษายา และการให้คำแนะนำเรื่องยาแก่ผู้มารับบริการ
+        </div>
+        <div class="course-meta">
+          เหมาะสำหรับทำงานร้านยา คลินิก และหน่วยบริการสาธารณสุข
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-title">หลักสูตรพนักงานผู้ช่วยทันตแพทย์</div>
+        <div class="course-body">
+          ฝึกการเตรียมเครื่องมือ ช่วยทันตแพทย์ในการรักษา และการดูแลผู้ป่วยด้านทันตกรรม
+        </div>
+        <div class="course-meta">
+          เหมาะสำหรับคลินิกทันตกรรมเอกชนและโรงพยาบาล
+        </div>
+      </div>
+
+      <div class="course-card">
+        <div class="course-title">หลักสูตรอบรมระยะสั้น/ต่อยอด</div>
+        <div class="course-body">
+          อบรมเสริมทักษะ เช่น การดูแลผู้สูงอายุ การดูแลผู้ป่วยติดเตียง และหัวข้อเฉพาะด้านอื่น ๆ
+        </div>
+        <div class="course-meta">
+          เหมาะสำหรับผู้มีประสบการณ์ที่ต้องการเสริมสมรรถนะเพิ่มเติม
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard เดิม -->
   <h2 class="section-title">📊 Dashboard ระบบโรงเรียน</h2>
 
   <div class="dash-grid">
@@ -251,7 +440,7 @@
     <div class="dash-card"><h3>บรรจุงานแล้ว</h3><p id="stat-employed">0</p></div>
   </div>
 
-  <!-- สมัครเรียน -->
+  <!-- สมัครเรียน เดิม -->
   <h2 class="section-title" id="register-section">✏️ สมัครเรียน</h2>
 
   <form id="applyForm" class="register-grid">
@@ -280,9 +469,38 @@
     </div>
   </form>
 
+  <!-- section ใหม่: ขั้นตอนการสมัคร (admission) -->
+  <section id="admission">
+    <span class="tag">Admission</span>
+    <h2>ขั้นตอนการสมัครเรียน</h2>
+    <div class="two-col">
+      <div>
+        <ol style="font-size:13px;margin-left:18px;">
+          <li>กรอกแบบฟอร์มสมัครเรียนออนไลน์ หรือสมัครด้วยตนเองที่โรงเรียน</li>
+          <li>เตรียมเอกสาร เช่น วุฒิการศึกษา สำเนาบัตรประชาชน รูปถ่าย ฯลฯ</li>
+          <li>เจ้าหน้าที่นัดหมายสัมภาษณ์ และชี้แจงรายละเอียดหลักสูตร/ค่าใช้จ่าย</li>
+          <li>ยืนยันสิทธิ์และชำระค่าใช้จ่ายตามเงื่อนไข</li>
+        </ol>
+        <p style="font-size:13px;color:#555;">
+          ตัวอย่างลิงก์ที่ใช้แนบใน Make.com ช่อง <strong>Link</strong> เพื่อให้ผู้สนใจมาดูขั้นตอนสมัครเรียนโดยตรง:<br>
+          <code>https://apipoooo-afk.github.io/URR.github.io/index.html?section=admission</code>
+        </p>
+      </div>
+      <div style="font-size:13px;color:#444;">
+        <strong>ตัวอย่างข้อมูลที่ควรเตรียมก่อนสมัคร:</strong>
+        <ul>
+          <li>ชื่อ–สกุล และข้อมูลการติดต่อ</li>
+          <li>ระดับการศึกษาสูงสุด</li>
+          <li>หลักสูตรที่สนใจ</li>
+          <li>ช่วงเวลาที่สะดวกเรียน</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <hr style="margin:40px 0; opacity:0.2;">
 
-  <!-- งานว่าง -->
+  <!-- งานว่าง เดิม -->
   <h2 class="section-title" id="jobs">💼 ตำแหน่งงานว่าง</h2>
 
   <div style="display:flex; flex-wrap:wrap; gap:12px;">
@@ -359,7 +577,7 @@
     </div>
   </div>
 
-  <!-- ติดต่อเรา -->
+  <!-- ติดต่อเรา เดิม -->
   <h2 class="section-title" id="contact">📞 ติดต่อโรงเรียน</h2>
 
   <div style="
@@ -376,8 +594,46 @@
     <a href="https://www.facebook.com/khru.nis.xubl.buri.raks.kar.bribal" target="_blank">
       คลิกเปิด Facebook
     </a>
+    <br><br>
+    <span style="font-size:13px;color:#ddd;">
+      ตัวอย่างลิงก์ใช้กับ Make.com เพื่อเลื่อนมาส่วนติดต่อโดยตรง:<br>
+      https://apipoooo-afk.github.io/URR.github.io/index.html?section=contact
+    </span>
   </div>
 
 </main>
 
 <footer>
+  © 2025 โรงเรียนอุบลบุรีรักษ์การบริบาล (URR School). All rights reserved.
+</footer>
+
+<script>
+  // ฟังก์ชันเลื่อนหน้าไปยัง element ตาม id
+  function scrollToSectionId(id) {
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // 1) อ่านค่าจาก query string: ?section=xxx
+    var params = new URLSearchParams(window.location.search);
+    var sectionFromQuery = params.get("section");
+
+    if (sectionFromQuery) {
+      scrollToSectionId(sectionFromQuery);
+      return; // ถ้าเจอจาก query แล้ว ไม่ต้องสนใจ hash ต่อ
+    }
+
+    // 2) ถ้าไม่มี query section ให้ลองดู hash (#xxx) แบบเดิม
+    if (window.location.hash) {
+      var hashId = window.location.hash.replace("#", "");
+      scrollToSectionId(hashId);
+    }
+  });
+</script>
+
+</body>
+</html>
