@@ -70,4 +70,30 @@
     chatbox.scrollTop = chatbox.scrollHeight;
   }
 
-  const fuse = new
+  // ✅ สร้าง Fuse.js จากฐานข้อมูล faqData
+  const fuse = new Fuse(faqData, { keys: ["q"], threshold: 0.4 });
+
+  function botReply(userText) {
+    let result = fuse.search(userText);
+    let reply = "ขออภัย ไม่พบข้อมูลที่ตรงกับคำถามของคุณ";
+    if (result.length > 0) {
+      reply = result[0].item.a;
+    }
+    addMessage(reply, "bot");
+  }
+
+  sendBtn.addEventListener("click", () => {
+    const text = input.value.trim();
+    if (!text) return;
+    addMessage(text, "user");
+    botReply(text);
+    input.value = "";
+  });
+
+  function ask(text) {
+    input.value = text;
+    sendBtn.click();
+  }
+</script>
+</body>
+</html>
