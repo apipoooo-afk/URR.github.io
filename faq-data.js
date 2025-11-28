@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-16">
   <title>FAQ / Chatbot | URR School</title>
   <style>
     body { font-family: Arial, sans-serif; background:#f5f6fa; margin:0; padding:0; }
@@ -55,10 +55,10 @@
   <button id="sendBtn">ส่ง</button>
 </main>
 
-<!-- 1) โหลดฐานข้อมูลคำถาม–คำตอบ -->
+<!-- โหลดข้อมูล FAQ จากไฟล์ภายนอก -->
 <script src="faq-data.js"></script>
 
-<!-- 2) โหลด Fuse.js สำหรับค้นหาแบบ fuzz -->
+<!-- Fuse.js สำหรับค้นหาข้อความแบบ fuzz -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
 
 <script>
