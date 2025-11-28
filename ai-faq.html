@@ -97,3 +97,14 @@
 </script>
 </body>
 </html>
+
+const fuse = new Fuse(faqData, { keys: ["q"], threshold: 0.4 });
+
+function botReply(userText) {
+  let result = fuse.search(userText);
+  let reply = "ขออภัย ไม่พบข้อมูลที่ตรงกับคำถามของคุณ";
+  if (result.length > 0) {
+    reply = result[0].item.a;
+  }
+  addMessage(reply, "bot");
+}
