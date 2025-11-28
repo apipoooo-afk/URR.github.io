@@ -8,7 +8,7 @@
     header { background:linear-gradient(120deg,#ff6fb5,#0d6efd,#20c997); color:white; padding:12px; text-align:center; }
     main { max-width:900px; margin:20px auto; background:white; padding:20px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,0.12); }
     #chatbox { height:400px; overflow-y:auto; border:1px solid #ddd; padding:10px; margin-bottom:12px; background:#fafafa; }
-    .msg { margin:6px 0; padding:8px 12px; border-radius:12px; max-width:70%; }
+    .msg { margin:6px 0; padding:8px 12px; border-radius:12px; max-width:70%; word-wrap:break-word; white-space:pre-line; }
     .user { background:#0d6efd; color:white; margin-left:auto; }
     .bot { background:#e9f3ff; color:#333; margin-right:auto; }
     #userInput { width:80%; padding:8px; border-radius:8px; border:1px solid #ccc; }
@@ -55,14 +55,85 @@
   <button id="sendBtn">ส่ง</button>
 </main>
 
+<!-- โหลดข้อมูล FAQ จากไฟล์ภายนอก -->
 <script src="faq-data.js"></script>
+
+<!-- Fuse.js สำหรับค้นหาข้อความแบบ fuzz -->
 <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js"></script>
+
 <script>
+  // ---------------------------
+  // 1) ตรวจว่า FAQ_DATA ถูกโหลดมาหรือยัง
+  // ---------------------------
+  if (typeof FAQ_DATA === "undefined") {
+    alert("❌ โหลดไฟล์ faq-data.js ไม่สำเร็จ — ตรวจชื่อไฟล์หรือ path ให้ถูกต้อง");
+  }
+
+  // ---------------------------
+  // 2) ตั้งค่า Fuse.js
+  // ---------------------------
+  const fuseOptions = {
+    keys: ["q", "keywords"],
+    threshold: 0.35,
+    includeScore: true
+  };
+  const fuse = new Fuse(FAQ_DATA, fuseOptions);
+
+  // ---------------------------
+  // 3) ฟังก์ชันแชต
+  // ---------------------------
   const chatbox = document.getElementById("chatbox");
-  const input = document.getElementById("userInput");
+  const input   = document.getElementById("userInput");
   const sendBtn = document.getElementById("sendBtn");
 
   function addMessage(text, type) {
     const div = document.createElement("div");
     div.className = "msg " + type;
     div.innerText = text;
+    chatbox.appendChild(div);
+    chatbox.scrollTop = chatbox.scrollHeight;
+  }
+
+  function botReply(userText) {
+    const text = userText.trim();
+    if (!text) return "";
+
+    const result = fuse.search(text);
+
+    if (result.length === 0) {
+      return "ขออภัย ตอนนี้ยังไม่มีคำตอบสำหรับคำถามนี้ค่ะ\nลองพิมพ์ใหม่ หรือทักไลน์โรงเรียนเพื่อสอบถามเจ้าหน้าที่ได้เลยค่ะ 💬";
+    }
+
+    return result[0].item.a;
+  }
+
+  function ask(text) {
+    addMessage(text, "user");
+    const reply = botReply(text);
+    setTimeout(() => addMessage(reply, "bot"), 300);
+  }
+
+  // ---------------------------
+  // 4) ปุ่มส่ง & Enter
+  // ---------------------------
+  sendBtn.addEventListener("click", () => {
+    const text = input.value;
+    if (!text.trim()) return;
+    addMessage(text, "user");
+    input.value = "";
+    const reply = botReply(text);
+    setTimeout(() => addMessage(reply, "bot"), 300);
+  });
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") sendBtn.click();
+  });
+
+  // ---------------------------
+  // 5) ข้อความต้อนรับ
+  // ---------------------------
+  addMessage("สวัสดีค่ะ 😊 ยินดีต้อนรับสู่ระบบถาม–ตอบ URR School\nสามารถกดปุ่มคำถามด้านบน หรือพิมพ์คำถามได้เลยค่ะ", "bot");
+</script>
+
+</body>
+</html>
