@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>FAQ / Chatbot | URR School</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f6fa;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: linear-gradient(120deg,#ff6fb5,#0d6efd,#20c997);
+      color: white;
+      padding: 12px;
+      text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 20px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    #chatbox {
+      height: 400px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 12px;
+      background: #fafafa;
+    }
+    .msg {
+      margin: 6px 0;
+      padding: 8px 12px;
+      border-radius: 12px;
+      max-width: 70%;
+    }
+    .user { background: #0d6efd; color: white; margin-left: auto; }
+    .bot { background: #e9f3ff; color: #333; margin-right: auto; }
+    #userInput {
+      width: 80%;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    #sendBtn {
+      padding: 8px 14px;
+      border: none;
+      background: #ff2f92;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    #sendBtn:hover { background: #d91f7a; }
+  </style>
+</head>
+<body>
+<header>
+  <h2>🤖 FAQ / Chatbot URR School</h2>
+  <p>ถาม–ตอบอัตโนมัติ เกี่ยวกับการสมัครเรียน หลักสูตร และข้อมูลโรงเรียน</p>
+</header>
+
+<main>
+  <div id="chatbox"></div>
+  <input id="userInput" placeholder="พิมพ์คำถามของคุณ...">
+  <button id="sendBtn">ส่ง</button>
+</main>
+
+<script src="faq-data.js"></script>
+<script>
+  const chatbox = document.getElementById("chatbox");
+  const input = document.getElementById("userInput");
+  const sendBtn = document.getElementById("sendBtn");
+
+  function addMessage(text, type) {
+    const div = document.createElement("div");
+    div.className = "msg " + type;
+    div.innerText = text;
+    chatbox.appendChild(div);
+    chatbox.scrollTop = chatbox.scrollHeight;
+  }
+
+  function botReply(userText) {
+    let reply = "ขออภัย ไม่พบข้อมูลที่ตรงกับคำถามของคุณ";
+    userText = userText.toLowerCase();
+
+    // loop คำถามในฐานข้อมูล
+    faqData.forEach(item => {
+      if (userText.includes(item.q)) {
+        reply = item.a;
+      }
+    });
+    addMessage(reply, "bot");
+  }
+
+  sendBtn.addEventListener("click", () => {
+    const text = input.value.trim();
+    if (!text) return;
+    addMessage(text, "user");
+    botReply(text);
+    input.value = "";
+  });
+</script>
+</body>
+</html>
