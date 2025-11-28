@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-16">
+  <meta charset="UTF-8">
   <title>FAQ / Chatbot | URR School</title>
   <style>
     body { font-family: Arial, sans-serif; background:#f5f6fa; margin:0; padding:0; }
@@ -25,7 +25,7 @@
       color:#0d6efd;
       border-radius:999px;
       cursor:pointer;
-      font-size:13px;
+      font-size:16px;
     }
     .category-buttons button:hover { background:#d0e7ff; }
   </style>
